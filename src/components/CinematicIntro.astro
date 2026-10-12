@@ -1,0 +1,752 @@
+---
+// src/components/CinematicIntro.astro — Introdução Cinematográfica Premium V2
+// Direção de Arte: K. UP BIZ
+---
+
+<div
+  id="cinematic-intro"
+  class="cinematic-intro"
+  aria-label="Abertura Cinematográfica K. UP BIZ"
+  role="dialog"
+  aria-modal="true"
+>
+  <!-- Fundo Escuro com Vinheta Cinematográfica -->
+  <div class="intro-backdrop">
+    <div class="intro-grain"></div>
+    <div class="intro-vignette"></div>
+    <div class="intro-glow-core"></div>
+  </div>
+
+  <!-- Barras Luminosas Inspiradas no Vídeo de Referência -->
+  <div class="intro-light-bars" id="intro-light-bars" aria-hidden="true">
+    <div class="light-bar bar-top-left"></div>
+    <div class="light-bar bar-top-right"></div>
+    <div class="light-bar bar-bottom-left"></div>
+    <div class="light-bar bar-bottom-right"></div>
+    <div class="light-beam beam-horizontal"></div>
+    <div class="light-beam beam-vertical"></div>
+  </div>
+
+  <!-- Palco Central Tipográfico -->
+  <div class="intro-stage">
+    
+    <!-- Frase 1: Sans-Serif Moderna Digitada -->
+    <div class="intro-phrase intro-phrase-1" id="intro-phrase-1">
+      <span class="phrase-text" id="typewriter-text-1"></span>
+      <span class="intro-cursor" id="intro-cursor-1" aria-hidden="true"></span>
+    </div>
+
+    <!-- Frase 2: Contraste Editorial de Luxo (Bodoni Moda Italic) -->
+    <div class="intro-phrase intro-phrase-2" id="intro-phrase-2">
+      <span class="phrase-prefix" id="intro-phrase-2-prefix">Mas ele realmente</span>
+      <span class="phrase-luxury italic-editorial text-gold" id="intro-phrase-2-luxury">vende?</span>
+    </div>
+
+    <!-- Sublinhado / Feixe de Luz Editorial -->
+    <div class="intro-accent-flare" id="intro-accent-flare" aria-hidden="true">
+      <div class="flare-line"></div>
+      <div class="flare-dot"></div>
+    </div>
+  </div>
+
+  <!-- Controles Superiores Discretos -->
+  <div class="intro-controls">
+    <!-- Seletor de Comparação Tipográfica (Bodoni Moda vs Cormorant Garamond) -->
+    <div class="intro-font-toggle" id="intro-font-toggle" title="Comparar Fontes Editoriais">
+      <span class="toggle-label">FONTE:</span>
+      <button type="button" class="font-btn active" data-font="bodoni">Bodoni Moda</button>
+      <button type="button" class="font-btn" data-font="cormorant">Cormorant</button>
+    </div>
+
+    <!-- Botão Pular Intro -->
+    <button
+      type="button"
+      id="intro-skip-btn"
+      class="intro-skip-btn"
+      aria-label="Pular introdução cinematográfica"
+    >
+      <span>PULAR INTRO</span>
+      <kbd>ESC</kbd>
+    </button>
+  </div>
+</div>
+
+<style>
+  /* ==========================================================================
+     ESTILOS DA INTRODUÇÃO CINEMATOGRÁFICA PREMIUM V2
+     ========================================================================== */
+
+  .cinematic-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #020e0b;
+    color: var(--color-marfim);
+    overflow: hidden;
+    user-select: none;
+    pointer-events: all;
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0.8s ease;
+  }
+
+  .cinematic-intro.is-completed {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s;
+  }
+
+  /* Backdrop & Atmosfera */
+  .intro-backdrop {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .intro-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at center,
+      rgba(4, 29, 23, 0.4) 0%,
+      rgba(2, 14, 11, 0.85) 60%,
+      #020b08 100%
+    );
+  }
+
+  .intro-glow-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 350px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(4, 120, 87, 0.18) 0%,
+      rgba(212, 175, 55, 0.08) 45%,
+      transparent 70%
+    );
+    filter: blur(50px);
+    opacity: 0.8;
+  }
+
+  .intro-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  /* Barras Luminosas Cinematográficas (Inspiradas no Vídeo 0:05-0:07s) */
+  .intro-light-bars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .light-bar {
+    position: absolute;
+    height: 18px;
+    background: linear-gradient(90deg, #D4AF37 0%, #F3E5AB 50%, #047857 100%);
+    box-shadow:
+      0 0 24px rgba(212, 175, 55, 0.9),
+      0 0 60px rgba(4, 120, 87, 0.6);
+    border-radius: 4px;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: center;
+  }
+
+  .bar-top-left {
+    top: 26%;
+    left: 20%;
+    width: 140px;
+  }
+
+  .bar-top-right {
+    top: 26%;
+    left: 38%;
+    width: 220px;
+  }
+
+  .bar-bottom-left {
+    top: 64%;
+    left: 54%;
+    width: 110px;
+  }
+
+  .bar-bottom-right {
+    top: 64%;
+    left: 66%;
+    width: 190px;
+  }
+
+  .light-beam {
+    position: absolute;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(212, 175, 55, 0.6) 50%,
+      transparent 100%
+    );
+    opacity: 0;
+    filter: blur(12px);
+  }
+
+  .beam-horizontal {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: center;
+  }
+
+  .beam-vertical {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: center;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(4, 120, 87, 0.5) 50%,
+      transparent 100%
+    );
+  }
+
+  /* Palco Central Tipográfico */
+  .intro-stage {
+    position: relative;
+    z-index: 10;
+    max-width: 960px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 240px;
+  }
+
+  /* Frase 1: Sans-Serif Moderna */
+  .intro-phrase-1 {
+    font-family: var(--font-sans);
+    font-size: clamp(1.5rem, 3.8vw, 2.75rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #F5F1E8;
+    line-height: 1.25;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 1.4em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  }
+
+  .phrase-text {
+    display: inline;
+    white-space: pre-wrap;
+  }
+
+  .intro-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.15em;
+    background-color: var(--color-dourado);
+    box-shadow: 0 0 12px var(--color-dourado-glow);
+    margin-left: 6px;
+    border-radius: 2px;
+    animation: cursorBlink 0.75s infinite ease-in-out;
+  }
+
+  @keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Frase 2: Contraste Editorial de Luxo */
+  .intro-phrase-2 {
+    margin-top: 1.25rem;
+    font-size: clamp(2rem, 5.5vw, 4.25rem);
+    line-height: 1.22;
+    padding: 0.12em 0.6em;
+    overflow: visible;
+    opacity: 0;
+    transform: translateY(24px);
+    clip-path: polygon(-25% 100%, 125% 100%, 125% 100%, -25% 100%);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.35em;
+  }
+
+  .phrase-prefix {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: rgba(245, 241, 232, 0.85);
+  }
+
+  /* Contêiner de Luxo Editorial com respiro lateral para o ponto de interrogação */
+  .phrase-luxury {
+    display: inline-block;
+    padding-right: 0.32em; /* Espaço para o glifo itálico do '?' respirar sem corte lateral */
+    padding-top: 0.08em; /* Espaço para a curvatura superior do '?' */
+    overflow: visible;
+  }
+
+  /* Fonte de Luxo Editorial (Bodoni Moda Italic por padrão) */
+  .italic-editorial {
+    font-family: var(--font-bodoni);
+    font-style: italic;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-dourado);
+    text-shadow:
+      0 0 25px rgba(212, 175, 55, 0.55),
+      0 0 60px rgba(212, 175, 55, 0.25);
+    transition: font-family 0.3s ease;
+  }
+
+  /* Variação Cormorant Garamond */
+  .cinematic-intro.use-cormorant .italic-editorial {
+    font-family: var(--font-cormorant);
+    font-style: italic;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  /* Linha Decorativa Editorial / Flare */
+  .intro-accent-flare {
+    position: relative;
+    width: 180px;
+    height: 12px;
+    margin-top: 1.5rem;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: center;
+  }
+
+  .flare-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(212, 175, 55, 0.8) 50%,
+      transparent 100%
+    );
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  }
+
+  .flare-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #FFF;
+    box-shadow: 0 0 12px #D4AF37, 0 0 24px #D4AF37;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Controles Superiores */
+  .intro-controls {
+    position: absolute;
+    top: 24px;
+    left: 28px;
+    right: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+    pointer-events: all;
+  }
+
+  /* Seletor de Comparação Tipográfica */
+  .intro-font-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(4, 29, 23, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(245, 241, 232, 0.12);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+  }
+
+  .toggle-label {
+    color: rgba(245, 241, 232, 0.5);
+    font-weight: 600;
+    margin-right: 2px;
+  }
+
+  .font-btn {
+    background: transparent;
+    border: none;
+    color: rgba(245, 241, 232, 0.7);
+    font-family: inherit;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .font-btn:hover {
+    color: var(--color-marfim);
+  }
+
+  .font-btn.active {
+    background: rgba(212, 175, 55, 0.18);
+    color: var(--color-dourado);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+  }
+
+  /* Botão Pular Intro */
+  .intro-skip-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(4, 29, 23, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(245, 241, 232, 0.16);
+    color: rgba(245, 241, 232, 0.85);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .intro-skip-btn:hover {
+    background: rgba(11, 43, 34, 0.85);
+    border-color: rgba(212, 175, 55, 0.4);
+    color: var(--color-dourado);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .intro-skip-btn kbd {
+    background: rgba(245, 241, 232, 0.1);
+    border: 1px solid rgba(245, 241, 232, 0.2);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 0.625rem;
+    font-family: inherit;
+    color: rgba(245, 241, 232, 0.7);
+  }
+
+  /* Responsividade */
+  @media (max-width: 640px) {
+    .intro-controls {
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      flex-direction: column-reverse;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    .intro-font-toggle {
+      align-self: flex-start;
+    }
+
+    .light-bar {
+      height: 12px;
+    }
+
+    .bar-top-left {
+      top: 22%;
+      left: 10%;
+      width: 100px;
+    }
+
+    .bar-top-right {
+      top: 22%;
+      left: 38%;
+      width: 150px;
+    }
+
+    .bar-bottom-left {
+      top: 68%;
+      left: 45%;
+      width: 90px;
+    }
+
+    .bar-bottom-right {
+      top: 68%;
+      left: 62%;
+      width: 130px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cinematic-intro {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const introEl = document.getElementById('cinematic-intro');
+    if (!introEl) return;
+
+    // Se o usuário já tiver preferência de movimento reduzido
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      introEl.remove();
+      return;
+    }
+
+    const phrase1El = document.getElementById('typewriter-text-1');
+    const cursor1El = document.getElementById('intro-cursor-1');
+    const phrase2El = document.getElementById('intro-phrase-2');
+    const flareEl = document.getElementById('intro-accent-flare');
+    const skipBtn = document.getElementById('intro-skip-btn');
+    const fontBtns = document.querySelectorAll('.font-btn');
+
+    // Textos canônicos
+    const textPhrase1 = 'Seu negócio está na internet.';
+
+    // Estado da animação
+    let isSkipped = false;
+    let masterTl: gsap.core.Timeline | null = null;
+
+    // Alternador de Fonte para Comparação Visual (Bodoni Moda vs Cormorant Garamond)
+    fontBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        fontBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const chosen = btn.getAttribute('data-font');
+        if (chosen === 'cormorant') {
+          introEl.classList.add('use-cormorant');
+        } else {
+          introEl.classList.remove('use-cormorant');
+        }
+      });
+    });
+
+    // Função para Concluir / Desvendar para o Hero
+    function finishIntro() {
+      if (isSkipped) return;
+      isSkipped = true;
+
+      if (masterTl) {
+        masterTl.kill();
+      }
+
+      // Ocultar imediatamente qualquer texto e brilho da introdução para não sobrepor a fotografia
+      gsap.set(['#intro-stage', phrase1El, phrase2El, flareEl, '#intro-light-bars'], {
+        opacity: 0,
+        visibility: 'hidden'
+      });
+
+      // Transição cinematográfica suave sem flashes ou saltos
+      gsap.to(introEl, {
+        opacity: 0,
+        duration: 0.75,
+        ease: 'power2.inOut',
+        onStart: () => {
+          window.dispatchEvent(new CustomEvent('cinematic-photo-revealed'));
+        },
+        onComplete: () => {
+          introEl.classList.add('is-completed');
+          introEl.style.display = 'none';
+          introEl.style.visibility = 'hidden';
+          introEl.style.pointerEvents = 'none';
+          window.dispatchEvent(new CustomEvent('cinematic-intro-complete'));
+          window.dispatchEvent(new CustomEvent('cinematic-header-reveal'));
+          window.dispatchEvent(new CustomEvent('cinematic-indicator-reveal'));
+        }
+      });
+    }
+
+    // Botão pular & Tecla ESC
+    skipBtn?.addEventListener('click', finishIntro);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') finishIntro();
+    });
+
+    // Linha de Tempo Master GSAP
+    masterTl = gsap.timeline({
+      onComplete: finishIntro
+    });
+
+    // Passo 0: Inicialização
+    gsap.set(introEl, { opacity: 1, visibility: 'visible' });
+    gsap.set('.light-bar', { opacity: 0, scaleX: 0 });
+    gsap.set('.light-beam', { opacity: 0 });
+    gsap.set(phrase2El, {
+      opacity: 0,
+      y: 24,
+      clipPath: 'polygon(-25% 100%, 125% 100%, 125% 100%, -25% 100%)'
+    });
+    gsap.set(flareEl, { opacity: 0, scaleX: 0 });
+
+    // PASSO 1: Digitação da Frase 1 ("Seu negócio está na internet.")
+    const typingObj = { charCount: 0 };
+    masterTl.to(typingObj, {
+      charCount: textPhrase1.length,
+      duration: 1.6,
+      ease: 'none',
+      onUpdate: () => {
+        if (phrase1El) {
+          phrase1El.textContent = textPhrase1.slice(0, Math.round(typingObj.charCount));
+        }
+      }
+    }, '+=0.3');
+
+    // Pausa dramática na frase 1
+    masterTl.to({}, { duration: 0.6 });
+
+    // Ocultar cursor da frase 1
+    masterTl.to(cursor1El, {
+      opacity: 0,
+      duration: 0.25,
+      ease: 'power1.out'
+    });
+
+    // PASSO 2: Entrada das Barras Luminosas (Inspiradas no Vídeo 0:05-0:07s)
+    masterTl.add('barsEntrance');
+    masterTl.to('.beam-horizontal', {
+      opacity: 0.7,
+      scaleX: 1,
+      duration: 0.45,
+      ease: 'power2.out'
+    }, 'barsEntrance');
+
+    masterTl.to('.light-bar', {
+      opacity: 0.95,
+      scaleX: 1,
+      duration: 0.5,
+      stagger: 0.08,
+      ease: 'power3.out'
+    }, 'barsEntrance+=0.1');
+
+    // Barras deslizam e se expandem com brilho
+    masterTl.to('.bar-top-left', { x: -30, opacity: 0.4, duration: 0.6, ease: 'power2.inOut' }, 'barsEntrance+=0.3');
+    masterTl.to('.bar-top-right', { x: 40, opacity: 0.4, duration: 0.6, ease: 'power2.inOut' }, 'barsEntrance+=0.3');
+    masterTl.to('.bar-bottom-left', { x: -40, opacity: 0.4, duration: 0.6, ease: 'power2.inOut' }, 'barsEntrance+=0.3');
+    masterTl.to('.bar-bottom-right', { x: 30, opacity: 0.4, duration: 0.6, ease: 'power2.inOut' }, 'barsEntrance+=0.3');
+
+    // Barras desvanecem abrindo o palco
+    masterTl.to('.light-bar, .beam-horizontal', {
+      opacity: 0,
+      scaleY: 0.3,
+      duration: 0.5,
+      ease: 'power2.in'
+    }, '+=0.2');
+
+    // PASSO 3: Revelação da Frase 2 (Contraste Editorial de Luxo - Bodoni Moda)
+    masterTl.add('phrase2Entrance');
+    masterTl.to(phrase2El, {
+      opacity: 1,
+      y: 0,
+      clipPath: 'polygon(-25% -30%, 125% -30%, 125% 130%, -25% 130%)',
+      duration: 0.9,
+      ease: 'power3.out'
+    }, 'phrase2Entrance');
+
+    // Revelação do feixe de brilho dourado
+    masterTl.to(flareEl, {
+      opacity: 1,
+      scaleX: 1,
+      duration: 0.7,
+      ease: 'power2.out'
+    }, 'phrase2Entrance+=0.2');
+
+    // Pulso áureo no texto editorial
+    masterTl.to('#intro-phrase-2-luxury', {
+      textShadow: '0 0 45px rgba(212, 175, 55, 0.9), 0 0 80px rgba(212, 175, 55, 0.5)',
+      duration: 0.4,
+      yoyo: true,
+      repeat: 1,
+      ease: 'sine.inOut'
+    }, 'phrase2Entrance+=0.4');
+
+    // PASSO 4: TRANSIÇÃO CINEMATOGRÁFICA CONTÍNUA PARA A HERO
+    // 1. Manter a frase por um breve momento
+    masterTl.to({}, { duration: 1.15 });
+
+    // 2. Fazer o texto desaparecer completamente por uma máscara vertical
+    masterTl.add('textExit');
+    masterTl.to(phrase2El, {
+      clipPath: 'polygon(-25% -30%, 125% -30%, 125% -30%, -25% -30%)',
+      y: -16,
+      opacity: 0,
+      duration: 0.75,
+      ease: 'power2.inOut'
+    }, 'textExit');
+
+    // Reduzir discretamente a iluminação dourada
+    masterTl.to([flareEl, '.intro-glow-core'], {
+      opacity: 0,
+      duration: 0.65,
+      ease: 'power2.out'
+    }, 'textExit');
+
+    // Garantir que todos os textos da introdução fiquem 100% invisíveis antes de revelar a fotografia
+    masterTl.set([phrase1El, phrase2El, flareEl, '#intro-light-bars'], {
+      opacity: 0,
+      visibility: 'hidden'
+    }, 'textExit+=0.75');
+
+    // 3. Revelar progressivamente a fotografia do fundador (apenas após o texto ter sumido completamente)
+    masterTl.add('photoReveal', 'textExit+=0.78');
+    masterTl.to(introEl, {
+      opacity: 0,
+      duration: 1.15,
+      ease: 'power2.inOut',
+      onStart: () => {
+        window.dispatchEvent(new CustomEvent('cinematic-photo-revealed'));
+      },
+      onComplete: () => {
+        introEl.classList.add('is-completed');
+        introEl.style.display = 'none';
+        introEl.style.visibility = 'hidden';
+        introEl.style.pointerEvents = 'none';
+        window.dispatchEvent(new CustomEvent('cinematic-intro-complete'));
+      }
+    }, 'photoReveal');
+
+    // 4. Fazer o Header aparecer somente após a fotografia estar visível
+    masterTl.add('headerReveal', 'photoReveal+=0.75');
+    masterTl.call(() => {
+      window.dispatchEvent(new CustomEvent('cinematic-header-reveal'));
+    }, [], 'headerReveal');
+
+    // 5. O indicador de rolagem surge após o header estar em posição
+    masterTl.add('indicatorReveal', 'headerReveal+=0.3');
+    masterTl.call(() => {
+      window.dispatchEvent(new CustomEvent('cinematic-indicator-reveal'));
+    }, [], 'indicatorReveal');
+  });
+</script>

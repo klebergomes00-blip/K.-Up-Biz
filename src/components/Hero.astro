@@ -1,0 +1,1251 @@
+---
+// src/components/Hero.astro — Refinamento V2: Composição Editorial
+---
+
+<section class="hero-scroll-wrapper" id="hero-scroll-wrapper" aria-label="Apresentação Principal K. UP BIZ">
+  <!-- Pinned Viewport Container -->
+  <div class="hero-viewport" id="hero-viewport">
+    
+    <!-- Mídia: Vídeo de Fundo e Imagem do Fundador -->
+    <!-- Mídia: Vídeo de Fundo e Fotografia Limpa de Abertura -->
+    <div class="hero-media-container" aria-hidden="true">
+      <video
+        id="hero-video"
+        class="hero-video"
+        muted
+        playsinline
+        preload="auto"
+        poster="/imagens/hero-poster.png"
+      >
+        <source src="/videos/hero-desktop-intra-opt.mp4" type="video/mp4" />
+        <source src="/videos/hero-desktop.mp4" type="video/mp4" />
+      </video>
+
+      <!-- Camada de Fotografia Limpa para Abertura Inicial (0% Scroll) -->
+      <div class="hero-photo-layer" id="hero-photo-layer">
+        <img
+          src="/imagens/hero-poster.png"
+          alt="Fundador K. UP BIZ"
+          class="hero-photo-img"
+          id="hero-photo-img"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      
+      <!-- Scrims Cinematográficos para Fusão & Legibilidade Sem Obstrução -->
+      <div class="hero-scrim-right"></div>
+      <div class="hero-scrim-top"></div>
+      <div class="hero-scrim-bottom"></div>
+    </div>
+
+    <!-- Camada de Conteúdo Narrativo em 3 Atos (Coluna Direita no Desktop) -->
+    <div class="hero-content-container">
+      <div class="wrap hero-wrap">
+        <div class="hero-stage" id="hero-stage">
+          
+          <!-- ================================================================
+               MOMENTO 1 — A IDEIA (6% - 28% do Scroll)
+               A fotografia do fundador é protagonista. Surge a centelha da ideia.
+               ================================================================ -->
+          <div class="hero-act hero-act-1" id="hero-act-1">
+            <h2 class="act-title act1-title" id="act1-title">
+              <span class="act-line">Toda transformação</span>
+              <span class="act-line">começa com <span class="italic-serif text-gold act1-highlight">uma ideia.</span></span>
+            </h2>
+
+            <!-- Linha Decorativa Minimalista de Pensamento -->
+            <div class="act1-decor" aria-hidden="true">
+              <div class="act1-decor-line" id="act1-decor-line"></div>
+              <div class="act1-decor-spark"></div>
+            </div>
+          </div>
+
+          <!-- ================================================================
+               ATO 2 — A ESTRATÉGIA (32% - 64% do Scroll)
+               À medida que as partículas se expandem, surge a estratégia.
+               ================================================================ -->
+          <div class="hero-act hero-act-2" id="hero-act-2">
+            <h2 class="act-title act2-title" id="act2-title">
+              <span class="act-line">Mas ideias precisam de</span>
+              <span class="act-line"><span class="italic-serif text-gold act2-highlight">estratégia</span> para crescer.</span>
+            </h2>
+
+            <div class="act2-decor" aria-hidden="true">
+              <div class="act2-decor-line" id="act2-decor-line"></div>
+              <div class="act2-decor-spark"></div>
+            </div>
+          </div>
+
+          <!-- ================================================================
+               ATO 3 — O RESULTADO (68% - 100% do Scroll)
+               A realização completa: Não basta estar presente. É preciso ser encontrado.
+               ================================================================ -->
+          <div class="hero-act hero-act-3" id="hero-act-3">
+            <h1 class="hero-title" id="hero-title-3">
+              <span class="title-line title-line-1">Não basta estar presente.</span>
+              <span class="title-line title-line-2">
+                É preciso <span class="italic-serif text-gold hero-highlight">ser encontrado.</span>
+              </span>
+            </h1>
+
+            <p class="hero-subtitle" id="hero-subtitle-3">
+              Transformamos presença digital em oportunidades reais com estratégias no Google, sites e tráfego pago.
+            </p>
+
+            <div class="hero-cta-group" id="hero-cta-group-3">
+              <a href="#contato" class="btn-pill btn-pill-lg hero-cta-primary" id="cta-primary">
+                <span>ELEVE SEU NEGÓCIO</span>
+                <span aria-hidden="true" class="arrow">
+                  <svg fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewBox="0 0 24 24" width="15">
+                    <path d="M7 17 17 7"></path>
+                    <path d="M8 7h9v9"></path>
+                  </svg>
+                </span>
+              </a>
+
+              <a href="#solucoes" class="btn-outline hero-cta-secondary" id="cta-secondary">
+                <span>CONHEÇA NOSSAS SOLUÇÕES</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Indicador de Rolagem Minimalista & Editorial -->
+    <div class="hero-scroll-indicator" id="hero-scroll-indicator" aria-hidden="true">
+      <span class="scroll-explore-text">ROLE PARA EXPLORAR</span>
+      <div class="scroll-explore-line">
+        <div class="scroll-explore-line-fill"></div>
+      </div>
+    </div>
+
+    <!-- Linha de Brilho Inferior Canônica do Design System -->
+    <div class="hero-bottom-glow" aria-hidden="true"></div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     HERO V2 — COMPOSIÇÃO EDITORIAL CINEMATOGRÁFICA
+     - Desktop: Imagem do fundador à esquerda, conteúdo comercial à direita
+     - Mobile: Imagem acima, conteúdo comercial abaixo
+     ========================================================================== */
+
+  /* Wrapper com Altura para Scroll Scrubbing */
+  .hero-scroll-wrapper {
+    position: relative;
+    width: 100%;
+    height: 320vh;
+    background-color: var(--color-verde-profundo);
+  }
+
+  /* Viewport Pinned durante o Scrub */
+  .hero-viewport {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 10;
+    border-radius: 0 0 36px 36px;
+  }
+
+  /* Mídia e Vídeo de Fundo */
+  .hero-media-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    background: #02120e;
+  }
+
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 25% center; /* Enquadra o fundador com naturalidade à esquerda */
+    transform: scale(1.02);
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  /* Camada de Fotografia Limpa de Abertura (Scroll = 0) */
+  .hero-photo-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+    will-change: opacity;
+  }
+
+  .hero-photo-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 25% center;
+    transform: scale(1.02);
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  /* Scrim Lateral Direito: Localizado com precisão na área de texto para proteger a leitura sem obscurecer os fluxos de luz */
+  .hero-scrim-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 54%;
+    height: 100%;
+    background: radial-gradient(
+      ellipse 90% 75% at 85% 50%,
+      rgba(4, 29, 23, 0.96) 0%,
+      rgba(4, 29, 23, 0.86) 45%,
+      rgba(4, 29, 23, 0.35) 75%,
+      transparent 100%
+    );
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Scrim Superior: Integração sutil com o Header */
+  .hero-scrim-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 25%;
+    background: linear-gradient(
+      180deg,
+      rgba(4, 29, 23, 0.82) 0%,
+      rgba(4, 29, 23, 0.3) 65%,
+      transparent 100%
+    );
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Scrim Inferior */
+  .hero-scrim-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 22%;
+    background: linear-gradient(
+      0deg,
+      rgba(4, 29, 23, 0.96) 0%,
+      rgba(4, 29, 23, 0.35) 60%,
+      transparent 100%
+    );
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Camada de Conteúdo */
+  .hero-content-container {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: calc(var(--header-height) + 12px);
+    padding-bottom: 72px; /* Espaço confortável e seguro até a borda inferior */
+  }
+
+  /* Layout Grid/Flex: Coluna Comercial à Direita */
+  .hero-wrap {
+    display: flex;
+    justify-content: flex-end; /* Posiciona o bloco de texto à direita */
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Palco Narrativo em 3 Atos: Alinhamento Estrito à Direita com Gradiente Localizado */
+  .hero-stage {
+    width: 100%;
+    max-width: clamp(540px, 46vw, 650px);
+    min-height: 420px;
+    display: grid;
+    grid-template-areas: "stage";
+    align-items: center;
+    justify-items: start;
+    position: relative;
+    z-index: 6;
+    background: radial-gradient(
+      ellipse 115% 100% at 50% 50%,
+      rgba(4, 29, 23, 0.72) 0%,
+      rgba(4, 29, 23, 0.35) 65%,
+      transparent 100%
+    );
+    padding: 24px 28px;
+    border-radius: 24px;
+  }
+
+  /* Atos Narrativos Compartilham a Mesma Área Óptica */
+  .hero-act {
+    grid-area: stage;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    will-change: opacity, transform;
+  }
+
+  /* Tipografia do Ato 1 (A Ideia) */
+  .act1-title {
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-marfim);
+    margin: 0 0 24px 0;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
+    overflow: visible;
+    will-change: clip-path, transform, opacity;
+  }
+
+  .act-line {
+    display: block;
+  }
+
+  .act1-highlight {
+    font-size: 1.08em;
+    color: #D4AF37;
+    text-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.92),
+      0 0 24px rgba(212, 175, 55, 0.65),
+      0 0 50px rgba(212, 175, 55, 0.32);
+    display: inline-block;
+    padding-right: 0.12em;
+  }
+
+  /* Linha Decorativa do Ato 1 */
+  .act1-decor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 320px;
+    margin-top: 4px;
+  }
+
+  .act1-decor-line {
+    height: 2px;
+    flex: 1;
+    background: linear-gradient(
+      90deg,
+      #D4AF37 0%,
+      rgba(4, 120, 87, 0.8) 70%,
+      transparent 100%
+    );
+    transform-origin: left center;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    will-change: transform;
+  }
+
+  .act1-decor-spark {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #D4AF37;
+    box-shadow: 0 0 12px #D4AF37;
+    flex-shrink: 0;
+  }
+
+  /* Tipografia do Ato 2 (A Estratégia) */
+  .act2-title {
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-marfim);
+    margin: 0 0 24px 0;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
+    overflow: visible;
+    will-change: clip-path, transform, opacity;
+  }
+
+  .act2-highlight {
+    font-size: 1.08em;
+    color: #D4AF37;
+    text-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.92),
+      0 0 24px rgba(212, 175, 55, 0.65),
+      0 0 50px rgba(212, 175, 55, 0.32);
+    display: inline-block;
+    padding-right: 0.12em;
+  }
+
+  .act2-decor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 320px;
+    margin-top: 4px;
+  }
+
+  .act2-decor-line {
+    height: 2px;
+    flex: 1;
+    background: linear-gradient(
+      90deg,
+      #047857 0%,
+      rgba(212, 175, 55, 0.9) 70%,
+      transparent 100%
+    );
+    transform-origin: left center;
+    box-shadow: 0 0 10px rgba(4, 120, 87, 0.5);
+    will-change: transform;
+  }
+
+  .act2-decor-spark {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-dourado);
+    box-shadow: 0 0 12px var(--color-dourado);
+    flex-shrink: 0;
+  }
+
+  /* Badge / Eyebrow */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 16px 6px 12px;
+    border-radius: 999px;
+    background: rgba(11, 43, 34, 0.75);
+    border: 1px solid rgba(212, 175, 55, 0.32);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  .badge-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-dourado);
+    box-shadow: 0 0 12px var(--color-dourado);
+    animation: pulse-glow 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(0.8);
+    }
+  }
+
+  .badge-text {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-marfim);
+    text-transform: uppercase;
+  }
+
+  /* Headline com Escala Refinada (Não corta em 1366x768 nem 1920x1080) */
+  .hero-title {
+    font-size: clamp(34px, 3.8vw, 54px);
+    font-weight: 600;
+    line-height: 1.13;
+    letter-spacing: -0.025em;
+    color: var(--color-marfim);
+    margin: 0 0 22px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
+    overflow: visible;
+    will-change: clip-path, transform, opacity;
+  }
+
+  .title-line {
+    display: block;
+    white-space: normal;
+  }
+
+  .hero-highlight {
+    font-size: 1.07em;
+    letter-spacing: -0.01em;
+    color: #D4AF37;
+    /* Contraste dourado reforçado */
+    text-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.92),
+      0 0 20px rgba(212, 175, 55, 0.55),
+      0 0 45px rgba(212, 175, 55, 0.28);
+    display: inline-block;
+    padding-right: 0.12em;
+  }
+
+  /* Subtítulo com Marfim Suave, Largura Confortável e Espaçamento Otimizado */
+  .hero-subtitle {
+    font-size: clamp(15px, 1.18vw, 17px);
+    line-height: 1.62;
+    color: rgba(245, 241, 232, 0.9);
+    max-width: 500px;
+    margin: 0 0 28px 0;
+    text-align: left;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+    font-weight: 400;
+  }
+
+  /* CTAs Lado a Lado no Desktop com Hierarquia Clara */
+  .hero-cta-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    flex-wrap: nowrap; /* Garante que os dois botões permaneçam lado a lado no desktop */
+    width: 100%;
+  }
+
+  /* Botão Primário: Visualmente Dominante */
+  .hero-cta-primary {
+    padding: 13px 12px 13px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 16px rgba(212, 175, 55, 0.25);
+    flex-shrink: 0;
+  }
+
+  /* Botão Secundário: Complementar e Equilibrado */
+  .hero-cta-secondary {
+    padding: 13px 22px;
+    font-size: 13.5px;
+    font-weight: 600;
+    background: rgba(4, 29, 23, 0.55);
+    border: 1.5px solid rgba(245, 241, 232, 0.32);
+    color: rgba(245, 241, 232, 0.88);
+    flex-shrink: 0;
+  }
+
+  /* Indicador de Rolagem: Minimalista, Tipográfico & Linha Vertical Dourada */
+  .hero-scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+    opacity: 0; /* Animado suavemente no enterTl */
+    will-change: opacity, transform;
+  }
+
+  .scroll-explore-text {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--color-marfim);
+    opacity: 0.85;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+  }
+
+  .scroll-explore-line {
+    width: 1.5px;
+    height: 38px;
+    background: rgba(212, 175, 55, 0.22);
+    position: relative;
+    overflow: hidden;
+    border-radius: 999px;
+  }
+
+  .scroll-explore-line-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(212, 175, 55, 0) 0%,
+      var(--color-dourado) 50%,
+      rgba(212, 175, 55, 0.95) 100%
+    );
+    border-radius: 999px;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+    transform-origin: top center;
+    animation: scroll-line-sweep 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+
+  @keyframes scroll-line-sweep {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+
+  /* Linha de Brilho Inferior */
+  .hero-bottom-glow {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(720px, 85%);
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(4, 120, 87, 0.6) 20%,
+      rgba(212, 175, 55, 0.8) 50%,
+      rgba(4, 120, 87, 0.6) 80%,
+      transparent
+    );
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    pointer-events: none;
+    z-index: 6;
+  }
+
+  /* ==========================================================================
+     MOBILE (< 860px) — COMPOSIÇÃO VERTICAL PRÓPRIA:
+     - Imagem/Vídeo ACIMA com enquadramento focado no rosto do fundador
+     - Conteúdo comercial ABAIXO com legibilidade máxima
+     ========================================================================== */
+  @media (max-width: 860px) {
+    .hero-scroll-wrapper {
+      height: 260vh;
+    }
+
+    .hero-viewport {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    /* Mídia na Metade Superior */
+    .hero-media-container {
+      position: relative;
+      width: 100%;
+      height: 46vh;
+      flex-shrink: 0;
+    }
+
+    .hero-video,
+    .hero-photo-img {
+      /* Enquadramento calibrado rigorosamente no rosto do fundador */
+      object-position: 20% 32%;
+    }
+
+    .hero-scrim-right {
+      display: none; /* No mobile a divisão é vertical */
+    }
+
+    .hero-scrim-top {
+      height: 35%;
+      background: linear-gradient(
+        180deg,
+        rgba(4, 29, 23, 0.75) 0%,
+        transparent 100%
+      );
+    }
+
+    .hero-scrim-bottom {
+      height: 45%;
+      background: linear-gradient(
+        0deg,
+        var(--color-verde-profundo) 0%,
+        rgba(4, 29, 23, 0.7) 50%,
+        transparent 100%
+      );
+    }
+
+    /* Conteúdo Comercial na Metade Inferior */
+    .hero-content-container {
+      position: relative;
+      width: 100%;
+      flex: 1;
+      padding: 8px 0 24px 0;
+      display: flex;
+      align-items: center;
+      background: var(--color-verde-profundo);
+    }
+
+    .hero-wrap {
+      justify-content: flex-start;
+      padding: 0 20px;
+    }
+
+    .hero-stage {
+      max-width: 100%;
+      min-height: 260px;
+      margin: 0;
+      padding: 0;
+      background: none;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .hero-act {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .act1-title,
+    .act2-title {
+      font-size: clamp(25px, 6.8vw, 34px);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .act1-decor,
+    .act2-decor {
+      max-width: 220px;
+    }
+
+    .hero-badge {
+      margin-bottom: 12px;
+      padding: 4px 12px;
+    }
+
+    .badge-text {
+      font-size: 10.5px;
+    }
+
+    .hero-title {
+      font-size: clamp(25px, 6.8vw, 34px);
+      line-height: 1.14;
+      margin-bottom: 12px;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .hero-subtitle {
+      font-size: 13.5px;
+      line-height: 1.48;
+      margin-bottom: 18px;
+      max-width: 100%;
+      text-align: left;
+    }
+
+    .hero-cta-group {
+      flex-direction: column;
+      flex-wrap: wrap;
+      width: 100%;
+      gap: 11px;
+      align-items: stretch;
+    }
+
+    .hero-cta-primary,
+    .hero-cta-secondary {
+      width: 100%;
+      max-width: 360px;
+      justify-content: center;
+      padding: 13px 20px;
+      font-size: 14px;
+    }
+
+    .hero-scroll-indicator {
+      bottom: max(18px, env(safe-area-inset-bottom, 16px));
+      gap: 8px;
+    }
+
+    .scroll-explore-text {
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+    }
+
+    .scroll-explore-line {
+      height: 26px;
+    }
+  }
+
+  /* Telas Pequenas Verticais (< 380px) */
+  @media (max-width: 380px) {
+    .hero-media-container {
+      height: 40vh;
+    }
+    .hero-title {
+      font-size: 24px;
+    }
+    .hero-subtitle {
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+  }
+
+  /* Acessibilidade: prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scroll-wrapper {
+      height: 100vh;
+    }
+    .hero-act-1,
+    .hero-act-2 {
+      display: none !important;
+    }
+    .hero-act-3 {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+    }
+    .scroll-explore-line-fill {
+      animation: none !important;
+      transform: translateY(0) !important;
+      opacity: 0.8 !important;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('hero-video') as HTMLVideoElement | null;
+    const photoLayer = document.getElementById('hero-photo-layer');
+    const photoImg = document.getElementById('hero-photo-img');
+    const scrollWrapper = document.getElementById('hero-scroll-wrapper');
+    const heroViewport = document.getElementById('hero-viewport');
+    const scrollIndicator = document.getElementById('hero-scroll-indicator');
+    const bottomGlow = document.querySelector('.hero-bottom-glow');
+
+    // Elementos do Momento 1 (A Ideia)
+    const act1 = document.getElementById('hero-act-1');
+    const act1Title = document.getElementById('act1-title');
+    const act1Line = document.getElementById('act1-decor-line');
+    const act1Spark = act1?.querySelector('.act1-decor-spark');
+
+    // Elementos do Momento 2 (A Estratégia)
+    const act2 = document.getElementById('hero-act-2');
+    const act2Title = document.getElementById('act2-title');
+    const act2Line = document.getElementById('act2-decor-line');
+    const act2Spark = act2?.querySelector('.act2-decor-spark');
+
+    // Elementos do Momento 3 (A Transformação)
+    const act3 = document.getElementById('hero-act-3');
+    const act3Title = document.getElementById('hero-title-3');
+    const act3Subtitle = document.getElementById('hero-subtitle-3');
+    const act3Ctas = document.getElementById('hero-cta-group-3');
+
+    // 1. ANIMAÇÃO DE ENTRADA DO INDICADOR DE ROLAGEM ("ROLE PARA EXPLORAR")
+    // Centralizado com precisão na parte inferior da viewport e revelado após a fotografia e o header
+    let indicatorRevealed = false;
+    const revealScrollIndicator = () => {
+      if (scrollIndicator && window.scrollY < 20 && !indicatorRevealed) {
+        indicatorRevealed = true;
+        gsap.fromTo(
+          scrollIndicator,
+          { opacity: 0, y: 16, xPercent: -50 },
+          { opacity: 1, y: 0, xPercent: -50, duration: 0.9, ease: 'power2.out' }
+        );
+      }
+    };
+
+    window.addEventListener('cinematic-indicator-reveal', revealScrollIndicator);
+    window.addEventListener('cinematic-intro-complete', revealScrollIndicator);
+
+    if (!document.getElementById('cinematic-intro') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      revealScrollIndicator();
+    }
+
+    // 2. CURSOR GLOW FOLLOWER NOS BOTÕES .btn-pill (Canônico do Design System)
+    document.querySelectorAll<HTMLElement>('.btn-pill').forEach((btn) => {
+      const light = { x: 0, y: 0 };
+      const apply = () => {
+        btn.style.setProperty('--mx', `${light.x}px`);
+        btn.style.setProperty('--my', `${light.y}px`);
+      };
+      const rest = () => ({ x: btn.offsetWidth - 22, y: btn.offsetHeight / 2 });
+      const settle = (duration: number) => {
+        if (!btn.offsetWidth) return;
+        const target = rest();
+        if (duration) {
+          gsap.to(light, {
+            ...target,
+            duration,
+            ease: 'power3.inOut',
+            onUpdate: apply,
+            overwrite: true
+          });
+        } else {
+          Object.assign(light, target);
+          apply();
+        }
+      };
+
+      settle(0);
+      window.addEventListener('resize', () => settle(0), { passive: true });
+
+      btn.addEventListener('pointermove', (e: PointerEvent) => {
+        const r = btn.getBoundingClientRect();
+        const target = { x: e.clientX - r.left, y: e.clientY - r.top };
+        gsap.to(light, {
+          ...target,
+          duration: 0.25,
+          ease: 'power3.out',
+          onUpdate: apply,
+          overwrite: true
+        });
+      });
+
+      btn.addEventListener('pointerleave', () => settle(0.8));
+    });
+
+    // 3. APPLE-STYLE SCROLL VIDEO SCRUBBING & MASTER NARRATIVE TIMELINE
+    if (!video || !scrollWrapper || !heroViewport) return;
+
+    // Respeitar prefers-reduced-motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.pause();
+      return;
+    }
+
+    // Pausa garantida: o vídeo NUNCA toca de forma independente
+    video.pause();
+
+    let isInitialized = false;
+
+    const setupScrubber = () => {
+      if (isInitialized) return;
+      isInitialized = true;
+
+      video.pause();
+
+      // Timeline normalizada (0.0s a 10.0s = 0% a 100% do progresso de scroll)
+      const timelineDuration = 10;
+
+      // Mecanismo Não-Bloqueante de Busca de Frames (Bidirecional Suave)
+      let targetTime = 0;
+      const requestSeek = (time: number) => {
+        const videoDuration = (video && Number.isFinite(video.duration) && video.duration > 0) ? video.duration : 1;
+        targetTime = Math.max(0, Math.min(videoDuration, time));
+        // Se o decodificador de hardware não estiver ocupado, aplica a busca imediatamente
+        if (!video.seeking && video.readyState >= 1) {
+          if (Math.abs(video.currentTime - targetTime) > 0.015) {
+            video.currentTime = targetTime;
+          }
+        }
+      };
+
+      // Fila de busca contínua: assim que o decodificador conclui um frame,
+      // atualiza para a nova posição se o usuário continuou rolando
+      video.addEventListener('seeked', () => {
+        if (Math.abs(video.currentTime - targetTime) > 0.015) {
+          video.currentTime = targetTime;
+        }
+      });
+
+      // Objeto proxy animado pelo GSAP (progresso 0 a 1)
+      const videoProxy = { progress: 0 };
+
+      // Garantir alinhamento horizontal centralizado rigoroso do indicador
+      if (scrollIndicator) {
+        gsap.set(scrollIndicator, { xPercent: -50, left: '50%' });
+      }
+
+      // Definir estado inicial explícito de todos os 3 atos narrativos
+      gsap.set([act1, act2, act3], {
+        opacity: 0,
+        visibility: 'hidden',
+        pointerEvents: 'none',
+        y: 20
+      });
+
+      // Única Instância Principal de ScrollTrigger & Timeline Mestre
+      const masterTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: scrollWrapper,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 0.5, // Damping equilibrado estilo Apple
+          pin: heroViewport,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        }
+      });
+
+      // --- 1. Sincronização do tempo do vídeo pelo proxy de progresso ---
+      masterTimeline.to(videoProxy, {
+        progress: 1,
+        ease: 'none',
+        duration: timelineDuration,
+        onUpdate: () => {
+          const videoDuration = (video && Number.isFinite(video.duration) && video.duration > 0) ? video.duration : 1;
+          requestSeek(videoProxy.progress * videoDuration);
+        }
+      }, 0);
+
+      // --- 2. Movimento de Câmera Virtual Suave (CSS Transform em 0-100%) ---
+      const cameraTargets: (HTMLElement | HTMLVideoElement)[] = [video];
+      if (photoImg) cameraTargets.push(photoImg);
+      masterTimeline.to(cameraTargets, {
+        scale: 1.07,
+        xPercent: -1.5,
+        yPercent: -0.6,
+        ease: 'none',
+        duration: timelineDuration,
+      }, 0);
+
+      // --- 3. Indicador de Rolagem: Fade-out suave ao iniciar o scroll (0% a 5%) ---
+      // E reaparece automaticamente com precisão cirúrgica ao retornar ao topo (0%)
+      if (scrollIndicator) {
+        masterTimeline.fromTo(
+          scrollIndicator,
+          { opacity: 1, y: 0, xPercent: -50 },
+          {
+            opacity: 0,
+            y: 18,
+            xPercent: -50,
+            ease: 'power2.out',
+            duration: 0.5,
+          },
+          0
+        );
+      }
+
+      // --- 4. Transição Suave da Fotografia Limpa para o Vídeo (0% a 6% do Scroll) ---
+      if (photoLayer) {
+        masterTimeline.to(photoLayer, {
+          opacity: 0,
+          ease: 'power1.out',
+          duration: 0.6,
+        }, 0);
+      }
+
+      // --- 5. ATO 1 — A IDEIA (6% a 28% do Scroll) ---
+      // A fotografia do fundador é protagonista. A ideia surge com máscara vertical suave.
+      if (act1) {
+        masterTimeline.set(act1, {
+          visibility: 'visible',
+          pointerEvents: 'auto',
+        }, 0.5);
+
+        masterTimeline.fromTo(act1,
+          { opacity: 0, y: 22 },
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+          0.6
+        );
+
+        if (act1Title) {
+          masterTimeline.fromTo(act1Title,
+            {
+              clipPath: 'polygon(-10% 120%, 110% 120%, 110% 120%, -10% 120%)',
+              filter: 'blur(4px)'
+            },
+            {
+              clipPath: 'polygon(-10% -20%, 110% -20%, 110% 120%, -10% 120%)',
+              filter: 'blur(0px)',
+              duration: 0.8,
+              ease: 'power2.out'
+            },
+            0.6
+          );
+        }
+
+        if (act1Line) {
+          masterTimeline.fromTo(act1Line,
+            { scaleX: 0 },
+            { scaleX: 1.35, duration: 0.9, ease: 'none' },
+            0.7
+          );
+        }
+
+        if (act1Spark) {
+          masterTimeline.fromTo(act1Spark,
+            { opacity: 0, scale: 0 },
+            { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' },
+            0.8
+          );
+        }
+
+        // Saída suave do Ato 1 por deslocamento e fade (concluída em 28%, antes do Ato 2)
+        masterTimeline.to(act1, {
+          opacity: 0,
+          y: -20,
+          filter: 'blur(4px)',
+          ease: 'power2.in',
+          duration: 0.6,
+        }, 2.2);
+
+        masterTimeline.set(act1, {
+          visibility: 'hidden',
+          pointerEvents: 'none',
+        }, 2.8);
+      }
+
+      // --- 6. ATO 2 — A ESTRATÉGIA (32% a 63% do Scroll) ---
+      // Inicia apenas após o Ato 1 ter desaparecido completamente (intervalo livre de 28% a 32%)
+      if (act2) {
+        masterTimeline.set(act2, {
+          visibility: 'visible',
+          pointerEvents: 'auto',
+        }, 3.1);
+
+        masterTimeline.fromTo(act2,
+          { opacity: 0, y: 22 },
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+          3.2
+        );
+
+        if (act2Title) {
+          masterTimeline.fromTo(act2Title,
+            {
+              clipPath: 'polygon(-10% 120%, 110% 120%, 110% 120%, -10% 120%)',
+              filter: 'blur(4px)'
+            },
+            {
+              clipPath: 'polygon(-10% -20%, 110% -20%, 110% 120%, -10% 120%)',
+              filter: 'blur(0px)',
+              duration: 0.8,
+              ease: 'power2.out'
+            },
+            3.2
+          );
+        }
+
+        if (act2Line) {
+          masterTimeline.fromTo(act2Line,
+            { scaleX: 0 },
+            { scaleX: 1.35, duration: 0.9, ease: 'none' },
+            3.3
+          );
+        }
+
+        if (act2Spark) {
+          masterTimeline.fromTo(act2Spark,
+            { opacity: 0, scale: 0 },
+            { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' },
+            3.4
+          );
+        }
+
+        // Saída suave do Ato 2 (concluída em 63%, antes do Ato 3)
+        masterTimeline.to(act2, {
+          opacity: 0,
+          y: -20,
+          filter: 'blur(4px)',
+          ease: 'power2.in',
+          duration: 0.7,
+        }, 5.6);
+
+        masterTimeline.set(act2, {
+          visibility: 'hidden',
+          pointerEvents: 'none',
+        }, 6.3);
+      }
+
+      // --- 7. ATO 3 — O RESULTADO / A TRANSFORMAÇÃO (68% a 100% do Scroll) ---
+      // Sincronizado com o ponto de maior impacto visual do vídeo (intervalo livre de 63% a 68%)
+      if (act3) {
+        masterTimeline.set(act3, {
+          visibility: 'visible',
+          pointerEvents: 'auto',
+        }, 6.8);
+
+        masterTimeline.fromTo(act3,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+          6.8
+        );
+
+        if (act3Title) {
+          masterTimeline.fromTo(act3Title,
+            {
+              clipPath: 'polygon(-10% 120%, 110% 120%, 110% 120%, -10% 120%)',
+              filter: 'blur(4px)'
+            },
+            {
+              clipPath: 'polygon(-10% -20%, 110% -20%, 110% 120%, -10% 120%)',
+              filter: 'blur(0px)',
+              duration: 0.8,
+              ease: 'power2.out'
+            },
+            6.8
+          );
+        }
+
+        if (act3Subtitle) {
+          masterTimeline.fromTo(act3Subtitle,
+            { opacity: 0, y: 16, filter: 'blur(4px)' },
+            { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, ease: 'power2.out' },
+            7.6
+          );
+        }
+
+        if (act3Ctas) {
+          masterTimeline.fromTo(act3Ctas.children,
+            { opacity: 0, y: 18 },
+            { opacity: 1, y: 0, stagger: 0.2, duration: 0.7, ease: 'power2.out' },
+            8.2
+          );
+        }
+      }
+
+      // --- 8. Transição Visual para a Próxima Seção (Brilho Inferior Intensificado) ---
+      if (bottomGlow) {
+        masterTimeline.fromTo(bottomGlow,
+          { opacity: 0.4, scaleX: 0.8 },
+          { opacity: 1, scaleX: 1.15, duration: 1.5, ease: 'power2.out' },
+          8.5
+        );
+      }
+    };
+
+    // Inicializar scrubber imediatamente e sincronizar em eventos de layout/mídia
+    setupScrubber();
+
+    if (video.readyState < 1) {
+      video.addEventListener('loadedmetadata', () => {
+        ScrollTrigger.refresh();
+      }, { once: true });
+      video.addEventListener('canplay', () => {
+        ScrollTrigger.refresh();
+      }, { once: true });
+    }
+
+    window.addEventListener('cinematic-intro-complete', () => {
+      ScrollTrigger.refresh();
+    });
+  });
+</script>

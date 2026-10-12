@@ -1,0 +1,256 @@
+/* ==========================================================================
+   K. UP BIZ — DESIGN SYSTEM & ESTILOS GLOBAIS
+   Paleta Canônica Adaptada:
+   - Verde profundo: #041D17 (Background Base)
+   - Verde secundário: #0B2B22 (Surfaces / Header Notch)
+   - Verde esmeralda: #047857 (Accent / Energy)
+   - Dourado: #D4AF37 (Luxury Highlight / Editorial)
+   - Marfim: #F5F1E8 (Primary Text / High Contrast)
+   ========================================================================== */
+
+:root {
+  /* Cores Principais */
+  --color-verde-profundo: #041D17;
+  --color-verde-secundario: #0B2B22;
+  --color-verde-esmeralda: #047857;
+  --color-verde-esmeralda-glow: rgba(4, 120, 87, 0.45);
+  --color-dourado: #D4AF37;
+  --color-dourado-glow: rgba(212, 175, 55, 0.4);
+  --color-dourado-light: #F3E5AB;
+  --color-marfim: #F5F1E8;
+  --color-marfim-muted: rgba(245, 241, 232, 0.88);
+  --color-marfim-faint: rgba(245, 241, 232, 0.4);
+
+  /* Superfícies & Bordas */
+  --bg-base: var(--color-verde-profundo);
+  --bg-surface: var(--color-verde-secundario);
+  --border-subtle: rgba(245, 241, 232, 0.12);
+  --border-accent: rgba(212, 175, 55, 0.35);
+  --border-emerald: rgba(4, 120, 87, 0.4);
+
+  /* Tipografia */
+  --font-sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Bodoni Moda', 'Instrument Serif', Georgia, serif;
+  --font-bodoni: 'Bodoni Moda', 'Instrument Serif', Georgia, serif;
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-instrument-serif: 'Instrument Serif', Georgia, serif;
+
+  /* Grid e Layout */
+  --max-width: 1240px;
+  --header-height: 82px;
+}
+
+/* Reset Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--color-verde-profundo);
+  color: var(--color-marfim);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-verde-profundo);
+  color: var(--color-marfim);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.5;
+}
+
+/* Tipografia Utilitária */
+.italic-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.text-gold {
+  color: var(--color-dourado);
+  text-shadow: 0 0 24px var(--color-dourado-glow);
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+/* ==========================================================================
+   BOTÕES CANÔNICOS (DESIGN SYSTEM)
+   ========================================================================== */
+
+/* Botão Pill com Cursor Glow Follower */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-marfim);
+  color: var(--color-verde-profundo);
+  text-decoration: none;
+  padding: 10px 8px 10px 22px;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  position: relative;
+  isolation: isolate;
+  --mx: 90%;
+  --my: 50%;
+  --glow: 0.75;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.btn-pill:hover {
+  transform: translateY(-1px);
+  --glow: 1;
+}
+
+.btn-pill:active {
+  transform: translateY(0);
+}
+
+/* Halo suave sob o botão (Acento Dourado e Esmeralda) */
+.btn-pill::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: inherit;
+  z-index: -1;
+  background: radial-gradient(
+    66px circle at calc(var(--mx) + 10px) calc(var(--my) + 10px),
+    rgba(245, 241, 232, 0.95),
+    rgba(212, 175, 55, 0.9) 30%,
+    rgba(4, 120, 87, 0.5) 55%,
+    transparent 75%
+  );
+  filter: blur(12px);
+  opacity: var(--glow);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+/* Borda iluminada que acompanha a luz do mouse */
+.btn-pill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(
+    48px circle at var(--mx) var(--my),
+    var(--color-dourado),
+    rgba(212, 175, 55, 0.85) 35%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: var(--glow);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.btn-pill .arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-verde-profundo);
+  color: var(--color-marfim);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.25s ease;
+}
+
+.btn-pill:hover .arrow {
+  transform: rotate(45deg);
+  background: #02120e;
+}
+
+/* Variante Grande (.btn-pill-lg) */
+.btn-pill-lg {
+  padding: 14px 10px 14px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.btn-pill-lg .arrow {
+  width: 32px;
+  height: 32px;
+}
+
+/* Botão Outline Refinado (Hero V3) */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(4, 29, 23, 0.65);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(245, 241, 232, 0.42);
+  color: var(--color-marfim);
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-dourado);
+  color: #ffffff;
+  background: rgba(212, 175, 55, 0.16);
+  box-shadow: 0 0 28px rgba(212, 175, 55, 0.3), 0 8px 24px rgba(0, 0, 0, 0.45);
+  transform: translateY(-2px);
+}
+
+.btn-outline:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   ACSIBILIDADE & PREFERS-REDUCED-MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-dourado);
+  outline-offset: 3px;
+}

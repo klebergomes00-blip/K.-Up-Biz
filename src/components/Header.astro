@@ -1,0 +1,386 @@
+---
+// src/components/Header.astro
+---
+
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <!-- Logo -->
+    <a href="/" class="brand-logo" aria-label="K. UP BIZ Página Inicial">
+      <span class="logo-text">K. UP BIZ</span>
+      <span class="logo-accent" aria-hidden="true"></span>
+    </a>
+
+    <!-- Desktop Notch Menu Centralizado -->
+    <nav class="nav-menu" id="nav-menu" aria-label="Navegação Principal">
+      <a href="#inicio" class="nav-link is-active">Início</a>
+      <a href="#solucoes" class="nav-link">Soluções</a>
+      <a href="#metodologia" class="nav-link">Metodologia</a>
+      <a href="#diferenciais" class="nav-link">Diferenciais</a>
+      <a href="#contato" class="nav-link">Contato</a>
+    </nav>
+
+    <!-- Header CTA Direito -->
+    <div class="header-actions">
+      <a href="#contato" class="btn-pill header-cta">
+        <span>FALE CONOSCO</span>
+        <span aria-hidden="true" class="arrow">
+          <svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewBox="0 0 24 24" width="14">
+            <path d="M7 17 17 7"></path>
+            <path d="M8 7h9v9"></path>
+          </svg>
+        </span>
+      </a>
+
+      <!-- Botão Hambúrguer Mobile -->
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-label="Abrir Menu de Navegação"
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+      >
+        <span class="toggle-bar"></span>
+        <span class="toggle-bar"></span>
+        <span class="toggle-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Overlay -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="mobile-drawer-inner">
+      <nav class="mobile-nav-links">
+        <a href="#inicio" class="mobile-nav-link">Início</a>
+        <a href="#solucoes" class="mobile-nav-link">Soluções</a>
+        <a href="#metodologia" class="mobile-nav-link">Metodologia</a>
+        <a href="#diferenciais" class="mobile-nav-link">Diferenciais</a>
+        <a href="#contato" class="mobile-nav-link">Contato</a>
+      </nav>
+      <div class="mobile-drawer-cta">
+        <a href="#contato" class="btn-pill btn-pill-lg mobile-cta-btn">
+          <span>ELEVE SEU NEGÓCIO</span>
+          <span aria-hidden="true" class="arrow">
+            <svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewBox="0 0 24 24" width="14">
+              <path d="M7 17 17 7"></path>
+              <path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Header Container */
+  .site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    width: 100%;
+    background: transparent;
+    opacity: 0;
+    transform: translateY(-12px);
+    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+
+  .site-header.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 22px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    position: relative;
+  }
+
+  /* Logo */
+  .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.015em;
+    color: var(--color-marfim);
+    text-decoration: none;
+    z-index: 110;
+  }
+
+  .logo-text {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .logo-accent {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-dourado);
+    box-shadow: 0 0 10px var(--color-dourado);
+    display: inline-block;
+  }
+
+  /* Desktop Notch Menu */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 14px;
+    color: var(--color-marfim-muted);
+  }
+
+  .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-marfim-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+    padding: 4px 0;
+  }
+
+  .nav-link:hover,
+  .nav-link.is-active {
+    color: var(--color-marfim);
+  }
+
+  .nav-link.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 2px;
+    background: var(--color-dourado);
+    border-radius: 999px;
+    box-shadow: 0 0 8px var(--color-dourado);
+  }
+
+  /* Desktop Notch Styling com Curvatura Exclusiva */
+  @media (min-width: 861px) {
+    .nav-menu {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: var(--header-height);
+      align-items: center;
+      flex-wrap: nowrap;
+      gap: 30px;
+      padding: 0 36px;
+      background: var(--color-verde-profundo);
+      border-radius: 0 0 6px 6px;
+      border-bottom: 1px solid rgba(245, 241, 232, 0.08);
+      box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Asas laterais curvadas (Notch Wings SVG) com a cor canônica #041D17 */
+    .nav-menu::before,
+    .nav-menu::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 58px;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58 82' preserveAspectRatio='none'%3E%3Cpath d='M0 0H58V82H50C43 82 39 79 36 73L8 9C6 4 3 0 0 0Z' fill='%23041D17'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+      pointer-events: none;
+    }
+
+    .nav-menu::before {
+      right: calc(100% - 1px);
+    }
+
+    .nav-menu::after {
+      left: calc(100% - 1px);
+      transform: scaleX(-1);
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 110;
+  }
+
+  /* Responsividade Desktop Intermediário */
+  @media (min-width: 861px) and (max-width: 1140px) {
+    .nav-menu {
+      gap: 20px;
+      padding: 0 24px;
+      font-size: 13px;
+    }
+    .nav-menu::before,
+    .nav-menu::after {
+      width: 44px;
+    }
+  }
+
+  /* Toggle Mobile */
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    z-index: 120;
+  }
+
+  .toggle-bar {
+    width: 24px;
+    height: 2px;
+    background: var(--color-marfim);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+  }
+
+  .nav-toggle.is-open .toggle-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background: var(--color-dourado);
+  }
+
+  .nav-toggle.is-open .toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.is-open .toggle-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background: var(--color-dourado);
+  }
+
+  /* Mobile Drawer */
+  .mobile-drawer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 29, 23, 0.96);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    z-index: 105;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    padding-top: 100px;
+  }
+
+  .mobile-drawer.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-drawer-inner {
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 36px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    width: 100%;
+  }
+
+  .mobile-nav-link {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-marfim);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(245, 241, 232, 0.08);
+    transition: color 0.2s ease;
+  }
+
+  .mobile-nav-link:hover {
+    color: var(--color-dourado);
+  }
+
+  .mobile-drawer-cta {
+    width: 100%;
+  }
+
+  .mobile-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Breakpoint Mobile */
+  @media (max-width: 860px) {
+    .nav-menu {
+      display: none;
+    }
+    .header-cta {
+      display: none;
+    }
+    .nav-toggle {
+      display: flex;
+    }
+    .mobile-drawer {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  // Mobile drawer toggle script
+  const toggleBtn = document.getElementById('nav-toggle');
+  const drawer = document.getElementById('mobile-drawer');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+  if (toggleBtn && drawer) {
+    const toggleMenu = () => {
+      const isOpen = toggleBtn.classList.toggle('is-open');
+      drawer.classList.toggle('is-open', isOpen);
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      drawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
+
+    toggleBtn.addEventListener('click', toggleMenu);
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        if (toggleBtn.classList.contains('is-open')) {
+          toggleMenu();
+        }
+      });
+    });
+  }
+
+  // Revelação fluida sincronizada: Header aparece após a fotografia do fundador estar visível
+  const siteHeaderEl = document.getElementById('site-header');
+  const revealSiteHeader = () => {
+    siteHeaderEl?.classList.add('is-revealed');
+  };
+
+  window.addEventListener('cinematic-header-reveal', revealSiteHeader);
+  window.addEventListener('cinematic-intro-complete', revealSiteHeader);
+
+  // Fallback para quando não houver intro ou quando o usuário preferir movimento reduzido
+  if (!document.getElementById('cinematic-intro') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealSiteHeader();
+  }
+</script>
