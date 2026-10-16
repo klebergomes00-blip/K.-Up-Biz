@@ -1,0 +1,560 @@
+---
+// src/components/NossaVisao.astro — Segunda Dobra Editorial: Nossa Visão
+---
+
+<section class="visao-section" id="nossa-visao" aria-label="01 Nossa Visão — Da Presença à Relevância">
+  <!-- Auras atmosféricas profundas em verde esmeralda e reflexo dourado -->
+  <div class="visao-ambient-glow glow-emerald" aria-hidden="true"></div>
+  <div class="visao-ambient-glow glow-gold" aria-hidden="true"></div>
+
+  <div class="wrap visao-wrap">
+    <!-- Top Row: Identificador Editorial Superior -->
+    <div class="visao-header">
+      <div class="visao-eyebrow">
+        <span class="eyebrow-pip" aria-hidden="true"></span>
+        <span class="eyebrow-text">01 / NOSSA VISÃO</span>
+      </div>
+
+      <div class="visao-concept-tag" aria-hidden="true">
+        <span>DA PRESENÇA À RELEVÂNCIA</span>
+      </div>
+    </div>
+
+    <!-- Composição Editorial Assimétrica -->
+    <div class="visao-grid">
+      <!-- Coluna Principal (Esquerda / Centro): Monumental Headline em 3 Linhas -->
+      <div class="visao-headline-col">
+        <h2 class="visao-headline">
+          <span class="headline-mask">
+            <span class="headline-line line-1">O seu negócio merece</span>
+          </span>
+          <span class="headline-mask">
+            <span class="headline-line line-2 italic-serif text-gold">mais do que presença.</span>
+          </span>
+          <span class="headline-mask">
+            <span class="headline-line line-3">Merece relevância.</span>
+          </span>
+        </h2>
+      </div>
+
+      <!-- Coluna Complementar (Direita): Linha Dourada e Narrativa Comercial -->
+      <div class="visao-narrative-col">
+        <div class="visao-hairline-wrap" aria-hidden="true">
+          <div class="visao-hairline divider-line"></div>
+        </div>
+
+        <p class="visao-description">
+          Não criamos apenas sites ou campanhas. Construímos experiências digitais que ajudam empresas a serem encontradas, transmitirem confiança e conquistarem novas oportunidades.
+        </p>
+      </div>
+    </div>
+
+    <!-- Assinatura Inferior Discreta & Separador Arquitetônico -->
+    <div class="visao-footer">
+      <div class="visao-footer-line" aria-hidden="true"></div>
+      <div class="visao-signature">
+        <span class="sig-item">ESTRATÉGIA</span>
+        <span class="sig-bullet" aria-hidden="true">•</span>
+        <span class="sig-item">PRESENÇA</span>
+        <span class="sig-bullet" aria-hidden="true">•</span>
+        <span class="sig-item">CRESCIMENTO</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     K. UP BIZ — SEGUNDA DOBRA | NOSSA VISÃO
+     Direção de Arte Editorial: Da Presença à Relevância
+     Paleta: Verde profundo (#041D17), Verde Quase Preto (#030D0B),
+             Esmeralda (#047857), Dourado (#D4AF37), Marfim (#F5F1E8).
+     ========================================================================== */
+
+  .visao-section {
+    position: relative;
+    width: 100%;
+    /* Transição orgânica a partir do verde profundo da Hero (#041D17) para o tom quase preto (#030D0B) */
+    background: linear-gradient(
+      180deg,
+      #041D17 0%,
+      #030D0B 200px,
+      #030D0B calc(100% - 180px),
+      #041D17 100%
+    );
+    color: var(--color-marfim);
+    padding: clamp(110px, 16vh, 190px) 0 clamp(80px, 12vh, 140px);
+    overflow: hidden;
+    z-index: 5;
+  }
+
+  /* Auras Atmosféricas Profundas (Luz orgânica sem reflexos espalhafatosos) */
+  .visao-ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(110px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .glow-emerald {
+    top: 15%;
+    left: -8%;
+    width: clamp(380px, 48vw, 720px);
+    height: clamp(380px, 48vw, 720px);
+    background: radial-gradient(
+      circle,
+      rgba(4, 120, 87, 0.14) 0%,
+      rgba(4, 29, 23, 0.03) 60%,
+      transparent 80%
+    );
+  }
+
+  .glow-gold {
+    bottom: 8%;
+    right: -8%;
+    width: clamp(320px, 42vw, 600px);
+    height: clamp(320px, 42vw, 600px);
+    background: radial-gradient(
+      circle,
+      rgba(212, 175, 55, 0.07) 0%,
+      rgba(4, 29, 23, 0.02) 55%,
+      transparent 75%
+    );
+  }
+
+  /* Container Principal */
+  .visao-wrap {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* --------------------------------------------------------------------------
+     1. IDENTIFICADOR SUPERIOR (EYEBROW)
+     -------------------------------------------------------------------------- */
+  .visao-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: clamp(32px, 4.5vh, 52px);
+    border-bottom: 1px solid rgba(245, 241, 232, 0.07);
+  }
+
+  .visao-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eyebrow-pip {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-verde-esmeralda);
+    box-shadow: 0 0 12px rgba(4, 120, 87, 0.9), 0 0 4px rgba(212, 175, 55, 0.5);
+  }
+
+  .eyebrow-text {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-dourado);
+  }
+
+  .visao-concept-tag {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(245, 241, 232, 0.42);
+  }
+
+  /* --------------------------------------------------------------------------
+     2. GRID EDITORIAL ASSIMÉTRICO
+     -------------------------------------------------------------------------- */
+  .visao-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.36fr) minmax(0, 0.82fr);
+    gap: clamp(48px, 5.5vw, 88px);
+    align-items: end;
+    padding-top: clamp(48px, 7vh, 80px);
+  }
+
+  /* Coluna da Headline */
+  .visao-headline-col {
+    position: relative;
+  }
+
+  .visao-headline {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4px, 0.8vh, 8px);
+  }
+
+  .headline-mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 8px; /* Evita corte das caudas tipográficas da Bodoni Moda */
+  }
+
+  .headline-line {
+    display: block;
+    will-change: transform, opacity;
+  }
+
+  .line-1,
+  .line-3 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(2.2rem, 3.8vw, 3.65rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-marfim);
+  }
+
+  .line-2 {
+    font-family: var(--font-bodoni);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2.65rem, 4.6vw, 4.35rem);
+    line-height: 1.15;
+    color: var(--color-dourado);
+    text-shadow: 0 0 32px rgba(212, 175, 55, 0.38);
+    letter-spacing: -0.01em;
+  }
+
+  /* Em telas amplas de desktop, cada uma das 3 frases mantém presença monumental em sua linha */
+  @media (min-width: 1180px) {
+    .headline-line {
+      white-space: nowrap;
+    }
+  }
+
+  /* Coluna Narrativa */
+  .visao-narrative-col {
+    position: relative;
+    max-width: 460px;
+    padding-bottom: 8px;
+  }
+
+  /* Linha Dourada Fina Editorial */
+  .visao-hairline-wrap {
+    width: 100%;
+    margin-bottom: clamp(26px, 3.5vh, 36px);
+  }
+
+  .visao-hairline {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      #D4AF37 0%,
+      rgba(212, 175, 55, 0.4) 65%,
+      transparent 100%
+    );
+    will-change: transform;
+  }
+
+  /* Texto Complementar */
+  .visao-description {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: clamp(1.05rem, 1.2vw, 1.22rem);
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--color-marfim-muted);
+    letter-spacing: -0.005em;
+  }
+
+  /* --------------------------------------------------------------------------
+     3. ASSINATURA INFERIOR & MANTRA ESTRATÉGICO
+     -------------------------------------------------------------------------- */
+  .visao-footer {
+    margin-top: clamp(80px, 12vh, 130px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(26px, 3.8vh, 40px);
+  }
+
+  .visao-footer-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(245, 241, 232, 0.08) 22%,
+      rgba(212, 175, 55, 0.3) 50%,
+      rgba(245, 241, 232, 0.08) 78%,
+      transparent 100%
+    );
+    will-change: transform;
+  }
+
+  .visao-signature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(14px, 2.2vw, 26px);
+    font-family: var(--font-sans);
+    font-size: clamp(0.72rem, 0.88vw, 0.88rem);
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(245, 241, 232, 0.6);
+  }
+
+  .sig-bullet {
+    color: var(--color-dourado);
+    font-size: 10px;
+    opacity: 0.9;
+  }
+
+  /* --------------------------------------------------------------------------
+     RESPONSIVIDADE (TABLET & MOBILE)
+     -------------------------------------------------------------------------- */
+  @media (max-width: 1080px) {
+    .visao-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .visao-narrative-col {
+      max-width: 580px;
+    }
+
+    .visao-hairline {
+      max-width: 300px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .visao-section {
+      padding: 72px 0 54px;
+    }
+
+    .visao-header {
+      padding-bottom: 24px;
+    }
+
+    .visao-concept-tag {
+      display: none; /* Mantém foco no identificador principal em telas estreitas */
+    }
+
+    .visao-grid {
+      padding-top: 32px;
+      gap: 34px;
+    }
+
+    .visao-headline {
+      gap: 2px;
+    }
+
+    .line-1,
+    .line-3 {
+      font-size: clamp(1.85rem, 8vw, 2.45rem);
+      line-height: 1.18;
+    }
+
+    .line-2 {
+      font-size: clamp(2.15rem, 9.2vw, 2.9rem);
+      line-height: 1.16;
+    }
+
+    .visao-hairline {
+      max-width: 200px;
+    }
+
+    .visao-description {
+      font-size: 1.05rem;
+      line-height: 1.72;
+    }
+
+    .visao-footer {
+      margin-top: 54px;
+      gap: 24px;
+    }
+
+    .visao-signature {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      gap: 12px;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     ACESSIBILIDADE: PREFERS-REDUCED-MOTION
+     -------------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .headline-mask {
+      overflow: visible !important;
+    }
+
+    .headline-line,
+    .visao-eyebrow,
+    .visao-hairline,
+    .visao-description,
+    .visao-footer-line,
+    .visao-signature {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('nossa-visao');
+    if (!section) return;
+
+    // Respeito estrito a usuários que preferem movimento reduzido
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const eyebrow = section.querySelector('.visao-eyebrow');
+    const conceptTag = section.querySelector('.visao-concept-tag');
+    const line1 = section.querySelector('.line-1');
+    const line2 = section.querySelector('.line-2');
+    const line3 = section.querySelector('.line-3');
+    const hairline = section.querySelector('.visao-hairline');
+    const description = section.querySelector('.visao-description');
+    const footerLine = section.querySelector('.visao-footer-line');
+    const signature = section.querySelector('.visao-signature');
+
+    // Estado inicial visual antes do acionamento pelo ScrollTrigger
+    gsap.set([eyebrow, conceptTag, description, signature].filter(Boolean), {
+      opacity: 0,
+      y: 18,
+    });
+
+    gsap.set([line1, line3].filter(Boolean), {
+      yPercent: 110,
+      opacity: 0,
+    });
+
+    if (line2) {
+      gsap.set(line2, {
+        yPercent: 115,
+        opacity: 0,
+        filter: 'blur(4px)',
+      });
+    }
+
+    if (hairline) {
+      gsap.set(hairline, {
+        scaleX: 0,
+        transformOrigin: 'left center',
+      });
+    }
+
+    if (footerLine) {
+      gsap.set(footerLine, {
+        scaleX: 0,
+        transformOrigin: 'center center',
+      });
+    }
+
+    // Timeline independente vinculada exclusivamente à entrada da seção na viewport
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 75%',
+        toggleActions: 'play none none reverse',
+        invalidateOnRefresh: true,
+      },
+    });
+
+    // 1. Identificador superior surge suavemente
+    if (eyebrow) {
+      tl.to([eyebrow, conceptTag].filter(Boolean), {
+        opacity: 1,
+        y: 0,
+        duration: 0.65,
+        stagger: 0.1,
+        ease: 'power2.out',
+      }, 0);
+    }
+
+    // 2. Headline revelada por linhas com máscara vertical
+    if (line1) {
+      tl.to(line1, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 0.85,
+        ease: 'power3.out',
+      }, 0.15);
+    }
+
+    if (line2) {
+      // Destaque dourado com pequeno atraso editorial e dissolução do blur
+      tl.to(line2, {
+        yPercent: 0,
+        opacity: 1,
+        filter: 'blur(0px)',
+        duration: 0.95,
+        ease: 'power3.out',
+      }, 0.32);
+    }
+
+    if (line3) {
+      tl.to(line3, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 0.85,
+        ease: 'power3.out',
+      }, 0.48);
+    }
+
+    // 3. Linha dourada expande horizontalmente
+    if (hairline) {
+      tl.to(hairline, {
+        scaleX: 1,
+        duration: 0.85,
+        ease: 'power2.out',
+      }, 0.42);
+    }
+
+    // 4. Texto complementar entra com deslocamento vertical sutil
+    if (description) {
+      tl.to(description, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+      }, 0.58);
+    }
+
+    // 5. Linha divisória e Assinatura inferior
+    if (footerLine) {
+      tl.to(footerLine, {
+        scaleX: 1,
+        duration: 0.9,
+        ease: 'power2.out',
+      }, 0.7);
+    }
+
+    if (signature) {
+      tl.to(signature, {
+        opacity: 1,
+        y: 0,
+        duration: 0.75,
+        ease: 'power2.out',
+      }, 0.85);
+    }
+  });
+</script>

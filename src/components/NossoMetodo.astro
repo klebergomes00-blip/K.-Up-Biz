@@ -1,0 +1,1287 @@
+---
+// src/components/NossoMetodo.astro — Quarta Dobra: Nosso Método
+// Narrativa editorial assimétrica das 4 etapas com scroll cinematográfico controlado e pin.
+
+interface StepItem {
+  index: string;
+  phase: string;
+  title: string;
+  description: string;
+}
+
+const steps: StepItem[] = [
+  {
+    index: '01',
+    phase: 'FASE 01',
+    title: 'ENTENDER',
+    description: 'Conhecemos seu negócio, seus desafios e objetivos.'
+  },
+  {
+    index: '02',
+    phase: 'FASE 02',
+    title: 'PLANEJAR',
+    description: 'Definimos prioridades e uma estratégia alinhada à sua realidade.'
+  },
+  {
+    index: '03',
+    phase: 'FASE 03',
+    title: 'EXECUTAR',
+    description: 'Transformamos o planejamento em presença digital e ações concretas.'
+  },
+  {
+    index: '04',
+    phase: 'FASE 04',
+    title: 'EVOLUIR',
+    description: 'Acompanhamos resultados e identificamos oportunidades de melhoria.'
+  }
+];
+---
+
+<section class="metodo-section" id="metodo" aria-label="03 Nosso Método — Crescimento não acontece por acaso">
+  <!-- Mídia de Fundo: Montanha Cinematográfica com Video Scrubbing Sincronizado -->
+  <div class="metodo-media-container" aria-hidden="true">
+    <video
+      id="metodo-video"
+      class="metodo-video"
+      muted
+      playsinline
+      preload="metadata"
+      poster="/imagens/metodo-poster.png"
+    >
+      <source src="/videos/metodo-montanha-opt.mp4" type="video/mp4" />
+      <source src="/videos/metodo-montanha.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Camada de Poster Fallback (0% Scroll / Sem JS / Reduced Motion) -->
+    <div class="metodo-poster-layer" id="metodo-poster-layer">
+      <img
+        src="/imagens/metodo-poster.png"
+        alt="Montanha com caminho luminoso dourado"
+        class="metodo-poster-img"
+        id="metodo-poster-img"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <!-- Scrims Cinematográficos para Fusão e Legibilidade Impecável -->
+    <div class="metodo-scrim-overlay"></div>
+    <div class="metodo-scrim-left"></div>
+    <div class="metodo-scrim-top"></div>
+    <div class="metodo-scrim-bottom"></div>
+  </div>
+
+  <!-- Auras atmosféricas profundas em verde esmeralda e reflexo dourado -->
+  <div class="metodo-ambient-glow glow-emerald" aria-hidden="true"></div>
+  <div class="metodo-ambient-glow glow-gold" aria-hidden="true"></div>
+
+  <div class="wrap metodo-wrap">
+    <!-- Grid Editorial Assimétrico de Duas Colunas -->
+    <div class="metodo-grid">
+      <!-- Coluna Esquerda: Headline & Narrativa Editorial -->
+      <aside class="metodo-sticky-col">
+        <div class="metodo-sticky-inner">
+          <div class="metodo-eyebrow">
+            <span class="eyebrow-pip" aria-hidden="true"></span>
+            <span class="eyebrow-text">03 / NOSSO MÉTODO</span>
+          </div>
+
+          <h2 class="metodo-headline">
+            <span class="headline-mask">
+              <span class="headline-line line-1">Crescimento não acontece</span>
+            </span>
+            <span class="headline-mask">
+              <span class="headline-line line-2 italic-serif text-gold">por acaso.</span>
+            </span>
+          </h2>
+
+          <div class="metodo-hairline" aria-hidden="true"></div>
+
+          <p class="metodo-lead">
+            Cada negócio tem uma realidade. Nosso trabalho é entender seu momento e construir o caminho certo para avançar.
+          </p>
+
+          <div class="metodo-concept-tag" aria-hidden="true">
+            <span class="concept-dot"></span>
+            <span class="concept-text">MÉTODO ESTRATÉGICO INTEGRADO</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Coluna Direita: As 4 Etapas Conectadas pela Linha Vertical de Progresso -->
+      <div class="metodo-steps-col" id="metodo-steps-col">
+        <!-- Trilha e Linha Vertical de Progresso Luminosa -->
+        <div class="metodo-timeline-rail" aria-hidden="true">
+          <!-- Linha base tênue estrutural -->
+          <div class="metodo-rail-bg"></div>
+          <!-- Linha dourada progressiva iluminada (cresce via ScrollTrigger) -->
+          <div class="metodo-rail-progress" id="metodo-rail-progress"></div>
+        </div>
+
+        <ol class="metodo-steps-list">
+          {steps.map((item, i) => (
+            <li class="metodo-step is-upcoming" data-step-index={i}>
+              <!-- Marcador Físico / Nó Luminoso Alinhado à Linha -->
+              <div class="step-indicator">
+                <div class="step-node">
+                  <span class="step-node-glow" aria-hidden="true"></span>
+                  <span class="step-node-ring"></span>
+                  <span class="step-node-core"></span>
+                </div>
+                <span class="step-index">{item.index}</span>
+              </div>
+
+              <!-- Conteúdo Editorial da Etapa -->
+              <div class="step-body">
+                <span class="step-tag">{item.phase}</span>
+                <h3 class="step-title">
+                  <span class="step-title-mask">
+                    <span class="step-title-text">{item.title}</span>
+                  </span>
+                </h3>
+                <p class="step-description">
+                  {item.description}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     K. UP BIZ — QUARTA DOBRA | NOSSO MÉTODO
+     Direção de Arte: Crescimento não acontece por acaso
+     Paleta Canônica: #041D17, #030D0B, #047857, #D4AF37, #F5F1E8
+     ========================================================================== */
+
+  .metodo-section {
+    position: relative;
+    width: 100%;
+    /* Transição elegante do verde profundo da Digital Shelf para o tom quase preto */
+    background: linear-gradient(
+      180deg,
+      #041D17 0%,
+      #030D0B 160px,
+      #030D0B calc(100% - 160px),
+      #041D17 100%
+    );
+    color: var(--color-marfim);
+    padding: clamp(80px, 11vh, 120px) 0;
+    overflow: hidden;
+    z-index: 6;
+  }
+
+  @media (min-width: 1025px) {
+    .metodo-section {
+      height: 100vh;
+      height: 100dvh;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(24px, 4vh, 48px) 0;
+      box-sizing: border-box;
+    }
+  }
+
+  /* ==========================================================================
+     MÍDIA DE FUNDO: MONTANHA CINEMATOGRÁFICA COM VIDEO SCRUBBING
+     ========================================================================== */
+  .metodo-media-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .metodo-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 36%;
+    z-index: 1;
+    transform: translateZ(0);
+    will-change: transform;
+    opacity: 0.88;
+  }
+
+  .metodo-poster-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .metodo-poster-layer.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .metodo-poster-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 36%;
+    display: block;
+  }
+
+  /* Scrim Principal: Vinheta Atmosférica Verde-Escura & Obsidiana */
+  .metodo-scrim-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background:
+      radial-gradient(
+        ellipse 90% 80% at 50% 50%,
+        rgba(3, 13, 11, 0.38) 0%,
+        rgba(3, 13, 11, 0.62) 55%,
+        rgba(4, 29, 23, 0.86) 85%,
+        #041D17 100%
+      ),
+      linear-gradient(
+        180deg,
+        #041D17 0%,
+        rgba(4, 29, 23, 0.8) 12%,
+        rgba(3, 13, 11, 0.36) 35%,
+        rgba(3, 13, 11, 0.32) 60%,
+        rgba(4, 29, 23, 0.86) 88%,
+        #041D17 100%
+      );
+  }
+
+  /* Scrim Lateral Esquerdo: Proteção Óptica para a Coluna Editorial */
+  .metodo-scrim-left {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: clamp(380px, 52vw, 760px);
+    z-index: 4;
+    background: linear-gradient(
+      90deg,
+      rgba(3, 13, 11, 0.85) 0%,
+      rgba(3, 13, 11, 0.68) 45%,
+      rgba(3, 13, 11, 0.28) 78%,
+      transparent 100%
+    );
+  }
+
+  /* Scrims Superior e Inferior para Fusão Perfeita entre Dobras */
+  .metodo-scrim-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: clamp(80px, 12vh, 140px);
+    z-index: 4;
+    background: linear-gradient(180deg, #041D17 0%, transparent 100%);
+  }
+
+  .metodo-scrim-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: clamp(80px, 12vh, 140px);
+    z-index: 4;
+    background: linear-gradient(0deg, #041D17 0%, transparent 100%);
+  }
+
+  /* Auras Atmosféricas Profundas */
+  .metodo-ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .glow-emerald {
+    top: 20%;
+    right: -6%;
+    width: clamp(380px, 45vw, 680px);
+    height: clamp(380px, 45vw, 680px);
+    background: radial-gradient(
+      circle,
+      rgba(4, 120, 87, 0.13) 0%,
+      rgba(4, 29, 23, 0.03) 60%,
+      transparent 80%
+    );
+  }
+
+  .glow-gold {
+    bottom: 12%;
+    left: -6%;
+    width: clamp(340px, 40vw, 600px);
+    height: clamp(340px, 40vw, 600px);
+    background: radial-gradient(
+      circle,
+      rgba(212, 175, 55, 0.08) 0%,
+      rgba(4, 29, 23, 0.02) 55%,
+      transparent 75%
+    );
+  }
+
+  .metodo-wrap {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  /* --------------------------------------------------------------------------
+     1. GRID EDITORIAL ASSIMÉTRICO
+     -------------------------------------------------------------------------- */
+  .metodo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(48px, 6.5vw, 96px);
+    align-items: center;
+    position: relative;
+  }
+
+  /* Coluna Esquerda: Headline e Apresentação */
+  .metodo-sticky-col {
+    position: relative;
+    align-self: center;
+  }
+
+  .metodo-sticky-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .metodo-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .eyebrow-pip {
+    width: 6.5px;
+    height: 6.5px;
+    border-radius: 50%;
+    background-color: var(--color-verde-esmeralda);
+    box-shadow: 0 0 12px rgba(4, 120, 87, 0.9), 0 0 4px rgba(212, 175, 55, 0.4);
+  }
+
+  .eyebrow-text {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-dourado);
+  }
+
+  .metodo-headline {
+    margin: 0 0 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: clamp(2.3rem, 3.5vw, 3.35rem);
+    line-height: 1.08;
+    letter-spacing: -0.028em;
+  }
+
+  .headline-mask {
+    display: block;
+    overflow: hidden;
+  }
+
+  .headline-line {
+    display: block;
+    color: var(--color-marfim);
+  }
+
+  .metodo-headline .italic-serif {
+    font-family: var(--font-bodoni);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2.65rem, 4.1vw, 3.85rem);
+    color: var(--color-dourado);
+    text-shadow: 0 0 32px rgba(212, 175, 55, 0.35);
+  }
+
+  .metodo-hairline {
+    width: 110px;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      var(--color-dourado) 0%,
+      rgba(212, 175, 55, 0.4) 65%,
+      transparent 100%
+    );
+    margin: 16px 0 22px;
+    transform-origin: left center;
+  }
+
+  .metodo-lead {
+    margin: 0 0 28px;
+    font-family: var(--font-sans);
+    font-size: clamp(1.02rem, 1.15vw, 1.15rem);
+    line-height: 1.7;
+    color: var(--color-marfim-muted);
+    max-width: 460px;
+  }
+
+  .metodo-concept-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(4, 120, 87, 0.12);
+    border: 1px solid rgba(4, 120, 87, 0.32);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--color-dourado);
+  }
+
+  .concept-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--color-dourado);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+  }
+
+  /* --------------------------------------------------------------------------
+     2. COLUNA DIREITA: TIMELINE VERTICAL DE ETAPAS
+     -------------------------------------------------------------------------- */
+  .metodo-steps-col {
+    position: relative;
+    padding-left: clamp(40px, 5.5vw, 68px);
+  }
+
+  /* Trilha da Linha Vertical de Progresso */
+  .metodo-timeline-rail {
+    position: absolute;
+    top: 16px;
+    bottom: 24px;
+    left: clamp(16px, 2.2vw, 24px);
+    width: 2px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .metodo-rail-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(245, 241, 232, 0.06) 0%,
+      rgba(245, 241, 232, 0.12) 20%,
+      rgba(245, 241, 232, 0.12) 80%,
+      rgba(245, 241, 232, 0.04) 100%
+    );
+    border-radius: 999px;
+  }
+
+  .metodo-rail-progress {
+    position: absolute;
+    top: 0;
+    left: -0.5px;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      #D4AF37 0%,
+      #6EE7B7 40%,
+      #10B981 75%,
+      #047857 100%
+    );
+    border-radius: 999px;
+    box-shadow:
+      0 0 8px rgba(212, 175, 55, 0.8),
+      0 0 18px rgba(16, 185, 129, 0.7),
+      0 0 32px rgba(4, 120, 87, 0.5);
+    transform-origin: top center;
+    transform: scaleY(0);
+    will-change: transform;
+  }
+
+  /* Lista Ordenada de Etapas */
+  .metodo-steps-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(26px, 4.2vh, 46px);
+  }
+
+  /* Item de Etapa Individual */
+  .metodo-step {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(20px, 2.8vw, 36px);
+  }
+
+  /* Estados de Foco Editorial na Etapa */
+  .metodo-step.is-upcoming {
+    opacity: 0.32;
+  }
+
+  .metodo-step.is-active {
+    opacity: 1;
+  }
+
+  .metodo-step.is-past {
+    opacity: 0.65;
+  }
+
+  /* --------------------------------------------------------------------------
+     3. INDICADOR / NÓ LUMINOSO DA ETAPA
+     -------------------------------------------------------------------------- */
+  .step-indicator {
+    position: absolute;
+    left: calc(-1 * clamp(40px, 5.5vw, 68px) + clamp(16px, 2.2vw, 24px));
+    transform: translateX(-50%);
+    top: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 3;
+  }
+
+  .step-node {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step-node-glow {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(212, 175, 55, 0.85) 0%,
+      rgba(16, 185, 129, 0.5) 45%,
+      transparent 75%
+    );
+    opacity: 0;
+    transform: scale(0.6);
+    pointer-events: none;
+  }
+
+  .step-node-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #030D0B;
+    border: 2px solid rgba(245, 241, 232, 0.22);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  }
+
+  .step-node-core {
+    position: relative;
+    z-index: 2;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(245, 241, 232, 0.4);
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Nó Ativo */
+  .metodo-step.is-active .step-node-ring {
+    border-color: var(--color-dourado);
+    box-shadow:
+      0 0 12px rgba(212, 175, 55, 0.8),
+      inset 0 0 6px rgba(212, 175, 55, 0.4);
+    background: #061d17;
+  }
+
+  .metodo-step.is-active .step-node-core {
+    background: #FFFFFF;
+    transform: scale(1.3);
+    box-shadow: 0 0 8px #F5F1E8, 0 0 14px var(--color-dourado);
+  }
+
+  .metodo-step.is-active .step-node-glow {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  /* Nó Concluído (Past) */
+  .metodo-step.is-past .step-node-ring {
+    border-color: rgba(4, 120, 87, 0.7);
+    background: #041d17;
+  }
+
+  .metodo-step.is-past .step-node-core {
+    background: var(--color-verde-esmeralda);
+    box-shadow: 0 0 6px rgba(4, 120, 87, 0.6);
+  }
+
+  .step-index {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: rgba(245, 241, 232, 0.35);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  .metodo-step.is-active .step-index {
+    color: var(--color-dourado);
+    text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+  }
+
+  .metodo-step.is-past .step-index {
+    color: rgba(245, 241, 232, 0.55);
+  }
+
+  /* --------------------------------------------------------------------------
+     4. CORPO DA ETAPA (TIPOGRAFIA EDITORIAL PURA)
+     -------------------------------------------------------------------------- */
+  .step-body {
+    flex: 1;
+    max-width: 520px;
+  }
+
+  .step-tag {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(212, 175, 55, 0.65);
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+  }
+
+  .metodo-step.is-active .step-tag {
+    color: var(--color-dourado);
+  }
+
+  .step-title {
+    margin: 0 0 8px;
+    font-family: var(--font-sans);
+    font-size: clamp(1.55rem, 2.2vw, 2.05rem);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  .step-title-mask {
+    display: block;
+    overflow: hidden;
+  }
+
+  .step-title-text {
+    display: block;
+    color: var(--color-marfim);
+    transition: color 0.3s ease;
+  }
+
+  .metodo-step.is-active .step-title-text {
+    color: #FFFFFF;
+    text-shadow: 0 0 24px rgba(245, 241, 232, 0.25);
+  }
+
+  .step-description {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: clamp(0.96rem, 1.05vw, 1.06rem);
+    line-height: 1.6;
+    color: var(--color-marfim-muted);
+    transition: color 0.3s ease;
+  }
+
+  .metodo-step.is-active .step-description {
+    color: var(--color-marfim);
+  }
+
+  /* --------------------------------------------------------------------------
+     5. RESPONSIVIDADE (TABLET & MOBILE)
+     -------------------------------------------------------------------------- */
+  @media (max-width: 1024px) {
+    .metodo-video,
+    .metodo-poster-img {
+      object-position: center 25%;
+      opacity: 0.72;
+    }
+
+    .metodo-scrim-left {
+      width: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(3, 13, 11, 0.88) 0%,
+        rgba(3, 13, 11, 0.75) 45%,
+        rgba(3, 13, 11, 0.9) 100%
+      );
+    }
+
+    .metodo-section {
+      min-height: auto;
+      padding: clamp(80px, 12vh, 120px) 0;
+    }
+
+    .metodo-grid {
+      grid-template-columns: 1fr;
+      gap: 56px;
+      align-items: flex-start;
+    }
+
+    .metodo-sticky-inner {
+      max-width: 640px;
+    }
+
+    .metodo-steps-col {
+      padding-left: 54px;
+    }
+
+    .metodo-timeline-rail {
+      left: 18px;
+    }
+
+    .step-indicator {
+      left: -36px;
+    }
+
+    .metodo-steps-list {
+      gap: 44px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .metodo-section {
+      padding: 72px 0 64px;
+    }
+
+    .metodo-grid {
+      gap: 44px;
+    }
+
+    .metodo-headline {
+      font-size: clamp(1.95rem, 7.8vw, 2.5rem);
+    }
+
+    .metodo-headline .italic-serif {
+      font-size: clamp(2.3rem, 9vw, 2.95rem);
+    }
+
+    .metodo-lead {
+      font-size: 0.98rem;
+      margin-bottom: 20px;
+    }
+
+    .metodo-steps-col {
+      padding-left: 44px;
+    }
+
+    .metodo-timeline-rail {
+      left: 12px;
+    }
+
+    .step-indicator {
+      left: -32px;
+    }
+
+    .metodo-steps-list {
+      gap: 44px;
+    }
+
+    .step-title {
+      font-size: 1.45rem;
+    }
+
+    .step-description {
+      font-size: 0.94rem;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     6. ACESSIBILIDADE: PREFERS-REDUCED-MOTION
+     -------------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .metodo-rail-progress {
+      transform: scaleY(1) !important;
+      transition: none !important;
+    }
+
+    .metodo-step {
+      opacity: 1 !important;
+      transition: none !important;
+    }
+
+    .step-title-text,
+    .step-description,
+    .step-tag,
+    .headline-line,
+    .metodo-hairline,
+    .metodo-lead,
+    .metodo-concept-tag,
+    .metodo-eyebrow {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      transition: none !important;
+    }
+
+    .step-node-glow {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('metodo');
+    if (!section) return;
+
+    const video = section.querySelector('#metodo-video') as HTMLVideoElement | null;
+    const posterLayer = section.querySelector('#metodo-poster-layer') as HTMLElement | null;
+
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isReducedMotion) {
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+      const railProgress = section.querySelector('#metodo-rail-progress') as HTMLElement;
+      if (railProgress) railProgress.style.transform = 'scaleY(1)';
+      section.querySelectorAll('.metodo-step').forEach((s) => {
+        s.classList.remove('is-upcoming');
+        s.classList.add('is-active');
+      });
+      return;
+    }
+
+    // --- Mecanismo de Busca de Frames Não-Bloqueante (Bidirecional Suave) ---
+    let targetTime = 0;
+    const getVideoDuration = () => {
+      if (video && Number.isFinite(video.duration) && video.duration > 0) {
+        return video.duration;
+      }
+      return 8.0; // Duração exata do clipe da montanha
+    };
+
+    const requestSeek = (time: number) => {
+      if (!video) return;
+      const duration = getVideoDuration();
+      targetTime = Math.max(0, Math.min(duration, time));
+      if (!video.seeking && video.readyState >= 1) {
+        if (Math.abs(video.currentTime - targetTime) > 0.02) {
+          video.currentTime = targetTime;
+        }
+      }
+    };
+
+    if (video) {
+      video.pause();
+
+      video.addEventListener('seeked', () => {
+        if (!video) return;
+        if (Math.abs(video.currentTime - targetTime) > 0.02) {
+          video.currentTime = targetTime;
+        }
+      });
+
+      // Transição suave do poster para o vídeo decodificado
+      const onVideoReady = () => {
+        if (posterLayer) {
+          posterLayer.classList.add('is-hidden');
+        }
+      };
+
+      if (video.readyState >= 2) {
+        onVideoReady();
+      } else {
+        video.addEventListener('loadeddata', onVideoReady, { once: true });
+        video.addEventListener('canplay', onVideoReady, { once: true });
+      }
+
+      video.addEventListener('error', () => {
+        console.warn('Vídeo da montanha indisponível; exibindo poster estático.');
+        if (posterLayer) {
+          posterLayer.classList.remove('is-hidden');
+        }
+      });
+
+      // Carregamento sob demanda: eleva preload para 'auto' quando a seção se aproxima
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (video.preload !== 'auto') {
+                video.preload = 'auto';
+              }
+              observer.disconnect();
+            }
+          });
+        }, { rootMargin: '800px 0px' });
+        observer.observe(section);
+      }
+    }
+
+    const eyebrow = section.querySelector('.metodo-eyebrow');
+    const line1 = section.querySelector('.line-1');
+    const line2 = section.querySelector('.line-2');
+    const hairline = section.querySelector('.metodo-hairline');
+    const lead = section.querySelector('.metodo-lead');
+    const conceptTag = section.querySelector('.metodo-concept-tag');
+
+    const stepsCol = section.querySelector('#metodo-steps-col') as HTMLElement;
+    const rail = section.querySelector('.metodo-timeline-rail') as HTMLElement;
+    const railProgress = section.querySelector('#metodo-rail-progress') as HTMLElement;
+    const steps = Array.from(section.querySelectorAll<HTMLElement>('.metodo-step'));
+
+    const mm = gsap.matchMedia();
+
+    // ========================================================================
+    // 1. DESKTOP CINEMATOGRÁFICO (>= 1025px): PIN CONTROLADO + TIMELINE NARRATIVA
+    // ========================================================================
+    mm.add('(min-width: 1025px)', () => {
+      // Cálculo dinâmico da geometria da trilha para ancorar perfeitamente entre Nó 01 e Nó 04
+      const updateRailGeometry = () => {
+        if (!stepsCol || !rail || steps.length < 4) return [0, 0.33, 0.66, 1];
+        const colRect = stepsCol.getBoundingClientRect();
+        const node0 = steps[0].querySelector('.step-node') as HTMLElement;
+        const node3 = steps[3].querySelector('.step-node') as HTMLElement;
+        const r0 = node0.getBoundingClientRect();
+        const r3 = node3.getBoundingClientRect();
+
+        const node0Center = (r0.top + r0.height / 2) - colRect.top;
+        const node3Center = (r3.top + r3.height / 2) - colRect.top;
+        const totalHeight = node3Center - node0Center;
+
+        rail.style.top = `${node0Center}px`;
+        rail.style.height = `${totalHeight}px`;
+        rail.style.bottom = 'auto';
+
+        return steps.map((s) => {
+          const node = s.querySelector('.step-node') as HTMLElement;
+          const nr = node.getBoundingClientRect();
+          const center = (nr.top + nr.height / 2) - colRect.top;
+          return totalHeight > 0 ? Math.max(0, Math.min(1, (center - node0Center) / totalHeight)) : 0;
+        });
+      };
+
+      const p = updateRailGeometry();
+
+      // Configuração inicial rigorosa: sem elementos ativados antecipadamente
+      gsap.set(railProgress, { scaleY: 0, transformOrigin: 'top center' });
+
+      // Cabeçalho editorial da coluna esquerda
+      gsap.set([eyebrow, lead, conceptTag].filter(Boolean), { opacity: 0, y: 16 });
+      if (line1) gsap.set(line1, { yPercent: 105, opacity: 0 });
+      if (line2) gsap.set(line2, { yPercent: 110, opacity: 0, filter: 'blur(4px)' });
+      if (hairline) gsap.set(hairline, { scaleX: 0, transformOrigin: 'left center' });
+
+      // Configuração inicial de cada etapa
+      steps.forEach((step) => {
+        const titleText = step.querySelector('.step-title-text');
+        const desc = step.querySelector('.step-description');
+        const tag = step.querySelector('.step-tag');
+        const glow = step.querySelector('.step-node-glow');
+
+        gsap.set(titleText, { yPercent: 105, opacity: 0 });
+        gsap.set(desc, { y: 14, opacity: 0 });
+        gsap.set(tag, { y: 8, opacity: 0 });
+        gsap.set(glow, { opacity: 0, scale: 0.6 });
+        step.classList.remove('is-active', 'is-past');
+        step.classList.add('is-upcoming');
+      });
+
+      // ----------------------------------------------------------------------
+      // ENTRADA DO CABEÇALHO (ocorre quando a Digital Shelf já saiu da tela)
+      // Dispara em 'top 30%' — sem conflito com a visualização da Digital Shelf
+      // ----------------------------------------------------------------------
+      const headerTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 30%',
+          toggleActions: 'play none none reverse',
+        }
+      });
+
+      if (eyebrow) headerTl.to(eyebrow, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
+      if (line1) headerTl.to(line1, { yPercent: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 0.08);
+      if (line2) headerTl.to(line2, { yPercent: 0, opacity: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out' }, 0.18);
+      if (hairline) headerTl.to(hairline, { scaleX: 1, duration: 0.6, ease: 'power2.out' }, 0.28);
+      if (lead) headerTl.to(lead, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.36);
+      if (conceptTag) headerTl.to(conceptTag, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.46);
+
+      // Objeto proxy de controle do tempo do vídeo
+      const videoProxy = { time: 0 };
+
+      // ----------------------------------------------------------------------
+      // TIMELINE PRINCIPAL COM PIN: SCROLL CONTROLADO DAS 4 ETAPAS + VÍDEO
+      // Inicia EXCLUSIVAMENTE em 'top top', quando a quarta dobra ocupa a tela
+      // ----------------------------------------------------------------------
+      const mainTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: () => '+=' + Math.round(window.innerHeight * 2.5),
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.8,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: () => {
+            const t = mainTl.time();
+            let activeIdx = -1;
+            if (t >= 0.5 && t < 3.0) activeIdx = 0;
+            else if (t >= 3.0 && t < 5.7) activeIdx = 1;
+            else if (t >= 5.7 && t < 8.4) activeIdx = 2;
+            else if (t >= 8.4) activeIdx = 3;
+
+            steps.forEach((step, idx) => {
+              step.classList.remove('is-active', 'is-past', 'is-upcoming');
+              if (idx === activeIdx) {
+                step.classList.add('is-active');
+              } else if (idx < activeIdx) {
+                step.classList.add('is-past');
+              } else {
+                step.classList.add('is-upcoming');
+              }
+            });
+
+            // Assegura sincronização contínua do frame com o decodificador
+            requestSeek(videoProxy.time);
+          }
+        }
+      });
+
+      // Leve movimento de câmera (push-in cinematográfico) durante a ascensão pela montanha
+      if (video) {
+        mainTl.to(video, {
+          scale: 1.05,
+          ease: 'none',
+          duration: 12.0
+        }, 0);
+      }
+
+      const stepElements = steps.map((s) => ({
+        step: s,
+        tag: s.querySelector('.step-tag'),
+        title: s.querySelector('.step-title-text'),
+        desc: s.querySelector('.step-description'),
+        glow: s.querySelector('.step-node-glow'),
+      }));
+
+      // ======================================================================
+      // FASE 01 — ENTENDER (Timeline 0.5s -> 3.0s | Vídeo 0.0s -> 1.6s)
+      // A jornada começa: a linha vertical alcança o Nó 01. O caminho dourado
+      // acende na base da montanha. Dwell amplo para leitura da proposta.
+      // ======================================================================
+      mainTl
+        .to(videoProxy, {
+          time: 1.6,
+          duration: 2.5,
+          ease: 'none',
+          onUpdate: () => requestSeek(videoProxy.time)
+        }, 0.5)
+        .to(stepElements[0].step, { opacity: 1, duration: 0.8, ease: 'power1.out' }, 0.5)
+        .to(stepElements[0].glow, { opacity: 1, scale: 1.2, duration: 0.8, ease: 'power2.out' }, 0.5)
+        .to(stepElements[0].tag, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.55)
+        .to(stepElements[0].title, { yPercent: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 0.65)
+        .to(stepElements[0].desc, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.8);
+
+      // ======================================================================
+      // FASE 02 — PLANEJAR (Timeline 3.0s -> 5.7s | Vídeo 1.6s -> 3.6s)
+      // O caminho dourado ascende pela montanha. O segundo marcador acende.
+      // O Nó 01 suaviza seu brilho, mantendo-se como histórico concluído.
+      // ======================================================================
+      mainTl
+        .to(videoProxy, {
+          time: 3.6,
+          duration: 2.7,
+          ease: 'none',
+          onUpdate: () => requestSeek(videoProxy.time)
+        }, 3.0)
+        .to(railProgress, { scaleY: p[1] || 0.32, ease: 'power1.inOut', duration: 1.2 }, 3.0)
+        .to(stepElements[0].step, { opacity: 0.65, duration: 0.6, ease: 'power1.out' }, 3.0)
+        .to(stepElements[0].glow, { opacity: 0, scale: 0.8, duration: 0.5 }, 3.0)
+        .to(stepElements[1].step, { opacity: 1, duration: 0.8, ease: 'power1.out' }, 3.4)
+        .to(stepElements[1].glow, { opacity: 1, scale: 1.2, duration: 0.8, ease: 'power2.out' }, 3.4)
+        .to(stepElements[1].tag, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 3.45)
+        .to(stepElements[1].title, { yPercent: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 3.55)
+        .to(stepElements[1].desc, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 3.7);
+
+      // ======================================================================
+      // FASE 03 — EXECUTAR (Timeline 5.7s -> 8.4s | Vídeo 3.6s -> 5.8s)
+      // O fluxo de energia sobe a crista rochosa em direção ao topo. Ondas de
+      // aurora boreal iluminam o céu. O terceiro marcador se destaca.
+      // ======================================================================
+      mainTl
+        .to(videoProxy, {
+          time: 5.8,
+          duration: 2.7,
+          ease: 'none',
+          onUpdate: () => requestSeek(videoProxy.time)
+        }, 5.7)
+        .to(railProgress, { scaleY: p[2] || 0.64, ease: 'power1.inOut', duration: 1.2 }, 5.7)
+        .to(stepElements[1].step, { opacity: 0.65, duration: 0.6, ease: 'power1.out' }, 5.7)
+        .to(stepElements[1].glow, { opacity: 0, scale: 0.8, duration: 0.5 }, 5.7)
+        .to(stepElements[2].step, { opacity: 1, duration: 0.8, ease: 'power1.out' }, 6.1)
+        .to(stepElements[2].glow, { opacity: 1, scale: 1.2, duration: 0.8, ease: 'power2.out' }, 6.1)
+        .to(stepElements[2].tag, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 6.15)
+        .to(stepElements[2].title, { yPercent: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 6.25)
+        .to(stepElements[2].desc, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 6.4);
+
+      // ======================================================================
+      // FASE 04 — EVOLUIR (Timeline 8.4s -> 11.5s | Vídeo 5.8s -> 8.0s)
+      // O feixe alcança o cume e expande-se em uma supernova dourada sob a
+      // aurora. A linha vertical completa 100%. O quarto marcador resplandece.
+      // ======================================================================
+      mainTl
+        .to(videoProxy, {
+          time: 8.0,
+          duration: 3.1,
+          ease: 'none',
+          onUpdate: () => requestSeek(videoProxy.time)
+        }, 8.4)
+        .to(railProgress, { scaleY: 1.0, ease: 'power1.inOut', duration: 1.2 }, 8.4)
+        .to(stepElements[2].step, { opacity: 0.65, duration: 0.6, ease: 'power1.out' }, 8.4)
+        .to(stepElements[2].glow, { opacity: 0, scale: 0.8, duration: 0.5 }, 8.4)
+        .to(stepElements[3].step, { opacity: 1, duration: 0.8, ease: 'power1.out' }, 8.8)
+        .to(stepElements[3].glow, { opacity: 1, scale: 1.2, duration: 0.8, ease: 'power2.out' }, 8.8)
+        .to(stepElements[3].tag, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 8.85)
+        .to(stepElements[3].title, { yPercent: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 8.95)
+        .to(stepElements[3].desc, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 9.1);
+
+      // Ponto de permanência final contemplativa antes da liberação suave do scroll
+      mainTl.to({}, { duration: 0.5 }, 11.5);
+    });
+
+    // ========================================================================
+    // 2. MOBILE & TABLET (<= 1024px): ROLAGEM NATURAL SEM TRAVAMENTO
+    // ========================================================================
+    mm.add('(max-width: 1024px)', () => {
+      // Configuração inicial
+      gsap.set([eyebrow, lead, conceptTag].filter(Boolean), { opacity: 0, y: 14 });
+      if (line1) gsap.set(line1, { yPercent: 105, opacity: 0 });
+      if (line2) gsap.set(line2, { yPercent: 110, opacity: 0, filter: 'blur(3px)' });
+      if (hairline) gsap.set(hairline, { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set(railProgress, { scaleY: 0, transformOrigin: 'top center' });
+
+      steps.forEach((step) => {
+        const titleText = step.querySelector('.step-title-text');
+        const desc = step.querySelector('.step-description');
+        const tag = step.querySelector('.step-tag');
+        gsap.set(titleText, { yPercent: 105, opacity: 0 });
+        gsap.set(desc, { y: 12, opacity: 0 });
+        gsap.set(tag, { y: 8, opacity: 0 });
+        step.classList.add('is-upcoming');
+      });
+
+      // Entrada do cabeçalho em 'top 45%' (quando Digital Shelf já navegou para fora)
+      const mobileHeaderTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 45%',
+          toggleActions: 'play none none reverse',
+        }
+      });
+
+      if (eyebrow) mobileHeaderTl.to(eyebrow, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 0);
+      if (line1) mobileHeaderTl.to(line1, { yPercent: 0, opacity: 1, duration: 0.65, ease: 'power3.out' }, 0.08);
+      if (line2) mobileHeaderTl.to(line2, { yPercent: 0, opacity: 1, filter: 'blur(0px)', duration: 0.75, ease: 'power3.out' }, 0.16);
+      if (hairline) mobileHeaderTl.to(hairline, { scaleX: 1, duration: 0.55, ease: 'power2.out' }, 0.24);
+      if (lead) mobileHeaderTl.to(lead, { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' }, 0.32);
+      if (conceptTag) mobileHeaderTl.to(conceptTag, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 0.4);
+
+      // Scrubbing suave do vídeo no mobile acompanhando o scroll natural da seção
+      const mobileVideoProxy = { time: 0 };
+      gsap.to(mobileVideoProxy, {
+        time: 8.0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 65%',
+          end: 'bottom 25%',
+          scrub: 0.8,
+          onUpdate: () => requestSeek(mobileVideoProxy.time)
+        }
+      });
+
+      // Linha de progresso vertical mobile (scrub natural)
+      if (railProgress && stepsCol) {
+        gsap.to(railProgress, {
+          scaleY: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: stepsCol,
+            start: 'top 55%',
+            end: 'bottom 65%',
+            scrub: 0.5,
+          }
+        });
+      }
+
+      // Ativação individual de cada etapa mobile ao atingir o centro visual
+      steps.forEach((step) => {
+        const titleText = step.querySelector('.step-title-text');
+        const desc = step.querySelector('.step-description');
+        const tag = step.querySelector('.step-tag');
+
+        const stepTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: step,
+            start: 'top 58%',
+            end: 'bottom 35%',
+            toggleActions: 'play reverse play reverse',
+            onEnter: () => {
+              step.classList.remove('is-upcoming', 'is-past');
+              step.classList.add('is-active');
+            },
+            onLeave: () => {
+              step.classList.remove('is-active', 'is-upcoming');
+              step.classList.add('is-past');
+            },
+            onEnterBack: () => {
+              step.classList.remove('is-upcoming', 'is-past');
+              step.classList.add('is-active');
+            },
+            onLeaveBack: () => {
+              step.classList.remove('is-active', 'is-past');
+              step.classList.add('is-upcoming');
+            },
+          }
+        });
+
+        stepTl
+          .to(tag, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }, 0)
+          .to(titleText, { yPercent: 0, opacity: 1, duration: 0.55, ease: 'power3.out' }, 0.06)
+          .to(desc, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 0.16);
+      });
+    });
+
+    if (video && video.readyState < 1) {
+      video.addEventListener('loadedmetadata', () => {
+        ScrollTrigger.refresh();
+      }, { once: true });
+    }
+  });
+</script>

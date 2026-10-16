@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 120" width="440" height="120" role="img" aria-label="K. Up Biz - Kleber Up Business">
+<g transform="translate(12 12) scale(0.1875)">
+<rect width="512" height="512" rx="112" fill="#0B1B3A"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="36"><line x1="178" y1="150" x2="178" y2="362" stroke="#FFFFFF"/><line x1="196" y1="262" x2="316" y2="364" stroke="#FFFFFF"/><line x1="178" y1="262" x2="312" y2="140" stroke="#22C55E"/><polyline points="250,138 314,138 314,202" stroke="#22C55E"/></g>
+</g>
+<text x="128" y="66" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="50" font-weight="700" fill="#F5F1E8">K. Up Biz</text>
+<text x="130" y="94" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="500" letter-spacing="1" fill="#D4AF37">Kleber Up Business</text>
+</svg>

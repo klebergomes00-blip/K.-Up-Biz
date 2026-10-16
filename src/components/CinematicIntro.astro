@@ -51,13 +51,6 @@
 
   <!-- Controles Superiores Discretos -->
   <div class="intro-controls">
-    <!-- Seletor de Comparação Tipográfica (Bodoni Moda vs Cormorant Garamond) -->
-    <div class="intro-font-toggle" id="intro-font-toggle" title="Comparar Fontes Editoriais">
-      <span class="toggle-label">FONTE:</span>
-      <button type="button" class="font-btn active" data-font="bodoni">Bodoni Moda</button>
-      <button type="button" class="font-btn" data-font="cormorant">Cormorant</button>
-    </div>
-
     <!-- Botão Pular Intro -->
     <button
       type="button"
@@ -378,52 +371,6 @@
     pointer-events: all;
   }
 
-  /* Seletor de Comparação Tipográfica */
-  .intro-font-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(4, 29, 23, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(245, 241, 232, 0.12);
-    border-radius: 999px;
-    padding: 4px 10px;
-    font-family: var(--font-sans);
-    font-size: 0.6875rem;
-    letter-spacing: 0.06em;
-  }
-
-  .toggle-label {
-    color: rgba(245, 241, 232, 0.5);
-    font-weight: 600;
-    margin-right: 2px;
-  }
-
-  .font-btn {
-    background: transparent;
-    border: none;
-    color: rgba(245, 241, 232, 0.7);
-    font-family: inherit;
-    font-size: 0.6875rem;
-    font-weight: 500;
-    padding: 3px 8px;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .font-btn:hover {
-    color: var(--color-marfim);
-  }
-
-  .font-btn.active {
-    background: rgba(212, 175, 55, 0.18);
-    color: var(--color-dourado);
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-  }
-
   /* Botão Pular Intro */
   .intro-skip-btn {
     display: inline-flex;
@@ -473,10 +420,6 @@
       align-items: flex-end;
     }
 
-    .intro-font-toggle {
-      align-self: flex-start;
-    }
-
     .light-bar {
       height: 12px;
     }
@@ -516,7 +459,7 @@
 <script>
   import { gsap } from 'gsap';
 
-  document.addEventListener('DOMContentLoaded', () => {
+  const initIntro = () => {
     const introEl = document.getElementById('cinematic-intro');
     if (!introEl) return;
 
@@ -526,38 +469,32 @@
       return;
     }
 
+    const skipBtn = document.getElementById('intro-skip-btn');
     const phrase1El = document.getElementById('typewriter-text-1');
     const cursor1El = document.getElementById('intro-cursor-1');
     const phrase2El = document.getElementById('intro-phrase-2');
     const flareEl = document.getElementById('intro-accent-flare');
-    const skipBtn = document.getElementById('intro-skip-btn');
-    const fontBtns = document.querySelectorAll('.font-btn');
-
     // Textos canônicos
     const textPhrase1 = 'Seu negócio está na internet.';
 
     // Estado da animação
-    let isSkipped = false;
+    let isCompleted = false;
     let masterTl: gsap.core.Timeline | null = null;
+    let failsafeTimer: ReturnType<typeof setTimeout> | null = null;
 
-    // Alternador de Fonte para Comparação Visual (Bodoni Moda vs Cormorant Garamond)
-    fontBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        fontBtns.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-        const chosen = btn.getAttribute('data-font');
-        if (chosen === 'cormorant') {
-          introEl.classList.add('use-cormorant');
-        } else {
-          introEl.classList.remove('use-cormorant');
-        }
-      });
-    });
+    const cleanup = () => {
+      if (failsafeTimer) {
+        clearTimeout(failsafeTimer);
+        failsafeTimer = null;
+      }
+      window.removeEventListener('keydown', handleKeydown);
+    };
 
-    // Função para Concluir / Desvendar para o Hero
+    // Função para Concluir / Desvendar para o Hero (pular ou recuperação de emergência)
     function finishIntro() {
-      if (isSkipped) return;
-      isSkipped = true;
+      if (isCompleted) return;
+      isCompleted = true;
+      cleanup();
 
       if (masterTl) {
         masterTl.kill();
@@ -572,7 +509,7 @@
       // Transição cinematográfica suave sem flashes ou saltos
       gsap.to(introEl, {
         opacity: 0,
-        duration: 0.75,
+        duration: 0.6,
         ease: 'power2.inOut',
         onStart: () => {
           window.dispatchEvent(new CustomEvent('cinematic-photo-revealed'));
@@ -590,14 +527,37 @@
     }
 
     // Botão pular & Tecla ESC
-    skipBtn?.addEventListener('click', finishIntro);
-    window.addEventListener('keydown', (e) => {
+    if (skipBtn) {
+      skipBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        finishIntro();
+      });
+    }
+
+    const handleKeydown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') finishIntro();
-    });
+    };
+    window.addEventListener('keydown', handleKeydown);
+
+    // Mecanismo de recuperação discreto (failsafe): se por qualquer razão a animação não concluir em 12s, libera a Hero
+    failsafeTimer = setTimeout(() => {
+      if (!isCompleted) {
+        finishIntro();
+      }
+    }, 12000);
 
     // Linha de Tempo Master GSAP
     masterTl = gsap.timeline({
-      onComplete: finishIntro
+      onComplete: () => {
+        if (!isCompleted) {
+          isCompleted = true;
+          cleanup();
+          introEl.classList.add('is-completed');
+          introEl.style.display = 'none';
+          introEl.style.visibility = 'hidden';
+          introEl.style.pointerEvents = 'none';
+        }
+      }
     });
 
     // Passo 0: Inicialização
@@ -743,10 +703,15 @@
       window.dispatchEvent(new CustomEvent('cinematic-header-reveal'));
     }, [], 'headerReveal');
 
-    // 5. O indicador de rolagem surge após o header estar em posição
     masterTl.add('indicatorReveal', 'headerReveal+=0.3');
     masterTl.call(() => {
       window.dispatchEvent(new CustomEvent('cinematic-indicator-reveal'));
     }, [], 'indicatorReveal');
-  });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initIntro);
+  } else {
+    initIntro();
+  }
 </script>

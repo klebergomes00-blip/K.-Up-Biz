@@ -5,9 +5,16 @@
 <header class="site-header" id="site-header">
   <div class="header-inner">
     <!-- Logo -->
-    <a href="/" class="brand-logo" aria-label="K. UP BIZ Página Inicial">
-      <span class="logo-text">K. UP BIZ</span>
-      <span class="logo-accent" aria-hidden="true"></span>
+    <a href="/" class="brand-logo" aria-label="K. Up Biz Página Inicial">
+      <img
+        src="/imagens/kupbiz-logo-fundo-escuro.svg"
+        alt="K. Up Biz"
+        class="logo-img"
+        width="132"
+        height="36"
+        loading="eager"
+        decoding="async"
+      />
     </a>
 
     <!-- Desktop Notch Menu Centralizado -->
@@ -109,28 +116,18 @@
   .brand-logo {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-weight: 700;
-    font-size: 22px;
-    letter-spacing: -0.015em;
-    color: var(--color-marfim);
     text-decoration: none;
     z-index: 110;
+    line-height: 0;
+    flex-shrink: 0;
   }
 
-  .logo-text {
-    font-family: var(--font-sans);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-
-  .logo-accent {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--color-dourado);
-    box-shadow: 0 0 10px var(--color-dourado);
-    display: inline-block;
+  .logo-img {
+    display: block;
+    width: auto;
+    height: 36px;
+    max-width: 140px;
+    object-fit: contain;
   }
 
   /* Desktop Notch Menu */
@@ -340,6 +337,10 @@
     }
     .mobile-drawer {
       display: block;
+    }
+    .logo-img {
+      height: 30px;
+      max-width: 120px;
     }
   }
 </style>

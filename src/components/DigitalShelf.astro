@@ -1,0 +1,2636 @@
+---
+// src/components/DigitalShelf.astro — Terceira Dobra: The Digital Shelf (Refinamento 3D)
+// Capas de vinil de luxo em perspectiva tridimensional apoiadas em prateleira física de metal escuro escovado.
+
+interface ServiceData {
+  id: string;
+  index: string;
+  titleVisual: string;
+  subtitle: string;
+  expandedTitle: string;
+  expandedDescription: string;
+  logoSrc: string;
+  logoAlt: string;
+  themeClass: string;
+  accentGlow: string;
+}
+
+const services: ServiceData[] = [
+  {
+    id: 'web',
+    index: '01',
+    titleVisual: 'WEB',
+    subtitle: 'Criação de Sites',
+    expandedTitle: 'Sua presença merece um endereço próprio.',
+    expandedDescription: 'Sites estratégicos que apresentam sua empresa com profissionalismo e transformam visitantes em oportunidades.',
+    logoSrc: '/imagens/logo-web.svg',
+    logoAlt: 'Criação de Sites K. Up Biz',
+    themeClass: 'theme-web',
+    accentGlow: 'rgba(0, 209, 255, 0.28)'
+  },
+  {
+    id: 'local',
+    index: '02',
+    titleVisual: 'LOCAL',
+    subtitle: 'Google Meu Negócio',
+    expandedTitle: 'Esteja onde seus clientes procuram.',
+    expandedDescription: 'Uma presença local mais completa para ajudar sua empresa a ser encontrada e conquistar confiança.',
+    logoSrc: '/imagens/logo-google-meu-negocio.svg',
+    logoAlt: 'Google Meu Negócio K. Up Biz',
+    themeClass: 'theme-local',
+    accentGlow: 'rgba(212, 175, 55, 0.32)'
+  },
+  {
+    id: 'reach',
+    index: '03',
+    titleVisual: 'REACH',
+    subtitle: 'Gestão de Tráfego',
+    expandedTitle: 'Alcance quem realmente importa.',
+    expandedDescription: 'Campanhas estratégicas para conectar sua marca a públicos relevantes e gerar novas oportunidades.',
+    logoSrc: '/imagens/logo-gestao-trafego.svg',
+    logoAlt: 'Gestão de Tráfego K. Up Biz',
+    themeClass: 'theme-reach',
+    accentGlow: 'rgba(4, 120, 87, 0.38)'
+  }
+];
+---
+
+<section class="shelf-section" id="solucoes" aria-label="02 Nossas Soluções — The Digital Shelf">
+  <!-- Camada de Fundo Independente: Parede de Tijolinhos com Iluminação Atmosférica -->
+  <div class="shelf-brick-backdrop" aria-hidden="true">
+    <div class="brick-wall-image"></div>
+    <div class="brick-wall-overlay"></div>
+  </div>
+
+  <!-- Auras ambientais de profundidade -->
+  <div class="shelf-ambient-glow glow-top" aria-hidden="true"></div>
+  <div class="shelf-ambient-glow glow-bottom" aria-hidden="true"></div>
+
+  <div class="wrap shelf-wrap">
+    <!-- Cabeçalho Editorial da Seção -->
+    <header class="shelf-header">
+      <div class="shelf-eyebrow">
+        <span class="eyebrow-pip" aria-hidden="true"></span>
+        <span class="eyebrow-text">02 / NOSSAS SOLUÇÕES</span>
+      </div>
+
+      <h2 class="shelf-headline">
+        <span class="headline-block">Três caminhos.</span>
+        <span class="headline-block italic-serif text-gold">Um próximo nível.</span>
+      </h2>
+
+      <p class="shelf-description">
+        Explore as soluções que conectam sua empresa às oportunidades do mundo digital.
+      </p>
+    </header>
+
+    <!-- Palco Tridimensional da Prateleira -->
+    <div class="shelf-stage" id="shelf-stage">
+      <div class="shelf-cards-row" id="shelf-cards-row">
+        {services.map((item, i) => (
+          <div
+            class={`shelf-card-anchor ${item.themeClass}`}
+            data-service-id={item.id}
+            data-index={i}
+          >
+            <!-- Card Físico (Capa 1:1 com Perspectiva e Espessura) -->
+            <button
+              type="button"
+              class="shelf-card"
+              id={`card-trigger-${item.id}`}
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-label={`Abrir detalhes de ${item.subtitle}`}
+            >
+              <!-- Lombo 3D Lateral Esquerdo (Espessura de Capa Física) -->
+              <span class="card-spine" aria-hidden="true"></span>
+
+              <!-- Ranhura Circular Sutil de Vinil Interno -->
+              <span class="card-vinyl-groove" aria-hidden="true"></span>
+
+              <!-- Texturas Geométricas Específicas de Fundo -->
+              <span class="card-art-bg" aria-hidden="true">
+                <span class="card-art-pattern"></span>
+                <span class="card-art-light"></span>
+              </span>
+
+              <!-- Conteúdo da Capa -->
+              <span class="card-content">
+                <span class="card-top-tag">
+                  <span class="card-index">{item.index}</span>
+                  <span class="card-dot">•</span>
+                  <span class="card-category">SOLUÇÃO</span>
+                </span>
+
+                <span class="card-logo-wrap">
+                  {item.id === 'web' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 200 200"
+                      width="84"
+                      height="84"
+                      class="card-logo card-logo-svg card-logo-web"
+                      role="img"
+                      aria-label={item.logoAlt}
+                    >
+                      <defs>
+                        <!-- Degradê Base Original Preservado -->
+                        <linearGradient id="grad-shelf-web" gradientUnits="userSpaceOnUse" x1="20" y1="20" x2="180" y2="180">
+                          <stop offset="0" stop-color="#2F6BFF"/>
+                          <stop offset="0.55" stop-color="#00D1FF"/>
+                          <stop offset="1" stop-color="#2EE59D"/>
+                        </linearGradient>
+
+                        <!-- Filete Especular de Brilho da Borda -->
+                        <linearGradient id="grad-shelf-web-border" gradientUnits="userSpaceOnUse" x1="20" y1="20" x2="180" y2="180">
+                          <stop offset="0%" stop-color="rgba(0, 209, 255, 0)"/>
+                          <stop offset="42%" stop-color="rgba(245, 241, 232, 0.2)"/>
+                          <stop offset="50%" stop-color="#F5F1E8"/>
+                          <stop offset="58%" stop-color="#D4AF37"/>
+                          <stop offset="100%" stop-color="rgba(46, 229, 157, 0)"/>
+                        </linearGradient>
+
+                        <!-- Varredura Luminosa nos Símbolos de Código -->
+                        <linearGradient id="grad-shelf-web-code-sweep" gradientUnits="userSpaceOnUse" x1="65" y1="96" x2="135" y2="140">
+                          <stop offset="0%" stop-color="#F5F1E8"/>
+                          <stop offset="50%" stop-color="#D4AF37"/>
+                          <stop offset="100%" stop-color="#00D1FF"/>
+                        </linearGradient>
+                      </defs>
+
+                      <!-- Estrutura Básica da Janela Web (Desenho Original Rigoroso) -->
+                      <g fill="none" stroke="url(#grad-shelf-web)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" class="svg-web-frame">
+                        <rect x="20" y="35" width="160" height="130" rx="18"/>
+                        <line x1="20" y1="70" x2="180" y2="70"/>
+                      </g>
+
+                      <!-- Brilho que Percorre Discretamente a Borda da Janela -->
+                      <rect
+                        x="20"
+                        y="35"
+                        width="160"
+                        height="130"
+                        rx="18"
+                        fill="none"
+                        stroke="url(#grad-shelf-web-border)"
+                        stroke-width="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="svg-web-border-sheen"
+                        aria-hidden="true"
+                      />
+
+                      <!-- Símbolos de Código Originais (< / >) -->
+                      <g fill="none" stroke="url(#grad-shelf-web)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" class="svg-web-code-base">
+                        <polyline points="85,100 65,118 85,136"/>
+                        <polyline points="115,100 135,118 115,136"/>
+                        <line x1="106" y1="96" x2="94" y2="140"/>
+                      </g>
+
+                      <!-- Camada de Varredura Luminosa Sequencial dos Símbolos de Código -->
+                      <g fill="none" stroke="url(#grad-shelf-web-code-sweep)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" class="svg-web-code-sheen-group" aria-hidden="true">
+                        <polyline points="85,100 65,118 85,136" class="svg-web-code-left"/>
+                        <line x1="106" y1="96" x2="94" y2="140" class="svg-web-code-slash"/>
+                        <polyline points="115,100 135,118 115,136" class="svg-web-code-right"/>
+                      </g>
+
+                      <!-- Três Pontos Superiores (Acendimento Sequencial) -->
+                      <g fill="url(#grad-shelf-web)" class="svg-web-dots">
+                        <circle cx="40" cy="52" r="5" class="svg-web-dot svg-web-dot-1"/>
+                        <circle cx="56" cy="52" r="5" class="svg-web-dot svg-web-dot-2"/>
+                        <circle cx="72" cy="52" r="5" class="svg-web-dot svg-web-dot-3"/>
+                      </g>
+                    </svg>
+                  )}
+
+                  {item.id === 'local' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 200 200"
+                      width="84"
+                      height="84"
+                      class="card-logo card-logo-svg card-logo-local"
+                      role="img"
+                      aria-label={item.logoAlt}
+                    >
+                      <defs>
+                        <!-- Degradê Base Original Preservado -->
+                        <linearGradient id="grad-shelf-local" gradientUnits="userSpaceOnUse" x1="20" y1="20" x2="180" y2="180">
+                          <stop offset="0" stop-color="#2F6BFF"/>
+                          <stop offset="0.55" stop-color="#00D1FF"/>
+                          <stop offset="1" stop-color="#2EE59D"/>
+                        </linearGradient>
+
+                        <!-- Degradê Dourado Editorial para o Pulso da Estrela -->
+                        <linearGradient id="grad-shelf-local-star" gradientUnits="userSpaceOnUse" x1="75" y1="54" x2="125" y2="101">
+                          <stop offset="0%" stop-color="#FFFFFF"/>
+                          <stop offset="35%" stop-color="#F5F1E8"/>
+                          <stop offset="70%" stop-color="#D4AF37"/>
+                          <stop offset="100%" stop-color="#047857"/>
+                        </linearGradient>
+                      </defs>
+
+                      <!-- Duas Ondas Circulares Discretas Atrás do Símbolo (Descoberta / Radar Local) -->
+                      <g class="svg-local-ripples" aria-hidden="true">
+                        <circle cx="100" cy="80" r="30" fill="none" stroke="#D4AF37" stroke-width="2.5" class="svg-local-ripple svg-local-ripple-1"/>
+                        <circle cx="100" cy="80" r="30" fill="none" stroke="#047857" stroke-width="2" class="svg-local-ripple svg-local-ripple-2"/>
+                      </g>
+
+                      <!-- Contorno do Marcador Estável (Geometria 100% Preservada) -->
+                      <path
+                        d="M100 180 C100 180 40 122 40 80 A60 60 0 0 1 160 80 C160 122 100 180 100 180 Z"
+                        fill="none"
+                        stroke="url(#grad-shelf-local)"
+                        stroke-width="10"
+                        stroke-linejoin="round"
+                        class="svg-local-pin"
+                      />
+
+                      <!-- Estrela Central com Pulso Dourado Suave -->
+                      <polygon
+                        points="100,54 106.5,71.1 124.7,72 110.5,83.4 115.3,101 100,91 84.7,101 89.5,83.4 75.3,72 93.5,71.1"
+                        fill="url(#grad-shelf-local)"
+                        stroke="url(#grad-shelf-local)"
+                        stroke-width="4"
+                        stroke-linejoin="round"
+                        class="svg-local-star"
+                      />
+
+                      <!-- Elipse da Base com Pulso Suave de Contato -->
+                      <ellipse
+                        cx="100"
+                        cy="190"
+                        rx="30"
+                        ry="5"
+                        fill="url(#grad-shelf-local)"
+                        opacity="0.45"
+                        class="svg-local-base"
+                      />
+                    </svg>
+                  )}
+
+                  {item.id === 'reach' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 200 200"
+                      width="84"
+                      height="84"
+                      class="card-logo card-logo-svg card-logo-reach"
+                      role="img"
+                      aria-label={item.logoAlt}
+                    >
+                      <defs>
+                        <!-- Degradê Base Original Preservado -->
+                        <linearGradient id="grad-shelf-reach" gradientUnits="userSpaceOnUse" x1="20" y1="20" x2="180" y2="180">
+                          <stop offset="0" stop-color="#2F6BFF"/>
+                          <stop offset="0.55" stop-color="#00D1FF"/>
+                          <stop offset="1" stop-color="#2EE59D"/>
+                        </linearGradient>
+
+                        <!-- Ponto Luminoso de Tráfego -->
+                        <radialGradient id="grad-shelf-reach-particle" cx="50%" cy="50%" r="50%">
+                          <stop offset="0%" stop-color="#FFFFFF"/>
+                          <stop offset="30%" stop-color="#F5F1E8"/>
+                          <stop offset="70%" stop-color="#D4AF37"/>
+                          <stop offset="100%" stop-color="rgba(212, 175, 55, 0)"/>
+                        </radialGradient>
+                      </defs>
+
+                      <!-- Três Barras Originais com Crescimento Suave e Sequencial -->
+                      <g fill="url(#grad-shelf-reach)" class="svg-reach-bars">
+                        <rect x="28" y="130" width="26" height="40" rx="6" class="svg-reach-bar svg-reach-bar-1"/>
+                        <rect x="68" y="108" width="26" height="62" rx="6" class="svg-reach-bar svg-reach-bar-2"/>
+                        <rect x="108" y="86" width="26" height="84" rx="6" class="svg-reach-bar svg-reach-bar-3"/>
+                      </g>
+
+                      <!-- Trajetória Ascendente e Ponta da Seta Originais -->
+                      <g fill="none" stroke="url(#grad-shelf-reach)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" class="svg-reach-path">
+                        <polyline points="30,95 70,70 100,80 160,30" class="svg-reach-trajectory"/>
+                        <polyline points="128,30 160,30 160,62" class="svg-reach-arrow"/>
+                      </g>
+
+                      <!-- Brilho Especular Sutil na Ponta da Seta -->
+                      <polyline
+                        points="128,30 160,30 160,62"
+                        fill="none"
+                        stroke="#F5F1E8"
+                        stroke-width="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="svg-reach-arrow-sheen"
+                        aria-hidden="true"
+                      />
+
+                      <!-- Ponto Luminoso que Percorre a Trajetória Ascendente -->
+                      <g class="svg-reach-particle-track" aria-hidden="true">
+                        <circle r="4.5" fill="url(#grad-shelf-reach-particle)" class="svg-reach-particle">
+                          <animateMotion
+                            path="M30,95 L70,70 L100,80 L160,30"
+                            dur="3.4s"
+                            repeatCount="indefinite"
+                            keyTimes="0; 0.12; 0.62; 1"
+                            keyPoints="0; 0; 1; 1"
+                            calcMode="linear"
+                          />
+                        </circle>
+                      </g>
+                    </svg>
+                  )}
+                </span>
+
+                <span class="card-info">
+                  <span class="card-visual-title">{item.titleVisual}</span>
+                  <span class="card-subtitle">{item.subtitle}</span>
+                </span>
+              </span>
+
+              <!-- Bisel e Reflexo Especular de Vidro Acrílico -->
+              <span class="card-sheen" aria-hidden="true"></span>
+              <span class="card-top-specular" aria-hidden="true"></span>
+            </button>
+
+            <!-- Sombra de Contato Realista na Superfície da Prateleira -->
+            <span class="card-ground-shadow" aria-hidden="true"></span>
+
+            <!-- Botão Pílula ABRIR Integrado Fisicamente ao Card Elevado -->
+            <button
+              type="button"
+              class="card-open-pill-btn"
+              id={`open-btn-${item.id}`}
+              aria-label={`Abrir detalhes de ${item.subtitle}`}
+              data-service-id={item.id}
+            >
+              <span class="card-open-pill">
+                <span>ABRIR</span>
+                <svg fill="none" height="11" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24" width="11">
+                  <path d="M7 17 17 7"></path>
+                  <path d="M8 7h9v9"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <!-- Estrutura Física Tridimensional da Prateleira (Metal Escovado Escuro) -->
+      <div class="physical-shelf" aria-hidden="true">
+        <!-- Plano Superior em Perspectiva (Onde as capas se apoiam) -->
+        <div class="shelf-top-deck">
+          <div class="shelf-deck-surface"></div>
+          <div class="shelf-deck-reflection"></div>
+          <div class="shelf-deck-edge-gold"></div>
+        </div>
+
+        <!-- Face Frontal com Espessura Visível (Chanfro Escuro) -->
+        <div class="shelf-front-face">
+          <div class="shelf-front-bevel"></div>
+          <div class="shelf-front-grain"></div>
+        </div>
+
+        <!-- Iluminação LED Indireta Esmeralda Embutida sob a Prateleira -->
+        <div class="shelf-led-underglow" aria-hidden="true">
+          <!-- Faixa luminosa estreita diretamente sob a base frontal -->
+          <div class="shelf-led-strip"></div>
+          <!-- Projeção vertical difusa de luz para baixo no ambiente -->
+          <div class="shelf-led-cast"></div>
+          <!-- Halo atmosférico amplo de dispersão suave esmeralda -->
+          <div class="shelf-led-ambient"></div>
+        </div>
+
+        <!-- Sombra Projetada abaixo e atrás da Prateleira -->
+        <div class="shelf-under-shadow"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL DE EXPANSÃO CINEMATOGRÁFICA (FLIP EXPANSION OVERLAY)
+       ======================================================================== -->
+  <div
+    class="shelf-modal-overlay"
+    id="shelf-modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    tabindex="-1"
+  >
+    <!-- Fundo Escuro com Backdrop Blur -->
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+
+    <div class="modal-container">
+      <!-- Botão de Fechar com Foco Visível -->
+      <button
+        type="button"
+        class="modal-close-btn"
+        id="modal-close-btn"
+        aria-label="Fechar apresentação da solução"
+      >
+        <span class="close-label">FECHAR</span>
+        <span class="close-icon" aria-hidden="true">
+          <svg fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24" width="15">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </span>
+      </button>
+
+      <!-- Layout Editorial Expandido: Texto à Esquerda, Card à Direita -->
+      <div class="modal-content-grid">
+        <!-- Coluna Esquerda: Texto Comercial e Apresentação -->
+        <div class="modal-narrative-col" id="modal-narrative-col">
+          <div class="modal-service-badge" id="modal-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text" id="modal-service-name">SERVIÇO</span>
+          </div>
+
+          <h3 class="modal-title" id="modal-title">
+            Título da Solução
+          </h3>
+
+          <div class="modal-divider-line" aria-hidden="true"></div>
+
+          <p class="modal-description" id="modal-description">
+            Descrição estratégica e comercial detalhada do serviço.
+          </p>
+        </div>
+
+        <!-- Coluna Direita: Receptáculo de Destino do Card Expandido -->
+        <div class="modal-card-target" id="modal-card-target">
+          <!-- O card animado voará da prateleira para cá via transição FLIP -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     K. UP BIZ — THE DIGITAL SHELF (REFINAMENTO 3D)
+     Paleta Canônica: #041D17, #030D0B, #047857, #D4AF37, #F5F1E8
+     ========================================================================== */
+
+  .shelf-section {
+    position: relative;
+    width: 100%;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(
+      180deg,
+      #041D17 0%,
+      #030D0B 120px,
+      #030D0B calc(100% - 120px),
+      #041D17 100%
+    );
+    color: var(--color-marfim);
+    padding: clamp(40px, 5.5vh, 64px) 0 clamp(32px, 4.5vh, 48px);
+    overflow: hidden;
+    z-index: 6;
+  }
+
+  /* ==========================================================================
+     CAMADA DE FUNDO INDEPENDENTE: PAREDE DE TIJOLINHOS SHOWROOM PREMIUM
+     ========================================================================== */
+  .shelf-brick-backdrop {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .brick-wall-image {
+    position: absolute;
+    inset: 0;
+    background-image: url('/imagens/parede-tijolos-kupbiz.png');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.75;
+    transform: translateZ(0);
+  }
+
+  /* Sobreposição verde-escura e degradês cinematográficos de transição entre dobras */
+  .brick-wall-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      /* Vinheta radial escura que mantém o foco na prateleira central e cards */
+      radial-gradient(
+        ellipse 90% 82% at 50% 50%,
+        rgba(3, 13, 11, 0.28) 0%,
+        rgba(3, 13, 11, 0.52) 60%,
+        rgba(4, 29, 23, 0.92) 88%,
+        #041D17 100%
+      ),
+      /* Degradê vertical para fusão perfeita com a 2ª dobra no topo e a 4ª dobra na base */
+      linear-gradient(
+        180deg,
+        #041D17 0%,
+        rgba(4, 29, 23, 0.85) 12%,
+        rgba(3, 13, 11, 0.25) 30%,
+        rgba(3, 13, 11, 0.2) 58%,
+        rgba(3, 13, 11, 0.45) 75%,
+        rgba(4, 29, 23, 0.9) 90%,
+        #041D17 100%
+      );
+  }
+
+  /* Auras de Profundidade */
+  .shelf-ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .glow-top {
+    top: 5%;
+    right: 10%;
+    width: clamp(350px, 45vw, 650px);
+    height: clamp(350px, 45vw, 650px);
+    background: radial-gradient(circle, rgba(4, 120, 87, 0.12) 0%, transparent 70%);
+  }
+
+  .glow-bottom {
+    bottom: 5%;
+    left: 5%;
+    width: clamp(300px, 40vw, 550px);
+    height: clamp(300px, 40vw, 550px);
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+  }
+
+  .shelf-wrap {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* --------------------------------------------------------------------------
+     1. CABEÇALHO DA SEÇÃO (COMPOSIÇÃO EDITORIAL AMPLIADA & EQUILIBRADA)
+     -------------------------------------------------------------------------- */
+  .shelf-header {
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto clamp(68px, 9.2vh, 105px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .shelf-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .eyebrow-pip {
+    width: 6.5px;
+    height: 6.5px;
+    border-radius: 50%;
+    background-color: var(--color-verde-esmeralda);
+    box-shadow: 0 0 12px rgba(4, 120, 87, 0.9), 0 0 4px rgba(212, 175, 55, 0.4);
+  }
+
+  .eyebrow-text {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-dourado);
+  }
+
+  .shelf-headline {
+    margin: 0 0 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: clamp(3.05rem, 4.65vw, 4.25rem);
+    line-height: 1.03;
+    letter-spacing: -0.03em;
+  }
+
+  .headline-block {
+    display: block;
+    color: var(--color-marfim);
+  }
+
+  .shelf-headline .italic-serif {
+    font-family: var(--font-bodoni);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(3.45rem, 5.35vw, 4.75rem);
+    color: var(--color-dourado);
+    text-shadow: 0 0 36px rgba(212, 175, 55, 0.38);
+    padding-right: 0.06em;
+  }
+
+  .shelf-description {
+    margin: 4px auto 0;
+    font-family: var(--font-sans);
+    font-size: clamp(1.0rem, 1.15vw, 1.16rem);
+    line-height: 1.6;
+    color: var(--color-marfim-muted);
+    max-width: 620px;
+  }
+
+  /* --------------------------------------------------------------------------
+     2. PALCO DA PRATELEIRA TRIDIMENSIONAL
+     -------------------------------------------------------------------------- */
+  .shelf-stage {
+    position: relative;
+    max-width: clamp(780px, 72vw, 980px);
+    margin: 0 auto;
+    perspective: 1300px;
+    transform-style: preserve-3d;
+    padding-bottom: clamp(18px, 2.2vh, 26px);
+  }
+
+  .shelf-cards-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(20px, 3.2vw, 42px);
+    position: relative;
+    z-index: 4;
+    margin-bottom: -14px; /* Assentamento físico sobre o plano superior da prateleira */
+    transform-style: preserve-3d;
+  }
+
+  /* Âncora individual de cada card (Redimensionada em ~18% a 20% para caber em tela única) */
+  .shelf-card-anchor {
+    position: relative;
+    flex: 0 0 auto;
+    width: clamp(200px, min(18vw, 31vh), 258px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-style: preserve-3d;
+    transition: opacity 0.45s ease, z-index 0s;
+  }
+
+  /* --------------------------------------------------------------------------
+     3. O CARD (CAPA DE DISCO FÍSICA 1:1 EM PERSPECTIVA)
+     -------------------------------------------------------------------------- */
+  .shelf-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    /* Bisel perimetral com simulação de luz de cima para baixo */
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.18);
+    border-right: 1.5px solid rgba(0, 0, 0, 0.55);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.85);
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #061f18;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+      0 14px 28px rgba(0, 0, 0, 0.75),
+      0 2px 6px rgba(0, 0, 0, 0.45);
+    transform-origin: center 75%;
+    /* Inclinação física sutil de repouso sobre a prateleira */
+    transform: perspective(1000px) rotateX(4.5deg);
+    transition:
+      transform 0.5s cubic-bezier(0.2, 0.9, 0.25, 1),
+      box-shadow 0.5s cubic-bezier(0.2, 0.9, 0.25, 1),
+      border-color 0.45s ease;
+    outline: none;
+    padding: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .shelf-card:focus-visible {
+    border-color: var(--color-dourado);
+    box-shadow:
+      0 0 0 3px rgba(212, 175, 55, 0.4),
+      0 16px 36px rgba(0, 0, 0, 0.85);
+  }
+
+  /* Lombo 3D Sutil (Sensação física de capa de vinil / encadernação) */
+  .card-spine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 7px;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.04) 40%,
+      rgba(0, 0, 0, 0.35) 85%,
+      transparent 100%
+    );
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  /* Ranhura Circular Sutil de Disco Interno */
+  .card-vinyl-groove {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 82%;
+    height: 82%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.035);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Arte e Gradientes Específicos de Cada Serviço */
+  .card-art-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .card-art-light {
+    position: absolute;
+    inset: 0;
+    opacity: 0.88;
+    transition: opacity 0.45s ease;
+  }
+
+  .card-art-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.26;
+    pointer-events: none;
+  }
+
+  /* Tema 01: WEB (Verde Profundo + Acento Ciano Digital) */
+  .theme-web .shelf-card {
+    background: #041d17;
+  }
+  .theme-web .card-art-light {
+    background: radial-gradient(
+      circle at 75% 25%,
+      rgba(0, 209, 255, 0.16) 0%,
+      rgba(4, 120, 87, 0.36) 45%,
+      rgba(3, 13, 11, 0.95) 90%
+    );
+  }
+  .theme-web .card-art-pattern {
+    background-image:
+      linear-gradient(rgba(0, 209, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 209, 255, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: center;
+  }
+
+  /* Tema 02: LOCAL (Verde Esmeralda + Dourado de Descoberta) */
+  .theme-local .shelf-card {
+    background: #06221a;
+  }
+  .theme-local .card-art-light {
+    background: radial-gradient(
+      circle at 50% 30%,
+      rgba(212, 175, 55, 0.22) 0%,
+      rgba(4, 120, 87, 0.42) 50%,
+      rgba(3, 13, 11, 0.95) 90%
+    );
+  }
+  .theme-local .card-art-pattern {
+    background-image: radial-gradient(
+      circle at 50% 50%,
+      rgba(212, 175, 55, 0.12) 1px,
+      transparent 1px
+    );
+    background-size: 20px 20px;
+  }
+
+  /* Tema 03: REACH (Verde Quase Preto + Feixes de Tráfego Esmeralda) */
+  .theme-reach .shelf-card {
+    background: #030d0b;
+  }
+  .theme-reach .card-art-light {
+    background: radial-gradient(
+      circle at 30% 70%,
+      rgba(4, 120, 87, 0.42) 0%,
+      rgba(11, 43, 34, 0.52) 45%,
+      rgba(3, 13, 11, 0.98) 90%
+    );
+  }
+  .theme-reach .card-art-pattern {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(4, 120, 87, 0.05) 0,
+      rgba(4, 120, 87, 0.05) 2px,
+      transparent 2px,
+      transparent 18px
+    );
+  }
+
+  /* Conteúdo Interno da Capa */
+  .card-content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    padding: clamp(14px, 1.8vw, 18px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card-top-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: rgba(245, 241, 232, 0.6);
+  }
+
+  .card-index {
+    color: var(--color-dourado);
+  }
+
+  .card-dot {
+    color: rgba(212, 175, 55, 0.5);
+    font-size: 7px;
+  }
+
+  .card-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 0;
+  }
+
+  .card-logo {
+    width: clamp(56px, 5.2vw, 68px);
+    height: clamp(56px, 5.2vw, 68px);
+    object-fit: contain;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.65));
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ==========================================================================
+     ANIMAÇÕES SVG PREMIUM INTERNAS — DIGITAL SHELF
+     ========================================================================== */
+  .card-logo-svg {
+    display: block;
+    overflow: visible;
+  }
+
+  /* Pausa automática quando a seção estiver fora do viewport */
+  .shelf-section:not(.is-shelf-visible) .card-logo-svg,
+  .shelf-section:not(.is-shelf-visible) .card-logo-svg * {
+    animation-play-state: paused !important;
+  }
+
+  /* --------------------------------------------------------------------------
+     1. CARD WEB — CONSTRUÇÃO DIGITAL (Ciclo ~3.8s)
+     - Pontos superiores acendem sequencialmente
+     - Varredura luminosa nos símbolos de código (< / >)
+     - Brilho percorre a borda da janela
+     - Retorno suave
+     -------------------------------------------------------------------------- */
+  .svg-web-border-sheen {
+    stroke-dasharray: 65 485;
+    stroke-dashoffset: 0;
+    opacity: 0.35;
+    transition: opacity 0.4s ease, stroke-width 0.4s ease;
+    animation: webBorderTravel 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes webBorderTravel {
+    0% {
+      stroke-dashoffset: 0;
+      opacity: 0.2;
+    }
+    18% {
+      opacity: 0.8;
+    }
+    55% {
+      opacity: 0.7;
+    }
+    72% {
+      stroke-dashoffset: -550;
+      opacity: 0.2;
+    }
+    100% {
+      stroke-dashoffset: -550;
+      opacity: 0;
+    }
+  }
+
+  /* Três pontos superiores: acendimento sequencial */
+  .svg-web-dot {
+    opacity: 0.4;
+    transform-origin: center;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+    animation-duration: 3.8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .svg-web-dot-1 {
+    animation-name: webDotGlow1;
+  }
+  .svg-web-dot-2 {
+    animation-name: webDotGlow2;
+  }
+  .svg-web-dot-3 {
+    animation-name: webDotGlow3;
+  }
+
+  @keyframes webDotGlow1 {
+    0%, 100% { opacity: 0.4; filter: none; }
+    12% { opacity: 1; filter: drop-shadow(0 0 4px #00D1FF); }
+    24% { opacity: 0.55; filter: none; }
+  }
+
+  @keyframes webDotGlow2 {
+    0%, 100% { opacity: 0.4; filter: none; }
+    20% { opacity: 1; filter: drop-shadow(0 0 4px #00D1FF); }
+    32% { opacity: 0.55; filter: none; }
+  }
+
+  @keyframes webDotGlow3 {
+    0%, 100% { opacity: 0.4; filter: none; }
+    28% { opacity: 1; filter: drop-shadow(0 0 5px #2EE59D); }
+    40% { opacity: 0.55; filter: none; }
+  }
+
+  /* Varredura luminosa nos símbolos de código (< / >) */
+  .svg-web-code-sheen-group {
+    opacity: 1;
+    transition: filter 0.4s ease;
+  }
+
+  .svg-web-code-left,
+  .svg-web-code-slash,
+  .svg-web-code-right {
+    opacity: 0;
+    animation-duration: 3.8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .svg-web-code-left {
+    animation-name: webCodeSweepLeft;
+  }
+  .svg-web-code-slash {
+    animation-name: webCodeSweepSlash;
+  }
+  .svg-web-code-right {
+    animation-name: webCodeSweepRight;
+  }
+
+  @keyframes webCodeSweepLeft {
+    0%, 36%, 100% { opacity: 0; filter: none; }
+    43% { opacity: 0.95; filter: drop-shadow(0 0 5px #F5F1E8) drop-shadow(0 0 8px #D4AF37); }
+    51% { opacity: 0; filter: none; }
+  }
+
+  @keyframes webCodeSweepSlash {
+    0%, 43%, 100% { opacity: 0; filter: none; }
+    50% { opacity: 1; filter: drop-shadow(0 0 6px #F5F1E8) drop-shadow(0 0 10px #D4AF37); }
+    58% { opacity: 0; filter: none; }
+  }
+
+  @keyframes webCodeSweepRight {
+    0%, 50%, 100% { opacity: 0; filter: none; }
+    57% { opacity: 0.95; filter: drop-shadow(0 0 5px #00D1FF) drop-shadow(0 0 8px #2EE59D); }
+    65% { opacity: 0; filter: none; }
+  }
+
+  /* --------------------------------------------------------------------------
+     2. CARD LOCAL — DESCOBERTA (Ciclo ~4.6s)
+     - Duas ondas circulares discretas atrás do símbolo
+     - Expansão e desaparecimento suave dentro dos limites do card
+     - Estrela central com pulso dourado
+     - Contorno do marcador estável
+     -------------------------------------------------------------------------- */
+  .svg-local-pin {
+    /* Contorno absolutamente estável */
+    transform: none;
+  }
+
+  .svg-local-ripples {
+    transform-origin: 100px 80px;
+  }
+
+  .svg-local-ripple {
+    transform-origin: 100px 80px;
+    opacity: 0;
+    transition: filter 0.4s ease, stroke-width 0.4s ease;
+    animation-duration: 4.6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .svg-local-ripple-1 {
+    animation-name: localRipplePulse1;
+  }
+  .svg-local-ripple-2 {
+    animation-name: localRipplePulse2;
+  }
+
+  @keyframes localRipplePulse1 {
+    0% {
+      transform: scale(0.65);
+      opacity: 0;
+    }
+    14% {
+      opacity: 0.5;
+    }
+    55% {
+      transform: scale(1.85);
+      opacity: 0.15;
+    }
+    70%, 100% {
+      transform: scale(2.05);
+      opacity: 0;
+    }
+  }
+
+  @keyframes localRipplePulse2 {
+    0%, 18% {
+      transform: scale(0.65);
+      opacity: 0;
+    }
+    32% {
+      opacity: 0.45;
+    }
+    72% {
+      transform: scale(1.9);
+      opacity: 0.1;
+    }
+    88%, 100% {
+      transform: scale(2.1);
+      opacity: 0;
+    }
+  }
+
+  /* Estrela central: pulso dourado editorial */
+  .svg-local-star {
+    transform-origin: 100px 77.5px;
+    transition: filter 0.4s ease;
+    animation: localStarGlow 4.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes localStarGlow {
+    0%, 100% {
+      transform: scale(1);
+      filter: none;
+    }
+    34% {
+      transform: scale(1);
+      filter: none;
+    }
+    48% {
+      transform: scale(1.08);
+      filter: drop-shadow(0 0 6px #D4AF37) drop-shadow(0 0 12px rgba(212, 175, 55, 0.65));
+    }
+    64% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.25));
+    }
+    78% {
+      transform: scale(1);
+      filter: none;
+    }
+  }
+
+  .svg-local-base {
+    animation: localBaseBreathe 4.6s ease-in-out infinite;
+  }
+
+  @keyframes localBaseBreathe {
+    0%, 100% { opacity: 0.45; transform: scaleX(1); }
+    48% { opacity: 0.65; transform: scaleX(1.06); }
+  }
+
+  /* --------------------------------------------------------------------------
+     3. CARD REACH — CRESCIMENTO (Ciclo ~3.4s)
+     - Barras com crescimento suave e sequencial
+     - Ponto luminoso percorrendo trajetória ascendente
+     - Ponta da seta com brilho sutil
+     - Reinício natural
+     -------------------------------------------------------------------------- */
+  .svg-reach-bar {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+    animation-duration: 3.4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .svg-reach-bar-1 {
+    animation-name: reachBarBreathe1;
+  }
+  .svg-reach-bar-2 {
+    animation-name: reachBarBreathe2;
+  }
+  .svg-reach-bar-3 {
+    animation-name: reachBarBreathe3;
+  }
+
+  @keyframes reachBarBreathe1 {
+    0%, 100% { transform: scaleY(1); }
+    14% { transform: scaleY(0.93); }
+    32% { transform: scaleY(1.05); }
+    50% { transform: scaleY(1); }
+  }
+
+  @keyframes reachBarBreathe2 {
+    0%, 100% { transform: scaleY(1); }
+    22% { transform: scaleY(0.92); }
+    40% { transform: scaleY(1.06); }
+    58% { transform: scaleY(1); }
+  }
+
+  @keyframes reachBarBreathe3 {
+    0%, 100% { transform: scaleY(1); }
+    30% { transform: scaleY(0.91); }
+    48% { transform: scaleY(1.07); }
+    66% { transform: scaleY(1); }
+  }
+
+  /* Ponto luminoso ascendente */
+  .svg-reach-particle {
+    opacity: 0;
+    transition: filter 0.4s ease;
+    animation: reachParticleGlow 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes reachParticleGlow {
+    0% {
+      opacity: 0;
+      filter: none;
+    }
+    12% {
+      opacity: 1;
+      filter: drop-shadow(0 0 4px #F5F1E8) drop-shadow(0 0 8px #D4AF37);
+    }
+    58% {
+      opacity: 1;
+      filter: drop-shadow(0 0 5px #F5F1E8) drop-shadow(0 0 10px #D4AF37);
+    }
+    64% {
+      opacity: 0.8;
+    }
+    70%, 100% {
+      opacity: 0;
+      filter: none;
+    }
+  }
+
+  /* Brilho especular sutil na ponta da seta */
+  .svg-reach-arrow-sheen {
+    opacity: 0;
+    transition: filter 0.4s ease;
+    animation: reachArrowFlash 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes reachArrowFlash {
+    0%, 58%, 100% {
+      opacity: 0;
+      filter: none;
+    }
+    64% {
+      opacity: 0.95;
+      filter: drop-shadow(0 0 6px #F5F1E8) drop-shadow(0 0 10px #D4AF37);
+    }
+    75% {
+      opacity: 0.3;
+      filter: drop-shadow(0 0 3px #047857);
+    }
+    84% {
+      opacity: 0;
+      filter: none;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     4. INTENSIFICAÇÃO REFINADA NO HOVER / TOUCH ATIVO
+     - Aumenta suavemente a intensidade luminosa sem saltos
+     - Retorno suave ao afastar o cursor
+     -------------------------------------------------------------------------- */
+  .shelf-card-anchor:hover .card-logo-web .svg-web-border-sheen,
+  .shelf-card-anchor.is-touch-active .card-logo-web .svg-web-border-sheen,
+  .shelf-card-anchor.is-hover-simulated .card-logo-web .svg-web-border-sheen {
+    opacity: 0.95;
+    stroke-width: 12px;
+  }
+
+  .shelf-card-anchor:hover .card-logo-web .svg-web-code-sheen-group,
+  .shelf-card-anchor.is-touch-active .card-logo-web .svg-web-code-sheen-group,
+  .shelf-card-anchor.is-hover-simulated .card-logo-web .svg-web-code-sheen-group {
+    filter: drop-shadow(0 0 8px #F5F1E8) drop-shadow(0 0 14px #00D1FF);
+  }
+
+  .shelf-card-anchor:hover .card-logo-local .svg-local-ripple,
+  .shelf-card-anchor.is-touch-active .card-logo-local .svg-local-ripple,
+  .shelf-card-anchor.is-hover-simulated .card-logo-local .svg-local-ripple {
+    stroke-width: 3.5px;
+    filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.75));
+  }
+
+  .shelf-card-anchor:hover .card-logo-local .svg-local-star,
+  .shelf-card-anchor.is-touch-active .card-logo-local .svg-local-star,
+  .shelf-card-anchor.is-hover-simulated .card-logo-local .svg-local-star {
+    filter: drop-shadow(0 0 10px #D4AF37) drop-shadow(0 0 18px rgba(4, 120, 87, 0.8)) !important;
+  }
+
+  .shelf-card-anchor:hover .card-logo-reach .svg-reach-particle,
+  .shelf-card-anchor.is-touch-active .card-logo-reach .svg-reach-particle,
+  .shelf-card-anchor.is-hover-simulated .card-logo-reach .svg-reach-particle {
+    filter: drop-shadow(0 0 8px #FFFFFF) drop-shadow(0 0 14px #D4AF37) !important;
+  }
+
+  .shelf-card-anchor:hover .card-logo-reach .svg-reach-arrow-sheen,
+  .shelf-card-anchor.is-touch-active .card-logo-reach .svg-reach-arrow-sheen,
+  .shelf-card-anchor.is-hover-simulated .card-logo-reach .svg-reach-arrow-sheen {
+    filter: drop-shadow(0 0 10px #FFFFFF) drop-shadow(0 0 16px #D4AF37) !important;
+  }
+
+  /* Nítido e proporcional no clone do modal expandido */
+  .flying-card-clone .card-logo {
+    width: clamp(96px, 12vw, 124px);
+    height: clamp(96px, 12vw, 124px);
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.4s ease;
+  }
+
+  .card-visual-title {
+    font-family: var(--font-sans);
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: var(--color-marfim);
+  }
+
+  .card-subtitle {
+    font-family: var(--font-sans);
+    font-size: clamp(11px, 0.9vw, 12px);
+    font-weight: 400;
+    color: rgba(245, 241, 232, 0.75);
+  }
+
+  /* Reflexo de Vidro Acrílico Diagonal */
+  .card-sheen {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    background: linear-gradient(
+      128deg,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.03) 30%,
+      transparent 62%
+    );
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .card-top-specular {
+    position: absolute;
+    top: 0;
+    left: 8%;
+    right: 8%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.45) 50%,
+      transparent 100%
+    );
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  /* Sombra de Contato na Superfície da Prateleira */
+  .card-ground-shadow {
+    position: absolute;
+    bottom: -8px;
+    left: 8%;
+    right: 8%;
+    height: 18px;
+    background: radial-gradient(
+      ellipse 50% 60% at 50% 40%,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.6) 45%,
+      transparent 75%
+    );
+    filter: blur(4px);
+    z-index: 1;
+    pointer-events: none;
+    transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.5s ease, filter 0.5s ease;
+  }
+
+  /* --------------------------------------------------------------------------
+     4. BOTÃO PÍLULA ABRIR (BOTÃO REAL HTML COM TYPE="BUTTON")
+     Encaixa-se na borda inferior do card e eleva-se em perfeita sincronia 3D.
+     Não sobrepõe textos internos e flutua acima da superfície da prateleira.
+     -------------------------------------------------------------------------- */
+  .card-open-pill-btn {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .card-open-pill-btn:focus-visible .card-open-pill {
+    outline: 2px solid var(--color-dourado);
+    outline-offset: 3px;
+  }
+
+  .card-open-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #F5F1E8;
+    color: #030D0B;
+    padding: 6px 15px;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    box-shadow:
+      0 6px 18px rgba(0, 0, 0, 0.65),
+      0 0 16px rgba(212, 175, 55, 0.35);
+    white-space: nowrap;
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    cursor: pointer;
+    pointer-events: none; /* Deixa o clique ser capturado confiavelmente pelo botão pai */
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .card-open-pill-btn:hover .card-open-pill {
+    background: #FFFFFF;
+    border-color: var(--color-dourado);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.75),
+      0 0 22px rgba(212, 175, 55, 0.55);
+    transform: scale(1.04);
+  }
+
+  /* Quando o modal está aberto, o botão ABRIR fica oculto */
+  body.shelf-modal-open .card-open-pill-btn {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* --------------------------------------------------------------------------
+     5. ESTRUTURA FÍSICA TRIDIMENSIONAL DA PRATELEIRA
+     Superfície em perspectiva visível + Face frontal chanfrada em metal escuro
+     -------------------------------------------------------------------------- */
+  .physical-shelf {
+    position: relative;
+    width: 100%;
+    z-index: 2;
+    transform-style: preserve-3d;
+  }
+
+  /* Plano Superior em Perspectiva Tridimensional (Onde as capas se apoiam) */
+  .shelf-top-deck {
+    position: relative;
+    width: 100%;
+    height: clamp(30px, 3.2vh, 36px);
+    background: linear-gradient(
+      180deg,
+      #020907 0%,
+      #041510 30%,
+      #08241c 70%,
+      #0b2f25 100%
+    );
+    border-radius: 6px 6px 0 0;
+    box-shadow: inset 0 1px 0 rgba(4, 120, 87, 0.4);
+    transform-origin: 50% 100%;
+    transform: perspective(900px) rotateX(46deg);
+    overflow: hidden;
+  }
+
+  /* Reflexo de metal escovado no plano superior */
+  .shelf-deck-reflection {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.03) 20%,
+      rgba(212, 175, 55, 0.08) 50%,
+      rgba(255, 255, 255, 0.03) 80%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Borda Frontal com Reflexo Dourado Editorial */
+  .shelf-deck-edge-gold {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      rgba(212, 175, 55, 0.05) 0%,
+      rgba(212, 175, 55, 0.45) 15%,
+      rgba(212, 175, 55, 0.95) 50%,
+      rgba(212, 175, 55, 0.45) 85%,
+      rgba(212, 175, 55, 0.05) 100%
+    );
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.5), 0 0 4px rgba(212, 175, 55, 0.8);
+    z-index: 2;
+  }
+
+  /* Face Frontal com Espessura Física Visível (Metal Escovado Escuro) */
+  .shelf-front-face {
+    position: relative;
+    width: 100%;
+    height: clamp(13px, 1.6vh, 16px);
+    background: linear-gradient(
+      180deg,
+      #08221b 0%,
+      #030d0b 40%,
+      #010504 100%
+    );
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+  }
+
+  .shelf-front-bevel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .shelf-front-grain {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.015) 0,
+      rgba(255, 255, 255, 0.015) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  }
+
+  /* --------------------------------------------------------------------------
+     ILUMINAÇÃO LED INDIRETA INFERIOR (FITA LED EMBUTIDA SOB A PRATELEIRA)
+     Emite luz esmeralda luminosa (#10B981 / #047857) projetada no ambiente.
+     -------------------------------------------------------------------------- */
+  .shelf-led-underglow {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: clamp(90px, 11vh, 120px);
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+  }
+
+  /* Camada 1: Fonte de luz — Faixa estreita, contínua e luminosa sob a face frontal */
+  .shelf-led-strip {
+    position: absolute;
+    top: -1px;
+    left: 1.5%;
+    right: 1.5%;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      rgba(16, 185, 129, 0) 0%,
+      rgba(4, 120, 87, 0.75) 8%,
+      #10B981 22%,
+      #6EE7B7 46%,
+      #F5F1E8 50%,
+      #6EE7B7 54%,
+      #10B981 78%,
+      rgba(4, 120, 87, 0.75) 92%,
+      rgba(16, 185, 129, 0) 100%
+    );
+    border-radius: 999px;
+    box-shadow:
+      0 0 8px #10B981,
+      0 0 16px rgba(16, 185, 129, 0.95),
+      0 0 28px rgba(4, 120, 87, 0.85);
+    opacity: 0.98;
+  }
+
+  /* Camada 2: Projeção luminosa — Halo horizontal difuso abaixo da prateleira (50-90px) */
+  .shelf-led-cast {
+    position: absolute;
+    top: 0;
+    left: 2%;
+    right: 2%;
+    height: clamp(54px, 6.5vh, 68px);
+    background: linear-gradient(
+      180deg,
+      rgba(16, 185, 129, 0.9) 0%,
+      rgba(16, 185, 129, 0.65) 18%,
+      rgba(4, 120, 87, 0.42) 44%,
+      rgba(4, 120, 87, 0.16) 72%,
+      transparent 100%
+    );
+    filter: blur(8px);
+    border-radius: 0 0 45px 45px;
+    opacity: 0.95;
+    mix-blend-mode: screen;
+  }
+
+  /* Camada 3: Iluminação ambiental — Brilho amplo, suave e pouco saturado na parede */
+  .shelf-led-ambient {
+    position: absolute;
+    top: 2px;
+    left: -6%;
+    right: -6%;
+    height: clamp(80px, 9.5vh, 110px);
+    background: radial-gradient(
+      ellipse 65% 80% at 50% 0%,
+      rgba(16, 185, 129, 0.5) 0%,
+      rgba(4, 120, 87, 0.35) 36%,
+      rgba(4, 120, 87, 0.12) 65%,
+      transparent 85%
+    );
+    filter: blur(22px);
+    opacity: 0.92;
+    mix-blend-mode: screen;
+  }
+
+  /* Sombra Projetada Realista abaixo e atrás da prateleira */
+  .shelf-under-shadow {
+    position: absolute;
+    top: 100%;
+    left: 8%;
+    right: 8%;
+    height: clamp(36px, 4.5vh, 44px);
+    background: radial-gradient(
+      ellipse 50% 50% at 50% 0%,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.45) 50%,
+      transparent 80%
+    );
+    filter: blur(12px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* --------------------------------------------------------------------------
+     6. HOVER & FOCO (DESKTOP) — ESTILOS COMPLEMENTARES
+     (Transformações tridimensionais, zoom e elevação são orquestrados via GSAP
+      para evitar conflito de transform entre inline styles e classes CSS)
+     -------------------------------------------------------------------------- */
+  .shelf-card-anchor.is-card-hovered {
+    z-index: 30 !important;
+  }
+
+  .shelf-card-anchor.is-card-hovered .shelf-card {
+    border-color: rgba(212, 175, 55, 0.8);
+    border-top-color: rgba(255, 244, 214, 0.95);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 42px 84px rgba(0, 0, 0, 0.96),
+      0 20px 42px rgba(0, 0, 0, 0.82),
+      0 0 54px rgba(4, 120, 87, 0.6);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .shelf-card-anchor:hover,
+    .shelf-card-anchor:focus-within {
+      z-index: 30;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     7. ESTADO ATIVO NO MOBILE (1º TOQUE)
+     -------------------------------------------------------------------------- */
+  .shelf-card-anchor.is-touch-active {
+    z-index: 25 !important;
+  }
+
+  .shelf-card-anchor.is-touch-active .shelf-card {
+    border-color: rgba(212, 175, 55, 0.75);
+    box-shadow: 0 28px 56px rgba(0, 0, 0, 0.92), 0 0 32px rgba(4, 120, 87, 0.5);
+  }
+
+  /* --------------------------------------------------------------------------
+     8. MODAL DE EXPANSÃO CINEMATOGRÁFICA
+     -------------------------------------------------------------------------- */
+  .shelf-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0.4s ease;
+  }
+
+  .shelf-modal-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(3, 13, 11, 0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    cursor: pointer;
+  }
+
+  .modal-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 32px;
+  }
+
+  .modal-close-btn {
+    position: absolute;
+    top: -56px;
+    right: 32px;
+    background: rgba(245, 241, 232, 0.08);
+    border: 1px solid rgba(245, 241, 232, 0.2);
+    color: var(--color-marfim);
+    padding: 8px 16px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    cursor: pointer;
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  }
+
+  .modal-close-btn:hover {
+    background: rgba(212, 175, 55, 0.18);
+    border-color: var(--color-dourado);
+    transform: translateY(-2px);
+  }
+
+  .modal-close-btn:focus-visible {
+    outline: 2px solid var(--color-dourado);
+    outline-offset: 2px;
+  }
+
+  .modal-content-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+  }
+
+  .modal-narrative-col {
+    max-width: 520px;
+  }
+
+  .modal-service-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(4, 120, 87, 0.16);
+    border: 1px solid rgba(4, 120, 87, 0.4);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--color-dourado);
+    margin-bottom: 24px;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-dourado);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+  }
+
+  .modal-title {
+    margin: 0 0 20px;
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    font-weight: 600;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--color-marfim);
+  }
+
+  .modal-divider-line {
+    width: 100%;
+    max-width: 280px;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      #D4AF37 0%,
+      rgba(212, 175, 55, 0.35) 70%,
+      transparent 100%
+    );
+    margin-bottom: 24px;
+  }
+
+  .modal-description {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+    line-height: 1.8;
+    color: var(--color-marfim-muted);
+  }
+
+  .modal-card-target {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Elemento Fantasma Animado (O card voador FLIP) */
+  .flying-card-clone {
+    position: fixed;
+    z-index: 1050;
+    border-radius: 20px;
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.9), 0 0 40px rgba(4, 120, 87, 0.3);
+    pointer-events: none;
+    will-change: transform, top, left, width, height;
+  }
+
+  /* --------------------------------------------------------------------------
+     8. TELAS BAIXAS / LAPTOPS (ALTURA <= 820px, EX: 1366×768)
+     Garante que todo o conjunto (identificador, título ampliado, descrição,
+     3 cards, prateleira e LED) caiba 100% visível em tela única sem rolagem.
+     -------------------------------------------------------------------------- */
+  @media (min-width: 1025px) and (max-height: 820px) {
+    .shelf-section {
+      padding: clamp(20px, 3vh, 28px) 0 clamp(16px, 2.5vh, 24px);
+    }
+
+    .shelf-header {
+      margin-bottom: clamp(34px, 4.8vh, 50px);
+    }
+
+    .shelf-eyebrow {
+      margin-bottom: 6px;
+    }
+
+    .shelf-headline {
+      margin-bottom: 6px;
+      gap: 1px;
+      font-size: clamp(2.75rem, 4.3vh, 3.25rem);
+      line-height: 1.03;
+    }
+
+    .shelf-headline .italic-serif {
+      font-size: clamp(3.15rem, 4.9vh, 3.75rem);
+    }
+
+    .shelf-description {
+      font-size: clamp(0.95rem, 1.4vh, 1.05rem);
+      line-height: 1.45;
+      max-width: 580px;
+    }
+
+    .shelf-card-anchor {
+      width: clamp(180px, 25vh, 215px);
+    }
+
+    .card-logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    .shelf-top-deck {
+      height: 28px;
+    }
+
+    .shelf-front-face {
+      height: 12px;
+    }
+
+    .shelf-led-underglow {
+      height: 80px;
+    }
+
+    .shelf-led-cast {
+      height: 48px;
+    }
+
+    .shelf-led-ambient {
+      height: 75px;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     9. RESPONSIVIDADE (TABLET & MOBILE)
+     -------------------------------------------------------------------------- */
+  @media (max-width: 1024px) {
+    .shelf-cards-row {
+      gap: 20px;
+    }
+
+    .shelf-card-anchor {
+      width: clamp(200px, 26vw, 240px);
+    }
+
+    .modal-content-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      text-align: center;
+    }
+
+    .modal-narrative-col {
+      max-width: 100%;
+      margin: 0 auto;
+      order: 2;
+    }
+
+    .modal-card-target {
+      order: 1;
+      max-width: 320px;
+    }
+
+    .modal-divider-line {
+      margin: 0 auto 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .brick-wall-image {
+      background-position: center top;
+      opacity: 0.65;
+    }
+
+    .shelf-section {
+      padding: 72px 0 64px;
+    }
+
+    .shelf-header {
+      margin-bottom: 44px;
+    }
+
+    .shelf-headline {
+      gap: 2px;
+      font-size: clamp(2.45rem, 9.4vw, 3.1rem);
+      line-height: 1.05;
+    }
+
+    .shelf-headline .italic-serif {
+      font-size: clamp(2.85rem, 10.6vw, 3.65rem);
+      padding-right: 0.06em;
+    }
+
+    .shelf-description {
+      font-size: 1.0rem;
+      line-height: 1.6;
+      max-width: 92%;
+    }
+
+    .shelf-cards-row {
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+      margin-bottom: 0;
+    }
+
+    .shelf-card-anchor {
+      width: min(300px, 85vw);
+    }
+
+    .physical-shelf {
+      display: none; /* No mobile empilhado, cada card opera como objeto tátil individual */
+    }
+
+    .shelf-card {
+      transform: none; /* Em telas touch mobile, o card fica plano para facilitar a leitura */
+    }
+
+    .modal-container {
+      padding: 0 20px;
+    }
+
+    .modal-close-btn {
+      top: -46px;
+      right: 20px;
+      padding: 6px 12px;
+      font-size: 10px;
+    }
+
+    .modal-card-target {
+      max-width: 240px;
+    }
+
+    .modal-title {
+      font-size: 1.6rem;
+    }
+
+    .modal-description {
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     ACESSIBILIDADE: PREFERS-REDUCED-MOTION
+     -------------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .shelf-card {
+      transition: none !important;
+      transform: none !important;
+    }
+
+    .flying-card-clone {
+      transition: none !important;
+    }
+
+    .modal-close-btn {
+      transition: none !important;
+    }
+
+    .svg-web-border-sheen,
+    .svg-web-code-left,
+    .svg-web-code-slash,
+    .svg-web-code-right,
+    .svg-web-dot,
+    .svg-local-ripple,
+    .svg-local-star,
+    .svg-local-base,
+    .svg-reach-bar,
+    .svg-reach-particle,
+    .svg-reach-arrow-sheen {
+      animation: none !important;
+      transform: none !important;
+      filter: none !important;
+    }
+
+    .svg-web-border-sheen,
+    .svg-web-code-sheen-group,
+    .svg-local-ripples,
+    .svg-reach-arrow-sheen,
+    .svg-reach-particle-track {
+      display: none !important;
+    }
+
+    .svg-web-dot {
+      opacity: 1 !important;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('solucoes');
+    if (!section) return;
+
+    const cardsRow = document.getElementById('shelf-cards-row');
+    const physicalShelf = section.querySelector('.physical-shelf');
+    const modal = document.getElementById('shelf-modal-overlay');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalBadge = document.getElementById('modal-service-name');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-description');
+    const modalNarrative = document.getElementById('modal-narrative-col');
+    const modalTarget = document.getElementById('modal-card-target');
+
+    const cardAnchors = Array.from(section.querySelectorAll<HTMLElement>('.shelf-card-anchor'));
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Pausar/retomar animações SVG leves quando a seção estiver fora de tela
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          section.classList.add('is-shelf-visible');
+        } else {
+          section.classList.remove('is-shelf-visible');
+        }
+      });
+    }, { threshold: 0.08 });
+    sectionObserver.observe(section);
+
+    // ------------------------------------------------------------------------
+    // 1. ENTRADA DA SEÇÃO COM SCROLLTRIGGER (STAGGER 3D)
+    // ------------------------------------------------------------------------
+    if (!isReducedMotion && cardsRow) {
+      const cards = cardsRow.querySelectorAll('.shelf-card');
+
+      gsap.set(cards, {
+        opacity: 0,
+        y: 45,
+        rotationX: 14,
+        scale: 1,
+        z: 0,
+        transformOrigin: 'center 75%',
+      });
+
+      const pillBtns = Array.from(section.querySelectorAll('.card-open-pill-btn'));
+      if (pillBtns.length > 0) {
+        gsap.set(pillBtns, { xPercent: -50, y: 0, z: 0 });
+      }
+
+      if (physicalShelf) {
+        gsap.set(physicalShelf, {
+          opacity: 0,
+          scaleX: 0.88,
+        });
+      }
+
+      const enterTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true,
+        },
+      });
+
+      if (physicalShelf) {
+        enterTl.to(physicalShelf, {
+          opacity: 1,
+          scaleX: 1,
+          duration: 0.9,
+          ease: 'power2.out',
+        }, 0);
+      }
+
+      enterTl.to(cards, {
+        opacity: 1,
+        y: 0,
+        rotationX: 4.5,
+        scale: 1,
+        z: 0,
+        duration: 0.85,
+        stagger: 0.15,
+        ease: 'power3.out',
+      }, 0.15);
+    }
+
+    // ------------------------------------------------------------------------
+    // 2. HOVER 3D CINEMATOGRÁFICO CONTROLADO POR GSAP (SEM CONFLITO DE TRANSFORM)
+    // ------------------------------------------------------------------------
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+
+    cardAnchors.forEach((anchor) => {
+      const card = anchor.querySelector<HTMLElement>('.shelf-card');
+      const pillBtn = anchor.querySelector<HTMLElement>('.card-open-pill-btn');
+      const shadow = anchor.querySelector<HTMLElement>('.card-ground-shadow');
+      const info = anchor.querySelector<HTMLElement>('.card-info');
+      const logo = anchor.querySelector<HTMLElement>('.card-logo');
+
+      if (!card) return;
+
+      const animateHover = (active: boolean) => {
+        if (isReducedMotion || document.body.classList.contains('shelf-modal-open')) return;
+
+        if (active) {
+          anchor.classList.add('is-card-hovered');
+          anchor.style.zIndex = '30';
+
+          // Suavizar cards irmãos
+          cardAnchors.forEach((other) => {
+            if (other !== anchor) {
+              gsap.to(other, { opacity: 0.45, duration: 0.45, ease: 'power2.out', overwrite: 'auto' });
+            }
+          });
+
+          const isShort = window.innerHeight <= 820;
+          const targetScale = isShort ? 1.12 : 1.15;
+          const targetY = isShort ? -4 : -4;
+          const targetZ = isShort ? 45 : 60;
+          const pillY = isShort ? -10 : -14;
+          const pillZ = targetZ + 15; // Flutua em Z à frente do card 3D
+
+          // Zoom cinematográfico 3D real calibrado para a nova proporção dos cards
+          gsap.to(card, {
+            scale: targetScale,
+            y: targetY,
+            z: targetZ,
+            rotationX: 0,
+            duration: 0.5,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          });
+
+          if (pillBtn) {
+            gsap.to(pillBtn, {
+              opacity: 1,
+              xPercent: -50,
+              y: pillY,
+              z: pillZ,
+              scale: 1.05,
+              pointerEvents: 'auto',
+              duration: 0.45,
+              ease: 'power3.out',
+              overwrite: 'auto'
+            });
+          }
+
+          if (shadow) {
+            gsap.to(shadow, {
+              scale: 1.25,
+              y: 12,
+              opacity: 0.55,
+              duration: 0.5,
+              ease: 'power3.out',
+              overwrite: 'auto'
+            });
+          }
+
+          if (info) {
+            gsap.to(info, {
+              y: -12,
+              duration: 0.45,
+              ease: 'power3.out',
+              overwrite: 'auto'
+            });
+          }
+
+          if (logo) {
+            gsap.to(logo, {
+              scale: 1.06,
+              duration: 0.45,
+              ease: 'power3.out',
+              overwrite: 'auto'
+            });
+          }
+        } else {
+          anchor.classList.remove('is-card-hovered');
+
+          // Restaurar opacidade dos irmãos
+          cardAnchors.forEach((other) => {
+            gsap.to(other, { opacity: 1, duration: 0.45, ease: 'power2.out', overwrite: 'auto' });
+          });
+
+          // Retorno suave à prateleira
+          gsap.to(card, {
+            scale: 1.0,
+            y: 0,
+            z: 0,
+            rotationX: 4.5,
+            duration: 0.5,
+            ease: 'power3.out',
+            overwrite: 'auto',
+            onComplete: () => {
+              if (!anchor.classList.contains('is-card-hovered') && !anchor.classList.contains('is-touch-active')) {
+                anchor.style.zIndex = '2';
+              }
+            }
+          });
+
+          if (pillBtn) {
+            gsap.to(pillBtn, {
+              opacity: 0,
+              xPercent: -50,
+              y: 0,
+              z: 0,
+              scale: 1.0,
+              pointerEvents: 'none',
+              duration: 0.35,
+              ease: 'power2.in',
+              overwrite: 'auto'
+            });
+          }
+
+          if (shadow) {
+            gsap.to(shadow, {
+              scale: 1.0,
+              y: 0,
+              opacity: 0.85,
+              duration: 0.5,
+              ease: 'power3.out',
+              overwrite: 'auto'
+            });
+          }
+
+          if (info) {
+            gsap.to(info, {
+              y: 0,
+              duration: 0.45,
+              ease: 'power3.out',
+              overwrite: 'auto'
+            });
+          }
+
+          if (logo) {
+            gsap.to(logo, {
+              scale: 1.0,
+              duration: 0.45,
+              ease: 'power3.out',
+              overwrite: 'auto'
+            });
+          }
+        }
+      };
+
+      if (!isTouch) {
+        anchor.addEventListener('mouseenter', () => animateHover(true));
+        anchor.addEventListener('mouseleave', () => animateHover(false));
+        anchor.addEventListener('focusin', () => animateHover(true));
+        anchor.addEventListener('focusout', (e) => {
+          if (!anchor.contains(e.relatedTarget as Node)) {
+            animateHover(false);
+          }
+        });
+      }
+
+      // Método exposto para automação de testes
+      (anchor as any).__triggerHover = animateHover;
+    });
+
+    // ------------------------------------------------------------------------
+    // 3. EXPANSÃO CINEMATOGRÁFICA FLIP (DESTAQUE FÍSICO COM PROFUNDIDADE)
+    // ------------------------------------------------------------------------
+    let activeCard: HTMLElement | null = null;
+    let flyingClone: HTMLElement | null = null;
+    let isExpanding = false;
+    let lastFocusedElement: HTMLElement | null = null;
+
+    // Dados para popular o modal
+    const servicesData: Record<string, { badge: string; title: string; desc: string }> = {
+      web: {
+        badge: '01 / CRIAÇÃO DE SITES',
+        title: 'Sua presença merece um endereço próprio.',
+        desc: 'Sites estratégicos que apresentam sua empresa com profissionalismo e transformam visitantes em oportunidades.'
+      },
+      local: {
+        badge: '02 / GOOGLE MEU NEGÓCIO',
+        title: 'Esteja onde seus clientes procuram.',
+        desc: 'Uma presença local mais completa para ajudar sua empresa a ser encontrada e conquistar confiança.'
+      },
+      reach: {
+        badge: '03 / GESTÃO DE TRÁFEGO',
+        title: 'Alcance quem realmente importa.',
+        desc: 'Campanhas estratégicas para conectar sua marca a públicos relevantes e gerar novas oportunidades.'
+      }
+    };
+
+    const openExpansion = (anchor: HTMLElement) => {
+      if (isExpanding || !modal || !modalTarget) return;
+      isExpanding = true;
+
+      const card = anchor.querySelector<HTMLElement>('.shelf-card');
+      if (!card) return;
+
+      activeCard = card;
+      lastFocusedElement = document.activeElement as HTMLElement;
+
+      const serviceId = anchor.getAttribute('data-service-id') || 'web';
+      const data = servicesData[serviceId];
+
+      if (data) {
+        if (modalBadge) modalBadge.textContent = data.badge;
+        if (modalTitle) modalTitle.textContent = data.title;
+        if (modalDesc) modalDesc.textContent = data.desc;
+      }
+
+      // Bloquear scroll do body de forma limpa
+      document.body.style.overflow = 'hidden';
+      document.body.classList.add('shelf-modal-open');
+
+      // Posição inicial real do card na prateleira (lê com precisão as dimensões ampliadas se estiver em hover)
+      const startRect = card.getBoundingClientRect();
+
+      // Clonar nó completo da capa para animar
+      flyingClone = card.cloneNode(true) as HTMLElement;
+      flyingClone.id = 'flying-card-instance';
+      flyingClone.className = `${card.className} flying-card-clone`;
+
+      // Evitar duplicação de IDs SVG e referências url(#...) no clone
+      const cloneSvg = flyingClone.querySelector('svg');
+      if (cloneSvg) {
+        const idElements = cloneSvg.querySelectorAll('[id]');
+        idElements.forEach((el) => {
+          const oldId = el.getAttribute('id');
+          if (!oldId) return;
+          const newId = `${oldId}-clone`;
+          el.setAttribute('id', newId);
+
+          cloneSvg.querySelectorAll(`[fill="url(#${oldId})"]`).forEach((t) => {
+            t.setAttribute('fill', `url(#${newId})`);
+          });
+          cloneSvg.querySelectorAll(`[stroke="url(#${oldId})"]`).forEach((t) => {
+            t.setAttribute('stroke', `url(#${newId})`);
+          });
+        });
+      }
+
+      // Posicionar inicialmente exatamente sobre o card original
+      flyingClone.style.top = `${startRect.top}px`;
+      flyingClone.style.left = `${startRect.left}px`;
+      flyingClone.style.width = `${startRect.width}px`;
+      flyingClone.style.height = `${startRect.height}px`;
+      flyingClone.style.margin = '0';
+      flyingClone.style.transform = 'none';
+
+      // Garantir que o botão abrir não apareça no clone expandido
+      const clonePill = flyingClone.querySelector('.card-open-pill-btn') || flyingClone.querySelector('.card-open-pill-wrap');
+      if (clonePill) clonePill.remove();
+
+      document.body.appendChild(flyingClone);
+
+      // Ocultar card original sem provocar salto de layout
+      card.style.visibility = 'hidden';
+
+      // Revelar modal overlay
+      modal.classList.add('is-active');
+      modal.setAttribute('aria-hidden', 'false');
+
+      // Calcular posição de destino após renderização do modal
+      requestAnimationFrame(() => {
+        if (!modalTarget || !flyingClone) return;
+        const targetRect = modalTarget.getBoundingClientRect();
+
+        if (isReducedMotion) {
+          flyingClone.style.top = `${targetRect.top}px`;
+          flyingClone.style.left = `${targetRect.left}px`;
+          flyingClone.style.width = `${targetRect.width}px`;
+          flyingClone.style.height = `${targetRect.height}px`;
+          modalCloseBtn?.focus();
+          isExpanding = false;
+          return;
+        }
+
+        // Animação GSAP da transição com sensação física de avanço em Z e pouso
+        const flipTl = gsap.timeline({
+          onComplete: () => {
+            isExpanding = false;
+            modalCloseBtn?.focus();
+          }
+        });
+
+        // 1. O clone voa e escala para o destino no modal a partir do estado visual real
+        const isHoveredOrActive = anchor.classList.contains('is-card-hovered') || anchor.classList.contains('is-touch-active');
+        const startRotationX = isHoveredOrActive ? 0 : (window.innerWidth <= 768 ? 0 : 4.5);
+
+        flipTl.fromTo(flyingClone,
+          {
+            top: startRect.top,
+            left: startRect.left,
+            width: startRect.width,
+            height: startRect.height,
+            rotationX: startRotationX,
+          },
+          {
+            top: targetRect.top,
+            left: targetRect.left,
+            width: targetRect.width,
+            height: targetRect.height,
+            rotationX: 0,
+            duration: 0.65,
+            ease: 'power3.out',
+          },
+          0
+        );
+
+        // 2. Os textos narrativos da esquerda entram com máscara suave
+        if (modalNarrative) {
+          flipTl.fromTo(modalNarrative.children,
+            { opacity: 0, x: -24 },
+            { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' },
+            0.15
+          );
+        }
+
+        // 3. Botão de fechar aparece
+        if (modalCloseBtn) {
+          flipTl.fromTo(modalCloseBtn,
+            { opacity: 0, y: -10 },
+            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' },
+            0.25
+          );
+        }
+      });
+    };
+
+    const closeExpansion = () => {
+      if (isExpanding || !modal || !activeCard || !flyingClone) return;
+      isExpanding = true;
+
+      // Reseta visual do card de volta à prateleira em repouso para capturar returnRect
+      gsap.set(activeCard, { scale: 1.0, y: 0, z: 0, rotationX: 4.5 });
+      const returnRect = activeCard.getBoundingClientRect();
+
+      const finishClosing = () => {
+        modal.classList.remove('is-active');
+        modal.setAttribute('aria-hidden', 'true');
+        if (activeCard) {
+          activeCard.style.visibility = 'visible';
+          gsap.set(activeCard, { scale: 1.0, y: 0, z: 0, rotationX: 4.5 });
+        }
+        if (flyingClone) {
+          flyingClone.remove();
+          flyingClone = null;
+        }
+        document.body.style.overflow = '';
+        document.body.classList.remove('shelf-modal-open');
+        cardAnchors.forEach((a) => {
+          a.classList.remove('is-touch-active');
+          a.classList.remove('is-card-hovered');
+          a.style.zIndex = '2';
+          gsap.to(a, { opacity: 1, duration: 0.2, overwrite: 'auto' });
+        });
+        lastFocusedElement?.focus();
+        isExpanding = false;
+      };
+
+      if (isReducedMotion) {
+        finishClosing();
+        return;
+      }
+
+      const closeTl = gsap.timeline({
+        onComplete: finishClosing
+      });
+
+      // 1. Textos recolhem rapidamente
+      if (modalNarrative) {
+        closeTl.to(modalNarrative.children, {
+          opacity: 0,
+          duration: 0.25,
+          ease: 'power2.in',
+        }, 0);
+      }
+
+      // 2. O card voa de volta para a prateleira inclinando de volta suavemente
+      closeTl.to(flyingClone, {
+        top: returnRect.top,
+        left: returnRect.left,
+        width: returnRect.width,
+        height: returnRect.height,
+        rotationX: 4.5,
+        duration: 0.5,
+        ease: 'power3.inOut',
+      }, 0.05);
+
+      if (modalCloseBtn) {
+        closeTl.to(modalCloseBtn, {
+          opacity: 0,
+          duration: 0.2,
+        }, 0);
+      }
+    };
+
+    // Listeners de Fechamento do Modal: Botão X, Backdrop escuro e Tecla ESC
+    modalCloseBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeExpansion();
+    });
+
+    modalBackdrop?.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeExpansion();
+    });
+
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        e.preventDefault();
+        closeExpansion();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.classList.contains('is-active')) {
+        closeExpansion();
+      }
+    });
+
+    // ------------------------------------------------------------------------
+    // 4. INTERAÇÕES DE CLIQUE & MOBILE DE DOIS TOQUES
+    // ------------------------------------------------------------------------
+    cardAnchors.forEach((anchor) => {
+      const card = anchor.querySelector<HTMLElement>('.shelf-card');
+      const openBtn = anchor.querySelector<HTMLElement>('.card-open-pill-btn');
+
+      if (!card) return;
+
+      // 1. Clique direto no botão "ABRIR" (funcional tanto em Desktop quanto Mobile)
+      openBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        openExpansion(anchor);
+      });
+
+      if (!isTouch) {
+        // Desktop: clique direto na capa também abre expansão
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          openExpansion(anchor);
+        });
+      } else {
+        // Mobile / Touch:
+        // 1º toque na capa destaca o card e exibe "ABRIR"
+        // 2º toque na capa expande
+        card.addEventListener('click', (e) => {
+          if (!anchor.classList.contains('is-touch-active')) {
+            e.preventDefault();
+            cardAnchors.forEach((a) => {
+              a.classList.remove('is-touch-active');
+              a.style.zIndex = '2';
+              const otherCard = a.querySelector<HTMLElement>('.shelf-card');
+              const otherPill = a.querySelector<HTMLElement>('.card-open-pill-btn');
+              if (otherCard) gsap.to(otherCard, { scale: 1, y: 0, z: 0, rotationX: 4.5, duration: 0.4, overwrite: 'auto' });
+              if (otherPill) gsap.to(otherPill, { opacity: 0, xPercent: -50, y: 0, pointerEvents: 'none', duration: 0.3, overwrite: 'auto' });
+              gsap.to(a, { opacity: 0.6, duration: 0.4, overwrite: 'auto' });
+            });
+
+            anchor.classList.add('is-touch-active');
+            anchor.style.zIndex = '25';
+            gsap.to(anchor, { opacity: 1, duration: 0.3, overwrite: 'auto' });
+            gsap.to(card, {
+              scale: 1.06,
+              y: -14,
+              z: 20,
+              rotationX: 0,
+              duration: 0.4,
+              ease: 'power3.out',
+              overwrite: 'auto'
+            });
+
+            if (openBtn) {
+              gsap.to(openBtn, {
+                opacity: 1,
+                xPercent: -50,
+                y: -18,
+                scale: 1.04,
+                pointerEvents: 'auto',
+                duration: 0.4,
+                ease: 'power3.out',
+                overwrite: 'auto'
+              });
+            }
+          } else {
+            e.preventDefault();
+            openExpansion(anchor);
+          }
+        });
+      }
+    });
+
+    // Toque fora desativa o destaque mobile
+    document.addEventListener('touchstart', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.shelf-card-anchor')) {
+        cardAnchors.forEach((a) => {
+          a.classList.remove('is-touch-active');
+          a.style.zIndex = '2';
+          const c = a.querySelector<HTMLElement>('.shelf-card');
+          const p = a.querySelector<HTMLElement>('.card-open-pill-btn');
+          if (c) gsap.to(c, { scale: 1, y: 0, z: 0, rotationX: 4.5, duration: 0.4, overwrite: 'auto' });
+          if (p) gsap.to(p, { opacity: 0, y: 0, pointerEvents: 'none', duration: 0.3, overwrite: 'auto' });
+          gsap.to(a, { opacity: 1, duration: 0.4, overwrite: 'auto' });
+        });
+      }
+    }, { passive: true });
+  });
+</script>

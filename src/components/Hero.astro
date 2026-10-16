@@ -44,14 +44,22 @@
       <div class="wrap hero-wrap">
         <div class="hero-stage" id="hero-stage">
           
+          <!-- Painel Editorial Liquid Glass Premium (Proteção Óptica para Legibilidade) -->
+          <div class="hero-glass-panel" id="hero-glass-panel" aria-hidden="true">
+            <div class="glass-reflection-gold"></div>
+            <div class="glass-inner-glow"></div>
+          </div>
+          
           <!-- ================================================================
                MOMENTO 1 — A IDEIA (6% - 28% do Scroll)
                A fotografia do fundador é protagonista. Surge a centelha da ideia.
                ================================================================ -->
           <div class="hero-act hero-act-1" id="hero-act-1">
             <h2 class="act-title act1-title" id="act1-title">
-              <span class="act-line">Toda transformação</span>
-              <span class="act-line">começa com <span class="italic-serif text-gold act1-highlight">uma ideia.</span></span>
+              <span class="act-line act1-prefix">Toda grande transformação começa com</span>
+              <span class="act-line act1-lead">
+                <span class="italic-serif text-gold act1-highlight">uma ideia.</span>
+              </span>
             </h2>
 
             <!-- Linha Decorativa Minimalista de Pensamento -->
@@ -67,8 +75,10 @@
                ================================================================ -->
           <div class="hero-act hero-act-2" id="hero-act-2">
             <h2 class="act-title act2-title" id="act2-title">
-              <span class="act-line">Mas ideias precisam de</span>
-              <span class="act-line"><span class="italic-serif text-gold act2-highlight">estratégia</span> para crescer.</span>
+              <span class="act-line act2-prefix">Uma boa ideia precisa de</span>
+              <span class="act-line act2-lead">
+                <span class="italic-serif text-gold act2-highlight">estratégia.</span>
+              </span>
             </h2>
 
             <div class="act2-decor" aria-hidden="true">
@@ -78,19 +88,19 @@
           </div>
 
           <!-- ================================================================
-               ATO 3 — O RESULTADO (68% - 100% do Scroll)
-               A realização completa: Não basta estar presente. É preciso ser encontrado.
+               ATO 3 — A TRANSFORMAÇÃO (68% - 100% do Scroll)
+               A realização completa: Sua empresa não precisa apenas aparecer. Precisa ser encontrada.
                ================================================================ -->
           <div class="hero-act hero-act-3" id="hero-act-3">
             <h1 class="hero-title" id="hero-title-3">
-              <span class="title-line title-line-1">Não basta estar presente.</span>
+              <span class="title-line title-line-1">Sua empresa não precisa apenas aparecer.</span>
               <span class="title-line title-line-2">
-                É preciso <span class="italic-serif text-gold hero-highlight">ser encontrado.</span>
+                Precisa <span class="italic-serif text-gold hero-highlight">ser encontrada.</span>
               </span>
             </h1>
 
             <p class="hero-subtitle" id="hero-subtitle-3">
-              Transformamos presença digital em oportunidades reais com estratégias no Google, sites e tráfego pago.
+              Google, sites e tráfego pago trabalhando juntos para transformar visibilidade em oportunidades de negócio.
             </p>
 
             <div class="hero-cta-group" id="hero-cta-group-3">
@@ -205,18 +215,18 @@
     pointer-events: none;
   }
 
-  /* Scrim Lateral Direito: Localizado com precisão na área de texto para proteger a leitura sem obscurecer os fluxos de luz */
+  /* Scrim Lateral Direito: Proteção óptica sutil para o texto editorial, preservando integralmente o fundador e os fluxos de luz */
   .hero-scrim-right {
     position: absolute;
     top: 0;
     right: 0;
-    width: 54%;
+    width: 50%;
     height: 100%;
     background: radial-gradient(
-      ellipse 90% 75% at 85% 50%,
-      rgba(4, 29, 23, 0.96) 0%,
-      rgba(4, 29, 23, 0.86) 45%,
-      rgba(4, 29, 23, 0.35) 75%,
+      ellipse 85% 75% at 90% 50%,
+      rgba(4, 29, 23, 0.65) 0%,
+      rgba(4, 29, 23, 0.35) 50%,
+      rgba(4, 29, 23, 0.08) 80%,
       transparent 100%
     );
     z-index: 3;
@@ -277,28 +287,88 @@
     width: 100%;
   }
 
-  /* Palco Narrativo em 3 Atos: Alinhamento Estrito à Direita com Gradiente Localizado */
+  /* Palco Narrativo em 3 Atos: Envolvido pelo Painel Editorial Liquid Glass */
   .hero-stage {
     width: 100%;
-    max-width: clamp(540px, 46vw, 650px);
-    min-height: 420px;
+    max-width: clamp(520px, 44vw, 630px);
+    min-height: 380px;
     display: grid;
     grid-template-areas: "stage";
     align-items: center;
     justify-items: start;
     position: relative;
     z-index: 6;
-    background: radial-gradient(
-      ellipse 115% 100% at 50% 50%,
-      rgba(4, 29, 23, 0.72) 0%,
-      rgba(4, 29, 23, 0.35) 65%,
-      transparent 100%
-    );
-    padding: 24px 28px;
+    background: none;
+    padding: clamp(34px, 3.4vw, 44px) clamp(32px, 3.2vw, 42px);
     border-radius: 24px;
   }
 
-  /* Atos Narrativos Compartilham a Mesma Área Óptica */
+  /* ==========================================================================
+     PAINEL EDITORIAL LIQUID GLASS PREMIUM
+     - Vidro esmeralda translúcido com reflexo áureo e bevel sutil
+     - Protege a legibilidade contra partículas e linhas de luz do vídeo
+     ========================================================================== */
+  .hero-glass-panel {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: linear-gradient(
+      140deg,
+      rgba(4, 29, 23, 0.40) 0%,
+      rgba(4, 29, 23, 0.22) 45%,
+      rgba(11, 43, 34, 0.35) 100%
+    );
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    border: 1px solid rgba(245, 241, 232, 0.14);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.28),
+      0 4px 16px rgba(0, 0, 0, 0.16),
+      inset 0 1px 0 rgba(245, 241, 232, 0.18),
+      inset 0 0 28px rgba(4, 120, 87, 0.08);
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+    opacity: 0; /* Controlado rigorosamente pelo GSAP masterTimeline */
+    transform: translateY(16px);
+    will-change: opacity, transform;
+  }
+
+  /* Reflexo Dourado Editorial Sutil na Borda Superior */
+  .glass-reflection-gold {
+    position: absolute;
+    top: 0;
+    left: 28px;
+    width: 160px;
+    height: 1.5px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(212, 175, 55, 0.65) 30%,
+      rgba(243, 229, 171, 0.9) 60%,
+      transparent 100%
+    );
+    filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.45));
+    pointer-events: none;
+  }
+
+  /* Brilho Interno Difuso (Refração Suave Esmeralda/Dourada) */
+  .glass-inner-glow {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(
+      circle,
+      rgba(212, 175, 55, 0.06) 0%,
+      rgba(4, 120, 87, 0.05) 50%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  /* Atos Narrativos Compartilham a Mesma Área Óptica com Z-Index Superior */
   .hero-act {
     grid-area: stage;
     width: 100%;
@@ -306,38 +376,85 @@
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    position: relative;
+    z-index: 2;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     will-change: opacity, transform;
   }
 
-  /* Tipografia do Ato 1 (A Ideia) */
-  .act1-title {
-    font-size: clamp(34px, 4vw, 54px);
-    font-weight: 600;
-    line-height: 1.15;
-    letter-spacing: -0.025em;
-    color: var(--color-marfim);
-    margin: 0 0 24px 0;
-    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
+  /* Títulos dos Atos 1 e 2 */
+  .act-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    margin: 0 0 clamp(20px, 2.2vw, 28px) 0;
     overflow: visible;
     will-change: clip-path, transform, opacity;
   }
 
   .act-line {
     display: block;
+    white-space: normal;
   }
 
+  /* Linhas Prefixos dos Atos 1 e 2 (Sans-Serif Editorial Marfim) */
+  .act1-prefix,
+  .act2-prefix {
+    font-family: var(--font-sans);
+    font-size: clamp(22px, 2.2vw, 32px);
+    font-weight: 500;
+    line-height: 1.28;
+    letter-spacing: -0.015em;
+    color: var(--color-marfim);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+    display: block;
+    margin-bottom: clamp(8px, 1.1vw, 14px);
+  }
+
+  /* Linhas de Destaque Focal */
+  .act1-lead,
+  .act2-lead {
+    display: block;
+    line-height: 1.1;
+    margin-top: 2px;
+  }
+
+  /* Destaques em Bodoni Moda Italic Dourada */
   .act1-highlight {
-    font-size: 1.08em;
-    color: #D4AF37;
+    font-family: var(--font-bodoni);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(46px, 5.2vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--color-dourado);
     text-shadow: 
-      0 2px 10px rgba(0, 0, 0, 0.92),
-      0 0 24px rgba(212, 175, 55, 0.65),
-      0 0 50px rgba(212, 175, 55, 0.32);
+      0 2px 12px rgba(0, 0, 0, 0.95),
+      0 0 26px rgba(212, 175, 55, 0.7),
+      0 0 52px rgba(212, 175, 55, 0.35);
     display: inline-block;
-    padding-right: 0.12em;
+    padding-right: 0.18em;
+    padding-bottom: 0.05em;
+  }
+
+  .act2-highlight {
+    font-family: var(--font-bodoni);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(48px, 5.5vw, 76px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--color-dourado);
+    text-shadow: 
+      0 2px 14px rgba(0, 0, 0, 0.98),
+      0 0 28px rgba(212, 175, 55, 0.78),
+      0 0 56px rgba(212, 175, 55, 0.4);
+    display: inline-block;
+    padding-right: 0.18em;
+    padding-bottom: 0.05em;
   }
 
   /* Linha Decorativa do Ato 1 */
@@ -346,8 +463,8 @@
     align-items: center;
     gap: 12px;
     width: 100%;
-    max-width: 320px;
-    margin-top: 4px;
+    max-width: 300px;
+    margin-top: clamp(18px, 2.2vw, 26px);
   }
 
   .act1-decor-line {
@@ -373,37 +490,14 @@
     flex-shrink: 0;
   }
 
-  /* Tipografia do Ato 2 (A Estratégia) */
-  .act2-title {
-    font-size: clamp(34px, 4vw, 54px);
-    font-weight: 600;
-    line-height: 1.15;
-    letter-spacing: -0.025em;
-    color: var(--color-marfim);
-    margin: 0 0 24px 0;
-    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
-    overflow: visible;
-    will-change: clip-path, transform, opacity;
-  }
-
-  .act2-highlight {
-    font-size: 1.08em;
-    color: #D4AF37;
-    text-shadow: 
-      0 2px 10px rgba(0, 0, 0, 0.92),
-      0 0 24px rgba(212, 175, 55, 0.65),
-      0 0 50px rgba(212, 175, 55, 0.32);
-    display: inline-block;
-    padding-right: 0.12em;
-  }
-
+  /* Linha Decorativa do Ato 2 */
   .act2-decor {
     display: flex;
     align-items: center;
     gap: 12px;
     width: 100%;
-    max-width: 320px;
-    margin-top: 4px;
+    max-width: 300px;
+    margin-top: clamp(18px, 2.2vw, 26px);
   }
 
   .act2-decor-line {
@@ -472,19 +566,13 @@
     text-transform: uppercase;
   }
 
-  /* Headline com Escala Refinada (Não corta em 1366x768 nem 1920x1080) */
+  /* Headline com Escala Refinada e Hierarquia Clara (Ato 3) */
   .hero-title {
-    font-size: clamp(34px, 3.8vw, 54px);
-    font-weight: 600;
-    line-height: 1.13;
-    letter-spacing: -0.025em;
-    color: var(--color-marfim);
-    margin: 0 0 22px 0;
+    margin: 0 0 clamp(20px, 2vw, 26px) 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
-    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
     overflow: visible;
     will-change: clip-path, transform, opacity;
   }
@@ -494,28 +582,58 @@
     white-space: normal;
   }
 
+  /* Frase 1: Contexto / Desafio (Sans-Serif Elegante, não compete com a 2ª) */
+  .title-line-1 {
+    font-family: var(--font-sans);
+    font-size: clamp(21px, 2vw, 28px);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: rgba(245, 241, 232, 0.88);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.88);
+    margin-bottom: clamp(6px, 0.8vw, 10px);
+    display: block;
+  }
+
+  /* Frase 2: Conclusão Comercial Monumental */
+  .title-line-2 {
+    font-family: var(--font-sans);
+    font-size: clamp(32px, 3.8vw, 52px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-marfim);
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.95);
+    display: block;
+  }
+
+  /* Destaque Dourado com Mais Presença em "ser encontrada." */
   .hero-highlight {
-    font-size: 1.07em;
+    font-family: var(--font-bodoni);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.1em;
     letter-spacing: -0.01em;
-    color: #D4AF37;
-    /* Contraste dourado reforçado */
+    color: var(--color-dourado);
     text-shadow: 
-      0 2px 10px rgba(0, 0, 0, 0.92),
-      0 0 20px rgba(212, 175, 55, 0.55),
-      0 0 45px rgba(212, 175, 55, 0.28);
+      0 2px 14px rgba(0, 0, 0, 0.98),
+      0 0 28px rgba(212, 175, 55, 0.75),
+      0 0 56px rgba(212, 175, 55, 0.38);
     display: inline-block;
-    padding-right: 0.12em;
+    padding-right: 0.18em;
+    padding-bottom: 0.05em;
   }
 
   /* Subtítulo com Marfim Suave, Largura Confortável e Espaçamento Otimizado */
   .hero-subtitle {
-    font-size: clamp(15px, 1.18vw, 17px);
-    line-height: 1.62;
-    color: rgba(245, 241, 232, 0.9);
-    max-width: 500px;
-    margin: 0 0 28px 0;
+    font-size: clamp(15.5px, 1.15vw, 17.5px);
+    line-height: 1.65;
+    color: rgba(245, 241, 232, 0.92);
+    letter-spacing: -0.005em;
+    max-width: 520px;
+    margin: 0 0 clamp(30px, 3.2vw, 40px) 0;
     text-align: left;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
     font-weight: 400;
   }
 
@@ -525,29 +643,42 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap: 15px;
+    gap: 16px;
     flex-wrap: nowrap; /* Garante que os dois botões permaneçam lado a lado no desktop */
     width: 100%;
   }
 
-  /* Botão Primário: Visualmente Dominante */
+  /* Botão Primário: Visualmente Dominante, Área Clicável Otimizada */
   .hero-cta-primary {
-    padding: 13px 12px 13px 24px;
-    font-size: 14px;
+    padding: 14px 12px 14px 26px;
+    font-size: 14.5px;
     font-weight: 700;
+    letter-spacing: 0.025em;
+    min-height: 52px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 16px rgba(212, 175, 55, 0.25);
     flex-shrink: 0;
   }
 
-  /* Botão Secundário: Complementar e Equilibrado */
+  /* Botão Secundário: Complementar, Equilibrado e Contraste Reforçado */
   .hero-cta-secondary {
-    padding: 13px 22px;
-    font-size: 13.5px;
+    padding: 14px 26px;
+    font-size: 14px;
     font-weight: 600;
-    background: rgba(4, 29, 23, 0.55);
-    border: 1.5px solid rgba(245, 241, 232, 0.32);
-    color: rgba(245, 241, 232, 0.88);
+    letter-spacing: 0.025em;
+    min-height: 52px;
+    background: rgba(4, 29, 23, 0.72);
+    border: 1.5px solid rgba(245, 241, 232, 0.45);
+    color: var(--color-marfim);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
     flex-shrink: 0;
+  }
+
+  .hero-cta-secondary:hover {
+    border-color: var(--color-dourado);
+    color: #ffffff;
+    background: rgba(212, 175, 55, 0.18);
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.35), 0 8px 24px rgba(0, 0, 0, 0.45);
+    transform: translateY(-2px);
   }
 
   /* Indicador de Rolagem: Minimalista, Tipográfico & Linha Vertical Dourada */
@@ -644,6 +775,60 @@
   }
 
   /* ==========================================================================
+     TABLET / LAPTOPS COMPACTOS (861px - 1120px)
+     - Preserva fotografia à esquerda sem invasão de textos
+     - Escala tipográfica calibrada
+     ========================================================================== */
+  @media (min-width: 861px) and (max-width: 1120px) {
+    .hero-stage {
+      max-width: 490px;
+      padding: 28px 26px;
+      border-radius: 22px;
+    }
+
+    .hero-glass-panel {
+      border-radius: 22px;
+    }
+
+    .act1-prefix,
+    .act2-prefix {
+      font-size: 21px;
+    }
+
+    .act1-highlight,
+    .act2-highlight {
+      font-size: 45px;
+    }
+
+    .title-line-1 {
+      font-size: 20px;
+    }
+
+    .title-line-2 {
+      font-size: 33px;
+    }
+
+    .hero-subtitle {
+      font-size: 14.5px;
+      max-width: 430px;
+    }
+
+    .hero-cta-group {
+      gap: 12px;
+    }
+
+    .hero-cta-primary {
+      padding: 12px 10px 12px 20px;
+      font-size: 13.5px;
+    }
+
+    .hero-cta-secondary {
+      padding: 12px 20px;
+      font-size: 13px;
+    }
+  }
+
+  /* ==========================================================================
      MOBILE (< 860px) — COMPOSIÇÃO VERTICAL PRÓPRIA:
      - Imagem/Vídeo ACIMA com enquadramento focado no rosto do fundador
      - Conteúdo comercial ABAIXO com legibilidade máxima
@@ -666,14 +851,14 @@
     .hero-media-container {
       position: relative;
       width: 100%;
-      height: 46vh;
+      height: 44vh;
       flex-shrink: 0;
     }
 
     .hero-video,
     .hero-photo-img {
       /* Enquadramento calibrado rigorosamente no rosto do fundador */
-      object-position: 20% 32%;
+      object-position: 20% 30%;
     }
 
     .hero-scrim-right {
@@ -717,12 +902,23 @@
 
     .hero-stage {
       max-width: 100%;
-      min-height: 260px;
+      min-height: auto;
       margin: 0;
-      padding: 0;
+      padding: 20px 18px 22px 18px;
+      border-radius: 20px;
       background: none;
       align-items: flex-start;
       text-align: left;
+    }
+
+    .hero-glass-panel {
+      border-radius: 20px;
+      background: linear-gradient(
+        140deg,
+        rgba(4, 29, 23, 0.48) 0%,
+        rgba(4, 29, 23, 0.32) 45%,
+        rgba(11, 43, 34, 0.44) 100%
+      );
     }
 
     .hero-act {
@@ -732,14 +928,32 @@
 
     .act1-title,
     .act2-title {
-      font-size: clamp(25px, 6.8vw, 34px);
-      line-height: 1.15;
       margin-bottom: 14px;
+    }
+
+    .act1-prefix,
+    .act2-prefix {
+      font-size: clamp(17px, 4.6vw, 22px);
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .act1-lead,
+    .act2-lead {
+      line-height: 1.1;
+      margin-top: 2px;
+    }
+
+    .act1-highlight,
+    .act2-highlight {
+      font-size: clamp(32px, 8.5vw, 44px);
+      padding-right: 0.16em;
     }
 
     .act1-decor,
     .act2-decor {
-      max-width: 220px;
+      max-width: 200px;
+      margin-top: 12px;
     }
 
     .hero-badge {
@@ -752,17 +966,31 @@
     }
 
     .hero-title {
-      font-size: clamp(25px, 6.8vw, 34px);
-      line-height: 1.14;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       align-items: flex-start;
       text-align: left;
     }
 
+    .title-line-1 {
+      font-size: clamp(17px, 4.5vw, 22px);
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .title-line-2 {
+      font-size: clamp(24px, 6.5vw, 32px);
+      line-height: 1.15;
+    }
+
+    .hero-highlight {
+      font-size: 1.08em;
+      padding-right: 0.16em;
+    }
+
     .hero-subtitle {
-      font-size: 13.5px;
-      line-height: 1.48;
-      margin-bottom: 18px;
+      font-size: clamp(13px, 3.5vw, 14.5px);
+      line-height: 1.5;
+      margin-bottom: 22px;
       max-width: 100%;
       text-align: left;
     }
@@ -781,6 +1009,7 @@
       max-width: 360px;
       justify-content: center;
       padding: 13px 20px;
+      min-height: 48px;
       font-size: 14px;
     }
 
@@ -804,12 +1033,23 @@
     .hero-media-container {
       height: 40vh;
     }
-    .hero-title {
+    .act1-prefix,
+    .act2-prefix {
+      font-size: 16px;
+    }
+    .act1-highlight,
+    .act2-highlight {
+      font-size: 30px;
+    }
+    .title-line-1 {
+      font-size: 16px;
+    }
+    .title-line-2 {
       font-size: 24px;
     }
     .hero-subtitle {
-      font-size: 13px;
-      margin-bottom: 14px;
+      font-size: 12.5px;
+      margin-bottom: 16px;
     }
   }
 
@@ -867,6 +1107,9 @@
     const act3Title = document.getElementById('hero-title-3');
     const act3Subtitle = document.getElementById('hero-subtitle-3');
     const act3Ctas = document.getElementById('hero-cta-group-3');
+
+    // Painel Editorial Liquid Glass Premium
+    const glassPanel = document.getElementById('hero-glass-panel');
 
     // 1. ANIMAÇÃO DE ENTRADA DO INDICADOR DE ROLAGEM ("ROLE PARA EXPLORAR")
     // Centralizado com precisão na parte inferior da viewport e revelado após a fotografia e o header
@@ -984,13 +1227,21 @@
         gsap.set(scrollIndicator, { xPercent: -50, left: '50%' });
       }
 
-      // Definir estado inicial explícito de todos os 3 atos narrativos
+      // Definir estado inicial explícito de todos os 3 atos narrativos e do painel liquid glass
       gsap.set([act1, act2, act3], {
         opacity: 0,
         visibility: 'hidden',
         pointerEvents: 'none',
         y: 20
       });
+
+      if (glassPanel) {
+        gsap.set(glassPanel, {
+          opacity: 0,
+          visibility: 'hidden',
+          y: 16
+        });
+      }
 
       // Única Instância Principal de ScrollTrigger & Timeline Mestre
       const masterTimeline = gsap.timeline({
@@ -1055,6 +1306,18 @@
 
       // --- 5. ATO 1 — A IDEIA (6% a 28% do Scroll) ---
       // A fotografia do fundador é protagonista. A ideia surge com máscara vertical suave.
+      if (glassPanel) {
+        masterTimeline.set(glassPanel, {
+          visibility: 'visible',
+        }, 0.5);
+
+        masterTimeline.fromTo(glassPanel,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+          0.55
+        );
+      }
+
       if (act1) {
         masterTimeline.set(act1, {
           visibility: 'visible',
@@ -1112,6 +1375,21 @@
           visibility: 'hidden',
           pointerEvents: 'none',
         }, 2.8);
+      }
+
+      if (glassPanel) {
+        // Durante a transição entre frases, suaviza a opacidade para manter a continuidade sem parecer um retângulo vazio
+        masterTimeline.to(glassPanel, {
+          opacity: 0.45,
+          duration: 0.5,
+          ease: 'power2.inOut',
+        }, 2.3);
+
+        masterTimeline.to(glassPanel, {
+          opacity: 1,
+          duration: 0.7,
+          ease: 'power2.out',
+        }, 3.1);
       }
 
       // --- 6. ATO 2 — A ESTRATÉGIA (32% a 63% do Scroll) ---
@@ -1173,6 +1451,21 @@
           visibility: 'hidden',
           pointerEvents: 'none',
         }, 6.3);
+      }
+
+      if (glassPanel) {
+        // Suaviza discretamente na transição para o clímax da transformação
+        masterTimeline.to(glassPanel, {
+          opacity: 0.45,
+          duration: 0.6,
+          ease: 'power2.inOut',
+        }, 5.7);
+
+        masterTimeline.to(glassPanel, {
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+        }, 6.7);
       }
 
       // --- 7. ATO 3 — O RESULTADO / A TRANSFORMAÇÃO (68% a 100% do Scroll) ---
