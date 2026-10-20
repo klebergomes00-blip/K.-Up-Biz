@@ -3,7 +3,6 @@
 // Narrativa editorial assimétrica das 4 etapas com scroll cinematográfico controlado e pin.
 
 interface StepItem {
-  index: string;
   phase: string;
   title: string;
   description: string;
@@ -11,25 +10,21 @@ interface StepItem {
 
 const steps: StepItem[] = [
   {
-    index: '01',
     phase: 'FASE 01',
     title: 'ENTENDER',
     description: 'Conhecemos seu negócio, seus desafios e objetivos.'
   },
   {
-    index: '02',
     phase: 'FASE 02',
     title: 'PLANEJAR',
     description: 'Definimos prioridades e uma estratégia alinhada à sua realidade.'
   },
   {
-    index: '03',
     phase: 'FASE 03',
     title: 'EXECUTAR',
     description: 'Transformamos o planejamento em presença digital e ações concretas.'
   },
   {
-    index: '04',
     phase: 'FASE 04',
     title: 'EVOLUIR',
     description: 'Acompanhamos resultados e identificamos oportunidades de melhoria.'
@@ -45,9 +40,10 @@ const steps: StepItem[] = [
       class="metodo-video"
       muted
       playsinline
-      preload="metadata"
+      preload="auto"
       poster="/imagens/metodo-poster.png"
     >
+      <source src="/videos/metodo-montanha-allintra.mp4" type="video/mp4" />
       <source src="/videos/metodo-montanha-opt.mp4" type="video/mp4" />
       <source src="/videos/metodo-montanha.mp4" type="video/mp4" />
     </video>
@@ -59,7 +55,7 @@ const steps: StepItem[] = [
         alt="Montanha com caminho luminoso dourado"
         class="metodo-poster-img"
         id="metodo-poster-img"
-        loading="lazy"
+        loading="eager"
         decoding="async"
       />
     </div>
@@ -118,9 +114,9 @@ const steps: StepItem[] = [
           <div class="metodo-rail-progress" id="metodo-rail-progress"></div>
         </div>
 
-        <ol class="metodo-steps-list">
-          {steps.map((item, i) => (
-            <li class="metodo-step is-upcoming" data-step-index={i}>
+        <div class="metodo-steps-list" role="list">
+          {steps.map((item) => (
+            <div class="metodo-step is-upcoming" role="listitem">
               <!-- Marcador Físico / Nó Luminoso Alinhado à Linha -->
               <div class="step-indicator">
                 <div class="step-node">
@@ -128,7 +124,6 @@ const steps: StepItem[] = [
                   <span class="step-node-ring"></span>
                   <span class="step-node-core"></span>
                 </div>
-                <span class="step-index">{item.index}</span>
               </div>
 
               <!-- Conteúdo Editorial da Etapa -->
@@ -143,9 +138,9 @@ const steps: StepItem[] = [
                   {item.description}
                 </p>
               </div>
-            </li>
+            </div>
           ))}
-        </ol>
+        </div>
       </div>
     </div>
   </div>
@@ -466,6 +461,13 @@ const steps: StepItem[] = [
     padding-left: clamp(40px, 5.5vw, 68px);
   }
 
+  @media (min-width: 1025px) {
+    .metodo-steps-col {
+      /* Deslocamento de 60px para a direita em desktop */
+      margin-left: 60px;
+    }
+  }
+
   /* Trilha da Linha Vertical de Progresso */
   .metodo-timeline-rail {
     position: absolute;
@@ -514,9 +516,10 @@ const steps: StepItem[] = [
     will-change: transform;
   }
 
-  /* Lista Ordenada de Etapas */
+  /* Lista de Etapas (Blindada contra marcadores numéricos) */
   .metodo-steps-list {
-    list-style: none;
+    list-style: none !important;
+    list-style-type: none !important;
     margin: 0;
     padding: 0;
     display: flex;
@@ -530,6 +533,13 @@ const steps: StepItem[] = [
     display: flex;
     align-items: flex-start;
     gap: clamp(20px, 2.8vw, 36px);
+    list-style: none !important;
+    list-style-type: none !important;
+  }
+
+  .metodo-step::marker {
+    display: none !important;
+    content: '' !important;
   }
 
   /* Estados de Foco Editorial na Etapa */
@@ -554,10 +564,18 @@ const steps: StepItem[] = [
     transform: translateX(-50%);
     top: 6px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
     z-index: 3;
+    pointer-events: none;
+  }
+
+  .step-indicator::before,
+  .step-indicator::after,
+  .step-node::before,
+  .step-node::after {
+    display: none !important;
+    content: none !important;
   }
 
   .step-node {
@@ -635,23 +653,6 @@ const steps: StepItem[] = [
     box-shadow: 0 0 6px rgba(4, 120, 87, 0.6);
   }
 
-  .step-index {
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    color: rgba(245, 241, 232, 0.35);
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-  }
-
-  .metodo-step.is-active .step-index {
-    color: var(--color-dourado);
-    text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
-  }
-
-  .metodo-step.is-past .step-index {
-    color: rgba(245, 241, 232, 0.55);
-  }
 
   /* --------------------------------------------------------------------------
      4. CORPO DA ETAPA (TIPOGRAFIA EDITORIAL PURA)
@@ -751,6 +752,7 @@ const steps: StepItem[] = [
     }
 
     .metodo-steps-col {
+      margin-left: 0;
       padding-left: 54px;
     }
 
@@ -854,7 +856,7 @@ const steps: StepItem[] = [
 
   gsap.registerPlugin(ScrollTrigger);
 
-  document.addEventListener('DOMContentLoaded', () => {
+  const initNossoMetodo = () => {
     const section = document.getElementById('metodo');
     if (!section) return;
 
@@ -876,7 +878,7 @@ const steps: StepItem[] = [
       return;
     }
 
-    // --- Mecanismo de Busca de Frames Não-Bloqueante (Bidirecional Suave) ---
+    // --- Mecanismo de Busca de Frames Contínuo e Não-Bloqueante (Bidirecional Suave) ---
     let targetTime = 0;
     const getVideoDuration = () => {
       if (video && Number.isFinite(video.duration) && video.duration > 0) {
@@ -885,37 +887,56 @@ const steps: StepItem[] = [
       return 8.0; // Duração exata do clipe da montanha
     };
 
+    const hidePoster = () => {
+      if (posterLayer) {
+        posterLayer.classList.add('is-hidden');
+        posterLayer.style.opacity = '0';
+        posterLayer.style.pointerEvents = 'none';
+      }
+    };
+
     const requestSeek = (time: number) => {
       if (!video) return;
       const duration = getVideoDuration();
       targetTime = Math.max(0, Math.min(duration, time));
+      hidePoster();
       if (!video.seeking && video.readyState >= 1) {
-        if (Math.abs(video.currentTime - targetTime) > 0.02) {
+        if (Math.abs(video.currentTime - targetTime) > 0.015) {
           video.currentTime = targetTime;
         }
       }
     };
 
     if (video) {
+      video.muted = true;
+      video.playsInline = true;
+      video.preload = 'auto';
       video.pause();
+      try {
+        video.load();
+      } catch (e) {
+        // ignora
+      }
 
       video.addEventListener('seeked', () => {
         if (!video) return;
-        if (Math.abs(video.currentTime - targetTime) > 0.02) {
+        if (Math.abs(video.currentTime - targetTime) > 0.015) {
           video.currentTime = targetTime;
         }
       });
 
-      // Transição suave do poster para o vídeo decodificado
       const onVideoReady = () => {
-        if (posterLayer) {
-          posterLayer.classList.add('is-hidden');
+        hidePoster();
+        if (video.readyState >= 1 && Math.abs(video.currentTime - targetTime) > 0.015) {
+          video.currentTime = targetTime;
         }
+        ScrollTrigger.refresh();
       };
 
       if (video.readyState >= 2) {
         onVideoReady();
       } else {
+        video.addEventListener('loadedmetadata', onVideoReady, { once: true });
         video.addEventListener('loadeddata', onVideoReady, { once: true });
         video.addEventListener('canplay', onVideoReady, { once: true });
       }
@@ -924,23 +945,9 @@ const steps: StepItem[] = [
         console.warn('Vídeo da montanha indisponível; exibindo poster estático.');
         if (posterLayer) {
           posterLayer.classList.remove('is-hidden');
+          posterLayer.style.opacity = '1';
         }
       });
-
-      // Carregamento sob demanda: eleva preload para 'auto' quando a seção se aproxima
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              if (video.preload !== 'auto') {
-                video.preload = 'auto';
-              }
-              observer.disconnect();
-            }
-          });
-        }, { rootMargin: '800px 0px' });
-        observer.observe(section);
-      }
     }
 
     const eyebrow = section.querySelector('.metodo-eyebrow');
@@ -1031,8 +1038,9 @@ const steps: StepItem[] = [
       if (lead) headerTl.to(lead, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.36);
       if (conceptTag) headerTl.to(conceptTag, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.46);
 
-      // Objeto proxy de controle do tempo do vídeo
-      const videoProxy = { time: 0 };
+      // Objeto proxy de controle contínuo do progresso do vídeo (0 a 1)
+      const timelineDuration = 12.0;
+      const videoProxy = { progress: 0 };
 
       // ----------------------------------------------------------------------
       // TIMELINE PRINCIPAL COM PIN: SCROLL CONTROLADO DAS 4 ETAPAS + VÍDEO
@@ -1048,13 +1056,13 @@ const steps: StepItem[] = [
           scrub: 0.8,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onUpdate: () => {
+          onUpdate: (self) => {
             const t = mainTl.time();
-            let activeIdx = -1;
-            if (t >= 0.5 && t < 3.0) activeIdx = 0;
-            else if (t >= 3.0 && t < 5.7) activeIdx = 1;
-            else if (t >= 5.7 && t < 8.4) activeIdx = 2;
-            else if (t >= 8.4) activeIdx = 3;
+            let activeIdx = 0;
+            if (t < 3.0) activeIdx = 0;
+            else if (t < 5.7) activeIdx = 1;
+            else if (t < 8.4) activeIdx = 2;
+            else activeIdx = 3;
 
             steps.forEach((step, idx) => {
               step.classList.remove('is-active', 'is-past', 'is-upcoming');
@@ -1067,18 +1075,38 @@ const steps: StepItem[] = [
               }
             });
 
-            // Assegura sincronização contínua do frame com o decodificador
-            requestSeek(videoProxy.time);
+            // Assegura sincronização contínua do frame baseada no progresso normalizado do ScrollTrigger
+            const duration = getVideoDuration();
+            requestSeek(self.progress * duration);
           }
         }
       });
 
-      // Leve movimento de câmera (push-in cinematográfico) durante a ascensão pela montanha
+      // --- Sincronização Contínua do Vídeo através do Proxy ---
+      mainTl.to(videoProxy, {
+        progress: 1,
+        ease: 'none',
+        duration: timelineDuration,
+        onUpdate: () => {
+          const duration = getVideoDuration();
+          requestSeek(videoProxy.progress * duration);
+        }
+      }, 0);
+
+      // Oculta camada de poster e aplica leve movimento de câmera durante a ascensão
+      if (posterLayer) {
+        mainTl.to(posterLayer, {
+          opacity: 0,
+          duration: 0.4,
+          ease: 'power1.out'
+        }, 0);
+      }
+
       if (video) {
         mainTl.to(video, {
           scale: 1.05,
           ease: 'none',
-          duration: 12.0
+          duration: timelineDuration
         }, 0);
       }
 
@@ -1091,17 +1119,11 @@ const steps: StepItem[] = [
       }));
 
       // ======================================================================
-      // FASE 01 — ENTENDER (Timeline 0.5s -> 3.0s | Vídeo 0.0s -> 1.6s)
+      // FASE 01 — ENTENDER (Timeline 0.5s -> 3.0s)
       // A jornada começa: a linha vertical alcança o Nó 01. O caminho dourado
       // acende na base da montanha. Dwell amplo para leitura da proposta.
       // ======================================================================
       mainTl
-        .to(videoProxy, {
-          time: 1.6,
-          duration: 2.5,
-          ease: 'none',
-          onUpdate: () => requestSeek(videoProxy.time)
-        }, 0.5)
         .to(stepElements[0].step, { opacity: 1, duration: 0.8, ease: 'power1.out' }, 0.5)
         .to(stepElements[0].glow, { opacity: 1, scale: 1.2, duration: 0.8, ease: 'power2.out' }, 0.5)
         .to(stepElements[0].tag, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.55)
@@ -1109,17 +1131,11 @@ const steps: StepItem[] = [
         .to(stepElements[0].desc, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.8);
 
       // ======================================================================
-      // FASE 02 — PLANEJAR (Timeline 3.0s -> 5.7s | Vídeo 1.6s -> 3.6s)
+      // FASE 02 — PLANEJAR (Timeline 3.0s -> 5.7s)
       // O caminho dourado ascende pela montanha. O segundo marcador acende.
       // O Nó 01 suaviza seu brilho, mantendo-se como histórico concluído.
       // ======================================================================
       mainTl
-        .to(videoProxy, {
-          time: 3.6,
-          duration: 2.7,
-          ease: 'none',
-          onUpdate: () => requestSeek(videoProxy.time)
-        }, 3.0)
         .to(railProgress, { scaleY: p[1] || 0.32, ease: 'power1.inOut', duration: 1.2 }, 3.0)
         .to(stepElements[0].step, { opacity: 0.65, duration: 0.6, ease: 'power1.out' }, 3.0)
         .to(stepElements[0].glow, { opacity: 0, scale: 0.8, duration: 0.5 }, 3.0)
@@ -1130,17 +1146,11 @@ const steps: StepItem[] = [
         .to(stepElements[1].desc, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 3.7);
 
       // ======================================================================
-      // FASE 03 — EXECUTAR (Timeline 5.7s -> 8.4s | Vídeo 3.6s -> 5.8s)
+      // FASE 03 — EXECUTAR (Timeline 5.7s -> 8.4s)
       // O fluxo de energia sobe a crista rochosa em direção ao topo. Ondas de
       // aurora boreal iluminam o céu. O terceiro marcador se destaca.
       // ======================================================================
       mainTl
-        .to(videoProxy, {
-          time: 5.8,
-          duration: 2.7,
-          ease: 'none',
-          onUpdate: () => requestSeek(videoProxy.time)
-        }, 5.7)
         .to(railProgress, { scaleY: p[2] || 0.64, ease: 'power1.inOut', duration: 1.2 }, 5.7)
         .to(stepElements[1].step, { opacity: 0.65, duration: 0.6, ease: 'power1.out' }, 5.7)
         .to(stepElements[1].glow, { opacity: 0, scale: 0.8, duration: 0.5 }, 5.7)
@@ -1151,17 +1161,11 @@ const steps: StepItem[] = [
         .to(stepElements[2].desc, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 6.4);
 
       // ======================================================================
-      // FASE 04 — EVOLUIR (Timeline 8.4s -> 11.5s | Vídeo 5.8s -> 8.0s)
+      // FASE 04 — EVOLUIR (Timeline 8.4s -> 11.5s)
       // O feixe alcança o cume e expande-se em uma supernova dourada sob a
       // aurora. A linha vertical completa 100%. O quarto marcador resplandece.
       // ======================================================================
       mainTl
-        .to(videoProxy, {
-          time: 8.0,
-          duration: 3.1,
-          ease: 'none',
-          onUpdate: () => requestSeek(videoProxy.time)
-        }, 8.4)
         .to(railProgress, { scaleY: 1.0, ease: 'power1.inOut', duration: 1.2 }, 8.4)
         .to(stepElements[2].step, { opacity: 0.65, duration: 0.6, ease: 'power1.out' }, 8.4)
         .to(stepElements[2].glow, { opacity: 0, scale: 0.8, duration: 0.5 }, 8.4)
@@ -1206,6 +1210,7 @@ const steps: StepItem[] = [
       });
 
       if (eyebrow) mobileHeaderTl.to(eyebrow, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 0);
+      if (posterLayer) mobileHeaderTl.to(posterLayer, { opacity: 0, duration: 0.45, ease: 'power1.out' }, 0);
       if (line1) mobileHeaderTl.to(line1, { yPercent: 0, opacity: 1, duration: 0.65, ease: 'power3.out' }, 0.08);
       if (line2) mobileHeaderTl.to(line2, { yPercent: 0, opacity: 1, filter: 'blur(0px)', duration: 0.75, ease: 'power3.out' }, 0.16);
       if (hairline) mobileHeaderTl.to(hairline, { scaleX: 1, duration: 0.55, ease: 'power2.out' }, 0.24);
@@ -1213,16 +1218,20 @@ const steps: StepItem[] = [
       if (conceptTag) mobileHeaderTl.to(conceptTag, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 0.4);
 
       // Scrubbing suave do vídeo no mobile acompanhando o scroll natural da seção
-      const mobileVideoProxy = { time: 0 };
+      const mobileVideoProxy = { progress: 0 };
       gsap.to(mobileVideoProxy, {
-        time: 8.0,
+        progress: 1,
         ease: 'none',
         scrollTrigger: {
           trigger: section,
           start: 'top 65%',
           end: 'bottom 25%',
           scrub: 0.8,
-          onUpdate: () => requestSeek(mobileVideoProxy.time)
+          onUpdate: (self) => {
+            hidePoster();
+            const d = getVideoDuration();
+            requestSeek(self.progress * d);
+          }
         }
       });
 
@@ -1278,10 +1287,30 @@ const steps: StepItem[] = [
       });
     });
 
-    if (video && video.readyState < 1) {
-      video.addEventListener('loadedmetadata', () => {
-        ScrollTrigger.refresh();
-      }, { once: true });
+    if (video) {
+      if (video.readyState < 1) {
+        video.addEventListener('loadedmetadata', () => {
+          hidePoster();
+          ScrollTrigger.refresh();
+        }, { once: true });
+        video.addEventListener('canplay', () => {
+          hidePoster();
+          ScrollTrigger.refresh();
+        }, { once: true });
+      }
     }
-  });
+
+    window.addEventListener('cinematic-intro-complete', () => {
+      ScrollTrigger.refresh();
+      if (video && video.readyState >= 1) {
+        requestSeek(targetTime);
+      }
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNossoMetodo);
+  } else {
+    initNossoMetodo();
+  }
 </script>
