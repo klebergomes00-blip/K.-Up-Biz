@@ -1,6 +1,7 @@
 ---
 // src/components/DigitalShelf.astro — Terceira Dobra: The Digital Shelf (Refinamento 3D)
 // Capas de vinil de luxo em perspectiva tridimensional apoiadas em prateleira física de metal escuro escovado.
+import ServiceExperienceModal from './ServiceExperienceModal.astro';
 
 interface ServiceData {
   id: string;
@@ -404,63 +405,9 @@ const services: ServiceData[] = [
   </div>
 
   <!-- ========================================================================
-       MODAL DE EXPANSÃO CINEMATOGRÁFICA (FLIP EXPANSION OVERLAY)
+       EXPERIÊNCIA IMERSIVA DE SERVIÇOS (DIGITAL SHELF EXPANSION OVERLAY)
        ======================================================================== -->
-  <div
-    class="shelf-modal-overlay"
-    id="shelf-modal-overlay"
-    role="dialog"
-    aria-modal="true"
-    aria-hidden="true"
-    tabindex="-1"
-  >
-    <!-- Fundo Escuro com Backdrop Blur -->
-    <div class="modal-backdrop" id="modal-backdrop"></div>
-
-    <div class="modal-container">
-      <!-- Botão de Fechar com Foco Visível -->
-      <button
-        type="button"
-        class="modal-close-btn"
-        id="modal-close-btn"
-        aria-label="Fechar apresentação da solução"
-      >
-        <span class="close-label">FECHAR</span>
-        <span class="close-icon" aria-hidden="true">
-          <svg fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24" width="15">
-            <path d="M18 6 6 18"></path>
-            <path d="m6 6 12 12"></path>
-          </svg>
-        </span>
-      </button>
-
-      <!-- Layout Editorial Expandido: Texto à Esquerda, Card à Direita -->
-      <div class="modal-content-grid">
-        <!-- Coluna Esquerda: Texto Comercial e Apresentação -->
-        <div class="modal-narrative-col" id="modal-narrative-col">
-          <div class="modal-service-badge" id="modal-badge">
-            <span class="badge-dot"></span>
-            <span class="badge-text" id="modal-service-name">SERVIÇO</span>
-          </div>
-
-          <h3 class="modal-title" id="modal-title">
-            Título da Solução
-          </h3>
-
-          <div class="modal-divider-line" aria-hidden="true"></div>
-
-          <p class="modal-description" id="modal-description">
-            Descrição estratégica e comercial detalhada do serviço.
-          </p>
-        </div>
-
-        <!-- Coluna Direita: Receptáculo de Destino do Card Expandido -->
-        <div class="modal-card-target" id="modal-card-target">
-          <!-- O card animado voará da prateleira para cá via transição FLIP -->
-        </div>
-      </div>
-    </div>
-  </div>
+  <ServiceExperienceModal />
 </section>
 
 <style>
@@ -1646,160 +1593,15 @@ const services: ServiceData[] = [
   }
 
   /* --------------------------------------------------------------------------
-     8. MODAL DE EXPANSÃO CINEMATOGRÁFICA
+     8. EXPANSÃO CINEMATOGRÁFICA (CARD FLIP CLONE)
      -------------------------------------------------------------------------- */
-  .shelf-modal-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: visibility 0.4s ease;
-  }
-
-  .shelf-modal-overlay.is-active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  .modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(3, 13, 11, 0.88);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    cursor: pointer;
-  }
-
-  .modal-container {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 1100px;
-    padding: 0 32px;
-  }
-
-  .modal-close-btn {
-    position: absolute;
-    top: -56px;
-    right: 32px;
-    background: rgba(245, 241, 232, 0.08);
-    border: 1px solid rgba(245, 241, 232, 0.2);
-    color: var(--color-marfim);
-    padding: 8px 16px;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    cursor: pointer;
-    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
-  }
-
-  .modal-close-btn:hover {
-    background: rgba(212, 175, 55, 0.18);
-    border-color: var(--color-dourado);
-    transform: translateY(-2px);
-  }
-
-  .modal-close-btn:focus-visible {
-    outline: 2px solid var(--color-dourado);
-    outline-offset: 2px;
-  }
-
-  .modal-content-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: clamp(40px, 6vw, 80px);
-    align-items: center;
-  }
-
-  .modal-narrative-col {
-    max-width: 520px;
-  }
-
-  .modal-service-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: rgba(4, 120, 87, 0.16);
-    border: 1px solid rgba(4, 120, 87, 0.4);
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    color: var(--color-dourado);
-    margin-bottom: 24px;
-  }
-
-  .badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--color-dourado);
-    box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
-  }
-
-  .modal-title {
-    margin: 0 0 20px;
-    font-family: var(--font-sans);
-    font-size: clamp(2rem, 3.2vw, 3rem);
-    font-weight: 600;
-    line-height: 1.18;
-    letter-spacing: -0.02em;
-    color: var(--color-marfim);
-  }
-
-  .modal-divider-line {
-    width: 100%;
-    max-width: 280px;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      #D4AF37 0%,
-      rgba(212, 175, 55, 0.35) 70%,
-      transparent 100%
-    );
-    margin-bottom: 24px;
-  }
-
-  .modal-description {
-    margin: 0;
-    font-family: var(--font-sans);
-    font-size: clamp(1.05rem, 1.2vw, 1.2rem);
-    line-height: 1.8;
-    color: var(--color-marfim-muted);
-  }
-
-  .modal-card-target {
-    position: relative;
-    width: 100%;
-    max-width: 420px;
-    aspect-ratio: 1 / 1;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Elemento Fantasma Animado (O card voador FLIP) */
   .flying-card-clone {
     position: fixed;
     z-index: 1050;
     border-radius: 20px;
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.9), 0 0 40px rgba(4, 120, 87, 0.3);
     pointer-events: none;
-    will-change: transform, top, left, width, height;
+    will-change: transform, top, left, width, height, opacity;
   }
 
   /* --------------------------------------------------------------------------
@@ -1878,27 +1680,6 @@ const services: ServiceData[] = [
     .shelf-card-anchor {
       width: clamp(200px, 26vw, 240px);
     }
-
-    .modal-content-grid {
-      grid-template-columns: 1fr;
-      gap: 36px;
-      text-align: center;
-    }
-
-    .modal-narrative-col {
-      max-width: 100%;
-      margin: 0 auto;
-      order: 2;
-    }
-
-    .modal-card-target {
-      order: 1;
-      max-width: 320px;
-    }
-
-    .modal-divider-line {
-      margin: 0 auto 20px;
-    }
   }
 
   @media (max-width: 767px) {
@@ -1949,30 +1730,6 @@ const services: ServiceData[] = [
 
     .shelf-card {
       transform: none; /* Em telas touch mobile, o card fica plano para facilitar a leitura */
-    }
-
-    .modal-container {
-      padding: 0 20px;
-    }
-
-    .modal-close-btn {
-      top: -46px;
-      right: 20px;
-      padding: 6px 12px;
-      font-size: 10px;
-    }
-
-    .modal-card-target {
-      max-width: 240px;
-    }
-
-    .modal-title {
-      font-size: 1.6rem;
-    }
-
-    .modal-description {
-      font-size: 0.98rem;
-      line-height: 1.65;
     }
   }
 
@@ -2035,14 +1792,17 @@ const services: ServiceData[] = [
 
     const cardsRow = document.getElementById('shelf-cards-row');
     const physicalShelf = section.querySelector('.physical-shelf');
-    const modal = document.getElementById('shelf-modal-overlay');
-    const modalBackdrop = document.getElementById('modal-backdrop');
-    const modalCloseBtn = document.getElementById('modal-close-btn');
-    const modalBadge = document.getElementById('modal-service-name');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDesc = document.getElementById('modal-description');
-    const modalNarrative = document.getElementById('modal-narrative-col');
-    const modalTarget = document.getElementById('modal-card-target');
+    const modal = document.getElementById('shelf-service-modal');
+    const modalBackdrop = document.getElementById('service-modal-backdrop');
+    const modalCloseBtn = document.getElementById('service-modal-close-btn');
+    const modalViewport = document.getElementById('service-modal-viewport');
+    const scrollContainer = document.getElementById('service-scroll-container');
+    const activeBadge = document.getElementById('active-service-badge');
+    const tabBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.service-tab-btn'));
+    const serviceViews = Array.from(document.querySelectorAll<HTMLElement>('.service-experience-view'));
+    const footerBackBtn = document.getElementById('footer-back-btn');
+    const simChips = Array.from(document.querySelectorAll<HTMLButtonElement>('.sim-chip'));
+    const simQueryText = document.getElementById('sim-query-text');
 
     const cardAnchors = Array.from(section.querySelectorAll<HTMLElement>('.shelf-card-anchor'));
     const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2293,30 +2053,81 @@ const services: ServiceData[] = [
     // ------------------------------------------------------------------------
     let activeCard: HTMLElement | null = null;
     let flyingClone: HTMLElement | null = null;
+    let currentFlipTl: gsap.core.Timeline | null = null;
     let isExpanding = false;
     let lastFocusedElement: HTMLElement | null = null;
+    let currentService = 'web';
 
-    // Dados para popular o modal
-    const servicesData: Record<string, { badge: string; title: string; desc: string }> = {
-      web: {
-        badge: '01 / CRIAÇÃO DE SITES',
-        title: 'Sua presença merece um endereço próprio.',
-        desc: 'Sites estratégicos que apresentam sua empresa com profissionalismo e transformam visitantes em oportunidades.'
-      },
-      local: {
-        badge: '02 / GOOGLE MEU NEGÓCIO',
-        title: 'Esteja onde seus clientes procuram.',
-        desc: 'Uma presença local mais completa para ajudar sua empresa a ser encontrada e conquistar confiança.'
-      },
-      reach: {
-        badge: '03 / GESTÃO DE TRÁFEGO',
-        title: 'Alcance quem realmente importa.',
-        desc: 'Campanhas estratégicas para conectar sua marca a públicos relevantes e gerar novas oportunidades.'
+    const badges: Record<string, string> = {
+      web: '01 / CRIAÇÃO DE SITES',
+      local: '02 / PRESENÇA LOCAL',
+      reach: '03 / GESTÃO DE TRÁFEGO'
+    };
+
+    const switchService = (targetService: string) => {
+      currentService = targetService;
+
+      // 1. Atualizar botões das abas superiores
+      tabBtns.forEach((btn) => {
+        const isTarget = btn.getAttribute('data-target') === targetService;
+        btn.classList.toggle('is-active', isTarget);
+        btn.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+      });
+
+      // 2. Atualizar badge de identificação do serviço ativo
+      if (activeBadge && badges[targetService]) {
+        activeBadge.textContent = badges[targetService];
+      }
+
+      // 3. Transição suave entre as views completas dos serviços
+      serviceViews.forEach((view) => {
+        const isTarget = view.getAttribute('data-service') === targetService;
+        if (isTarget) {
+          view.style.display = 'block';
+          gsap.fromTo(view, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' });
+          view.classList.add('is-active');
+        } else {
+          view.classList.remove('is-active');
+          view.style.display = 'none';
+        }
+      });
+
+      // 4. Retornar scroll ao topo da página do novo serviço
+      if (scrollContainer) {
+        scrollContainer.scrollTop = 0;
       }
     };
 
+    // Navegação interna por abas dentro do overlay aberto
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = btn.getAttribute('data-target');
+        if (target && target !== currentService) {
+          switchService(target);
+        }
+      });
+    });
+
+    // Simulador de busca local interativo
+    simChips.forEach((chip) => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        simChips.forEach((c) => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+        const q = chip.getAttribute('data-query');
+        if (simQueryText && q) {
+          simQueryText.style.opacity = '0.3';
+          setTimeout(() => {
+            simQueryText.textContent = `"${q}"`;
+            simQueryText.style.opacity = '1';
+          }, 120);
+        }
+      });
+    });
+
     const openExpansion = (anchor: HTMLElement) => {
-      if (isExpanding || !modal || !modalTarget) return;
+      if (isExpanding || !modal) return;
       isExpanding = true;
 
       const card = anchor.querySelector<HTMLElement>('.shelf-card');
@@ -2326,27 +2137,21 @@ const services: ServiceData[] = [
       lastFocusedElement = document.activeElement as HTMLElement;
 
       const serviceId = anchor.getAttribute('data-service-id') || 'web';
-      const data = servicesData[serviceId];
+      switchService(serviceId);
 
-      if (data) {
-        if (modalBadge) modalBadge.textContent = data.badge;
-        if (modalTitle) modalTitle.textContent = data.title;
-        if (modalDesc) modalDesc.textContent = data.desc;
-      }
-
-      // Bloquear scroll do body de forma limpa
+      // Bloquear scroll do body de forma limpa sem layout shift
       document.body.style.overflow = 'hidden';
       document.body.classList.add('shelf-modal-open');
 
-      // Posição inicial real do card na prateleira (lê com precisão as dimensões ampliadas se estiver em hover)
+      // Posição inicial real do card na prateleira
       const startRect = card.getBoundingClientRect();
 
-      // Clonar nó completo da capa para animar
+      // Clonar nó completo da capa para animar o FLIP cinematográfico
       flyingClone = card.cloneNode(true) as HTMLElement;
       flyingClone.id = 'flying-card-instance';
       flyingClone.className = `${card.className} flying-card-clone`;
 
-      // Evitar duplicação de IDs SVG e referências url(#...) no clone
+      // Evitar duplicação de IDs SVG no clone
       const cloneSvg = flyingClone.querySelector('svg');
       if (cloneSvg) {
         const idElements = cloneSvg.querySelectorAll('[id]');
@@ -2365,7 +2170,12 @@ const services: ServiceData[] = [
         });
       }
 
-      // Posicionar inicialmente exatamente sobre o card original
+      // Remover botões ou elementos extras no clone
+      const clonePill = flyingClone.querySelector('.card-open-pill-btn') || flyingClone.querySelector('.card-open-pill-wrap');
+      if (clonePill) clonePill.remove();
+
+      flyingClone.style.position = 'fixed';
+      flyingClone.style.zIndex = '100050';
       flyingClone.style.top = `${startRect.top}px`;
       flyingClone.style.left = `${startRect.left}px`;
       flyingClone.style.width = `${startRect.width}px`;
@@ -2373,161 +2183,208 @@ const services: ServiceData[] = [
       flyingClone.style.margin = '0';
       flyingClone.style.transform = 'none';
 
-      // Garantir que o botão abrir não apareça no clone expandido
-      const clonePill = flyingClone.querySelector('.card-open-pill-btn') || flyingClone.querySelector('.card-open-pill-wrap');
-      if (clonePill) clonePill.remove();
-
       document.body.appendChild(flyingClone);
 
-      // Ocultar card original sem provocar salto de layout
+      // Ocultar card original na prateleira
       card.style.visibility = 'hidden';
 
       // Revelar modal overlay
       modal.classList.add('is-active');
       modal.setAttribute('aria-hidden', 'false');
 
-      // Calcular posição de destino após renderização do modal
-      requestAnimationFrame(() => {
-        if (!modalTarget || !flyingClone) return;
-        const targetRect = modalTarget.getBoundingClientRect();
+      if (scrollContainer) {
+        scrollContainer.scrollTop = 0;
+      }
 
-        if (isReducedMotion) {
-          flyingClone.style.top = `${targetRect.top}px`;
-          flyingClone.style.left = `${targetRect.left}px`;
-          flyingClone.style.width = `${targetRect.width}px`;
-          flyingClone.style.height = `${targetRect.height}px`;
-          modalCloseBtn?.focus();
-          isExpanding = false;
-          return;
-        }
-
-        // Animação GSAP da transição com sensação física de avanço em Z e pouso
-        const flipTl = gsap.timeline({
-          onComplete: () => {
-            isExpanding = false;
-            modalCloseBtn?.focus();
-          }
-        });
-
-        // 1. O clone voa e escala para o destino no modal a partir do estado visual real
-        const isHoveredOrActive = anchor.classList.contains('is-card-hovered') || anchor.classList.contains('is-touch-active');
-        const startRotationX = isHoveredOrActive ? 0 : (window.innerWidth <= 768 ? 0 : 4.5);
-
-        flipTl.fromTo(flyingClone,
-          {
-            top: startRect.top,
-            left: startRect.left,
-            width: startRect.width,
-            height: startRect.height,
-            rotationX: startRotationX,
-          },
-          {
-            top: targetRect.top,
-            left: targetRect.left,
-            width: targetRect.width,
-            height: targetRect.height,
-            rotationX: 0,
-            duration: 0.65,
-            ease: 'power3.out',
-          },
-          0
-        );
-
-        // 2. Os textos narrativos da esquerda entram com máscara suave
-        if (modalNarrative) {
-          flipTl.fromTo(modalNarrative.children,
-            { opacity: 0, x: -24 },
-            { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' },
-            0.15
-          );
-        }
-
-        // 3. Botão de fechar aparece
-        if (modalCloseBtn) {
-          flipTl.fromTo(modalCloseBtn,
-            { opacity: 0, y: -10 },
-            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' },
-            0.25
-          );
-        }
-      });
-    };
-
-    const closeExpansion = () => {
-      if (isExpanding || !modal || !activeCard || !flyingClone) return;
-      isExpanding = true;
-
-      // Reseta visual do card de volta à prateleira em repouso para capturar returnRect
-      gsap.set(activeCard, { scale: 1.0, y: 0, z: 0, rotationX: 4.5 });
-      const returnRect = activeCard.getBoundingClientRect();
-
-      const finishClosing = () => {
-        modal.classList.remove('is-active');
-        modal.setAttribute('aria-hidden', 'true');
-        if (activeCard) {
-          activeCard.style.visibility = 'visible';
-          gsap.set(activeCard, { scale: 1.0, y: 0, z: 0, rotationX: 4.5 });
-        }
+      if (isReducedMotion) {
+        if (modalViewport) modalViewport.style.opacity = '1';
         if (flyingClone) {
           flyingClone.remove();
           flyingClone = null;
         }
-        document.body.style.overflow = '';
-        document.body.classList.remove('shelf-modal-open');
+        modalCloseBtn?.focus();
+        isExpanding = false;
+        return;
+      }
+
+      const isHoveredOrActive = anchor.classList.contains('is-card-hovered') || anchor.classList.contains('is-touch-active');
+      const startRotationX = isHoveredOrActive ? 0 : (window.innerWidth <= 768 ? 0 : 4.5);
+
+      currentFlipTl = gsap.timeline({
+        onComplete: () => {
+          if (flyingClone) {
+            flyingClone.remove();
+            flyingClone = null;
+          }
+          isExpanding = false;
+          currentFlipTl = null;
+          modalCloseBtn?.focus();
+        }
+      });
+
+      // 1. O card avança em profundidade e expande para a tela
+      const targetWidth = Math.min(window.innerWidth * 0.72, 440);
+      const targetHeight = targetWidth;
+      const targetLeft = (window.innerWidth - targetWidth) / 2;
+      const targetTop = Math.max(30, (window.innerHeight - targetHeight) / 3);
+
+      currentFlipTl.fromTo(flyingClone,
+        {
+          top: startRect.top,
+          left: startRect.left,
+          width: startRect.width,
+          height: startRect.height,
+          rotationX: startRotationX,
+          opacity: 1,
+          scale: 1,
+        },
+        {
+          top: targetTop,
+          left: targetLeft,
+          width: targetWidth,
+          height: targetHeight,
+          rotationX: 0,
+          scale: 1.1,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power3.out',
+        },
+        0
+      );
+
+      // 2. A viewport do serviço expande e entra suavemente
+      if (modalViewport) {
+        currentFlipTl.fromTo(modalViewport,
+          { opacity: 0, scale: 0.96 },
+          { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' },
+          0.15
+        );
+      }
+    };
+
+    const closeExpansion = () => {
+      if (!modal || !modal.classList.contains('is-active')) return;
+      if (currentFlipTl) {
+        currentFlipTl.kill();
+        currentFlipTl = null;
+      }
+      isExpanding = false;
+
+      // Localiza o card correspondente ao serviço que estava sendo exibido
+      const returnAnchor = section.querySelector<HTMLElement>(`.shelf-card-anchor[data-service-id="${currentService}"]`);
+      const targetCard = returnAnchor?.querySelector<HTMLElement>('.shelf-card') || activeCard;
+
+      const finishClosing = () => {
+        modal.classList.remove('is-active');
+        modal.setAttribute('aria-hidden', 'true');
+
+        // Garante que todos os cards da prateleira estejam visíveis e em repouso
         cardAnchors.forEach((a) => {
+          const c = a.querySelector<HTMLElement>('.shelf-card');
+          if (c) {
+            c.style.visibility = 'visible';
+            gsap.set(c, { scale: 1.0, y: 0, z: 0, rotationX: 4.5, opacity: 1 });
+          }
           a.classList.remove('is-touch-active');
           a.classList.remove('is-card-hovered');
           a.style.zIndex = '2';
           gsap.to(a, { opacity: 1, duration: 0.2, overwrite: 'auto' });
         });
-        lastFocusedElement?.focus();
+
+        if (flyingClone) {
+          flyingClone.remove();
+          flyingClone = null;
+        }
+
+        document.body.style.overflow = '';
+        document.body.classList.remove('shelf-modal-open');
+
+        // Retorna o foco acessível ao botão que abriu ou ao card
+        const openBtn = returnAnchor?.querySelector<HTMLElement>(`#open-btn-${currentService}`);
+        if (openBtn) {
+          openBtn.focus();
+        } else if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+
         isExpanding = false;
       };
 
-      if (isReducedMotion) {
+      if (!targetCard || isReducedMotion) {
         finishClosing();
         return;
       }
 
+      // Restaura visual neutro do card na prateleira para calcular returnRect com precisão
+      gsap.set(targetCard, { scale: 1.0, y: 0, z: 0, rotationX: 4.5 });
+      const returnRect = targetCard.getBoundingClientRect();
+
+      // Cria um clone para a transição reversa pousando suavemente na prateleira
+      const closeClone = targetCard.cloneNode(true) as HTMLElement;
+      closeClone.className = `${targetCard.className} flying-card-clone`;
+      const pill = closeClone.querySelector('.card-open-pill-btn') || closeClone.querySelector('.card-open-pill-wrap');
+      if (pill) pill.remove();
+
+      closeClone.style.position = 'fixed';
+      closeClone.style.zIndex = '100050';
+      closeClone.style.margin = '0';
+
+      const initialWidth = Math.min(window.innerWidth * 0.72, 420);
+      closeClone.style.top = `${Math.max(30, (window.innerHeight - initialWidth) / 3)}px`;
+      closeClone.style.left = `${(window.innerWidth - initialWidth) / 2}px`;
+      closeClone.style.width = `${initialWidth}px`;
+      closeClone.style.height = `${initialWidth}px`;
+      closeClone.style.opacity = '0';
+
+      document.body.appendChild(closeClone);
+
       const closeTl = gsap.timeline({
-        onComplete: finishClosing
+        onComplete: () => {
+          closeClone.remove();
+          finishClosing();
+        }
       });
 
-      // 1. Textos recolhem rapidamente
-      if (modalNarrative) {
-        closeTl.to(modalNarrative.children, {
+      // 1. O conteúdo do modal esmaece rapidamente
+      if (modalViewport) {
+        closeTl.to(modalViewport, {
           opacity: 0,
-          duration: 0.25,
+          scale: 0.97,
+          duration: 0.3,
           ease: 'power2.in',
         }, 0);
       }
 
-      // 2. O card voa de volta para a prateleira inclinando de volta suavemente
-      closeTl.to(flyingClone, {
+      // 2. O clone do card reaparece e voa de volta para a prateleira com inclinação física
+      closeTl.fromTo(closeClone,
+        { opacity: 0, scale: 1.05 },
+        { opacity: 1, scale: 1, duration: 0.15 },
+        0.1
+      );
+
+      closeTl.to(closeClone, {
         top: returnRect.top,
         left: returnRect.left,
         width: returnRect.width,
         height: returnRect.height,
         rotationX: 4.5,
-        duration: 0.5,
+        duration: 0.45,
         ease: 'power3.inOut',
-      }, 0.05);
-
-      if (modalCloseBtn) {
-        closeTl.to(modalCloseBtn, {
-          opacity: 0,
-          duration: 0.2,
-        }, 0);
-      }
+      }, 0.15);
     };
 
-    // Listeners de Fechamento do Modal: Botão X, Backdrop escuro e Tecla ESC
+    // Listeners de Fechamento do Modal: Botão X, Backdrop escuro, Footer Back e Tecla ESC
     modalCloseBtn?.addEventListener('click', (e) => {
       e.preventDefault();
       closeExpansion();
     });
 
     modalBackdrop?.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeExpansion();
+    });
+
+    footerBackBtn?.addEventListener('click', (e) => {
       e.preventDefault();
       closeExpansion();
     });
@@ -2539,11 +2396,14 @@ const services: ServiceData[] = [
       }
     });
 
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal?.classList.contains('is-active')) {
+    const handleEscape = (e: KeyboardEvent) => {
+      if ((e.key === 'Escape' || e.code === 'Escape' || e.keyCode === 27) && modal?.classList.contains('is-active')) {
+        e.preventDefault();
         closeExpansion();
       }
-    });
+    };
+    window.addEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', handleEscape);
 
     // ------------------------------------------------------------------------
     // 4. INTERAÇÕES DE CLIQUE & MOBILE DE DOIS TOQUES

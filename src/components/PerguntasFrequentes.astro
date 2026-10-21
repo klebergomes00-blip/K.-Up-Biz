@@ -1,0 +1,1198 @@
+---
+// src/components/PerguntasFrequentes.astro — Sétima Dobra: FAQ Interactive Experience
+// Conceito: CLAREZA EM MOVIMENTO — Escultura Tridimensional, Iluminação Cinematográfica & Accordion Editorial
+
+const faqItems = [
+  {
+    id: '01',
+    question: 'Minha empresa realmente precisa de um site?',
+    answer: 'Um site profissional ajuda a apresentar seus serviços, transmitir credibilidade e oferecer um caminho claro para o cliente entrar em contato.'
+  },
+  {
+    id: '02',
+    question: 'O que é o Perfil da Empresa no Google?',
+    answer: 'É a presença da sua empresa na Busca Google e no Maps. Um perfil bem trabalhado facilita que clientes encontrem informações, avaliações e formas de contato.'
+  },
+  {
+    id: '03',
+    question: 'Vocês trabalham com tráfego pago?',
+    answer: 'Sim. Podemos planejar e gerenciar campanhas digitais alinhadas ao público, aos objetivos e ao orçamento do negócio.'
+  },
+  {
+    id: '04',
+    question: 'Quanto custa criar um site?',
+    answer: 'O investimento depende das funcionalidades, do conteúdo e da complexidade do projeto. Conversamos sobre suas necessidades antes de elaborar uma proposta.'
+  },
+  {
+    id: '05',
+    question: 'Em quanto tempo meu projeto fica pronto?',
+    answer: 'O prazo varia conforme o escopo e a disponibilidade dos materiais. Um cronograma é definido na proposta de cada projeto.'
+  },
+  {
+    id: '06',
+    question: 'Como posso começar?',
+    answer: 'Basta entrar em contato com a K. Up Biz. Vamos conhecer sua empresa, entender suas necessidades e sugerir os próximos passos.'
+  }
+];
+---
+
+<section class="faq-section" id="faq" aria-label="06 Perguntas Frequentes — Clareza em Movimento">
+  <!-- Auras atmosféricas profundas -->
+  <div class="faq-ambient-glow glow-emerald" aria-hidden="true"></div>
+  <div class="faq-ambient-glow glow-gold" aria-hidden="true"></div>
+
+  <div class="faq-container">
+    <div class="faq-grid">
+      
+      <!-- ===================================================================
+           COLUNA ESQUERDA (~45% Desktop): EXPERIÊNCIA VISUAL & EDITORIAL
+           =================================================================== -->
+      <aside class="faq-visual-col">
+        <div class="faq-visual-content">
+          
+          <!-- Identificação Editorial -->
+          <div class="faq-eyebrow">
+            <span class="eyebrow-pip" aria-hidden="true"></span>
+            <span class="eyebrow-text">06 / PERGUNTAS FREQUENTES</span>
+          </div>
+
+          <!-- Headline Editorial de Alto Padrão -->
+          <h2 class="faq-headline">
+            <span class="headline-mask">
+              <span class="headline-line">Toda grande decisão</span>
+            </span>
+            <span class="headline-mask">
+              <span class="headline-highlight italic-editorial text-gold">começa com clareza.</span>
+            </span>
+          </h2>
+
+          <div class="faq-gold-divider" aria-hidden="true"></div>
+
+          <!-- Descrição Estratégica -->
+          <p class="faq-description">
+            As respostas que você precisa para dar o próximo passo com confiança.
+          </p>
+
+          <!-- ===============================================================
+               ESCULTURA TRIDIMENSIONAL: CLAREZA EM MOVIMENTO
+               Ponto de Interrogação em Metal Dourado Escovado + Anéis Orbitais
+               =============================================================== -->
+          <div class="sculpture-container" id="sculpture-container" aria-hidden="true">
+            <!-- Halo de Iluminação Cinematográfica (Verde-Esmeralda #047857 & Dourado #D4AF37) -->
+            <div class="sculpture-halo" id="sculpture-halo">
+              <div class="halo-layer halo-emerald"></div>
+              <div class="halo-layer halo-gold"></div>
+              <div class="halo-core-glow"></div>
+            </div>
+
+            <!-- Palco 3D com Perspectiva e Movimento Flutuante -->
+            <div class="sculpture-stage" id="sculpture-stage">
+              
+              <!-- Sistema de Anéis Orbitais Finos -->
+              <div class="orbital-system" id="orbital-system">
+                <!-- Anel 1: Inclinação Primária com Partícula Dourada -->
+                <div class="orbital-ring ring-1">
+                  <span class="orbital-particle particle-gold"></span>
+                </div>
+                <!-- Anel 2: Inclinação Oposta com Partícula Esmeralda -->
+                <div class="orbital-ring ring-2">
+                  <span class="orbital-particle particle-emerald"></span>
+                </div>
+                <!-- Anel 3: Anel Externo Fino com Traçado Editorial -->
+                <div class="orbital-ring ring-3"></div>
+              </div>
+
+              <!-- Núcleo da Escultura: Ponto de Interrogação Tridimensional -->
+              <div class="sculpture-core" id="sculpture-core">
+                <svg
+                  class="sculpture-svg"
+                  viewBox="0 0 240 320"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <!-- Gradiente do Metal Dourado Escovado Frontal -->
+                    <linearGradient id="gold-brushed-front" x1="15%" y1="0%" x2="85%" y2="100%">
+                      <stop offset="0%" stop-color="#FFF2C2" />
+                      <stop offset="22%" stop-color="#E5C158" />
+                      <stop offset="48%" stop-color="#D4AF37" />
+                      <stop offset="74%" stop-color="#9C7720" />
+                      <stop offset="90%" stop-color="#E8C766" />
+                      <stop offset="100%" stop-color="#AA8222" />
+                    </linearGradient>
+
+                    <!-- Gradiente da Parede de Extrusão 3D / Bevel Metálico -->
+                    <linearGradient id="gold-extrusion-bevel" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#7A5D18" />
+                      <stop offset="35%" stop-color="#55400F" />
+                      <stop offset="70%" stop-color="#3A2C0A" />
+                      <stop offset="100%" stop-color="#1E1605" />
+                    </linearGradient>
+
+                    <!-- Reflexo de Borda Lateral Esmeralda (Iluminação Direcional #047857) -->
+                    <linearGradient id="emerald-rim-light" x1="0%" y1="30%" x2="100%" y2="70%">
+                      <stop offset="0%" stop-color="rgba(4, 120, 87, 0.85)" />
+                      <stop offset="40%" stop-color="rgba(4, 120, 87, 0.35)" />
+                      <stop offset="100%" stop-color="rgba(4, 120, 87, 0)" />
+                    </linearGradient>
+
+                    <!-- Borda Especular Fina de Ouro Branco -->
+                    <linearGradient id="gold-specular-edge" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#FFFBE8" stop-opacity="0.9" />
+                      <stop offset="45%" stop-color="#D4AF37" stop-opacity="0.6" />
+                      <stop offset="100%" stop-color="#5B440F" stop-opacity="0.3" />
+                    </linearGradient>
+
+                    <!-- Gradiente Esférico Volumétrico para o Ponto da Interrogação -->
+                    <radialGradient id="gold-sphere-dot" cx="35%" cy="30%" r="70%">
+                      <stop offset="0%" stop-color="#FFFCEB" />
+                      <stop offset="25%" stop-color="#EAD175" />
+                      <stop offset="55%" stop-color="#D4AF37" />
+                      <stop offset="85%" stop-color="#775811" />
+                      <stop offset="100%" stop-color="#2D2106" />
+                    </radialGradient>
+
+                    <!-- Filtro de Blur para Camada de Oclusão de Fundo -->
+                    <filter id="soft-blur" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="8" />
+                    </filter>
+                  </defs>
+
+                  <!-- 1. CAMADA DE SOMBRA DIFUSA / OCLUSÃO AMBIENTAL -->
+                  <g transform="translate(6, 18)" opacity="0.45" filter="url(#soft-blur)">
+                    <path
+                      d="M 82, 110 C 82, 60, 108, 36, 142, 36 C 176, 36, 204, 60, 204, 96 C 204, 124, 186, 145, 164, 168 C 146, 185, 138, 198, 138, 222 L 106, 222 C 106, 190, 118, 172, 138, 151 C 156, 132, 170, 118, 170, 96 C 170, 75, 156, 62, 142, 62 C 126, 62, 114, 76, 114, 110 Z"
+                      fill="#000000"
+                    />
+                    <circle cx="122" cy="266" r="16" fill="#000000" />
+                  </g>
+
+                  <!-- 2. CAMADA DE EXTRUSÃO TRIDIMENSIONAL (BEVEL METÁLICO) -->
+                  <g transform="translate(4, 7)">
+                    <path
+                      d="M 82, 110 C 82, 60, 108, 36, 142, 36 C 176, 36, 204, 60, 204, 96 C 204, 124, 186, 145, 164, 168 C 146, 185, 138, 198, 138, 222 L 106, 222 C 106, 190, 118, 172, 138, 151 C 156, 132, 170, 118, 170, 96 C 170, 75, 156, 62, 142, 62 C 126, 62, 114, 76, 114, 110 Z"
+                      fill="url(#gold-extrusion-bevel)"
+                    />
+                    <circle cx="122" cy="266" r="16" fill="url(#gold-extrusion-bevel)" />
+                  </g>
+
+                  <!-- 3. CAMADA DE ILUMINAÇÃO LATERAL VERDE-ESMERALDA (RIM LIGHT) -->
+                  <g transform="translate(1, 2)">
+                    <path
+                      d="M 82, 110 C 82, 60, 108, 36, 142, 36 C 176, 36, 204, 60, 204, 96 C 204, 124, 186, 145, 164, 168 C 146, 185, 138, 198, 138, 222 L 106, 222"
+                      stroke="url(#emerald-rim-light)"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="122" cy="266" r="16" stroke="url(#emerald-rim-light)" stroke-width="2.5" />
+                  </g>
+
+                  <!-- 4. FACE FRONTAL PRINCIPAL — OURO ESCOVADO EDITORIAL -->
+                  <g>
+                    <!-- Corpo da Interrogação -->
+                    <path
+                      d="M 82, 110 C 82, 60, 108, 36, 142, 36 C 176, 36, 204, 60, 204, 96 C 204, 124, 186, 145, 164, 168 C 146, 185, 138, 198, 138, 222 L 106, 222 C 106, 190, 118, 172, 138, 151 C 156, 132, 170, 118, 170, 96 C 170, 75, 156, 62, 142, 62 C 126, 62, 114, 76, 114, 110 Z"
+                      fill="url(#gold-brushed-front)"
+                      stroke="url(#gold-specular-edge)"
+                      stroke-width="1.2"
+                    />
+
+                    <!-- Esfera Tridimensional do Ponto -->
+                    <circle
+                      cx="122"
+                      cy="266"
+                      r="16"
+                      fill="url(#gold-sphere-dot)"
+                      stroke="url(#gold-specular-edge)"
+                      stroke-width="1.2"
+                    />
+
+                    <!-- Brilho Especular na Curva Superior (Sheen de Reflexo) -->
+                    <path
+                      d="M 112, 46 C 122, 40, 136, 38, 148, 40 C 160, 42, 174, 48, 182, 58"
+                      stroke="#FFFFFF"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      opacity="0.75"
+                    />
+
+                    <!-- Brilho Especular Pontual na Esfera -->
+                    <circle cx="117" cy="260" r="3.5" fill="#FFFFFF" opacity="0.85" />
+                  </g>
+                </svg>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Selo Editorial de Segurança -->
+          <div class="faq-editorial-badge">
+            <span class="badge-sparkle">✦</span>
+            <span class="badge-text">Transparência, estratégia e atenção a cada detalhe.</span>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- ===================================================================
+           COLUNA DIREITA (~55% Desktop): ACCORDION EDITORIAL PREMIUM
+           =================================================================== -->
+      <div class="faq-accordion-col">
+        <div class="faq-accordion" role="region" aria-label="Perguntas e Respostas — K. Up Biz">
+          {faqItems.map((item, index) => (
+            <div
+              class={`faq-item ${index === 0 ? 'is-open' : ''}`}
+              data-index={index}
+              id={`faq-item-${item.id}`}
+            >
+              <button
+                type="button"
+                class="faq-trigger"
+                id={`faq-btn-${item.id}`}
+                aria-expanded={index === 0 ? 'true' : 'false'}
+                aria-controls={`faq-panel-${item.id}`}
+              >
+                <div class="faq-trigger-content">
+                  <span class="faq-number">{item.id}</span>
+                  <span class="faq-question">{item.question}</span>
+                </div>
+
+                <div class="faq-icon-wrap" aria-hidden="true">
+                  <span class="faq-icon-line horizontal"></span>
+                  <span class="faq-icon-line vertical"></span>
+                </div>
+              </button>
+
+              <div
+                class="faq-panel"
+                id={`faq-panel-${item.id}`}
+                role="region"
+                aria-labelledby={`faq-btn-${item.id}`}
+              >
+                <div class="faq-panel-inner">
+                  <p class="faq-answer">{item.answer}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SÉTIMA DOBRA: FAQ INTERACTIVE EXPERIENCE — CLAREZA EM MOVIMENTO
+     Paleta Canônica K. Up Biz:
+     - Preto Esverdeado / Fundo Base: #030D0B
+     - Verde Profundo: #041D17
+     - Verde Esmeralda: #047857
+     - Dourado Editorial: #D4AF37
+     - Marfim: #F5F1E8
+     ========================================================================== */
+
+  .faq-section {
+    position: relative;
+    width: 100%;
+    background-color: #030D0B;
+    color: var(--color-marfim, #F5F1E8);
+    font-family: var(--font-sans, 'Instrument Sans', sans-serif);
+    padding: clamp(80px, 12vh, 140px) 0 clamp(80px, 12vh, 140px);
+    overflow: hidden;
+    z-index: 20;
+    box-sizing: border-box;
+  }
+
+  /* Auras atmosféricas de profundidade */
+  .faq-ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    pointer-events: none;
+    opacity: 0.35;
+  }
+
+  .glow-emerald {
+    top: 25%;
+    left: -12%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(4, 120, 87, 0.24) 0%, rgba(4, 29, 23, 0) 70%);
+  }
+
+  .glow-gold {
+    bottom: 12%;
+    right: -8%;
+    width: 620px;
+    height: 620px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.16) 0%, rgba(3, 13, 11, 0) 70%);
+  }
+
+  /* Container Principal */
+  .faq-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 48px);
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+  }
+
+  /* Grid em Duas Regiões: 45% Esquerda / 55% Direita */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 4.5fr 5.5fr;
+    gap: clamp(40px, 6vw, 88px);
+    align-items: flex-start;
+  }
+
+  /* --------------------------------------------------------------------------
+     COLUNA ESQUERDA: APRESENTAÇÃO EDITORIAL & ESCULTURA TRIDIMENSIONAL
+     -------------------------------------------------------------------------- */
+  .faq-visual-col {
+    position: relative;
+  }
+
+  .faq-visual-content {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Eyebrow Editorial */
+  .faq-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(4, 120, 87, 0.12);
+    border: 1px solid rgba(4, 120, 87, 0.35);
+    margin-bottom: clamp(14px, 2vh, 20px);
+    backdrop-filter: blur(8px);
+  }
+
+  .eyebrow-pip {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-verde-esmeralda, #047857);
+    box-shadow: 0 0 10px rgba(4, 120, 87, 0.9), 0 0 4px #10b981;
+    animation: pipPulse 2.8s infinite ease-in-out;
+  }
+
+  @keyframes pipPulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.35); }
+  }
+
+  .eyebrow-text {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-marfim, #F5F1E8);
+  }
+
+  /* Headline com Máscara Vertical */
+  .faq-headline {
+    font-size: clamp(2.1rem, 3.2vw, 3.2rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    color: var(--color-marfim, #F5F1E8);
+    margin: 0 0 clamp(16px, 2vh, 22px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .headline-mask {
+    overflow: hidden;
+    display: block;
+  }
+
+  .headline-line {
+    display: block;
+  }
+
+  .headline-highlight {
+    display: block;
+    font-family: var(--font-serif, 'Bodoni Moda', Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-dourado, #D4AF37);
+    text-shadow: 0 0 35px rgba(212, 175, 55, 0.38);
+    margin-top: 2px;
+  }
+
+  .faq-gold-divider {
+    width: 56px;
+    height: 2px;
+    background: linear-gradient(90deg, #D4AF37 0%, rgba(212, 175, 55, 0) 100%);
+    margin-bottom: clamp(14px, 2vh, 20px);
+  }
+
+  .faq-description {
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    line-height: 1.6;
+    color: rgba(245, 241, 232, 0.74);
+    max-width: 440px;
+    margin: 0 0 clamp(24px, 3vh, 32px);
+  }
+
+  /* --------------------------------------------------------------------------
+     ESCULTURA TRIDIMENSIONAL & ANÉIS ORBITAIS
+     -------------------------------------------------------------------------- */
+  .sculpture-container {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto clamp(20px, 2.5vh, 28px);
+    perspective: 1200px;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Halo de Iluminação Cinematográfica com Transição Suave */
+  .sculpture-halo {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease;
+  }
+
+  .halo-layer {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    filter: blur(55px);
+  }
+
+  .halo-emerald {
+    background: radial-gradient(circle, rgba(4, 120, 87, 0.42) 0%, rgba(4, 29, 23, 0.15) 50%, transparent 70%);
+  }
+
+  .halo-gold {
+    inset: 20px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.28) 0%, rgba(212, 175, 55, 0.05) 55%, transparent 75%);
+  }
+
+  .halo-core-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 232, 163, 0.3) 0%, transparent 70%);
+    filter: blur(20px);
+  }
+
+  /* Palco 3D */
+  .sculpture-stage {
+    position: relative;
+    width: 240px;
+    height: 280px;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    animation: sculptureFloat 7.5s ease-in-out infinite;
+  }
+
+  @keyframes sculptureFloat {
+    0%, 100% {
+      transform: translateY(0px) rotateX(4deg) rotateY(-5deg);
+    }
+    50% {
+      transform: translateY(-12px) rotateX(-3deg) rotateY(5deg);
+    }
+  }
+
+  /* Sistema de Anéis Orbitais */
+  .orbital-system {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    pointer-events: none;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .orbital-ring {
+    position: absolute;
+    border-radius: 50%;
+    transform-style: preserve-3d;
+  }
+
+  /* Anel 1: Anel Elíptico Dourado com Rotação */
+  .ring-1 {
+    width: 270px;
+    height: 270px;
+    border: 1.2px solid rgba(212, 175, 55, 0.42);
+    box-shadow: 0 0 14px rgba(212, 175, 55, 0.15), inset 0 0 14px rgba(4, 120, 87, 0.2);
+    transform: rotateX(72deg) rotateY(16deg) rotateZ(0deg);
+    animation: orbitSpin1 32s linear infinite;
+  }
+
+  @keyframes orbitSpin1 {
+    from { transform: rotateX(72deg) rotateY(16deg) rotateZ(0deg); }
+    to { transform: rotateX(72deg) rotateY(16deg) rotateZ(360deg); }
+  }
+
+  /* Anel 2: Anel Inclinado Tracejado com Rotação Inversa */
+  .ring-2 {
+    width: 230px;
+    height: 230px;
+    border: 1px dashed rgba(212, 175, 55, 0.35);
+    box-shadow: 0 0 10px rgba(4, 120, 87, 0.18);
+    transform: rotateX(58deg) rotateY(-24deg) rotateZ(45deg);
+    animation: orbitSpin2 26s linear infinite reverse;
+  }
+
+  @keyframes orbitSpin2 {
+    from { transform: rotateX(58deg) rotateY(-24deg) rotateZ(45deg); }
+    to { transform: rotateX(58deg) rotateY(-24deg) rotateZ(405deg); }
+  }
+
+  /* Anel 3: Anel Externo Fino Editorial */
+  .ring-3 {
+    width: 320px;
+    height: 320px;
+    border: 1px solid rgba(245, 241, 232, 0.10);
+    transform: rotateX(82deg) rotateY(4deg) rotateZ(20deg);
+    animation: orbitSpin3 52s linear infinite;
+  }
+
+  @keyframes orbitSpin3 {
+    from { transform: rotateX(82deg) rotateY(4deg) rotateZ(20deg); }
+    to { transform: rotateX(82deg) rotateY(4deg) rotateZ(380deg); }
+  }
+
+  /* Partículas Orbitais Luminosas */
+  .orbital-particle {
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+  }
+
+  .particle-gold {
+    width: 6px;
+    height: 6px;
+    background: #FFF2C2;
+    box-shadow: 0 0 10px #D4AF37, 0 0 4px #FFFFFF;
+  }
+
+  .particle-emerald {
+    width: 5px;
+    height: 5px;
+    background: #34d399;
+    box-shadow: 0 0 12px #047857, 0 0 4px #10b981;
+  }
+
+  /* Núcleo Tridimensional da Escultura */
+  .sculpture-core {
+    position: relative;
+    width: 170px;
+    height: 226px;
+    transform-style: preserve-3d;
+    z-index: 4;
+    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.65));
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .sculpture-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* Selo Editorial de Segurança */
+  .faq-editorial-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: rgba(245, 241, 232, 0.03);
+    border: 1px solid rgba(245, 241, 232, 0.08);
+  }
+
+  .badge-sparkle {
+    color: var(--color-dourado, #D4AF37);
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+
+  .badge-text {
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: rgba(245, 241, 232, 0.65);
+    letter-spacing: 0.02em;
+  }
+
+  /* --------------------------------------------------------------------------
+     COLUNA DIREITA: ACCORDION EDITORIAL PREMIUM
+     -------------------------------------------------------------------------- */
+  .faq-accordion-col {
+    position: relative;
+    width: 100%;
+  }
+
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .faq-item {
+    position: relative;
+    border-bottom: 1px solid rgba(245, 241, 232, 0.10);
+    transition: border-color 0.4s ease, background-color 0.4s ease;
+  }
+
+  .faq-item:first-child {
+    border-top: 1px solid rgba(245, 241, 232, 0.10);
+  }
+
+  /* Realce no Item Ativo: Linha Dourada e Destaque Visual */
+  .faq-item.is-open {
+    border-bottom-color: rgba(212, 175, 55, 0.42);
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.03) 0%, transparent 100%);
+  }
+
+  .faq-item.is-open:first-child {
+    border-top-color: rgba(212, 175, 55, 0.42);
+  }
+
+  /* Botão de Disparo do Accordion */
+  .faq-trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: clamp(20px, 3vh, 28px) 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    outline: none;
+    color: inherit;
+    font-family: inherit;
+    transition: color 0.25s ease;
+  }
+
+  .faq-trigger:focus-visible {
+    outline: 2px solid var(--color-dourado, #D4AF37);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  .faq-trigger-content {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(14px, 1.8vw, 22px);
+    flex: 1;
+  }
+
+  .faq-number {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--color-dourado, #D4AF37);
+    font-feature-settings: 'tnum';
+    flex-shrink: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.75;
+  }
+
+  .faq-item.is-open .faq-number {
+    opacity: 1;
+    transform: translateX(3px);
+    text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+  }
+
+  .faq-question {
+    font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+    color: var(--color-marfim, #F5F1E8);
+    transition: color 0.3s ease;
+  }
+
+  .faq-trigger:hover .faq-question {
+    color: var(--color-dourado, #D4AF37);
+  }
+
+  .faq-item.is-open .faq-question {
+    color: var(--color-marfim, #F5F1E8);
+    font-weight: 600;
+  }
+
+  /* Ícone Morfométrico + / − com Anel Dourado Ativo */
+  .faq-icon-wrap {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(245, 241, 232, 0.16);
+    background: rgba(245, 241, 232, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .faq-trigger:hover .faq-icon-wrap {
+    border-color: rgba(212, 175, 55, 0.5);
+    background: rgba(212, 175, 55, 0.08);
+  }
+
+  .faq-item.is-open .faq-icon-wrap {
+    border-color: var(--color-dourado, #D4AF37);
+    background: rgba(212, 175, 55, 0.14);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.32);
+  }
+
+  .faq-icon-line {
+    position: absolute;
+    background-color: var(--color-marfim, #F5F1E8);
+    border-radius: 999px;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, opacity 0.35s ease;
+  }
+
+  .faq-icon-line.horizontal {
+    width: 12px;
+    height: 1.5px;
+  }
+
+  .faq-icon-line.vertical {
+    width: 1.5px;
+    height: 12px;
+  }
+
+  .faq-item.is-open .faq-icon-line {
+    background-color: var(--color-dourado, #D4AF37);
+  }
+
+  .faq-item.is-open .faq-icon-line.vertical {
+    transform: rotate(90deg) scaleY(0);
+    opacity: 0;
+  }
+
+  /* Painel de Resposta: Transição Fluida via CSS Grid (Sem saltos) */
+  .faq-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+    overflow: hidden;
+  }
+
+  .faq-item.is-open .faq-panel {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .faq-panel-inner {
+    min-height: 0;
+    padding: 0 0 clamp(20px, 3vh, 28px) clamp(30px, 2.8vw, 44px);
+  }
+
+  .faq-answer {
+    font-size: clamp(0.92rem, 1.05vw, 1.02rem);
+    line-height: 1.7;
+    color: rgba(245, 241, 232, 0.78);
+    max-width: 640px;
+    margin: 0;
+  }
+
+  /* --------------------------------------------------------------------------
+     RESPONSIVIDADE: TABLET & MOBILE
+     -------------------------------------------------------------------------- */
+  @media (max-width: 1024px) {
+    .faq-section {
+      padding: 72px 0 84px;
+    }
+
+    .faq-grid {
+      grid-template-columns: 1fr;
+      gap: 52px;
+    }
+
+    .faq-visual-content {
+      position: static;
+      max-width: 640px;
+      margin: 0 auto;
+      align-items: center;
+      text-align: center;
+    }
+
+    .faq-gold-divider {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .faq-description {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .sculpture-container {
+      max-width: 300px;
+      height: 240px;
+    }
+
+    .sculpture-core {
+      width: 150px;
+      height: 200px;
+    }
+
+    .ring-1 { width: 230px; height: 230px; }
+    .ring-2 { width: 195px; height: 195px; }
+    .ring-3 { width: 270px; height: 270px; }
+  }
+
+  @media (max-width: 640px) {
+    .faq-section {
+      padding: 44px 0 54px;
+    }
+
+    .faq-container {
+      padding: 0 18px;
+    }
+
+    .faq-grid {
+      gap: 28px;
+    }
+
+    .faq-visual-content {
+      align-items: flex-start;
+      text-align: left;
+      margin: 0;
+      width: 100%;
+    }
+
+    .faq-eyebrow {
+      margin-bottom: 12px;
+    }
+
+    .faq-gold-divider {
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 12px;
+    }
+
+    .faq-description {
+      text-align: left;
+      margin-bottom: 14px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .faq-headline {
+      font-size: 1.75rem;
+      margin-bottom: 12px;
+    }
+
+    /* Escultura em Tamanho Elegante e Compacto no Mobile */
+    .sculpture-container {
+      max-width: 200px;
+      height: 130px;
+      margin: 4px auto 14px;
+    }
+
+    .sculpture-stage {
+      width: 120px;
+      height: 130px;
+    }
+
+    .sculpture-core {
+      width: 82px;
+      height: 110px;
+    }
+
+    .ring-1 { width: 130px; height: 130px; }
+    .ring-2 { width: 110px; height: 110px; }
+    .ring-3 { width: 150px; height: 150px; }
+
+    .sculpture-halo {
+      width: 140px;
+      height: 140px;
+    }
+
+    .faq-editorial-badge {
+      display: none;
+    }
+
+    .faq-trigger {
+      padding: 16px 0;
+      gap: 12px;
+    }
+
+    .faq-trigger-content {
+      gap: 12px;
+    }
+
+    .faq-number {
+      font-size: 0.75rem;
+    }
+
+    .faq-question {
+      font-size: 0.98rem;
+      line-height: 1.35;
+    }
+
+    .faq-panel-inner {
+      padding: 0 0 16px 20px;
+    }
+
+    .faq-answer {
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .faq-icon-wrap {
+      width: 30px;
+      height: 30px;
+    }
+
+    .faq-icon-line.horizontal {
+      width: 10px;
+    }
+
+    .faq-icon-line.vertical {
+      height: 10px;
+    }
+  }
+
+  /* Acessibilidade: prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .faq-panel,
+    .faq-icon-wrap,
+    .faq-icon-line,
+    .eyebrow-pip,
+    .sculpture-stage,
+    .ring-1,
+    .ring-2,
+    .ring-3,
+    .sculpture-core,
+    .sculpture-halo {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initFaqExperience = () => {
+    const faqSection = document.getElementById('faq');
+    if (!faqSection) return;
+
+    const sculptureCore = faqSection.querySelector('#sculpture-core') as HTMLElement | null;
+    const sculptureHalo = faqSection.querySelector('#sculpture-halo') as HTMLElement | null;
+    const orbitalSystem = faqSection.querySelector('#orbital-system') as HTMLElement | null;
+
+    // 1. Interatividade do Accordion + Reação Cinematográfica da Escultura
+    const items = faqSection.querySelectorAll('.faq-item');
+    items.forEach((item) => {
+      const btn = item.querySelector('.faq-trigger') as HTMLButtonElement | null;
+      if (!btn) return;
+
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('is-open');
+
+        // Fecha os demais para manter leitura limpa
+        items.forEach((other) => {
+          if (other !== item) {
+            other.classList.remove('is-open');
+            const otherBtn = other.querySelector('.faq-trigger');
+            if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Alterna o item clicado
+        if (isOpen) {
+          item.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+
+          // Reação Cinematográfica Discreta na Escultura 3D (Sem distração)
+          if (
+            sculptureCore &&
+            sculptureHalo &&
+            !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ) {
+            // A. Micro-rotação amortecida no eixo Y e X
+            gsap.fromTo(
+              sculptureCore,
+              {
+                rotationY: 15,
+                rotationX: -6,
+                scale: 1.05
+              },
+              {
+                rotationY: 0,
+                rotationX: 0,
+                scale: 1,
+                duration: 1.4,
+                ease: 'power2.out'
+              }
+            );
+
+            // B. Pulso suave no Halo Esmeralda / Dourado
+            gsap.fromTo(
+              sculptureHalo,
+              {
+                scale: 1.25,
+                opacity: 0.8
+              },
+              {
+                scale: 1,
+                opacity: 0.45,
+                duration: 1.5,
+                ease: 'power2.out'
+              }
+            );
+
+            // C. Leve oscilação angular dos anéis orbitais
+            if (orbitalSystem) {
+              gsap.fromTo(
+                orbitalSystem,
+                { rotationZ: '+=12deg' },
+                { rotationZ: 0, duration: 1.8, ease: 'power2.out' }
+              );
+            }
+          }
+        }
+      });
+    });
+
+    // 2. Animação Suave de Entrada GSAP (ScrollTrigger natural, sem pinning prolongado)
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      ScrollTrigger.create({
+        trigger: faqSection,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          const tl = gsap.timeline();
+
+          // Ato 1: Identificação editorial
+          tl.from(faqSection.querySelector('.faq-eyebrow'), {
+            opacity: 0,
+            y: 14,
+            duration: 0.4,
+            ease: 'power2.out'
+          })
+          // Ato 2: Título com máscara vertical
+          .from(faqSection.querySelector('.headline-line'), {
+            opacity: 0,
+            y: 20,
+            duration: 0.5,
+            ease: 'power3.out'
+          }, '-=0.25')
+          .from(faqSection.querySelector('.headline-highlight'), {
+            opacity: 0,
+            y: 18,
+            duration: 0.5,
+            ease: 'power3.out'
+          }, '-=0.35')
+          // Ato 3: Descrição e divisor
+          .from(faqSection.querySelector('.faq-gold-divider'), {
+            scaleX: 0,
+            transformOrigin: 'left center',
+            duration: 0.4,
+            ease: 'power2.out'
+          }, '-=0.3')
+          .from(faqSection.querySelector('.faq-description'), {
+            opacity: 0,
+            y: 12,
+            duration: 0.4,
+            ease: 'power2.out'
+          }, '-=0.25')
+          // Ato 4: Escultura tridimensional e anéis orbitais
+          .from(faqSection.querySelector('.sculpture-container'), {
+            opacity: 0,
+            y: 20,
+            scale: 0.94,
+            duration: 0.6,
+            ease: 'back.out(1.2)'
+          }, '-=0.35')
+          .from(faqSection.querySelectorAll('.orbital-ring'), {
+            opacity: 0,
+            scale: 0.88,
+            duration: 0.5,
+            stagger: 0.05,
+            ease: 'power2.out'
+          }, '-=0.45')
+          // Ato 5: Selo e perguntas com stagger suave
+          .from(faqSection.querySelector('.faq-editorial-badge'), {
+            opacity: 0,
+            y: 10,
+            duration: 0.35,
+            ease: 'power2.out'
+          }, '-=0.3')
+          .fromTo(
+            faqSection.querySelectorAll('.faq-item'),
+            { opacity: 0, y: 16 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.4,
+              stagger: 0.04,
+              ease: 'power2.out',
+              clearProps: 'opacity,transform'
+            },
+            '-=0.45'
+          );
+        }
+      });
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFaqExperience);
+  } else {
+    initFaqExperience();
+  }
+
+  // Refresh ScrollTrigger when intro completes
+  window.addEventListener('cinematic-intro-complete', () => {
+    ScrollTrigger.refresh();
+  });
+</script>

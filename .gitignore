@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# perfis temporários do Chrome gerados pelos testes
+scratch/chrome-temp-profile-*/
