@@ -74,162 +74,51 @@ const faqItems = [
           </p>
 
           <!-- ===============================================================
-               ESCULTURA TRIDIMENSIONAL: CLAREZA EM MOVIMENTO
-               Ponto de Interrogação em Metal Dourado Escovado + Anéis Orbitais
+               ESCULTURA: ESFERA DE VIDRO + INTERROGAÇÃO EM OURO
+               O "?" vira "!" quando uma pergunta é aberta; as pílulas
+               flutuantes abrem a resposta correspondente.
                =============================================================== -->
-          <div class="sculpture-container" id="sculpture-container" aria-hidden="true">
-            <!-- Halo de Iluminação Cinematográfica (Verde-Esmeralda #047857 & Dourado #D4AF37) -->
-            <div class="sculpture-halo" id="sculpture-halo">
+          <div class="sculpture-container qx" id="sculpture-container">
+            <div class="sculpture-halo" id="sculpture-halo" aria-hidden="true">
               <div class="halo-layer halo-emerald"></div>
               <div class="halo-layer halo-gold"></div>
               <div class="halo-core-glow"></div>
             </div>
 
-            <!-- Palco 3D com Perspectiva e Movimento Flutuante -->
             <div class="sculpture-stage" id="sculpture-stage">
-              
-              <!-- Sistema de Anéis Orbitais Finos -->
-              <div class="orbital-system" id="orbital-system">
-                <!-- Anel 1: Inclinação Primária com Partícula Dourada -->
+              <!-- Anéis orbitais finos (decorativos) -->
+              <div class="orbital-system" id="orbital-system" aria-hidden="true">
                 <div class="orbital-ring ring-1">
                   <span class="orbital-particle particle-gold"></span>
                 </div>
-                <!-- Anel 2: Inclinação Oposta com Partícula Esmeralda -->
-                <div class="orbital-ring ring-2">
-                  <span class="orbital-particle particle-emerald"></span>
-                </div>
-                <!-- Anel 3: Anel Externo Fino com Traçado Editorial -->
                 <div class="orbital-ring ring-3"></div>
               </div>
 
-              <!-- Núcleo da Escultura: Ponto de Interrogação Tridimensional -->
-              <div class="sculpture-core" id="sculpture-core">
-                <svg
-                  class="sculpture-svg"
-                  viewBox="0 0 240 320"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <defs>
-                    <!-- Gradiente do Metal Dourado Escovado Frontal -->
-                    <linearGradient id="gold-brushed-front" x1="15%" y1="0%" x2="85%" y2="100%">
-                      <stop offset="0%" stop-color="#FFF2C2" />
-                      <stop offset="22%" stop-color="#E5C158" />
-                      <stop offset="48%" stop-color="#D4AF37" />
-                      <stop offset="74%" stop-color="#9C7720" />
-                      <stop offset="90%" stop-color="#E8C766" />
-                      <stop offset="100%" stop-color="#AA8222" />
-                    </linearGradient>
-
-                    <!-- Gradiente da Parede de Extrusão 3D / Bevel Metálico -->
-                    <linearGradient id="gold-extrusion-bevel" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#7A5D18" />
-                      <stop offset="35%" stop-color="#55400F" />
-                      <stop offset="70%" stop-color="#3A2C0A" />
-                      <stop offset="100%" stop-color="#1E1605" />
-                    </linearGradient>
-
-                    <!-- Reflexo de Borda Lateral Esmeralda (Iluminação Direcional #047857) -->
-                    <linearGradient id="emerald-rim-light" x1="0%" y1="30%" x2="100%" y2="70%">
-                      <stop offset="0%" stop-color="rgba(4, 120, 87, 0.85)" />
-                      <stop offset="40%" stop-color="rgba(4, 120, 87, 0.35)" />
-                      <stop offset="100%" stop-color="rgba(4, 120, 87, 0)" />
-                    </linearGradient>
-
-                    <!-- Borda Especular Fina de Ouro Branco -->
-                    <linearGradient id="gold-specular-edge" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stop-color="#FFFBE8" stop-opacity="0.9" />
-                      <stop offset="45%" stop-color="#D4AF37" stop-opacity="0.6" />
-                      <stop offset="100%" stop-color="#5B440F" stop-opacity="0.3" />
-                    </linearGradient>
-
-                    <!-- Gradiente Esférico Volumétrico para o Ponto da Interrogação -->
-                    <radialGradient id="gold-sphere-dot" cx="35%" cy="30%" r="70%">
-                      <stop offset="0%" stop-color="#FFFCEB" />
-                      <stop offset="25%" stop-color="#EAD175" />
-                      <stop offset="55%" stop-color="#D4AF37" />
-                      <stop offset="85%" stop-color="#775811" />
-                      <stop offset="100%" stop-color="#2D2106" />
-                    </radialGradient>
-
-                    <!-- Filtro de Blur para Camada de Oclusão de Fundo -->
-                    <filter id="soft-blur" x="-20%" y="-20%" width="140%" height="140%">
-                      <feGaussianBlur stdDeviation="8" />
-                    </filter>
-                  </defs>
-
-                  <!-- 1. CAMADA DE SOMBRA DIFUSA / OCLUSÃO AMBIENTAL -->
-                  <g transform="translate(6, 18)" opacity="0.45" filter="url(#soft-blur)">
-                    <path
-                      d="M 82, 110 C 82, 60, 108, 36, 142, 36 C 176, 36, 204, 60, 204, 96 C 204, 124, 186, 145, 164, 168 C 146, 185, 138, 198, 138, 222 L 106, 222 C 106, 190, 118, 172, 138, 151 C 156, 132, 170, 118, 170, 96 C 170, 75, 156, 62, 142, 62 C 126, 62, 114, 76, 114, 110 Z"
-                      fill="#000000"
-                    />
-                    <circle cx="122" cy="266" r="16" fill="#000000" />
-                  </g>
-
-                  <!-- 2. CAMADA DE EXTRUSÃO TRIDIMENSIONAL (BEVEL METÁLICO) -->
-                  <g transform="translate(4, 7)">
-                    <path
-                      d="M 82, 110 C 82, 60, 108, 36, 142, 36 C 176, 36, 204, 60, 204, 96 C 204, 124, 186, 145, 164, 168 C 146, 185, 138, 198, 138, 222 L 106, 222 C 106, 190, 118, 172, 138, 151 C 156, 132, 170, 118, 170, 96 C 170, 75, 156, 62, 142, 62 C 126, 62, 114, 76, 114, 110 Z"
-                      fill="url(#gold-extrusion-bevel)"
-                    />
-                    <circle cx="122" cy="266" r="16" fill="url(#gold-extrusion-bevel)" />
-                  </g>
-
-                  <!-- 3. CAMADA DE ILUMINAÇÃO LATERAL VERDE-ESMERALDA (RIM LIGHT) -->
-                  <g transform="translate(1, 2)">
-                    <path
-                      d="M 82, 110 C 82, 60, 108, 36, 142, 36 C 176, 36, 204, 60, 204, 96 C 204, 124, 186, 145, 164, 168 C 146, 185, 138, 198, 138, 222 L 106, 222"
-                      stroke="url(#emerald-rim-light)"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                    />
-                    <circle cx="122" cy="266" r="16" stroke="url(#emerald-rim-light)" stroke-width="2.5" />
-                  </g>
-
-                  <!-- 4. FACE FRONTAL PRINCIPAL — OURO ESCOVADO EDITORIAL -->
-                  <g>
-                    <!-- Corpo da Interrogação -->
-                    <path
-                      d="M 82, 110 C 82, 60, 108, 36, 142, 36 C 176, 36, 204, 60, 204, 96 C 204, 124, 186, 145, 164, 168 C 146, 185, 138, 198, 138, 222 L 106, 222 C 106, 190, 118, 172, 138, 151 C 156, 132, 170, 118, 170, 96 C 170, 75, 156, 62, 142, 62 C 126, 62, 114, 76, 114, 110 Z"
-                      fill="url(#gold-brushed-front)"
-                      stroke="url(#gold-specular-edge)"
-                      stroke-width="1.2"
-                    />
-
-                    <!-- Esfera Tridimensional do Ponto -->
-                    <circle
-                      cx="122"
-                      cy="266"
-                      r="16"
-                      fill="url(#gold-sphere-dot)"
-                      stroke="url(#gold-specular-edge)"
-                      stroke-width="1.2"
-                    />
-
-                    <!-- Brilho Especular na Curva Superior (Sheen de Reflexo) -->
-                    <path
-                      d="M 112, 46 C 122, 40, 136, 38, 148, 40 C 160, 42, 174, 48, 182, 58"
-                      stroke="#FFFFFF"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      opacity="0.75"
-                    />
-
-                    <!-- Brilho Especular Pontual na Esfera -->
-                    <circle cx="117" cy="260" r="3.5" fill="#FFFFFF" opacity="0.85" />
-                  </g>
-                </svg>
+              <!-- Esfera de vidro com o símbolo -->
+              <div class="sculpture-core qx-orb" id="sculpture-core" aria-hidden="true">
+                <span class="qx-rim"></span>
+                <span class="qx-glass"></span>
+                <span class="qx-caustic"></span>
+                <span class="qx-glyph-wrap">
+                  <span class="qx-glyph qx-q">?</span>
+                  <span class="qx-glyph qx-a">!</span>
+                </span>
+                <span class="qx-specular"></span>
+                <span class="qx-reflection"></span>
               </div>
-
             </div>
+
+            <!-- Atalhos flutuantes para as dúvidas mais comuns -->
+            <button type="button" class="qx-chip qx-chip-1" data-faq-target="04" aria-label="Ver resposta: Quanto custa criar um site?">Preço?</button>
+            <button type="button" class="qx-chip qx-chip-2" data-faq-target="02" aria-label="Ver resposta: O que é o Perfil da Empresa no Google?">Google?</button>
+            <button type="button" class="qx-chip qx-chip-3" data-faq-target="05" aria-label="Ver resposta: Em quanto tempo meu projeto fica pronto?">Prazo?</button>
+            <button type="button" class="qx-chip qx-chip-4" data-faq-target="03" aria-label="Ver resposta: Vocês trabalham com tráfego pago?">Tráfego?</button>
           </div>
 
           <!-- Selo Editorial de Segurança -->
           <div class="faq-editorial-badge">
             <span class="badge-sparkle">✦</span>
-            <span class="badge-text">Transparência, estratégia e atenção a cada detalhe.</span>
+            <span class="badge-text">Tire suas dúvidas antes de decidir.</span>
           </div>
 
         </div>
@@ -626,11 +515,6 @@ const faqItems = [
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .sculpture-svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-  }
 
   /* Selo Editorial de Segurança */
   .faq-editorial-badge {
@@ -1010,6 +894,245 @@ const faqItems = [
       animation: none !important;
     }
   }
+  /* ==========================================================================
+     ESFERA DE VIDRO + INTERROGAÇÃO EM OURO (substitui o SVG antigo)
+     ========================================================================== */
+  .sculpture-container.qx {
+    max-width: 420px;
+    height: 330px;
+    pointer-events: auto;
+  }
+
+  .qx .orbital-system { z-index: 1; }
+  .qx .ring-1 { width: 300px; height: 300px; }
+  .qx .ring-3 { width: 360px; height: 360px; }
+
+  .qx-orb {
+    position: relative;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.55));
+    z-index: 4;
+  }
+
+  /* Corpo de vidro escuro */
+  .qx-glass {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 120%, rgba(4, 120, 87, 0.55), transparent 60%),
+      radial-gradient(circle at 30% 25%, rgba(245, 241, 232, 0.10), transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(6, 34, 27, 0.92), rgba(3, 13, 11, 0.96) 70%);
+    box-shadow:
+      inset 0 2px 1px rgba(255, 255, 255, 0.10),
+      inset 0 -18px 40px rgba(4, 120, 87, 0.35),
+      inset 0 0 0 1px rgba(245, 241, 232, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Borda dourada que gira lentamente */
+  .qx-rim {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      rgba(212, 175, 55, 0) 0deg,
+      rgba(243, 229, 171, 0.95) 50deg,
+      rgba(212, 175, 55, 0.6) 95deg,
+      rgba(212, 175, 55, 0) 150deg,
+      rgba(4, 120, 87, 0.5) 230deg,
+      rgba(212, 175, 55, 0) 300deg
+    );
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+    animation: qxRimSpin 9s linear infinite;
+    filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.55));
+  }
+  @keyframes qxRimSpin { to { transform: rotate(360deg); } }
+
+  /* Luz dourada refletida no fundo da esfera */
+  .qx-caustic {
+    position: absolute;
+    left: 22%;
+    right: 22%;
+    bottom: 10%;
+    height: 26%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(243, 229, 171, 0.35), transparent);
+    filter: blur(10px);
+    animation: qxCaustic 4.5s ease-in-out infinite;
+  }
+  @keyframes qxCaustic {
+    0%, 100% { opacity: 0.55; transform: scaleX(1); }
+    50% { opacity: 0.95; transform: scaleX(1.15); }
+  }
+
+  /* Símbolos ? e ! */
+  .qx-glyph-wrap {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    perspective: 600px;
+    z-index: 2;
+  }
+  .qx-glyph {
+    grid-area: 1 / 1;
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 150px;
+    line-height: 1;
+    padding: 0 0.12em 0.06em 0;
+    background: linear-gradient(160deg, #FFF6D6 0%, #F3E5AB 18%, #D4AF37 45%, #9C7720 70%, #E8C766 88%, #B8912A 100%);
+    background-size: 100% 220%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 22px rgba(212, 175, 55, 0.35));
+    backface-visibility: hidden;
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+    user-select: none;
+  }
+  .qx-q {
+    transform-origin: 50% 82%;
+    animation: qxSwing 5.5s ease-in-out infinite, qxShine 7s ease-in-out infinite;
+  }
+  .qx-a {
+    opacity: 0;
+    transform: rotateY(-90deg) scale(0.8);
+  }
+  @keyframes qxSwing {
+    0%, 100% { rotate: -5deg; }
+    50% { rotate: 5deg; }
+  }
+  @keyframes qxShine {
+    0%, 100% { background-position: 0 0%; }
+    50% { background-position: 0 100%; }
+  }
+
+  /* Reação: pergunta aberta -> "?" vira "!" */
+  .qx.is-answered .qx-q { opacity: 0; transform: rotateY(90deg) scale(0.8); }
+  .qx.is-answered .qx-a { opacity: 1; transform: none; }
+  .qx.is-answered .qx-rim { animation-duration: 2.5s; }
+
+  /* Brilhos do vidro (por cima do símbolo) */
+  .qx-specular {
+    position: absolute;
+    top: 7%;
+    left: 16%;
+    width: 46%;
+    height: 26%;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0));
+    transform: rotate(-24deg);
+    z-index: 3;
+    pointer-events: none;
+  }
+  .qx-reflection {
+    position: absolute;
+    bottom: 12%;
+    right: 18%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    filter: blur(2px);
+    z-index: 3;
+  }
+
+  /* Pílulas flutuantes */
+  .qx-chip {
+    position: absolute;
+    z-index: 6;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(245, 241, 232, 0.14);
+    background: rgba(8, 26, 21, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: rgba(245, 241, 232, 0.88);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    animation: qxBob 6s ease-in-out infinite;
+    transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, scale 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .qx-chip::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background: #D4AF37;
+    box-shadow: 0 0 8px #D4AF37;
+    vertical-align: 1px;
+  }
+  .qx-chip:hover,
+  .qx-chip:focus-visible {
+    animation-play-state: paused;
+    border-color: rgba(212, 175, 55, 0.7);
+    color: #F3E5AB;
+    background: rgba(20, 40, 30, 0.85);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 24px rgba(212, 175, 55, 0.25);
+    scale: 1.06;
+    outline: none;
+  }
+  .qx-chip.is-current {
+    border-color: #D4AF37;
+    color: #030D0B;
+    background: linear-gradient(135deg, #D4AF37, #F3E5AB);
+  }
+  .qx-chip.is-current::before { background: #030D0B; box-shadow: none; }
+
+  .qx-chip-1 { top: 10%; right: 2%; animation-delay: -1s; }
+  .qx-chip-2 { top: 30%; left: 0; animation-delay: -3s; }
+  .qx-chip-3 { bottom: 14%; left: 6%; animation-delay: -2s; }
+  .qx-chip-4 { bottom: 6%; right: 6%; animation-delay: -4.5s; }
+
+  @keyframes qxBob {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -10px; }
+  }
+
+  @media (max-width: 1024px) {
+    .sculpture-container.qx { max-width: 380px; height: 300px; }
+    .qx-orb { width: 180px; height: 180px; }
+    .qx-glyph { font-size: 128px; }
+    .qx .ring-1 { width: 250px; height: 250px; }
+    .qx .ring-3 { width: 300px; height: 300px; }
+  }
+
+  @media (max-width: 640px) {
+    .sculpture-container.qx { max-width: 100%; height: 210px; margin: 6px auto 16px; }
+    .qx .sculpture-stage { width: 140px; height: 160px; }
+    .qx-orb { width: 128px; height: 128px; }
+    .qx-glyph { font-size: 92px; }
+    .qx .ring-1 { width: 170px; height: 170px; }
+    .qx .ring-3 { width: 200px; height: 200px; }
+    .qx-chip { font-size: 12px; padding: 7px 11px; }
+    .qx-chip::before { width: 5px; height: 5px; margin-right: 6px; }
+    .qx-chip-1 { top: 4%; right: 0; }
+    .qx-chip-2 { top: 40%; left: 0; }
+    .qx-chip-3 { bottom: 4%; left: 4%; }
+    .qx-chip-4 { bottom: 12%; right: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .qx-rim, .qx-caustic, .qx-q, .qx-chip { animation: none !important; }
+  }
 </style>
 
 <script>
@@ -1195,4 +1318,59 @@ const faqItems = [
   window.addEventListener('cinematic-intro-complete', () => {
     ScrollTrigger.refresh();
   });
+</script>
+
+<script>
+  // Esfera da FAQ: "?" vira "!" ao abrir uma pergunta e pílulas abrem respostas
+  const initFaqOrb = () => {
+    const section = document.getElementById('faq');
+    const orb = section?.querySelector<HTMLElement>('.qx');
+    if (!section || !orb) return;
+    let timer = 0;
+    const chips = Array.from(orb.querySelectorAll<HTMLButtonElement>('.qx-chip'));
+
+    const syncChips = () => {
+      const open = section.querySelector('.faq-item.is-open');
+      const id = open?.id.replace('faq-item-', '');
+      chips.forEach((c) => c.classList.toggle('is-current', c.dataset.faqTarget === id));
+    };
+
+    section.querySelectorAll<HTMLButtonElement>('.faq-trigger').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setTimeout(() => {
+          syncChips();
+          if (btn.getAttribute('aria-expanded') === 'true') {
+            orb.classList.add('is-answered');
+            clearTimeout(timer);
+            timer = window.setTimeout(() => orb.classList.remove('is-answered'), 1800);
+          }
+        }, 0);
+      });
+    });
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const target = section.querySelector<HTMLButtonElement>(`#faq-btn-${chip.dataset.faqTarget}`);
+        if (!target) return;
+        if (target.getAttribute('aria-expanded') !== 'true') target.click();
+        else {
+          orb.classList.add('is-answered');
+          clearTimeout(timer);
+          timer = window.setTimeout(() => orb.classList.remove('is-answered'), 1800);
+        }
+        if (window.innerWidth <= 1024) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        target.focus({ preventScroll: true });
+      });
+    });
+
+    syncChips();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFaqOrb);
+  } else {
+    initFaqOrb();
+  }
 </script>

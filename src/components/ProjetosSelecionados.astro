@@ -1,1148 +1,594 @@
 ---
-// src/components/ProjetosSelecionados.astro — Sexta Dobra: Portfólio Cinematográfico | Liquid Glass Carousel
-// Experiência visual de alto luxo com curvatura 3D, painéis de vidro líquido e movimento contínuo sincronizado ao scroll
+// src/components/ProjetosSelecionados.astro — Sexta Dobra: Projetos Selecionados
+// Galeria guiada pelo scroll: a seção fica fixa na tela e, conforme o usuário rola,
+// os projetos deslizam até o centro, um de cada vez (com uma pausa em cada).
+// Tudo é dimensionado pela altura da tela para nunca cortar texto.
 
 const projects = [
   {
     id: '01',
     key: 'fernando-junior',
     name: 'Fernando Junior',
-    segment: 'IMOBILIÁRIO PREMIUM',
+    segment: 'Imobiliário premium',
     description: 'Uma experiência imobiliária cinematográfica, criada para valorizar propriedades e transmitir sofisticação.',
     url: 'https://fernandocorretor-six.vercel.app/',
     urlClean: 'fernandocorretor-six.vercel.app',
-    imageWebp: '/images/cases/case-fernando-corretor.png',
-    imagePng: '/images/cases/case-fernando-corretor.png',
-    glowColor: 'rgba(212, 175, 55, 0.42)',
-    accentColor: '#D4AF37'
+    image: '/imagens/portfolio/fernando-junior.webp',
+    accent: '#D4AF37'
   },
   {
     id: '02',
     key: 'level-up-agency',
     name: 'Level Up Agency',
-    segment: 'MARKETING & PRESENÇA DIGITAL',
+    segment: 'Marketing & presença digital',
     description: 'Design e posicionamento reunidos para apresentar soluções de presença digital.',
     url: 'https://level-up-agency-astro.vercel.app/',
     urlClean: 'level-up-agency-astro.vercel.app',
-    imageWebp: '/imagens/portfolio/level-up-agency.webp',
-    imagePng: '/imagens/portfolio/level-up-agency.png',
-    glowColor: 'rgba(4, 120, 87, 0.48)',
-    accentColor: '#047857'
+    image: '/imagens/portfolio/level-up-agency.webp',
+    accent: '#2EE59D'
   },
   {
     id: '03',
     key: 'level-up-aesthetics',
     name: 'Level Up Aesthetics',
-    segment: 'ESTÉTICA & BEM-ESTAR',
+    segment: 'Estética & bem-estar',
     description: 'Uma experiência digital elegante que transmite cuidado, confiança e beleza natural.',
     url: 'https://clinicaestetica-xi.vercel.app/',
     urlClean: 'clinicaestetica-xi.vercel.app',
-    imageWebp: '/imagens/portfolio/level-up-aesthetics.webp',
-    imagePng: '/imagens/portfolio/level-up-aesthetics.png',
-    glowColor: 'rgba(245, 241, 232, 0.35)',
-    accentColor: '#F5F1E8'
+    image: '/imagens/portfolio/level-up-aesthetics.webp',
+    accent: '#E9D5B5'
   },
   {
     id: '04',
     key: 'styvy-burguer',
     name: 'Styvy Burguer',
-    segment: 'GASTRONOMIA',
+    segment: 'Gastronomia',
     description: 'Uma narrativa visual que transforma ingredientes, brasa e sabor em desejo.',
     url: 'https://styviburguer.vercel.app/',
     urlClean: 'styviburguer.vercel.app',
-    imageWebp: '/imagens/portfolio/styvy-burguer.webp',
-    imagePng: '/imagens/portfolio/styvy-burguer.png',
-    glowColor: 'rgba(220, 110, 40, 0.46)',
-    accentColor: '#DC6E28'
+    image: '/imagens/portfolio/styvy-burguer.webp',
+    accent: '#F08A3C'
   }
 ];
+const total = String(projects.length).padStart(2, '0');
 ---
 
-<section class="portfolio-section" id="portfolio" aria-label="05 Projetos Selecionados — Portfólio Cinematográfico K. Up Biz">
-  <!-- Auras atmosféricas profundas de estúdio -->
-  <div class="portfolio-ambient-glow glow-base" aria-hidden="true"></div>
-  <div class="portfolio-ambient-glow glow-interactive" id="portfolio-interactive-glow" aria-hidden="true"></div>
+<section
+  class="portfolio-section"
+  id="portfolio"
+  aria-labelledby="portfolio-title"
+  style={`--n:${projects.length}; --accent:${projects[0].accent}`}
+>
+  <div class="pf-sticky">
+    <div class="pf-ambient" aria-hidden="true"></div>
 
-  <!-- Vinhetas de fusão cinematográfica com as seções anterior e posterior -->
-  <div class="portfolio-scrim-top" aria-hidden="true"></div>
-  <div class="portfolio-scrim-bottom" aria-hidden="true"></div>
-
-  <!-- Viewport Principal Pinned no Desktop (100vh com dimensionamento rigoroso) -->
-  <div class="portfolio-viewport" id="portfolio-viewport">
-    <div class="portfolio-wrap">
-
-      <!-- CABEÇALHO CENTRALIZADO ESTÁVEL -->
-      <header class="portfolio-header" id="portfolio-header">
-        <div class="portfolio-eyebrow">
-          <span class="eyebrow-pip" aria-hidden="true"></span>
-          <span class="eyebrow-text">05 / PROJETOS SELECIONADOS</span>
+    <div class="pf-head">
+      <div class="pf-head-text">
+        <div class="pf-eyebrow">
+          <span class="pf-pip" aria-hidden="true"></span>
+          05 / PROJETOS SELECIONADOS
         </div>
-
-        <h2 class="portfolio-headline" id="portfolio-headline">
-          <span class="headline-base">Cada projeto, uma estratégia.</span>
-          <span class="headline-highlight italic-serif text-gold">Uma experiência única.</span>
+        <h2 class="pf-title" id="portfolio-title">
+          Cada projeto, uma estratégia. <span class="pf-gold">Uma experiência única.</span>
         </h2>
-
-        <div class="portfolio-gold-divider" aria-hidden="true"></div>
-
-        <p class="portfolio-lead" id="portfolio-lead">
-          Sites criados para negócios diferentes, com identidade própria, narrativa visual e atenção a cada detalhe.
-        </p>
-      </header>
-
-      <!-- PALCO DO CARROSSEL LIQUID GLASS 3D -->
-      <div class="liquid-carousel-stage" id="liquid-carousel-stage" aria-label="Carrossel 3D de Projetos">
-        
-        <!-- Halo Central Dinâmico Reativo -->
-        <div class="stage-central-halo" id="stage-central-halo" aria-hidden="true"></div>
-
-        <!-- Track 3D Desktop (Com perspectiva e profundidade curva) -->
-        <div class="liquid-carousel-track" id="liquid-carousel-track">
-          {projects.map((proj, idx) => (
-            <article
-              class={`liquid-glass-panel panel-index-${idx}`}
-              id={`liquid-panel-${idx}`}
-              data-index={idx}
-              data-project-key={proj.key}
-              aria-label={`Projeto ${proj.id}: ${proj.name} — ${proj.segment}`}
-            >
-              <!-- Camada C: Reflexo de Vidro Especular (Glass Sheen) -->
-              <div class="panel-glass-sheen" aria-hidden="true"></div>
-
-              <!-- Camada C: Destaque Especular de Borda Superior (Top Edge Highlight) -->
-              <div class="panel-top-highlight" aria-hidden="true"></div>
-
-              <!-- Camada C: Borda de Realce Luminoso (Glass Border Glow) -->
-              <div class="panel-border-glow" aria-hidden="true"></div>
-
-              <!-- Barra Superior Minimalista de Estúdio Digital -->
-              <div class="panel-top-bar" aria-hidden="true">
-                <div class="panel-dots">
-                  <span class="panel-dot"></span>
-                  <span class="panel-dot"></span>
-                  <span class="panel-dot"></span>
-                </div>
-                <div class="panel-url-capsule">
-                  <span class="lock-icon">🔒</span>
-                  <span class="url-text">{proj.urlClean}</span>
-                </div>
-                <div class="panel-status-tag">K. UP BIZ LIVE CASE</div>
-              </div>
-
-              <!-- Canvas da Captura Real do Site -->
-              <div class="panel-canvas">
-                <picture>
-                  <source srcset={proj.imageWebp} type="image/webp" />
-                  <img
-                    src={proj.imagePng}
-                    alt={`Interface do site real ${proj.name} — ${proj.segment}`}
-                    class="panel-screen-img"
-                    width="1600"
-                    height="1000"
-                    loading="eager"
-                    decoding="sync"
-                  />
-                </picture>
-              </div>
-
-              <!-- Faixa Editorial de Vidro na Parte Inferior do Painel -->
-              <div class="panel-glass-footer">
-                <div class="panel-footer-info">
-                  <div class="panel-badge">
-                    <span class="badge-dot" aria-hidden="true"></span>
-                    <span class="badge-text">{proj.segment}</span>
-                  </div>
-                  <h3 class="panel-name">{proj.name}</h3>
-                  <p class="panel-desc">{proj.description}</p>
-                </div>
-
-                <div class="panel-footer-action">
-                  <a
-                    href={proj.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="panel-explore-btn case-explore-btn"
-                    id={`btn-explore-${proj.key}`}
-                    aria-label={`Explorar projeto ${proj.name} (abre em nova aba)`}
-                  >
-                    <span class="btn-text">EXPLORAR PROJETO</span>
-                    <span class="btn-icon" aria-hidden="true">↗</span>
-                    <span class="btn-glow" aria-hidden="true"></span>
-                  </a>
-                </div>
-              </div>
-
-            </article>
-          ))}
-        </div>
-
-        <!-- Track Touch Adaptado para Mobile / Tablet (< 1025px) -->
-        <div class="liquid-carousel-track-mobile" id="liquid-carousel-track-mobile">
-          {projects.map((proj, idx) => (
-            <article
-              class={`liquid-mobile-card card-index-${idx}`}
-              id={`mobile-card-${idx}`}
-              data-index={idx}
-            >
-              <div class="mobile-card-frame">
-                <div class="panel-top-bar" aria-hidden="true">
-                  <div class="panel-dots">
-                    <span class="panel-dot"></span>
-                    <span class="panel-dot"></span>
-                    <span class="panel-dot"></span>
-                  </div>
-                  <div class="panel-url-capsule">
-                    <span class="lock-icon">🔒</span>
-                    <span class="url-text">{proj.urlClean}</span>
-                  </div>
-                </div>
-
-                <div class="panel-canvas">
-                  <picture>
-                    <source srcset={proj.imageWebp} type="image/webp" />
-                    <img
-                      src={proj.imagePng}
-                      alt={`Interface do site real ${proj.name} — ${proj.segment}`}
-                      class="panel-screen-img"
-                      loading="lazy"
-                    />
-                  </picture>
-                </div>
-
-                <div class="panel-glass-footer">
-                  <div class="panel-footer-info">
-                    <div class="panel-badge">
-                      <span class="badge-dot" aria-hidden="true"></span>
-                      <span class="badge-text">{proj.segment}</span>
-                    </div>
-                    <h3 class="panel-name">{proj.name}</h3>
-                    <p class="panel-desc">{proj.description}</p>
-                  </div>
-                  <div class="panel-footer-action">
-                    <a
-                      href={proj.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="panel-explore-btn"
-                      aria-label={`Explorar projeto ${proj.name}`}
-                    >
-                      <span>EXPLORAR PROJETO</span>
-                      <span class="btn-icon">↗</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-
       </div>
+      <div class="pf-arrows">
+        <button type="button" class="pf-arrow" data-pf-prev aria-label="Projeto anterior">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="pf-arrow" data-pf-next aria-label="Próximo projeto">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
 
-      <!-- INDICADOR EDITORIAL DISCRETO INFERIOR -->
-      <footer class="portfolio-indicator-bar" id="portfolio-indicator-bar">
-        <div class="indicator-meta">
-          <span class="indicator-step" id="carousel-step-counter">01 / 04</span>
-          <span class="indicator-divider" aria-hidden="true">·</span>
-          <span class="indicator-name" id="carousel-step-name">FERNANDO JUNIOR</span>
-        </div>
-        <div class="indicator-track" aria-hidden="true">
-          <div class="indicator-fill" id="carousel-progress-fill"></div>
-        </div>
-      </footer>
+    <div class="pf-stage">
+      <div class="pf-track">
+        {projects.map((p, i) => (
+          <article
+            class={`pf-card${i === 0 ? ' is-active' : ''}`}
+            data-pf-card={i}
+            data-accent={p.accent}
+            style={`--card-accent:${p.accent}`}
+            aria-label={`Projeto ${p.id} de ${total}: ${p.name}`}
+          >
+            <a class="pf-frame" href={p.url} target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+              <div class="pf-bar">
+                <span class="pf-dots"><i></i><i></i><i></i></span>
+                <span class="pf-url">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                  {p.urlClean}
+                </span>
+                <span class="pf-live"><span class="pf-live-dot"></span>No ar</span>
+              </div>
+              <div class="pf-shot">
+                <img
+                  src={p.image}
+                  alt={`Página inicial do site ${p.name}, desenvolvido pela K. Up Biz`}
+                  width="1584"
+                  height="849"
+                  loading={i < 2 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </div>
+            </a>
 
+            <div class="pf-info">
+              <div class="pf-info-text">
+                <span class="pf-seg"><span class="pf-num">{p.id}</span>{p.segment}</span>
+                <h3 class="pf-name">{p.name}</h3>
+                <p class="pf-desc">{p.description}</p>
+              </div>
+              <a class="pf-visit" href={p.url} target="_blank" rel="noopener noreferrer" aria-label={`Visitar o site ${p.name} (abre em nova aba)`}>
+                Visitar site <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="pf-controls">
+      <span class="pf-counter" aria-live="polite"><b data-pf-current>01</b> / {total}</span>
+      <div class="pf-dots-nav" role="group" aria-label="Escolher projeto">
+        {projects.map((p, i) => (
+          <button
+            type="button"
+            class={`pf-dot${i === 0 ? ' is-active' : ''}`}
+            data-pf-dot={i}
+            aria-label={`Ver projeto ${p.name}`}
+            aria-current={i === 0 ? 'true' : 'false'}
+          ></button>
+        ))}
+      </div>
+      <span class="pf-hint" aria-hidden="true">Role para ver os projetos</span>
     </div>
   </div>
 </section>
 
 <style>
   /* ==========================================================================
-     ESTILOS DA SEXTA DOBRA: LIQUID GLASS CAROUSEL 3D
-     Paleta Canônica:
-     - Fundo profundo: #030D0B / #041D17
-     - Esmeralda: #047857
-     - Dourado: #D4AF37
-     - Marfim: #F5F1E8
+     K. UP BIZ — SEXTA DOBRA | PROJETOS SELECIONADOS (galeria guiada pelo scroll)
      ========================================================================== */
-
   .portfolio-section {
+    --gold: #D4AF37;
+    --gold-l: #F3E5AB;
+    --ivory: #F5F1E8;
+    --ivory-2: rgba(245, 241, 232, 0.7);
+    --ivory-3: rgba(245, 241, 232, 0.42);
+    --line: rgba(245, 241, 232, 0.1);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --gutter: max(clamp(20px, 5vw, 64px), calc((100vw - var(--max-width, 1240px)) / 2 + 64px));
+    /* Largura do card limitada pela altura disponível: nunca corta */
+    --card-w: clamp(260px, min(70vw, calc((100svh - 330px) * 1.75)), 940px);
     position: relative;
-    width: 100%;
-    background-color: #030D0B;
-    color: var(--color-marfim, #F5F1E8);
-    font-family: var(--font-sans, 'Instrument Sans', sans-serif);
-    overflow: hidden;
-    z-index: 25;
-    padding: 0;
-    margin: 0;
+    height: calc(100svh + (var(--n) - 1) * 75svh);
+    background: linear-gradient(180deg, #041D17 0%, #030D0B 160px, #030D0B 100%);
+    color: var(--ivory);
+    z-index: 7;
   }
 
-  /* Vinhetas de transição entre dobras */
-  .portfolio-scrim-top {
-    position: absolute;
+  .pf-sticky {
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 90px;
-    background: linear-gradient(to bottom, #030D0B 0%, rgba(3, 13, 11, 0) 100%);
-    pointer-events: none;
-    z-index: 10;
-  }
-
-  .portfolio-scrim-bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 90px;
-    background: linear-gradient(to top, #030D0B 0%, rgba(3, 13, 11, 0) 100%);
-    pointer-events: none;
-    z-index: 10;
-  }
-
-  /* Auras atmosféricas profundas */
-  .portfolio-ambient-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(140px);
-    pointer-events: none;
-    opacity: 0.45;
-    transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease;
-  }
-
-  .glow-base {
-    top: 25%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 650px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(4, 120, 87, 0.25) 0%, rgba(4, 29, 23, 0) 70%);
-  }
-
-  .glow-interactive {
-    top: 30%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 550px;
-    height: 450px;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, rgba(3, 13, 11, 0) 70%);
-  }
-
-  /* Viewport Principal: 100vh fixo com distribuição vertical proporcional */
-  .portfolio-viewport {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    max-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: clamp(14px, 2.4vh, 26px) 0 clamp(10px, 1.8vh, 20px);
-    box-sizing: border-box;
+    height: 100svh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    padding: clamp(76px, 13svh, 120px) 0 clamp(14px, 3svh, 32px);
     overflow: hidden;
   }
 
-  .portfolio-wrap {
-    width: 100%;
-    max-width: 1360px;
-    margin: 0 auto;
-    padding: 0 clamp(16px, 2.5vw, 36px);
+  .pf-ambient {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    width: min(1100px, 130vw);
+    height: 75%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent 75%);
+    filter: blur(60px);
+    opacity: 0.8;
+    transition: background 1s ease;
+    pointer-events: none;
+  }
+
+  /* Cabeçalho compacto */
+  .pf-head {
+    position: relative;
+    z-index: 3;
     display: flex;
-    flex-direction: column;
+    align-items: flex-end;
     justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    max-height: 100%;
-    box-sizing: border-box;
+    gap: 24px;
+    padding: 0 var(--gutter);
   }
-
-  /* --------------------------------------------------------------------------
-     CABEÇALHO EDITORIAL CENTRALIZADO ESTÁVEL (Espaçamento Reequilibrado)
-     -------------------------------------------------------------------------- */
-  .portfolio-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: clamp(6px, 1.1vh, 12px);
-    flex-shrink: 0;
-    width: 100%;
-  }
-
-  .portfolio-eyebrow {
+  .pf-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 4px 12px;
-    border-radius: 999px;
-    background: rgba(4, 120, 87, 0.12);
-    border: 1px solid rgba(4, 120, 87, 0.35);
-    margin-bottom: clamp(5px, 0.7vh, 8px);
-    backdrop-filter: blur(8px);
-  }
-
-  .eyebrow-pip {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--color-verde-esmeralda, #047857);
-    box-shadow: 0 0 10px rgba(4, 120, 87, 0.9), 0 0 4px #10b981;
-    animation: pipPulse 2.8s infinite ease-in-out;
-  }
-
-  @keyframes pipPulse {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.35); }
-  }
-
-  .eyebrow-text {
-    font-size: 0.7rem;
+    gap: 10px;
+    margin-bottom: clamp(8px, 1.6svh, 16px);
+    font-family: var(--font-sans);
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-marfim, #F5F1E8);
+    letter-spacing: 0.22em;
+    color: var(--gold);
   }
-
-  .portfolio-headline {
-    font-size: clamp(1.4rem, 2.4vw, 2.3rem);
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.025em;
-    color: var(--color-marfim, #F5F1E8);
-    margin: 0 0 clamp(4px, 0.6vh, 8px);
-    text-align: center;
+  .pf-pip { width: 6px; height: 6px; border-radius: 50%; background: #2EE59D; box-shadow: 0 0 10px #2EE59D; }
+  .pf-title {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(24px, min(3.2vw, 5.6svh), 46px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
   }
-
-  .headline-base {
-    display: inline-block;
-    margin-right: 6px;
-  }
-
-  .headline-highlight {
-    display: inline-block;
-    font-family: var(--font-serif, 'Bodoni Moda', Georgia, serif);
+  .pf-gold {
+    font-family: var(--font-instrument-serif);
     font-style: italic;
     font-weight: 400;
-    color: var(--color-dourado, #D4AF37);
-    text-shadow: 0 0 24px rgba(212, 175, 55, 0.3);
+    letter-spacing: -0.01em;
+    color: var(--gold);
   }
 
-  .portfolio-gold-divider {
-    width: 48px;
-    height: 2px;
-    background: linear-gradient(to right, rgba(212, 175, 55, 0), #D4AF37, rgba(212, 175, 55, 0));
-    margin: 0 auto clamp(5px, 0.6vh, 8px);
+  .pf-arrows { display: flex; gap: 10px; flex-shrink: 0; }
+  .pf-arrow {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    background: rgba(245, 241, 232, 0.06);
+    color: var(--ivory);
+    cursor: pointer;
+    transition: background 0.3s ease, border-color 0.3s ease, opacity 0.3s ease, transform 0.3s var(--ease);
   }
+  .pf-arrow:hover:not(:disabled) { background: rgba(245, 241, 232, 0.14); border-color: rgba(212, 175, 55, 0.5); transform: scale(1.05); }
+  .pf-arrow:disabled { opacity: 0.3; cursor: default; }
+  .pf-arrow:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
-  .portfolio-lead {
-    font-size: clamp(0.78rem, 0.95vw, 0.92rem);
-    line-height: 1.42;
-    color: rgba(245, 241, 232, 0.72);
-    max-width: 580px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  /* --------------------------------------------------------------------------
-     PALCO DO CARROSSEL LIQUID GLASS 3D (Aproximação Moderada de 18%)
-     -------------------------------------------------------------------------- */
-  .liquid-carousel-stage {
+  /* Palco: o trilho é movido pelo script conforme o scroll */
+  .pf-stage {
     position: relative;
-    width: 100%;
-    flex: 1;
+    display: flex;
+    align-items: center;
+    min-width: 0;
     min-height: 0;
+    padding-top: clamp(10px, 2svh, 20px);
+  }
+  .pf-track {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: clamp(8px, 1.5vh, 18px);
-    perspective: 1350px;
-    perspective-origin: 50% 50%;
-    overflow: visible;
+    align-items: flex-start;
+    gap: clamp(20px, 3vw, 48px);
+    will-change: transform;
   }
 
-  /* Halo Central Atrás do Painel Ativo */
-  .stage-central-halo {
-    position: absolute;
-    width: clamp(400px, 58vw, 840px);
-    height: clamp(280px, 42vh, 520px);
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.38) 0%, rgba(4, 120, 87, 0.22) 50%, transparent 75%);
-    filter: blur(55px);
-    opacity: 0.72;
-    pointer-events: none;
-    z-index: 1;
-    transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  .pf-card {
+    flex: 0 0 var(--card-fit, var(--card-w));
+    width: var(--card-fit, var(--card-w));
+    opacity: 0.35;
+    transform-origin: 50% 40%;
   }
 
-  /* Track 3D Desktop */
-  .liquid-carousel-track {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform-style: preserve-3d;
-    z-index: 2;
-  }
-
-  /* ==========================================================================
-     CAMADA A (Estrutura) + CAMADA B (Vidro Líquido Premium)
-     ========================================================================== */
-  .liquid-glass-panel {
-    position: absolute;
-    aspect-ratio: 16 / 10.4;
-    max-height: clamp(290px, 52vh, 495px);
-    width: calc(clamp(290px, 52vh, 495px) * 1.538);
-    max-width: min(86vw, 760px);
-    border-radius: 18px;
-    background: linear-gradient(155deg, rgba(4, 35, 27, 0.75) 0%, rgba(3, 13, 11, 0.82) 48%, rgba(2, 9, 7, 0.90) 100%);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(245, 241, 232, 0.15);
-    box-shadow: 
-      0 32px 85px rgba(0, 0, 0, 0.95),
-      0 12px 32px rgba(0, 0, 0, 0.75),
-      inset 0 1px 1px rgba(255, 255, 255, 0.20),
-      inset 0 0 16px rgba(4, 35, 27, 0.45);
+  .pf-frame {
+    display: block;
+    border-radius: 20px;
     overflow: hidden;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    will-change: transform, opacity;
-    cursor: default;
+    border: 1px solid rgba(245, 241, 232, 0.12);
+    background: #06140F;
+    box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85);
+    transition: box-shadow 0.8s ease, border-color 0.8s ease;
   }
-
-  /* ==========================================================================
-     CAMADA C — REFLEXOS E ILUMINAÇÃO DE VIDRO REAL
-     ========================================================================== */
-  /* Reflexo de Vidro Especular Diagonal Suave */
-  .panel-glass-sheen {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      130deg,
-      rgba(255, 255, 255, 0.12) 0%,
-      rgba(212, 175, 55, 0.05) 16%,
-      rgba(4, 120, 87, 0.03) 30%,
-      transparent 52%
-    );
-    pointer-events: none;
-    z-index: 6;
-    opacity: 0.8;
-    transition: opacity 0.35s ease;
+  .pf-card.is-active .pf-frame {
+    border-color: color-mix(in srgb, var(--card-accent) 45%, transparent);
+    box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85), 0 0 60px -10px color-mix(in srgb, var(--card-accent) 35%, transparent);
   }
-
-  /* Filete Especular de Borda Superior (Top Edge Highlight) */
-  .panel-top-highlight {
-    position: absolute;
-    top: 0;
-    left: 4%;
-    right: 4%;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(245, 241, 232, 0.35) 15%,
-      rgba(255, 255, 255, 0.75) 35%,
-      rgba(212, 175, 55, 0.9) 50%,
-      rgba(255, 255, 255, 0.75) 65%,
-      rgba(245, 241, 232, 0.35) 85%,
-      transparent 100%
-    );
-    pointer-events: none;
-    z-index: 12;
-    opacity: 1;
-    transition: opacity 0.35s ease;
-  }
-
-  /* Contorno Óptico Tricromático (Branco Translúcido + Dourado Editorial + Esmeralda) */
-  .panel-border-glow {
-    position: absolute;
-    inset: 0;
-    border-radius: 18px;
-    border: 1px solid rgba(212, 175, 55, 0.55);
-    box-shadow: 
-      inset 0 1px 1.5px rgba(255, 255, 255, 0.3),
-      inset 0 0 16px rgba(212, 175, 55, 0.18),
-      inset 0 -12px 24px rgba(4, 120, 87, 0.22),
-      0 0 28px rgba(212, 175, 55, 0.28),
-      0 0 54px rgba(4, 120, 87, 0.20);
-    pointer-events: none;
-    z-index: 7;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  /* Barra Superior de Estúdio Digital */
-  .panel-top-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    background: rgba(3, 13, 11, 0.90);
-    border-bottom: 1px solid rgba(245, 241, 232, 0.10);
+  .pf-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 12px;
+    height: 34px;
     padding: 0 14px;
-    z-index: 10;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(245, 241, 232, 0.04);
+    border-bottom: 1px solid var(--line);
   }
-
-  .panel-dots {
-    display: flex;
-    gap: 5px;
-  }
-
-  .panel-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(245, 241, 232, 0.2);
-  }
-
-  .panel-dot:nth-child(1) { background: rgba(239, 68, 68, 0.65); }
-  .panel-dot:nth-child(2) { background: rgba(234, 179, 8, 0.65); }
-  .panel-dot:nth-child(3) { background: rgba(34, 197, 94, 0.65); }
-
-  .panel-url-capsule {
+  .pf-dots { display: flex; gap: 6px; }
+  .pf-dots i { width: 9px; height: 9px; border-radius: 50%; }
+  .pf-dots i:nth-child(1) { background: #FF5F57; }
+  .pf-dots i:nth-child(2) { background: #FEBC2E; }
+  .pf-dots i:nth-child(3) { background: #28C840; }
+  .pf-url {
+    flex: 1;
+    max-width: 300px;
+    margin: 0 auto;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    padding: 2px 10px;
-    border-radius: 999px;
-    background: rgba(245, 241, 232, 0.05);
-    border: 1px solid rgba(245, 241, 232, 0.08);
-  }
-
-  .panel-url-capsule .lock-icon {
-    font-size: 0.6rem;
-    opacity: 0.7;
-  }
-
-  .panel-url-capsule .url-text {
-    font-size: 0.64rem;
-    color: rgba(245, 241, 232, 0.65);
-    font-family: var(--font-mono, monospace);
-  }
-
-  .panel-status-tag {
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    color: var(--color-dourado, #D4AF37);
-  }
-
-  /* Canvas da Imagem com Separação Nítida e Bezel Recuado */
-  .panel-canvas {
-    position: absolute;
-    inset: 0;
-    top: 30px;
-    bottom: 0;
+    justify-content: center;
+    gap: 6px;
+    height: 22px;
+    padding: 0 12px;
+    border-radius: 7px;
+    background: rgba(0, 0, 0, 0.35);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: var(--ivory-2);
+    white-space: nowrap;
     overflow: hidden;
-    z-index: 3;
-    background: #030D0B;
-    border-top: 1px solid rgba(0, 0, 0, 0.65);
   }
+  .pf-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    color: #2EE59D;
+    white-space: nowrap;
+  }
+  .pf-live-dot { width: 7px; height: 7px; border-radius: 50%; background: #2EE59D; animation: pfLive 2s ease-in-out infinite; }
+  @keyframes pfLive { 50% { box-shadow: 0 0 0 5px rgba(46, 229, 157, 0.15); } }
 
-  .panel-screen-img {
+  .pf-shot { position: relative; aspect-ratio: 1584 / 849; overflow: hidden; }
+  .pf-shot img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: top center;
-    display: block;
-    transition: transform 0.6s ease;
+    transition: transform 6s ease-out;
   }
+  .pf-card.is-active .pf-shot img { transform: scale(1.04); }
 
-  /* Faixa Editorial de Vidro na Base do Painel */
-  .panel-glass-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: clamp(10px, 1.4vh, 14px) clamp(16px, 1.8vw, 22px) clamp(12px, 1.6vh, 16px);
-    background: linear-gradient(to top, rgba(3, 13, 11, 0.97) 0%, rgba(3, 13, 11, 0.88) 60%, rgba(3, 13, 11, 0) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+  /* Informações (compactas e sempre dentro da tela) */
+  .pf-info {
     display: flex;
-    justify-content: space-between;
     align-items: flex-end;
-    gap: 16px;
-    z-index: 8;
-    border-top: 1px solid rgba(245, 241, 232, 0.08);
+    justify-content: space-between;
+    gap: 20px;
+    padding: clamp(10px, 2svh, 18px) 2px 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.6s var(--ease);
   }
-
-  .panel-footer-info {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .panel-badge {
+  .pf-card.is-active .pf-info { opacity: 1; transform: none; }
+  .pf-info-text { min-width: 0; }
+  .pf-seg {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    margin-bottom: 2px;
-  }
-
-  .badge-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background-color: var(--color-dourado, #D4AF37);
-    box-shadow: 0 0 6px var(--color-dourado, #D4AF37);
-  }
-
-  .badge-text {
-    font-size: 0.62rem;
+    gap: 10px;
+    font-family: var(--font-sans);
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-dourado, #D4AF37);
+    color: var(--card-accent);
   }
-
-  .panel-name {
-    font-size: clamp(0.95rem, 1.35vw, 1.25rem);
+  .pf-num { color: var(--ivory-3); }
+  .pf-name {
+    margin: 4px 0 4px;
+    font-family: var(--font-sans);
     font-weight: 600;
-    line-height: 1.15;
-    letter-spacing: -0.015em;
-    color: var(--color-marfim, #F5F1E8);
-    margin: 1px 0 3px;
+    font-size: clamp(18px, min(2vw, 3.6svh), 28px);
+    letter-spacing: -0.025em;
+    color: var(--ivory);
   }
-
-  .panel-desc {
-    font-size: clamp(0.7rem, 0.84vw, 0.78rem);
-    line-height: 1.35;
-    color: rgba(245, 241, 232, 0.74);
-    max-width: 380px;
+  .pf-desc {
+    max-width: 560px;
     margin: 0;
+    font-family: var(--font-sans);
+    font-size: clamp(13px, min(1.1vw, 2.3svh), 16px);
+    line-height: 1.5;
+    color: var(--ivory-2);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-
-  .panel-footer-action {
+  .pf-visit {
     flex-shrink: 0;
-  }
-
-  /* Botão de Ação EXPLORAR PROJETO */
-  .panel-explore-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 15px;
-    border-radius: 999px;
-    background: rgba(4, 120, 87, 0.22);
-    border: 1px solid rgba(212, 175, 55, 0.5);
-    color: var(--color-marfim, #F5F1E8);
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    white-space: nowrap;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: pointer;
-  }
-
-  .panel-explore-btn:hover {
-    background: var(--color-dourado, #D4AF37);
-    color: #030D0B;
-    border-color: var(--color-dourado, #D4AF37);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-    transform: translateY(-2px);
-  }
-
-  .panel-explore-btn .btn-icon {
-    font-size: 0.78rem;
-    transition: transform 0.3s ease;
-  }
-
-  .panel-explore-btn:hover .btn-icon {
-    transform: translate(2px, -2px);
-  }
-
-  /* --------------------------------------------------------------------------
-     INDICADOR EDITORIAL DISCRETO INFERIOR
-     -------------------------------------------------------------------------- */
-  .portfolio-indicator-bar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    margin-top: clamp(8px, 1.4vh, 16px);
-    flex-shrink: 0;
-    width: 100%;
-    z-index: 10;
-  }
-
-  .indicator-meta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-  }
-
-  .indicator-step {
-    color: var(--color-marfim, #F5F1E8);
-  }
-
-  .indicator-divider {
-    color: var(--color-dourado, #D4AF37);
-    opacity: 0.5;
-  }
-
-  .indicator-name {
-    color: var(--color-dourado, #D4AF37);
-    transition: opacity 0.3s ease;
-  }
-
-  .indicator-track {
-    width: 140px;
-    height: 2px;
-    background: rgba(245, 241, 232, 0.12);
+    padding: 11px 20px;
     border-radius: 999px;
-    overflow: hidden;
+    border: 1px solid rgba(245, 241, 232, 0.18);
+    background: rgba(245, 241, 232, 0.05);
+    color: var(--ivory);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+  }
+  .pf-visit span { transition: transform 0.35s var(--ease); }
+  .pf-visit:hover { background: var(--ivory); color: #030D0B; border-color: var(--ivory); }
+  .pf-visit:hover span { transform: translate(2px, -2px); }
+  .pf-visit:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  /* Controles */
+  .pf-controls {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding-top: clamp(8px, 1.6svh, 16px);
+    font-family: var(--font-sans);
   }
-
-  .indicator-fill {
-    width: 25%;
-    height: 100%;
-    background: linear-gradient(to right, #047857, #D4AF37);
+  .pf-counter { font-size: 13px; color: var(--ivory-3); letter-spacing: 0.08em; min-width: 54px; text-align: right; }
+  .pf-counter b { color: var(--ivory); font-weight: 600; }
+  .pf-dots-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    padding: 0 18px;
     border-radius: 999px;
-    transition: width 0.35s ease-out;
+    background: rgba(245, 241, 232, 0.07);
+  }
+  .pf-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(245, 241, 232, 0.35);
+    cursor: pointer;
+    transition: width 0.5s var(--ease), background 0.3s ease;
+  }
+  .pf-dot::before { content: ''; position: absolute; inset: -12px -4px; }
+  .pf-dot:hover { background: rgba(245, 241, 232, 0.65); }
+  .pf-dot.is-active { width: 32px; background: var(--ivory); }
+  .pf-dot:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .pf-hint {
+    min-width: 54px;
+    font-size: 12px;
+    color: var(--ivory-3);
+    white-space: nowrap;
   }
 
-  /* --------------------------------------------------------------------------
-     ADAPTAÇÃO MOBILE / TABLET (<= 1024px)
-     -------------------------------------------------------------------------- */
-  .liquid-carousel-track-mobile {
-    display: none;
+  /* Telas baixas */
+  @media (max-height: 700px) {
+    .pf-live { display: none; }
+    .pf-bar { height: 28px; }
+    .pf-dots i { width: 8px; height: 8px; }
+    .pf-hint { display: none; }
   }
 
-  @media (max-width: 1024px) {
-    .portfolio-viewport {
-      height: auto;
-      max-height: none;
-      padding: 60px 0 50px;
-      overflow: visible;
+  /* Celular */
+  @media (max-width: 760px) {
+    .portfolio-section {
+      --card-w: clamp(240px, min(84vw, calc((100svh - 360px) * 1.86)), 520px);
+      height: calc(100svh + (var(--n) - 1) * 65svh);
     }
-
-    .portfolio-wrap {
-      padding: 0 16px;
-      height: auto;
-      max-height: none;
-    }
-
-    .liquid-carousel-stage {
-      perspective: none;
-      overflow: visible;
-      flex: none;
-      width: 100%;
-    }
-
-    .liquid-carousel-track {
-      display: none;
-    }
-
-    .stage-central-halo {
-      display: none;
-    }
-
-    .liquid-carousel-track-mobile {
-      display: flex;
-      gap: 16px;
-      width: 100%;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 10px 4px 20px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-
-    .liquid-carousel-track-mobile::-webkit-scrollbar {
-      display: none;
-    }
-
-    .liquid-mobile-card {
-      flex: 0 0 88vw;
-      max-width: 380px;
-      scroll-snap-align: center;
-      position: relative;
-    }
-
-    .mobile-card-frame {
-      position: relative;
-      aspect-ratio: 16 / 11;
-      border-radius: 14px;
-      background: rgba(3, 13, 11, 0.85);
-      border: 1px solid rgba(245, 241, 232, 0.16);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
-      overflow: hidden;
-    }
-
-    .mobile-card-frame .panel-canvas {
-      position: absolute;
-      inset: 0;
-      top: 28px;
-    }
+    .pf-arrows { display: none; }
+    .pf-info { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .pf-visit { padding: 10px 16px; font-size: 13px; }
+    .pf-bar { height: 28px; gap: 8px; padding: 0 10px; }
+    .pf-dots i { width: 7px; height: 7px; }
+    .pf-url { font-size: 10px; height: 18px; }
+    .pf-live, .pf-hint { display: none; }
+    .pf-frame { border-radius: 14px; }
   }
 
-  /* Suporte a Movimento Reduzido (Acessibilidade) */
   @media (prefers-reduced-motion: reduce) {
-    .portfolio-ambient-glow,
-    .eyebrow-pip,
-    .indicator-fill,
-    .panel-explore-btn {
-      transition: none !important;
-      animation: none !important;
-      transform: none !important;
-    }
+    .pf-shot img, .pf-info, .pf-dot { transition: none; }
+    .pf-card.is-active .pf-shot img { transform: none; }
+    .pf-live-dot { animation: none; }
   }
 </style>
 
 <script>
-  // Inicialização do GSAP e ScrollTrigger para o Liquid Glass Carousel 3D
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-  (window as any).ScrollTrigger = ScrollTrigger;
-
-  const initLiquidGlassCarousel = () => {
+  // Galeria guiada pelo scroll vertical: progresso da seção -> posição no trilho.
+  // Cada projeto tem uma "parada" (fica centralizado por um trecho do scroll).
+  const initPortfolio = () => {
     const section = document.getElementById('portfolio');
     if (!section) return;
+    const stage = section.querySelector<HTMLElement>('.pf-stage');
+    const track = section.querySelector<HTMLElement>('.pf-track');
+    const cards = Array.from(section.querySelectorAll<HTMLElement>('[data-pf-card]'));
+    const dots = Array.from(section.querySelectorAll<HTMLButtonElement>('[data-pf-dot]'));
+    const prev = section.querySelector<HTMLButtonElement>('[data-pf-prev]');
+    const next = section.querySelector<HTMLButtonElement>('[data-pf-next]');
+    const current = section.querySelector<HTMLElement>('[data-pf-current]');
+    if (!stage || !track || !cards.length) return;
 
-    const panels = [
-      document.getElementById('liquid-panel-0'),
-      document.getElementById('liquid-panel-1'),
-      document.getElementById('liquid-panel-2'),
-      document.getElementById('liquid-panel-3')
-    ].filter(Boolean) as HTMLElement[];
+    const N = cards.length;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let active = -1;
+    let raf = 0;
 
-    const stepCounter = document.getElementById('carousel-step-counter');
-    const stepName = document.getElementById('carousel-step-name');
-    const progressFill = document.getElementById('carousel-progress-fill');
-    const halo = document.getElementById('stage-central-halo');
-    const interactiveGlow = document.getElementById('portfolio-interactive-glow');
-
-    const projectNames = [
-      'FERNANDO JUNIOR',
-      'LEVEL UP AGENCY',
-      'LEVEL UP AESTHETICS',
-      'STYVY BURGUER'
-    ];
-
-    const haloGradients = [
-      'radial-gradient(circle, rgba(212, 175, 55, 0.38) 0%, rgba(4, 120, 87, 0.16) 50%, transparent 75%)',
-      'radial-gradient(circle, rgba(4, 120, 87, 0.45) 0%, rgba(4, 29, 23, 0.2) 50%, transparent 75%)',
-      'radial-gradient(circle, rgba(245, 241, 232, 0.3) 0%, rgba(4, 120, 87, 0.18) 50%, transparent 75%)',
-      'radial-gradient(circle, rgba(220, 110, 40, 0.44) 0%, rgba(4, 29, 23, 0.2) 50%, transparent 75%)'
-    ];
-
-    // Função de interpolação contínua da geometria 3D (Curvatura + Profundidade Z + Escala + Rotação Y)
-    let lastActiveIdx = -1;
-    const updateCarousel3D = (curPos: number) => {
-      const stage = document.getElementById('liquid-carousel-stage');
-      const stageWidth = stage ? stage.clientWidth : window.innerWidth;
-
-      // Espaçamento dinâmico calculado proporcionalmente à largura do palco
-      // Garante que os painéis vizinhos apareçam parcialmente em perspectiva elegante
-      const spacing = Math.min(stageWidth * 0.42, 590);
-
-      panels.forEach((panel, i) => {
-        if (!panel) return;
-        const diff = i - curPos; // Distância contínua até o centro (-3.0 a +3.0)
-        const absDiff = Math.abs(diff);
-
-        // 1. Deslocamento horizontal na curva tridimensional
-        const x = diff * spacing;
-
-        // 2. Profundidade no eixo Z (Curva côncava: o centro se projeta suavemente, as laterais recuam em profundidade)
-        // No centro: z = 20px (leve projeção para a frente)
-        // Adjacentes (absDiff = 1): z = 20 - 210 = -190px (recuo moderado no eixo Z)
-        // Distantes (absDiff = 2): z = 20 - 500 = -480px (maior recuo de profundidade)
-        const z = 20 - Math.pow(absDiff, 1.25) * 210;
-
-        // 3. Rotação Y (Curvatura tridimensional côncava em direção ao centro):
-        // Para o painel central: rotateY = 0°
-        // Para adjacentes (diff = ±1): rotateY = ∓20° (olhando para o centro)
-        // Para distantes (diff = ±2): rotateY = ∓34° (limitado suavemente)
-        const rawRotY = -diff * 20;
-        const rotY = Math.max(-34, Math.min(34, rawRotY));
-
-        // 4. Escala proporcional com contraste marcante (+5.88% de ampliação discreta no centro):
-        // No centro (absDiff = 0): scale = 1.08 (protagonista absoluto)
-        // Adjacentes (absDiff = 1): scale = 0.81 (escala reduzida)
-        // Distantes (absDiff = 2): scale = 0.65
-        const scale = Math.max(0.65, 1.08 - absDiff * 0.27);
-
-        // 5. Opacidade contínua:
-        // No centro: 1.0 (opacidade total)
-        // Adjacentes: ~0.60
-        // Distantes: ~0.14
-        const opacity = Math.max(0, 1 - Math.pow(absDiff, 1.1) * 0.40);
-
-        // 6. Z-index para ordenação estrita em camadas de profundidade
-        const zIndex = Math.round(30 - absDiff * 8);
-
-        // 7. Interatividade (apenas o painel ativo recebe cliques no botão)
-        const isInteractive = absDiff < 0.45;
-        panel.style.pointerEvents = isInteractive ? 'auto' : 'none';
-
-        // Aplicação acelerada por hardware via GSAP
-        gsap.set(panel, {
-          x,
-          z,
-          rotateY: rotY,
-          scale,
-          opacity,
-          zIndex,
-          transformOrigin: '50% 50%'
-        });
-
-        // ====================================================================
-        // CAMADA C: EFEITOS DINÂMICOS DE VIDRO LÍQUIDO E REFLEXOS
-        // ====================================================================
-        // Contorno óptico tricromático iluminado apenas no painel ativo
-        const glow = panel.querySelector('.panel-border-glow') as HTMLElement | null;
-        if (glow) {
-          glow.style.opacity = String(Math.max(0, 1 - absDiff * 1.6));
-        }
-
-        // Reflexo especular diagonal suave de vidro real
-        const sheen = panel.querySelector('.panel-glass-sheen') as HTMLElement | null;
-        if (sheen) {
-          sheen.style.opacity = String(Math.max(0.16, 0.82 - absDiff * 0.45));
-        }
-
-        // Highlight na borda superior
-        const topHigh = panel.querySelector('.panel-top-highlight') as HTMLElement | null;
-        if (topHigh) {
-          topHigh.style.opacity = String(Math.max(0.15, 1.0 - absDiff * 0.55));
-        }
-      });
-
-      // Atualização do Indicador e Iluminação Central
-      const activeIdx = Math.round(Math.max(0, Math.min(3, curPos)));
-      if (activeIdx !== lastActiveIdx) {
-        lastActiveIdx = activeIdx;
-        if (stepCounter) stepCounter.textContent = `0${activeIdx + 1} / 04`;
-        if (stepName && projectNames[activeIdx]) stepName.textContent = projectNames[activeIdx];
-        if (halo && haloGradients[activeIdx]) halo.style.background = haloGradients[activeIdx];
-        if (interactiveGlow && haloGradients[activeIdx]) interactiveGlow.style.background = haloGradients[activeIdx];
-      }
-
-      if (progressFill) {
-        // Progresso suave contínuo da barra inferior (25% a 100%)
-        const pct = 25 + (curPos / 3) * 75;
-        progressFill.style.width = `${Math.min(100, Math.max(25, pct))}%`;
-      }
+    const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+    // Segura o card no centro em parte do trecho e desliza no restante
+    const hold = (t: number) => {
+      const x = clamp((t - 0.3) / 0.4);
+      return reduced ? Math.round(x) : x * x * (3 - 2 * x);
     };
 
-    // MatchMedia GSAP para isolamento Desktop vs Mobile
-    const mm = gsap.matchMedia();
+    const progress = () => {
+      const r = section.getBoundingClientRect();
+      const span = r.height - window.innerHeight;
+      return span > 0 ? clamp(-r.top / span) : 0;
+    };
 
-    // ========================================================================
-    // 1. DESKTOP (> 1024px): LIQUID GLASS CAROUSEL 3D COM PINNING SCROLLTRIGGER
-    // ========================================================================
-    mm.add('(min-width: 1025px)', () => {
-      // Estado de interpolação contínua (de 0.0 a 3.0)
-      const carouselState = { pos: 0.0 };
-
-      // Inicializar posição inicial de repouso no Projeto 01
-      updateCarousel3D(0.0);
-
-      // Timeline Mestre com Pinning ScrollTrigger
-      const masterTl = gsap.timeline({
-        scrollTrigger: {
-          id: 'portfolio-trigger',
-          trigger: section,
-          start: 'top top',
-          end: '+=3800',
-          pin: true,
-          scrub: 0.8,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: () => {
-            updateCarousel3D(carouselState.pos);
-          }
-        }
+    const setActive = (i: number) => {
+      if (i === active) return;
+      active = i;
+      cards.forEach((c, k) => c.classList.toggle('is-active', k === i));
+      dots.forEach((d, k) => {
+        d.classList.toggle('is-active', k === i);
+        d.setAttribute('aria-current', k === i ? 'true' : 'false');
       });
+      if (current) current.textContent = String(i + 1).padStart(2, '0');
+      section.style.setProperty('--accent', cards[i].dataset.accent || '#D4AF37');
+      if (prev) prev.disabled = i === 0;
+      if (next) next.disabled = i === N - 1;
+    };
 
-      // Estrutura rítmica com 4 momentos de permanência (holds) para leitura
-      // e 3 transições suaves contínuas:
-      //
-      // 0.0s -> 0.8s: Hold no Projeto 01 (Fernando Junior)
-      // 0.8s -> 2.2s: Transição curva 01 -> 02
-      // 2.2s -> 3.2s: Hold no Projeto 02 (Level Up Agency)
-      // 3.2s -> 4.6s: Transição curva 02 -> 03
-      // 4.6s -> 5.6s: Hold no Projeto 03 (Level Up Aesthetics)
-      // 5.6s -> 7.0s: Transição curva 03 -> 04
-      // 7.0s -> 8.2s: Hold no Projeto 04 (Styvy Burguer)
-      // 8.2s -> 9.0s: Liberação suave do scroll
+    // Ajusta a largura do card ao espaço vertical real (print + informações)
+    const fit = () => {
+      section.style.removeProperty('--card-fit');
+      const maxW = cards[0].offsetWidth;
+      const pad = parseFloat(getComputedStyle(stage).paddingTop) || 0;
+      const avail = stage.clientHeight - pad - 6;
+      const info = Math.max(...cards.map((c) => c.querySelector<HTMLElement>('.pf-info')?.offsetHeight || 0)) + 4;
+      const bar = cards[0].querySelector<HTMLElement>('.pf-bar')?.offsetHeight || 0;
+      const byHeight = (avail - info - bar) * (1584 / 849);
+      const w = Math.max(220, Math.min(maxW, byHeight));
+      section.style.setProperty('--card-fit', `${Math.floor(w)}px`);
+    };
 
-      masterTl.addLabel('caseFernando', 0.0);
-      masterTl.to(carouselState, { pos: 0.0, duration: 0.8 }, 0.0);
+    const render = () => {
+      raf = 0;
+      const raw = progress() * (N - 1);
+      const base = Math.min(N - 2, Math.floor(raw));
+      const pos = N > 1 ? base + hold(raw - base) : 0;
 
-      masterTl.addLabel('transicao1_2', 0.8);
-      masterTl.to(carouselState, { pos: 1.0, duration: 1.4, ease: 'power2.inOut' }, 0.8);
+      const w = cards[0].offsetWidth;
+      const gap = parseFloat(getComputedStyle(track).columnGap || '0') || 0;
+      const step = w + gap;
+      const offset = (section.clientWidth - w) / 2;
+      track.style.transform = `translate3d(${(offset - pos * step).toFixed(1)}px,0,0)`;
 
-      masterTl.addLabel('caseLevelUp', 2.2);
-      masterTl.to(carouselState, { pos: 1.0, duration: 1.0 }, 2.2);
+      cards.forEach((c, k) => {
+        const d = Math.abs(k - pos);
+        const s = 1 - Math.min(d, 1.5) * 0.08;
+        c.style.transform = `scale(${s.toFixed(4)})`;
+        c.style.opacity = String(Math.max(0.25, 1 - d * 0.65).toFixed(3));
+      });
+      setActive(Math.round(pos));
+    };
 
-      masterTl.addLabel('transicao2_3', 3.2);
-      masterTl.to(carouselState, { pos: 2.0, duration: 1.4, ease: 'power2.inOut' }, 3.2);
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(render);
+    };
 
-      masterTl.addLabel('caseEstetica', 4.6);
-      masterTl.to(carouselState, { pos: 2.0, duration: 1.0 }, 4.6);
+    // Leva o scroll até a parada de um projeto
+    const goTo = (i: number) => {
+      const target = clamp(i, 0, N - 1);
+      const r = section.getBoundingClientRect();
+      const span = r.height - window.innerHeight;
+      const y = window.scrollY + r.top + (N > 1 ? (target / (N - 1)) * span : 0);
+      window.scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' });
+    };
 
-      masterTl.addLabel('transicao3_4', 5.6);
-      masterTl.to(carouselState, { pos: 3.0, duration: 1.4, ease: 'power2.inOut' }, 5.6);
+    prev?.addEventListener('click', () => goTo(active - 1));
+    next?.addEventListener('click', () => goTo(active + 1));
+    dots.forEach((d, k) => d.addEventListener('click', () => goTo(k)));
 
-      masterTl.addLabel('caseStyvy', 7.0);
-      masterTl.to(carouselState, { pos: 3.0, duration: 1.2 }, 7.0);
-
-      masterTl.addLabel('saida', 8.2);
-      masterTl.to({}, { duration: 0.8 }, 8.2);
-    });
-
-    // ========================================================================
-    // 2. MOBILE & TABLET (<= 1024px): CARROSSEL TOUCH HORIZONTAL COM SCROLL-SNAP
-    // ========================================================================
-    mm.add('(max-width: 1024px)', () => {
-      const mobileTrack = document.getElementById('liquid-carousel-track-mobile');
-      if (!mobileTrack) return;
-
-      const mobileCards = Array.from(mobileTrack.querySelectorAll('.liquid-mobile-card'));
-
-      mobileTrack.addEventListener('scroll', () => {
-        const scrollLeft = mobileTrack.scrollLeft;
-        const cardWidth = (mobileCards[0] as HTMLElement)?.offsetWidth || 300;
-        const activeIdx = Math.round(scrollLeft / (cardWidth + 16));
-        const clampedIdx = Math.max(0, Math.min(3, activeIdx));
-
-        if (stepCounter) stepCounter.textContent = `0${clampedIdx + 1} / 04`;
-        if (stepName && projectNames[clampedIdx]) stepName.textContent = projectNames[clampedIdx];
-        if (progressFill) progressFill.style.width = `${((clampedIdx + 1) / 4) * 100}%`;
-      }, { passive: true });
-    });
-
-    // Re-sincronização caso a introdução cinematográfica inicial complete
-    window.addEventListener('cinematic-intro-complete', () => {
-      ScrollTrigger.refresh();
-    });
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', () => { fit(); schedule(); });
+    document.fonts?.ready.then(() => { fit(); schedule(); });
+    fit();
+    render();
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLiquidGlassCarousel);
+    document.addEventListener('DOMContentLoaded', initPortfolio);
   } else {
-    initLiquidGlassCarousel();
+    initPortfolio();
   }
 </script>

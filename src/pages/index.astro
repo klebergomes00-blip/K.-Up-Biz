@@ -10,6 +10,7 @@ import NossoMetodo from '../components/NossoMetodo.astro';
 import NossoDiferencial from '../components/NossoDiferencial.astro';
 import ProjetosSelecionados from '../components/ProjetosSelecionados.astro';
 import PerguntasFrequentes from '../components/PerguntasFrequentes.astro';
+import Contato from '../components/Contato.astro';
 ---
 
 <Layout
@@ -24,6 +25,7 @@ import PerguntasFrequentes from '../components/PerguntasFrequentes.astro';
 
   <!-- Hero Cinematográfica com Apple-Style Scroll Video Scrubbing -->
   <main id="main-content">
+    <span id="inicio" class="anchor-inicio" aria-hidden="true"></span>
     <Hero />
     <NossaVisao />
     <DigitalShelf />
@@ -31,6 +33,7 @@ import PerguntasFrequentes from '../components/PerguntasFrequentes.astro';
     <NossoDiferencial />
     <ProjetosSelecionados />
     <PerguntasFrequentes />
+    <Contato />
   </main>
 </Layout>
 

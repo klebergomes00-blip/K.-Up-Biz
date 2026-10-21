@@ -1,0 +1,453 @@
+---
+// src/components/Contato.astro — Sétima Dobra: Contato + Rodapé
+// Fechamento da página: convite direto para o WhatsApp, atalhos com mensagem
+// pronta para cada serviço e rodapé completo.
+
+const WHATSAPP = '5561996229988';
+const WHATSAPP_LABEL = '(61) 99622-9988';
+const INSTAGRAM_URL = 'https://www.instagram.com/k.upbiz/';
+const INSTAGRAM_HANDLE = '@k.upbiz';
+
+const wa = (msg: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+
+const mainUrl = wa('Olá, Kleber! Vim pelo site da K. Up Biz e gostaria de conversar sobre o meu negócio.');
+const shortcuts = [
+  { label: 'Quero um site', msg: 'Olá, Kleber! Vim pelo site da K. Up Biz e quero um site profissional para o meu negócio.' },
+  { label: 'Quero aparecer no Google', msg: 'Olá, Kleber! Vim pelo site da K. Up Biz e quero melhorar o Perfil da minha empresa no Google.' },
+  { label: 'Quero anunciar', msg: 'Olá, Kleber! Vim pelo site da K. Up Biz e quero conversar sobre anúncios / tráfego pago.' }
+];
+const year = new Date().getFullYear();
+---
+
+<section class="contato-section" id="contato" aria-labelledby="contato-title">
+  <div class="ct-glow" aria-hidden="true"></div>
+  <div class="ct-grid-lines" aria-hidden="true"></div>
+
+  <div class="ct-wrap">
+    <div class="ct-eyebrow ct-rv">
+      <span class="ct-pip" aria-hidden="true"></span>
+      07 / CONTATO
+    </div>
+
+    <h2 class="ct-title ct-rv" id="contato-title">
+      Vamos conversar sobre{' '}<br class="ct-br" />
+      <span class="ct-gold">o seu negócio?</span>
+    </h2>
+
+    <p class="ct-lead ct-rv">
+      Me conta o que você precisa. Eu respondo pessoalmente e te ajudo a escolher o melhor caminho: site, Google ou anúncios.
+    </p>
+
+    <div class="ct-actions ct-rv">
+      <a href={mainUrl} target="_blank" rel="noopener noreferrer" class="ct-btn-main" data-ct-magnetic>
+        <svg class="ct-wa-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01zm-7.01 15.24h-.01a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.22-8.22 8.22zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/>
+        </svg>
+        <span>Chamar no WhatsApp</span>
+        <span class="ct-btn-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="ct-btn-ghost">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        <span>{INSTAGRAM_HANDLE}</span>
+      </a>
+    </div>
+
+    <div class="ct-shortcuts ct-rv">
+      <span class="ct-shortcuts-label">Ou comece com uma mensagem pronta:</span>
+      <div class="ct-shortcuts-row">
+        {shortcuts.map((s) => (
+          <a href={wa(s.msg)} target="_blank" rel="noopener noreferrer" class="ct-chip">
+            {s.label}
+            <span aria-hidden="true">→</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="ct-direct ct-rv">
+      <span class="ct-avatar" aria-hidden="true">K</span>
+      <span class="ct-direct-text">
+        <b>Atendimento direto com Kleber</b>
+        <small>Do primeiro contato à entrega, sem intermediários.</small>
+      </span>
+    </div>
+  </div>
+
+  <!-- RODAPÉ -->
+  <footer class="ct-footer">
+    <div class="ct-footer-inner">
+      <div class="ct-footer-brand">
+        <img src="/imagens/kupbiz-logo-fundo-escuro.svg" alt="K. Up Biz" width="132" height="36" loading="lazy" decoding="async" />
+        <p>Sites, Google e anúncios para empresas que querem ser encontradas.</p>
+      </div>
+
+      <nav class="ct-footer-col" aria-label="Navegação do rodapé">
+        <span class="ct-footer-head">Navegação</span>
+        <a href="#inicio">Início</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#metodo">Metodologia</a>
+        <a href="#diferencial">Diferenciais</a>
+        <a href="#portfolio">Projetos</a>
+        <a href="#faq">Perguntas frequentes</a>
+      </nav>
+
+      <div class="ct-footer-col">
+        <span class="ct-footer-head">Serviços</span>
+        <a href="#solucoes">Criação de sites</a>
+        <a href="#solucoes">Google Meu Negócio</a>
+        <a href="#solucoes">Gestão de tráfego</a>
+      </div>
+
+      <div class="ct-footer-col">
+        <span class="ct-footer-head">Contato</span>
+        <a href={mainUrl} target="_blank" rel="noopener noreferrer">WhatsApp {WHATSAPP_LABEL}</a>
+        <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram {INSTAGRAM_HANDLE}</a>
+      </div>
+    </div>
+
+    <div class="ct-footer-bottom">
+      <span>© {year} K. UP BIZ. Todos os direitos reservados.</span>
+      <a href="#inicio" class="ct-top">Voltar ao topo ↑</a>
+    </div>
+  </footer>
+</section>
+
+<style>
+  /* ==========================================================================
+     K. UP BIZ — SÉTIMA DOBRA | CONTATO + RODAPÉ
+     ========================================================================== */
+  .contato-section {
+    --gold: #D4AF37;
+    --gold-l: #F3E5AB;
+    --ivory: #F5F1E8;
+    --ivory-2: rgba(245, 241, 232, 0.7);
+    --ivory-3: rgba(245, 241, 232, 0.42);
+    --line: rgba(245, 241, 232, 0.09);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: clip;
+    background: linear-gradient(180deg, #030D0B 0%, #041D17 55%, #030D0B 100%);
+    color: var(--ivory);
+    z-index: 8;
+  }
+
+  .ct-glow {
+    position: absolute;
+    left: 50%;
+    top: 34%;
+    width: min(1100px, 140vw);
+    height: 620px;
+    transform: translate(-50%, -50%);
+    background:
+      radial-gradient(closest-side, rgba(4, 120, 87, 0.42), transparent 70%),
+      radial-gradient(40% 40% at 50% 60%, rgba(212, 175, 55, 0.12), transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .ct-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(245, 241, 232, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245, 241, 232, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(60% 50% at 50% 35%, #000, transparent);
+    -webkit-mask-image: radial-gradient(60% 50% at 50% 35%, #000, transparent);
+    pointer-events: none;
+  }
+
+  .ct-wrap {
+    position: relative;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: clamp(96px, 18vh, 180px) clamp(20px, 5vw, 48px) clamp(80px, 14vh, 140px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ct-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 26px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(46, 229, 157, 0.2);
+    background: rgba(4, 120, 87, 0.12);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+  }
+  .ct-pip { width: 6px; height: 6px; border-radius: 50%; background: #2EE59D; box-shadow: 0 0 10px #2EE59D; }
+
+  .ct-title {
+    margin: 0 0 24px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(34px, 5.6vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+  }
+  .ct-gold {
+    font-family: var(--font-instrument-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    background: linear-gradient(100deg, #B8912A 0%, var(--gold-l) 45%, var(--gold) 70%, #9C7A22 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-right: 0.06em;
+  }
+  .ct-lead {
+    max-width: 580px;
+    margin: 0 0 44px;
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.4vw, 20px);
+    line-height: 1.6;
+    color: var(--ivory-2);
+  }
+
+  .ct-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .ct-btn-main {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 34px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-l) 55%, var(--gold));
+    background-size: 200% 100%;
+    color: #030D0B;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 24px 60px -14px rgba(212, 175, 55, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    transition: background-position 0.8s var(--ease), box-shadow 0.4s ease, translate 0.5s var(--ease);
+  }
+  .ct-btn-main::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: inherit;
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    animation: ctPulse 2.6s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes ctPulse {
+    0% { opacity: 0.9; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.18); }
+  }
+  .ct-btn-main:hover { background-position: 100% 0; box-shadow: 0 30px 70px -12px rgba(212, 175, 55, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.5); }
+  .ct-btn-main:focus-visible { outline: 2px solid var(--ivory); outline-offset: 5px; }
+  .ct-wa-icon { flex-shrink: 0; }
+  .ct-btn-arrow { transition: transform 0.4s var(--ease); }
+  .ct-btn-main:hover .ct-btn-arrow { transform: translate(3px, -3px); }
+
+  .ct-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 19px 26px;
+    border-radius: 999px;
+    border: 1px solid rgba(245, 241, 232, 0.18);
+    background: rgba(245, 241, 232, 0.04);
+    color: var(--ivory);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+  }
+  .ct-btn-ghost:hover { border-color: rgba(212, 175, 55, 0.6); color: var(--gold-l); background: rgba(212, 175, 55, 0.06); }
+  .ct-btn-ghost:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+  .ct-shortcuts { display: grid; gap: 14px; justify-items: center; margin-bottom: 56px; }
+  .ct-shortcuts-label { font-family: var(--font-sans); font-size: 14px; color: var(--ivory-3); }
+  .ct-shortcuts-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .ct-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(8, 26, 21, 0.7);
+    color: var(--ivory-2);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.35s var(--ease);
+  }
+  .ct-chip span { color: var(--gold); transition: transform 0.35s var(--ease); }
+  .ct-chip:hover { color: var(--ivory); border-color: rgba(212, 175, 55, 0.5); transform: translateY(-2px); }
+  .ct-chip:hover span { transform: translateX(3px); }
+  .ct-chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  .ct-direct {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 20px 12px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(245, 241, 232, 0.03);
+    text-align: left;
+  }
+  .ct-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--gold), var(--gold-l));
+    color: #030D0B;
+    font-family: var(--font-instrument-serif);
+    font-style: italic;
+    font-size: 24px;
+  }
+  .ct-direct-text { display: grid; font-family: var(--font-sans); }
+  .ct-direct-text b { font-size: 15px; font-weight: 600; color: var(--ivory); }
+  .ct-direct-text small { font-size: 13px; color: var(--ivory-3); }
+
+  /* Revelação ao entrar na tela */
+  .ct-rv {
+    opacity: 0;
+    transform: translateY(36px);
+    filter: blur(6px);
+    transition: opacity 1s var(--ease), transform 1s var(--ease), filter 1s var(--ease);
+  }
+  .ct-rv.is-in { opacity: 1; transform: none; filter: none; }
+
+  /* --------------------------------------------------------------------------
+     RODAPÉ
+     -------------------------------------------------------------------------- */
+  .ct-footer {
+    position: relative;
+    border-top: 1px solid var(--line);
+    background: rgba(3, 13, 11, 0.7);
+  }
+  .ct-footer-inner {
+    max-width: var(--max-width, 1240px);
+    margin: 0 auto;
+    padding: 56px clamp(20px, 5vw, 64px) 40px;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+    gap: 40px;
+  }
+  .ct-footer-brand img { height: 36px; width: auto; }
+  .ct-footer-brand p {
+    max-width: 280px;
+    margin: 16px 0 0;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ivory-3);
+  }
+  .ct-footer-col { display: grid; align-content: start; gap: 12px; }
+  .ct-footer-head {
+    margin-bottom: 4px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .ct-footer-col a {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ivory-2);
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+  .ct-footer-col a:hover { color: var(--ivory); }
+  .ct-footer-bottom {
+    max-width: var(--max-width, 1240px);
+    margin: 0 auto;
+    padding: 20px clamp(20px, 5vw, 64px) 32px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ivory-3);
+  }
+  .ct-top { color: var(--gold); text-decoration: none; font-weight: 600; }
+  .ct-top:hover { color: var(--gold-l); }
+
+  @media (max-width: 900px) {
+    .ct-footer-inner { grid-template-columns: 1fr 1fr; }
+    .ct-footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 700px) {
+    .ct-br { display: none; }
+  }
+  @media (max-width: 560px) {
+    .ct-actions { flex-direction: column; width: 100%; }
+    .ct-btn-main, .ct-btn-ghost { justify-content: center; width: 100%; }
+    .ct-btn-main { padding: 18px 24px; font-size: 16px; }
+    .ct-chip { font-size: 14px; padding: 10px 15px; }
+    .ct-direct { border-radius: 20px; }
+    .ct-footer-inner { grid-template-columns: 1fr; gap: 28px; }
+    .ct-footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ct-rv { opacity: 1; transform: none; filter: none; transition: none; }
+    .ct-btn-main::after { animation: none; display: none; }
+  }
+</style>
+
+<script>
+  const initContato = () => {
+    const section = document.getElementById('contato');
+    if (!section) return;
+    const items = Array.from(section.querySelectorAll<HTMLElement>('.ct-rv'));
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            const el = e.target as HTMLElement;
+            const i = items.indexOf(el);
+            el.style.transitionDelay = `${Math.max(0, i) * 0.08}s`;
+            el.classList.add('is-in');
+            io.unobserve(el);
+          });
+        },
+        { threshold: 0.2 }
+      );
+      items.forEach((el) => io.observe(el));
+    } else {
+      items.forEach((el) => el.classList.add('is-in'));
+    }
+
+    const btn = section.querySelector<HTMLElement>('[data-ct-magnetic]');
+    if (btn && window.matchMedia('(hover: hover)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      btn.addEventListener('pointermove', (e) => {
+        const r = btn.getBoundingClientRect();
+        btn.style.translate = `${(e.clientX - (r.left + r.width / 2)) * 0.18}px ${(e.clientY - (r.top + r.height / 2)) * 0.3}px`;
+      });
+      btn.addEventListener('pointerleave', () => (btn.style.translate = '0 0'));
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContato);
+  } else {
+    initContato();
+  }
+</script>
