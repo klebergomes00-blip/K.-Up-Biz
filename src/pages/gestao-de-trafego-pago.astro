@@ -1,0 +1,100 @@
+---
+// /gestao-de-trafego-pago — Página do serviço de Gestão de Tráfego Pago
+import ServicoLayout from '../layouts/ServicoLayout.astro';
+
+const plataformas = [
+  { t: 'Google Ads', d: 'Anúncios para quem já está pesquisando pelo que você oferece na Busca do Google.' },
+  { t: 'Instagram e Facebook', d: 'Anúncios na Meta para apresentar a sua empresa ao público com o perfil certo.' }
+];
+
+const entregas = [
+  { t: 'Definição de objetivos', d: 'A campanha é alinhada às metas do negócio: contatos no WhatsApp, ligações ou visitas ao site.' },
+  { t: 'Segmentação e público', d: 'Mapeamento da área de atuação, faixa etária, interesses e comportamentos do cliente ideal.' },
+  { t: 'Criativos e mensagens', d: 'Orientação sobre imagens, textos e chamadas claras para despertar interesse real.' },
+  { t: 'Acompanhamento de indicadores', d: 'Leitura frequente de métricas como custo por contato, alcance e engajamento para embasar as decisões.' },
+  { t: 'Ajustes e otimizações', d: 'Testes e refinamentos contínuos para direcionar o orçamento ao que traz melhor resultado.' }
+];
+
+const etapas = [
+  { k: '01 · Mirar', t: 'Estratégia', d: 'Entendo o perfil do cliente, defino canais, metas de contato e a divisão do orçamento disponível.' },
+  { k: '02 · Lançar', t: 'Estrutura técnica', d: 'Crio as campanhas, as segmentações geográficas, a configuração de eventos e os testes de criativos.' },
+  { k: '03 · Medir', t: 'Leitura de dados', d: 'Acompanho a entrega dos anúncios, a qualidade dos contatos gerados e os custos.' },
+  { k: '04 · Ajustar', t: 'Refinamento', d: 'Ajusto públicos, levo a verba para os criativos mais eficientes e renovo as abordagens.' }
+];
+
+const faq = [
+  { q: 'O que é gestão de tráfego pago?', a: 'É o planejamento, a criação e o acompanhamento de campanhas de anúncios pagos, como Google Ads e anúncios no Instagram e no Facebook, para levar pessoas interessadas até a sua empresa.' },
+  { q: 'A verba dos anúncios está incluída no serviço?', a: 'Não. A verba de anúncios é paga diretamente às plataformas, como Google ou Meta. O serviço de gestão é tratado separadamente na proposta, conforme o escopo contratado.' },
+  { q: 'Vocês garantem resultados?', a: 'Não prometo retornos automáticos garantidos. O que entrego é seriedade técnica, acompanhamento constante e decisões baseadas nos dados das campanhas.' },
+  { q: 'Em quais plataformas vocês anunciam?', a: 'Google (Google Ads), Instagram e Facebook. A escolha depende do seu objetivo e de onde está o seu público.' },
+  { q: 'Preciso ter um site para anunciar?', a: 'Não obrigatoriamente. As campanhas podem levar o cliente direto para o WhatsApp, para uma ligação ou para o site, de acordo com o objetivo. Um site ou landing page bem feito costuma ajudar na decisão.' },
+  { q: 'Vocês atendem empresas de outras cidades?', a: 'Sim. A gestão é feita online, para empresas de todo o Brasil, com atendimento direto comigo pelo WhatsApp.' }
+];
+---
+
+<ServicoLayout
+  id="reach"
+  title="Gestão de Tráfego Pago (Google e Meta Ads) | K. Up Biz"
+  description="Gestão de tráfego pago para empresas: campanhas no Google Ads, Instagram e Facebook planejadas para o seu objetivo e orçamento, com acompanhamento constante. Atendimento online."
+  eyebrow="Gestão de tráfego pago"
+  h1="Gestão de tráfego pago"
+  h1Em="para alcançar as pessoas certas."
+  lead="Planejo e acompanho campanhas de anúncios no Google, no Instagram e no Facebook para conectar a sua empresa a públicos relevantes, de acordo com os seus objetivos e o seu orçamento."
+  ctaLabel="Conversar sobre anúncios"
+  serviceType="Gestão de tráfego pago (Google Ads e Meta Ads)"
+  faq={faq}
+>
+  <section class="sv-section" aria-labelledby="tr-problema">
+    <div class="sv-head">
+      <p class="sv-tag">O problema</p>
+      <h2 id="tr-problema" class="sv-h2">Não basta alcançar pessoas. <em>É preciso alcançar as pessoas certas.</em></h2>
+      <p>Atenção sem direção desperdiça investimento. Uma campanha precisa de objetivo claro, público bem definido, comunicação consistente e acompanhamento para orientar as decisões.</p>
+    </div>
+    <div class="sv-grid sv-grid-2">
+      {plataformas.map((e) => (
+        <article class="sv-card glass">
+          <h3>{e.t}</h3>
+          <p>{e.d}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="sv-section" aria-labelledby="tr-entregas">
+    <div class="sv-head">
+      <p class="sv-tag">O que é feito</p>
+      <h2 id="tr-entregas" class="sv-h2">Cada campanha <em>começa com estratégia.</em></h2>
+    </div>
+    <div class="sv-grid">
+      {entregas.map((e, i) => (
+        <article class="sv-card glass">
+          <span class="sv-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{e.t}</h3>
+          <p>{e.d}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="sv-section" id="como-funciona" aria-labelledby="tr-etapas">
+    <div class="sv-head">
+      <p class="sv-tag">Como funciona</p>
+      <h2 id="tr-etapas" class="sv-h2">Uma sequência contínua <em>de aperfeiçoamento.</em></h2>
+    </div>
+    <ol class="sv-steps">
+      {etapas.map((e) => (
+        <li class="glass">
+          <span class="sv-step-k">{e.k}</span>
+          <h3>{e.t}</h3>
+          <p>{e.d}</p>
+        </li>
+      ))}
+    </ol>
+    <p class="sv-note"><strong>Transparência no orçamento:</strong> a verba de anúncios (paga diretamente às plataformas, como Google ou Meta) e o serviço de gestão são tratados separadamente na proposta, conforme o escopo contratado. Não prometo retornos automáticos garantidos, e sim seriedade técnica e disciplina na análise.</p>
+  </section>
+</ServicoLayout>
+
+<style>
+  .sv-steps h3 { margin: 0 0 8px; font-family: var(--font-sans); font-size: 18px; font-weight: 600; color: #F5F1E8; }
+  .sv-steps p { margin: 0; font-family: var(--font-sans); font-size: 15px; line-height: 1.6; color: rgba(245, 241, 232, 0.74); }
+</style>

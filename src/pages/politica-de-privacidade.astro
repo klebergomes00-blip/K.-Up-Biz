@@ -1,0 +1,153 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { EMPRESA, waLink } from '../config/empresa';
+const wa = waLink('Olá, Kleber! Tenho uma solicitação sobre meus dados pessoais.');
+---
+
+<LegalLayout
+  title="Política de Privacidade"
+  description="Como a K. Up Biz trata os dados pessoais de visitantes e clientes, de acordo com a Lei Geral de Proteção de Dados (LGPD)."
+>
+  <p>
+    Esta Política explica, de forma simples, quais dados pessoais a <strong>{EMPRESA.nomeFantasia}</strong> trata,
+    para quê, com quem compartilha e como você pode exercer seus direitos, de acordo com a Lei Geral de Proteção de
+    Dados Pessoais (Lei nº 13.709/2018 — LGPD).
+  </p>
+
+  <h2>1. Quem é o responsável pelos seus dados</h2>
+  <p>
+    A {EMPRESA.nomeFantasia} é o nome comercial usado por <strong>{EMPRESA.responsavel}</strong>, {EMPRESA.tipo},
+    com endereço na {EMPRESA.endereco}, {EMPRESA.cidadeUf}. Ele é o <strong>controlador</strong> dos dados pessoais
+    tratados neste site e no atendimento, ou seja, quem decide como e por que esses dados são usados.
+  </p>
+  <p>
+    Canal para assuntos de privacidade: <a href={`mailto:${EMPRESA.email}`}>{EMPRESA.email}</a>{' '}
+    ou WhatsApp <a href={wa} target="_blank" rel="noopener noreferrer">{EMPRESA.whatsappLabel}</a>.
+  </p>
+
+  <h2>2. Quais dados tratamos</h2>
+  <h3>2.1 Quando você entra em contato pelo WhatsApp</h3>
+  <p>
+    O site não possui formulário. O contato acontece pelo WhatsApp, e você decide o que enviar. Normalmente tratamos:
+  </p>
+  <ul>
+    <li>nome e número de telefone (exibidos pelo próprio WhatsApp);</li>
+    <li>o conteúdo das mensagens, incluindo informações sobre o seu negócio e o serviço que você procura;</li>
+    <li>
+      quando houver contratação, os dados necessários para formalizar a proposta, executar o serviço e emitir
+      cobranças e comprovantes (por exemplo, nome completo ou razão social, documento e endereço).
+    </li>
+  </ul>
+  <p>
+    Pedimos que você <strong>não envie dados sensíveis</strong> (como informações de saúde, religião ou biometria) nem
+    dados de terceiros sem necessidade.
+  </p>
+
+  <h3>2.2 Quando você navega no site</h3>
+  <ul>
+    <li>
+      <strong>Registros técnicos:</strong> o serviço de hospedagem do site pode registrar automaticamente dados como
+      endereço IP, data e hora de acesso, navegador e páginas visitadas, para funcionamento e segurança.
+    </li>
+    <li>
+      <strong>Cookies e ferramentas de medição/anúncios:</strong> atualmente o site não utiliza cookies de
+      rastreamento. Se no futuro usarmos ferramentas como Google Analytics, Google Ads ou Pixel da Meta, elas só serão
+      ativadas com o seu consentimento, conforme a <a href="/politica-de-cookies">Política de Cookies</a>.
+    </li>
+  </ul>
+
+  <h3>2.3 Ao prestar serviços para empresas clientes</h3>
+  <p>
+    Na execução de serviços (como gestão de anúncios, Perfil da Empresa no Google ou criação de sites), podemos ter
+    acesso a dados pessoais que pertencem à base do cliente — por exemplo, contatos gerados por campanhas. Nesses
+    casos, tratamos esses dados apenas conforme as instruções do cliente e para executar o serviço contratado.
+  </p>
+
+  <h2>3. Para que usamos os dados e com qual base legal</h2>
+  <table>
+    <thead>
+      <tr><th scope="col">Finalidade</th><th scope="col">Base legal (LGPD, art. 7º)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Responder seu contato, entender sua necessidade e enviar proposta</td><td>Procedimentos preliminares a contrato, a seu pedido (inciso V)</td></tr>
+      <tr><td>Executar o serviço contratado, cobrar e prestar suporte</td><td>Execução de contrato (inciso V)</td></tr>
+      <tr><td>Guardar registros exigidos por lei (por exemplo, fiscais)</td><td>Cumprimento de obrigação legal (inciso II)</td></tr>
+      <tr><td>Manter o site funcionando e seguro</td><td>Legítimo interesse (inciso IX)</td></tr>
+      <tr><td>Medição de audiência e anúncios personalizados (quando ativados)</td><td>Consentimento (inciso I)</td></tr>
+    </tbody>
+  </table>
+  <p>Não vendemos seus dados pessoais e não os usamos para finalidades diferentes das descritas aqui.</p>
+
+  <h2>4. Com quem compartilhamos</h2>
+  <ul>
+    <li><strong>Meta (WhatsApp)</strong>, por onde acontece o atendimento;</li>
+    <li><strong>Google</strong>, se ativadas com seu consentimento, ferramentas de medição e anúncios;</li>
+    <li><strong>Serviço de hospedagem do site</strong>, que armazena os registros técnicos de acesso;</li>
+    <li>
+      <strong>Plataformas necessárias à execução do serviço contratado</strong> (como Google Ads, Meta Ads,
+      Perfil da Empresa no Google e serviços de hospedagem de sites), apenas no que for necessário;
+    </li>
+    <li><strong>Autoridades públicas</strong>, quando houver obrigação legal ou ordem judicial.</li>
+  </ul>
+
+  <h2>5. Transferência internacional</h2>
+  <p>
+    Alguns desses fornecedores (como Meta e Google) podem armazenar ou processar dados em servidores fora do Brasil.
+    Nesses casos, a transferência ocorre para viabilizar o serviço e com fornecedores que adotam medidas de proteção de
+    dados, nos termos permitidos pela LGPD.
+  </p>
+
+  <h2>6. Por quanto tempo guardamos</h2>
+  <p>
+    Mantemos os dados apenas pelo tempo necessário para cumprir as finalidades acima — por exemplo, enquanto durar a
+    negociação ou a prestação do serviço — e pelo período exigido por obrigações legais ou para defesa de direitos.
+    Depois disso, os dados são excluídos ou anonimizados.
+  </p>
+
+  <h2>7. Seus direitos</h2>
+  <p>Você pode, a qualquer momento e gratuitamente, solicitar:</p>
+  <ul>
+    <li>confirmação de que tratamos seus dados e acesso a eles;</li>
+    <li>correção de dados incompletos, inexatos ou desatualizados;</li>
+    <li>anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desacordo com a LGPD;</li>
+    <li>portabilidade dos dados a outro fornecedor;</li>
+    <li>eliminação dos dados tratados com base no seu consentimento;</li>
+    <li>informação sobre com quem compartilhamos seus dados;</li>
+    <li>informação sobre a possibilidade de não dar consentimento e suas consequências;</li>
+    <li>revogação do consentimento.</li>
+  </ul>
+  <p>
+    Para exercer seus direitos, escreva para <a href={`mailto:${EMPRESA.email}`}>{EMPRESA.email}</a>. Podemos pedir
+    informações para confirmar sua identidade antes de atender. Você também pode apresentar reclamação à Autoridade
+    Nacional de Proteção de Dados (ANPD).
+  </p>
+
+  <h2>8. Segurança</h2>
+  <p>
+    Adotamos medidas técnicas e administrativas razoáveis para proteger seus dados contra acessos não autorizados,
+    perda ou alteração, como acesso restrito às conversas e contas utilizadas no atendimento. Nenhum sistema é
+    totalmente imune a riscos; se ocorrer um incidente de segurança relevante, adotaremos as medidas previstas na
+    legislação.
+  </p>
+
+  <h2>9. Crianças e adolescentes</h2>
+  <p>
+    Nossos serviços são voltados a pessoas e negócios que contratam serviços digitais. Não buscamos coletar dados de
+    crianças. Se você é responsável por um menor e acredita que ele nos enviou dados, entre em contato para que possamos
+    excluí-los.
+  </p>
+
+  <h2>10. Alterações nesta Política</h2>
+  <p>
+    Esta Política pode ser atualizada para refletir mudanças no site, nos serviços ou na legislação. A data da última
+    atualização fica sempre no topo desta página.
+  </p>
+
+  <div class="lg-box">
+    <p>
+      <strong>Dúvidas?</strong> Fale com {EMPRESA.responsavel} pelo e-mail{' '}
+      <a href={`mailto:${EMPRESA.email}`}>{EMPRESA.email}</a> ou pelo WhatsApp{' '}
+      <a href={wa} target="_blank" rel="noopener noreferrer">{EMPRESA.whatsappLabel}</a>.
+    </p>
+  </div>
+</LegalLayout>

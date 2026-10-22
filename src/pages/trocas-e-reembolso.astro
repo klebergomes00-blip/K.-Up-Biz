@@ -1,0 +1,83 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { EMPRESA, waLink } from '../config/empresa';
+const wa = waLink('Olá, Kleber! Quero falar sobre cancelamento/reembolso de um serviço.');
+---
+
+<LegalLayout
+  title="Cancelamento e Reembolso"
+  description="Direito de arrependimento, cancelamento e reembolso dos serviços da K. Up Biz, conforme o Código de Defesa do Consumidor."
+>
+  <p>
+    A {EMPRESA.nomeFantasia} presta <strong>serviços</strong> (criação de sites e landing pages, otimização do Perfil
+    da Empresa no Google e gestão de tráfego pago). Por isso, esta política trata de cancelamento e reembolso de
+    serviços, de acordo com o Código de Defesa do Consumidor (Lei nº 8.078/1990 — CDC).
+  </p>
+
+  <h2>1. Como funciona a contratação</h2>
+  <p>
+    Toda contratação é feita pelo WhatsApp, por meio de uma <strong>proposta</strong> que informa o escopo do serviço,
+    o prazo, o valor e a forma de pagamento. O pagamento também é combinado pelo WhatsApp; o site não recebe
+    pagamentos.
+  </p>
+
+  <h2>2. Direito de arrependimento (7 dias)</h2>
+  <p>
+    Como a contratação acontece fora de um estabelecimento comercial (pelo WhatsApp), você pode desistir do serviço em
+    até <strong>7 (sete) dias</strong> a contar da contratação, sem precisar justificar, conforme o artigo 49 do CDC.
+  </p>
+  <p>
+    Nesse caso, os valores pagos durante esse prazo serão <strong>devolvidos integralmente</strong>, com atualização
+    monetária, preferencialmente pelo mesmo meio usado no pagamento.
+  </p>
+
+  <h2>3. Cancelamento após 7 dias</h2>
+  <p>
+    Depois do prazo de arrependimento, o cancelamento segue as condições informadas na proposta aceita (por exemplo,
+    etapas já entregues e valores correspondentes). Se a proposta não tratar do assunto, entre em contato para
+    combinarmos uma solução justa para as duas partes.
+  </p>
+
+  <h2>4. Problemas com o serviço entregue</h2>
+  <p>
+    Se o serviço for entregue com falha ou em desacordo com o que foi combinado, você pode pedir, conforme o CDC:
+  </p>
+  <ul>
+    <li>a correção ou nova execução do serviço, sem custo adicional;</li>
+    <li>a devolução do valor pago, com atualização monetária; ou</li>
+    <li>um abatimento proporcional no preço.</li>
+  </ul>
+  <p>
+    Pedimos que a reclamação seja feita pelos nossos canais assim que o problema for percebido, para que possamos
+    resolver o mais rápido possível. Os prazos para reclamar são os previstos no CDC.
+  </p>
+
+  <h2>5. Verba de anúncios</h2>
+  <p>
+    Nos serviços de gestão de tráfego, a verba investida em anúncios é paga <strong>diretamente às plataformas</strong>{' '}
+    (como Google e Meta) e é separada do valor do nosso serviço. Reembolsos dessa verba seguem as regras de cada
+    plataforma, que não são controladas pela {EMPRESA.nomeFantasia}. Podemos ajudar você a fazer a solicitação.
+  </p>
+
+  <h2>6. Resultados</h2>
+  <p>
+    Os serviços de marketing digital não garantem posições específicas no Google, volume de clientes ou vendas, porque
+    esses resultados dependem de fatores externos. A ausência de um resultado específico, por si só, não caracteriza
+    falha do serviço, desde que o que foi combinado na proposta tenha sido entregue.
+  </p>
+
+  <h2>7. Como solicitar</h2>
+  <p>
+    Envie sua solicitação de cancelamento ou reembolso pelo WhatsApp{' '}
+    <a href={wa} target="_blank" rel="noopener noreferrer">{EMPRESA.whatsappLabel}</a> ou pelo e-mail{' '}
+    <a href={`mailto:${EMPRESA.email}`}>{EMPRESA.email}</a>, informando seu nome e o serviço contratado. Você receberá
+    a confirmação do recebimento do pedido pelo mesmo canal.
+  </p>
+
+  <div class="lg-box">
+    <p>
+      Esta política não exclui nem limita nenhum direito garantido pelo Código de Defesa do Consumidor ou por outras
+      leis aplicáveis.
+    </p>
+  </div>
+</LegalLayout>

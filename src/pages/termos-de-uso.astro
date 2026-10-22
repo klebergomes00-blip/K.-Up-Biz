@@ -1,0 +1,99 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { EMPRESA } from '../config/empresa';
+---
+
+<LegalLayout
+  title="Termos de Uso"
+  description="Condições de uso do site da K. Up Biz."
+>
+  <p>
+    Estes Termos regulam o uso deste site, mantido por <strong>{EMPRESA.responsavel}</strong>, que atua com o nome
+    comercial <strong>{EMPRESA.nomeFantasia}</strong> ({EMPRESA.endereco}, {EMPRESA.cidadeUf} —{' '}
+    <a href={`mailto:${EMPRESA.email}`}>{EMPRESA.email}</a>). Ao navegar pelo site, você concorda com estes Termos.
+  </p>
+
+  <h2>1. Finalidade do site</h2>
+  <p>
+    Este site apresenta os serviços da {EMPRESA.nomeFantasia} — criação de sites e landing pages, otimização do Perfil
+    da Empresa no Google e gestão de tráfego pago — e oferece um canal de contato pelo WhatsApp. O site não realiza
+    vendas nem pagamentos.
+  </p>
+
+  <h2>2. Contratação de serviços</h2>
+  <p>
+    A contratação acontece por meio de proposta enviada pelo WhatsApp, com escopo, prazo, valor e forma de pagamento.
+    As condições específicas do serviço são as que constam na proposta aceita por você. Em caso de diferença entre
+    estes Termos e a proposta, prevalece a proposta. Os direitos de cancelamento e reembolso estão descritos na página{' '}
+    <a href="/trocas-e-reembolso">Cancelamento e Reembolso</a>.
+  </p>
+
+  <h2>3. Informações e exemplos exibidos</h2>
+  <ul>
+    <li>
+      Telas, simulações de busca, perfis, gráficos e animações exibidos no site são <strong>ilustrativos</strong> e
+      servem para explicar como os serviços funcionam.
+    </li>
+    <li>
+      Os resultados de qualquer serviço de marketing digital dependem de fatores que não controlamos, como concorrência,
+      orçamento, comportamento do público e regras das plataformas (Google, Meta e outras).{' '}
+      <strong>Não garantimos posições específicas no Google, volume de clientes, vendas ou retorno financeiro.</strong>
+    </li>
+    <li>Procuramos manter as informações do site corretas e atualizadas, mas elas podem mudar sem aviso prévio.</li>
+  </ul>
+
+  <h2>4. Propriedade intelectual</h2>
+  <p>
+    Os textos, a identidade visual, o layout e os demais conteúdos próprios deste site pertencem à{' '}
+    {EMPRESA.nomeFantasia} ou são usados com autorização, e não podem ser copiados ou reproduzidos sem permissão.
+    Os projetos exibidos no portfólio pertencem aos respectivos clientes e são mostrados apenas como exemplo de trabalho
+    realizado. Marcas de terceiros citadas no site (como Google, WhatsApp, Instagram e Meta) pertencem aos seus
+    titulares e são mencionadas apenas para identificar plataformas com as quais trabalhamos, sem indicar parceria
+    oficial.
+  </p>
+
+  <h2>5. Uso adequado</h2>
+  <p>Ao usar o site, você se compromete a não:</p>
+  <ul>
+    <li>tentar acessar áreas restritas, prejudicar o funcionamento do site ou explorar falhas de segurança;</li>
+    <li>usar o site para fins ilegais ou para enviar conteúdo ofensivo, enganoso ou que viole direitos de terceiros;</li>
+    <li>copiar o conteúdo do site em massa por meios automatizados sem autorização.</li>
+  </ul>
+
+  <h2>6. Links para outros sites</h2>
+  <p>
+    O site contém links para sites de terceiros, como os projetos do portfólio, WhatsApp e Instagram. Esses sites têm
+    seus próprios termos e políticas, e não somos responsáveis pelo conteúdo ou pelas práticas deles.
+  </p>
+
+  <h2>7. Disponibilidade</h2>
+  <p>
+    Buscamos manter o site disponível, mas ele pode passar por interrupções para manutenção ou por falhas de terceiros
+    (como hospedagem e internet).
+  </p>
+
+  <h2>8. Privacidade</h2>
+  <p>
+    O tratamento de dados pessoais segue a nossa <a href="/politica-de-privacidade">Política de Privacidade</a> e a{' '}
+    <a href="/politica-de-cookies">Política de Cookies</a>.
+  </p>
+
+  <h2>9. Alterações</h2>
+  <p>
+    Estes Termos podem ser atualizados a qualquer momento. A versão válida é sempre a publicada nesta página, com a data
+    da última atualização no topo.
+  </p>
+
+  <h2>10. Lei aplicável</h2>
+  <p>
+    Estes Termos são regidos pelas leis brasileiras. Nada nestes Termos limita os direitos garantidos ao consumidor
+    pelo Código de Defesa do Consumidor, inclusive o de propor ação no foro do seu domicílio.
+  </p>
+
+  <div class="lg-box">
+    <p>
+      Dúvidas sobre estes Termos: <a href={`mailto:${EMPRESA.email}`}>{EMPRESA.email}</a> ou WhatsApp{' '}
+      {EMPRESA.whatsappLabel}.
+    </p>
+  </div>
+</LegalLayout>

@@ -101,7 +101,6 @@ const services: ServiceData[] = [
               id={`card-trigger-${item.id}`}
               aria-haspopup="dialog"
               aria-expanded="false"
-              aria-label={`Abrir detalhes de ${item.subtitle}`}
             >
               <!-- Lombo 3D Lateral Esquerdo (Espessura de Capa Física) -->
               <span class="card-spine" aria-hidden="true"></span>
@@ -117,13 +116,13 @@ const services: ServiceData[] = [
 
               <!-- Conteúdo da Capa -->
               <span class="card-content">
-                <span class="card-top-tag">
+                <span class="card-top-tag" aria-hidden="true">
                   <span class="card-index">{item.index}</span>
                   <span class="card-dot">•</span>
                   <span class="card-category">SOLUÇÃO</span>
                 </span>
 
-                <span class="card-logo-wrap">
+                <span class="card-logo-wrap" aria-hidden="true">
                   {item.id === 'web' && (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -342,6 +341,7 @@ const services: ServiceData[] = [
                 <span class="card-info">
                   <span class="card-visual-title">{item.titleVisual}</span>
                   <span class="card-subtitle">{item.subtitle}</span>
+                  <span class="sr-only">, abrir detalhes</span>
                 </span>
               </span>
 
@@ -450,7 +450,8 @@ const services: ServiceData[] = [
   .brick-wall-image {
     position: absolute;
     inset: 0;
-    background-image: url('/imagens/parede-tijolos-kupbiz.png');
+    background-image: url('/imagens/parede-tijolos-kupbiz.webp');
+    background-image: image-set(url('/imagens/parede-tijolos-kupbiz.avif') type('image/avif'), url('/imagens/parede-tijolos-kupbiz.webp') type('image/webp'));
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -1684,6 +1685,10 @@ const services: ServiceData[] = [
 
   @media (max-width: 767px) {
     .brick-wall-image {
+      background-image: url('/imagens/parede-tijolos-kupbiz-960.webp');
+      background-image: image-set(url('/imagens/parede-tijolos-kupbiz-960.avif') type('image/avif'), url('/imagens/parede-tijolos-kupbiz-960.webp') type('image/webp'));
+    }
+    .brick-wall-image {
       background-position: center top;
       opacity: 0.65;
     }
@@ -2422,8 +2427,10 @@ const services: ServiceData[] = [
       });
 
       if (!isTouch) {
-        // Desktop: clique direto na capa também abre expansão
-        card.addEventListener('click', (e) => {
+        // Desktop: clique em qualquer ponto do card abre a expansão.
+        // (O ouvinte fica no contêiner: com o card inclinado em 3D, parte dos cliques
+        // cai no contêiner e não no botão da capa.)
+        anchor.addEventListener('click', (e) => {
           e.preventDefault();
           openExpansion(anchor);
         });
@@ -2431,7 +2438,8 @@ const services: ServiceData[] = [
         // Mobile / Touch:
         // 1º toque na capa destaca o card e exibe "ABRIR"
         // 2º toque na capa expande
-        card.addEventListener('click', (e) => {
+        // (ouvinte no contêiner para o toque funcionar em qualquer ponto do card)
+        anchor.addEventListener('click', (e) => {
           if (!anchor.classList.contains('is-touch-active')) {
             e.preventDefault();
             cardAnchors.forEach((a) => {

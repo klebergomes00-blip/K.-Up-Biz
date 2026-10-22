@@ -39,7 +39,7 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
   <div class="service-modal-viewport" id="service-modal-viewport">
     
     <!-- Topbar Fixa / Sticky: Identificador, Navegação entre Serviços e Fechar -->
-    <header class="service-modal-header" id="service-modal-header">
+    <div class="service-modal-header" id="service-modal-header">
       <div class="header-inner-row">
         <!-- Lado Esquerdo: Identificação do Serviço Ativo -->
         <div class="service-active-identity">
@@ -48,12 +48,14 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
         </div>
 
         <!-- Centro: Marca K. Up Biz e Seletor Discreto de Serviços -->
-        <nav class="service-tabs-nav" aria-label="Navegação entre experiências de serviço">
+        <div class="service-tabs-nav" role="tablist" aria-label="Escolher serviço">
           <button
             type="button"
             class="service-tab-btn is-active"
             data-target="web"
             id="tab-btn-web"
+            aria-controls="service-view-web"
+            tabindex="0"
             aria-selected="true"
             role="tab"
           >
@@ -65,6 +67,8 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
             class="service-tab-btn"
             data-target="local"
             id="tab-btn-local"
+            aria-controls="service-view-local"
+            tabindex="-1"
             aria-selected="false"
             role="tab"
           >
@@ -76,13 +80,15 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
             class="service-tab-btn"
             data-target="reach"
             id="tab-btn-reach"
+            aria-controls="service-view-reach"
+            tabindex="-1"
             aria-selected="false"
             role="tab"
           >
             <span class="tab-index">03</span>
             <span class="tab-label">REACH</span>
           </button>
-        </nav>
+        </div>
 
         <!-- Lado Direito: Botão Fechar Retornando à Prateleira -->
         <div class="service-header-actions">
@@ -102,19 +108,20 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
           </button>
         </div>
       </div>
-    </header>
+    </div>
     <!-- Superfície de Conteúdo com Scroll Próprio -->
     <div class="service-scroll-container" id="service-scroll-container">
 
       <!-- ==================================================================
            01. EXPERIÊNCIA WEB: CRIAÇÃO DE SITES E LANDING PAGES
            ================================================================== -->
-      <article
+      <div
         class="service-experience-view is-active"
         id="service-view-web"
         data-service="web"
         role="tabpanel"
-        aria-label="Criação de Sites e Landing Pages"
+        aria-labelledby="tab-btn-web"
+        tabindex="-1"
       >
         <!-- CENA 1 · HERO -->
         <section class="ax-hero" data-scrub>
@@ -135,8 +142,8 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
                 Desenvolvemos sites e landing pages que unem identidade, tecnologia e estratégia para apresentar sua empresa com profissionalismo e facilitar o contato com novos clientes.
               </p>
               <ul class="ax-chips">
-                <li><span class="ax-chip-dot" style="--c:#D4AF37"></span>Arquitetura Exclusiva</li>
-                <li><span class="ax-chip-dot" style="--c:#00D1FF"></span>Velocidade Ultrarrápida</li>
+                <li><span class="ax-chip-dot" style="--c:#D4AF37"></span>Estrutura Sob Medida</li>
+                <li><span class="ax-chip-dot" style="--c:#00D1FF"></span>Carregamento Rápido</li>
                 <li><span class="ax-chip-dot" style="--c:#2EE59D"></span>Foco em Conversão</li>
               </ul>
             </div>
@@ -169,16 +176,17 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
               <div class="ax-cap" data-step="2">
                 <span class="ax-tag">Transformação</span>
                 <h3 class="ax-h3">Então redesenhamos<br/>cada detalhe.</h3>
-                <p class="ax-p">Estrutura, tipografia, velocidade e chamadas para contato pensadas do zero para o seu negócio.</p>
+                <p class="ax-p">Estrutura, tipografia, velocidade e chamadas para contato pensadas para o seu negócio.</p>
               </div>
               <div class="ax-cap" data-step="3">
                 <span class="ax-tag ax-tag-ok">Padrão K. Up Biz</span>
                 <h3 class="ax-h3">Identidade forte.<br/><span class="ax-gold italic-serif">Conexão direta.</span></h3>
-                <p class="ax-p">Design sob medida, carregamento instantâneo e WhatsApp integrado.</p>
+                <p class="ax-p">Design sob medida, carregamento rápido e WhatsApp integrado.</p>
               </div>
             </div>
 
             <div class="ax-device-wrap">
+              <span class="ax-illus">Exemplo ilustrativo</span>
               <div class="ax-browser">
                 <div class="ax-browser-bar">
                   <i></i><i></i><i></i>
@@ -214,10 +222,10 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
                     </div>
                     <div class="ax-good-feats">
                       <span style="--i:0">Design sob medida</span>
-                      <span style="--i:1">Carregamento instantâneo</span>
+                      <span style="--i:1">Carregamento rápido</span>
                       <span style="--i:2">WhatsApp integrado</span>
                     </div>
-                    <div class="ax-good-score" style="--i:3"><b>100</b><small>desempenho</small></div>
+                    <div class="ax-good-score" style="--i:3"><b>✓</b><small>otimizado</small></div>
                   </div>
                   <div class="ax-scanline" aria-hidden="true"></div>
                 </div>
@@ -236,7 +244,7 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
             </div>
             <div class="ax-features-body">
               <ol class="ax-feature-list">
-                <li data-step="0"><span class="ax-fn">01</span><div><h4>Layout Personalizado</h4><p>Composição visual autoral, tipografia sofisticada e acabamento que reflete a autoridade real da sua empresa.</p></div></li>
+                <li data-step="0"><span class="ax-fn">01</span><div><h4>Layout Personalizado</h4><p>Composição visual adaptada à sua marca, tipografia sofisticada e acabamento que reflete a autoridade real da sua empresa.</p></div></li>
                 <li data-step="1"><span class="ax-fn">02</span><div><h4>Experiência Responsiva</h4><p>Navegação impecável e leitura confortável em smartphones, tablets, laptops e monitores de alta resolução.</p></div></li>
                 <li data-step="2"><span class="ax-fn">03</span><div><h4>Organização Estratégica</h4><p>Estruturação lógica de informações que responde dúvidas críticas do cliente e reduz atritos na decisão.</p></div></li>
                 <li data-step="3"><span class="ax-fn">04</span><div><h4>Canais de Contato Integrados</h4><p>Chamadas diretas para WhatsApp, telefone e canais comerciais estrategicamente posicionados.</p></div></li>
@@ -278,7 +286,7 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
             <div class="ax-track">
               <article class="ax-shot">
                 <div class="ax-shot-frame">
-                  <img src="/imagens/portfolio/fernando-junior.webp" alt="Site Fernando Junior Corretor de Imóveis" loading="lazy" decoding="async" />
+                  <picture><source type="image/avif" srcset="/imagens/portfolio/fernando-junior-800.avif 800w, /imagens/portfolio/fernando-junior.avif 1584w" sizes="(max-width: 768px) 90vw, 33vw" /><img src="/imagens/portfolio/fernando-junior.webp" srcset="/imagens/portfolio/fernando-junior-800.webp 800w, /imagens/portfolio/fernando-junior.webp 1584w" sizes="(max-width: 768px) 90vw, 33vw" width="1584" height="849" alt="Site Fernando Junior Corretor de Imóveis" loading="lazy" decoding="async" /></picture>
                 </div>
                 <div class="ax-shot-body">
                   <span class="ax-shot-tag">IMOBILIÁRIO &amp; ALTO PADRÃO</span>
@@ -289,22 +297,22 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
               </article>
               <article class="ax-shot">
                 <div class="ax-shot-frame">
-                  <img src="/imagens/portfolio/level-up-aesthetics.webp" alt="Site Clínica Estética Level Up" loading="lazy" decoding="async" />
+                  <picture><source type="image/avif" srcset="/imagens/portfolio/level-up-aesthetics-800.avif 800w, /imagens/portfolio/level-up-aesthetics.avif 1584w" sizes="(max-width: 768px) 90vw, 33vw" /><img src="/imagens/portfolio/level-up-aesthetics.webp" srcset="/imagens/portfolio/level-up-aesthetics-800.webp 800w, /imagens/portfolio/level-up-aesthetics.webp 1584w" sizes="(max-width: 768px) 90vw, 33vw" width="1584" height="849" alt="Site Level Up Aesthetics" loading="lazy" decoding="async" /></picture>
                 </div>
                 <div class="ax-shot-body">
                   <span class="ax-shot-tag">SAÚDE &amp; BEM-ESTAR PREMIUM</span>
-                  <h4>Clínica de Estética Level Up</h4>
+                  <h4>Level Up Aesthetics</h4>
                   <p>Ambiente digital sofisticado que detalha procedimentos clínicos, corpo técnico e canal de agendamento ágil.</p>
                   <a href="https://clinicaestetica-xi.vercel.app/" target="_blank" rel="noopener noreferrer" class="ax-link">Ver projeto <span>↗</span></a>
                 </div>
               </article>
               <article class="ax-shot">
                 <div class="ax-shot-frame">
-                  <img src="/imagens/portfolio/styvy-burguer.webp" alt="Site Styvi Burguer Gastronomia" loading="lazy" decoding="async" />
+                  <picture><source type="image/avif" srcset="/imagens/portfolio/styvy-burguer-800.avif 800w, /imagens/portfolio/styvy-burguer.avif 1584w" sizes="(max-width: 768px) 90vw, 33vw" /><img src="/imagens/portfolio/styvy-burguer.webp" srcset="/imagens/portfolio/styvy-burguer-800.webp 800w, /imagens/portfolio/styvy-burguer.webp 1584w" sizes="(max-width: 768px) 90vw, 33vw" width="1584" height="849" alt="Site Styvy Burguer" loading="lazy" decoding="async" /></picture>
                 </div>
                 <div class="ax-shot-body">
                   <span class="ax-shot-tag">GASTRONOMIA &amp; DELIVERY</span>
-                  <h4>Styvi Burguer</h4>
+                  <h4>Styvy Burguer</h4>
                   <p>Cardápio digital ágil e visualmente apetitoso com arquitetura voltada para conversão de pedidos em dispositivos móveis.</p>
                   <a href="https://styviburguer.vercel.app/" target="_blank" rel="noopener noreferrer" class="ax-link">Ver projeto <span>↗</span></a>
                 </div>
@@ -335,19 +343,22 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
               <span>Solicitar uma proposta</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
             </a>
+            <p class="ax-privacy">Abre uma conversa no WhatsApp. Seus dados são tratados conforme a <a href="/politica-de-privacidade">Política de Privacidade</a>.</p>
+            <a href="/criacao-de-sites" class="ax-more">Ver a página completa de Criação de Sites <span aria-hidden="true">→</span></a>
           </div>
         </section>
-      </article>
+      </div>
 
       <!-- ==================================================================
            02. EXPERIÊNCIA LOCAL: GOOGLE MEU NEGÓCIO / PERFIL DA EMPRESA
            ================================================================== -->
-      <article
+      <div
         class="service-experience-view"
         id="service-view-local"
         data-service="local"
         role="tabpanel"
-        aria-label="Google Meu Negócio e Presença Local"
+        aria-labelledby="tab-btn-local"
+        tabindex="-1"
       >
         <!-- CENA 1 · HERO -->
         <section class="ax-hero" data-scrub>
@@ -407,7 +418,7 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
               <div class="ax-cap" data-step="2">
                 <span class="ax-tag ax-tag-ok">03 · A confiança</span>
                 <h3 class="ax-h3">Escolhe quem<br/><span class="ax-gold italic-serif">transmite confiança.</span></h3>
-                <p class="ax-p">Perfil verificado, categoria adequada, horários atualizados, fotos profissionais e avaliações reais.</p>
+                <p class="ax-p">Perfil verificado, categoria adequada, horários atualizados, fotos profissionais e avaliações de clientes.</p>
               </div>
               <div class="ax-cap" data-step="3">
                 <span class="ax-tag">04 · O contato</span>
@@ -417,16 +428,12 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
             </div>
 
             <div class="ax-device-wrap">
-              <div class="ax-phone">
+              <span class="ax-illus">Exemplo ilustrativo</span>
+              <div class="ax-phone" aria-hidden="true">
                 <div class="ax-phone-island"></div>
                 <div class="ax-phone-screen">
                   <div class="ax-gsearch">
-                    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-                      <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
-                      <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"/>
-                      <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
-                      <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
-                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5F6368" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
                     <span class="ax-typed-wrap"><span class="ax-typed" id="sim-query-text">"clínica de estética perto de mim"</span></span>
                     <span class="ax-caret"></span>
                   </div>
@@ -451,10 +458,10 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
                     <span class="ax-handle"></span>
                     <span class="ax-verified">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="#2EE59D"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                      Perfil verificado e otimizado
+                      Perfil completo e organizado
                     </span>
                     <span class="ax-pname">Sua Empresa em Destaque</span>
-                    <span class="ax-rating"><b>5,0</b><span class="ax-stars"><span class="ax-stars-fill">★★★★★</span>★★★★★</span><small>Avaliações reais</small></span>
+                    <span class="ax-rating"><span class="ax-stars"><span class="ax-stars-fill">★★★★★</span>★★★★★</span><small>Avaliações de clientes</small></span>
                     <span class="ax-pcat">Categoria principal adequada</span>
                     <ul class="ax-pmeta">
                       <li style="--i:0"><i class="ax-ok"></i><span class="ax-open">Aberto agora</span> · horários atualizados</li>
@@ -560,19 +567,22 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
               <span>Quero melhorar meu perfil</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
             </a>
+            <p class="ax-privacy">Abre uma conversa no WhatsApp. Seus dados são tratados conforme a <a href="/politica-de-privacidade">Política de Privacidade</a>.</p>
+            <a href="/google-meu-negocio" class="ax-more">Ver a página completa de Google Meu Negócio <span aria-hidden="true">→</span></a>
           </div>
         </section>
-      </article>
+      </div>
 
       <!-- ==================================================================
            03. EXPERIÊNCIA REACH: GESTÃO DE TRÁFEGO PAGO
            ================================================================== -->
-      <article
+      <div
         class="service-experience-view"
         id="service-view-reach"
         data-service="reach"
         role="tabpanel"
-        aria-label="Gestão de Tráfego Pago"
+        aria-labelledby="tab-btn-reach"
+        tabindex="-1"
       >
         <!-- CENA 1 · HERO -->
         <section class="ax-hero" data-scrub>
@@ -593,7 +603,7 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
                 Planejamos e acompanhamos campanhas de anúncios para conectar sua empresa a públicos relevantes, de acordo com seus objetivos e orçamento.
               </p>
               <ul class="ax-chips">
-                <li><span class="ax-chip-dot" style="--c:#2EE59D"></span>Segmentação Cirúrgica</li>
+                <li><span class="ax-chip-dot" style="--c:#2EE59D"></span>Segmentação por Público</li>
                 <li><span class="ax-chip-dot" style="--c:#D4AF37"></span>Controle de Orçamento</li>
                 <li><span class="ax-chip-dot" style="--c:#00D1FF"></span>Otimização Contínua</li>
               </ul>
@@ -732,9 +742,11 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
               <span>Conversar sobre anúncios</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
             </a>
+            <p class="ax-privacy">Abre uma conversa no WhatsApp. Seus dados são tratados conforme a <a href="/politica-de-privacidade">Política de Privacidade</a>.</p>
+            <a href="/gestao-de-trafego-pago" class="ax-more">Ver a página completa de Gestão de Tráfego Pago <span aria-hidden="true">→</span></a>
           </div>
         </section>
-      </article>
+      </div>
 
       <!-- Rodapé Discreto Interno -->
       <footer class="service-modal-footer">
@@ -891,12 +903,11 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
   }
 
   .service-tab-btn.is-active .tab-index {
-    color: rgba(3, 13, 11, 0.7);
+    color: #030D0B;
   }
 
   .tab-index {
     font-size: 10px;
-    opacity: 0.75;
   }
 
   /* Botão Fechar */
@@ -987,7 +998,7 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
     align-items: center;
     justify-content: space-between;
     font-size: 11px;
-    color: rgba(245, 241, 232, 0.45);
+    color: rgba(245, 241, 232, 0.66);
     letter-spacing: 0.1em;
   }
 
@@ -1070,7 +1081,7 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
     --mint: #2EE59D;
     --ivory: #F5F1E8;
     --ivory-2: rgba(245, 241, 232, 0.62);
-    --ivory-3: rgba(245, 241, 232, 0.34);
+    --ivory-3: rgba(245, 241, 232, 0.62);
     --ink: #030D0B;
     --line: rgba(245, 241, 232, 0.09);
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -1566,6 +1577,21 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
     justify-content: center;
     height: 100%;
     perspective: 1800px;
+  }
+  #shelf-service-modal .ax-illus {
+    position: absolute;
+    top: 6%;
+    right: 4%;
+    z-index: 6;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(245, 241, 232, 0.2);
+    background: rgba(3, 13, 11, 0.85);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(245, 241, 232, 0.8);
+    pointer-events: none;
   }
   #shelf-service-modal .ax-device-shadow {
     position: absolute;
@@ -2277,7 +2303,7 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
     transition: max-height 0.7s var(--ease-out), opacity 0.5s ease, margin 0.7s var(--ease-out);
   }
   #shelf-service-modal .ax-feature-list li.past h4,
-  #shelf-service-modal .ax-feature-list li.past .ax-fn { color: rgba(245, 241, 232, 0.55); }
+  #shelf-service-modal .ax-feature-list li.past .ax-fn { color: rgba(245, 241, 232, 0.7); }
   #shelf-service-modal .ax-feature-list li.on h4 { color: var(--ivory); }
   #shelf-service-modal .ax-feature-list li.on .ax-fn { color: var(--gold); }
   #shelf-service-modal .ax-feature-list li.on p {
@@ -2383,6 +2409,7 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
     background: #0B2B22;
     box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.8);
   }
+  #shelf-service-modal .ax-shot-frame picture { display: contents; }
   #shelf-service-modal .ax-shot-frame img {
     width: 115%;
     height: 100%;
@@ -2616,6 +2643,27 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
     color: transparent;
   }
   #shelf-service-modal .ax-cta-box .ax-p { margin: 0 auto 40px; max-width: 560px; }
+  #shelf-service-modal .ax-privacy {
+    margin: 18px auto 0;
+    max-width: 420px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(245, 241, 232, 0.66);
+  }
+  #shelf-service-modal .ax-privacy a { color: #F3E5AB; text-decoration: underline; text-underline-offset: 3px; }
+  #shelf-service-modal .ax-more {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: #D4AF37;
+    text-decoration: none;
+  }
+  #shelf-service-modal .ax-more:hover { text-decoration: underline; text-underline-offset: 3px; }
+  #shelf-service-modal .ax-more:focus-visible { outline: 2px solid #D4AF37; outline-offset: 3px; border-radius: 4px; }
+  #shelf-service-modal .ax-privacy a:focus-visible { outline: 2px solid #D4AF37; outline-offset: 3px; }
   #shelf-service-modal .ax-btn {
     position: relative;
     display: inline-flex;
@@ -2729,6 +2777,12 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
     #shelf-service-modal .ax-btn { width: 100%; justify-content: center; }
   }
 
+  /* Celular/tablet: o selo "Exemplo ilustrativo" fica acima da ilustração, sem cobrir o conteúdo */
+  @media (max-width: 900px) {
+    #shelf-service-modal .ax-device-wrap { padding-top: 36px; box-sizing: border-box; }
+    #shelf-service-modal .ax-illus { top: 2px; right: auto; left: 50%; transform: translateX(-50%); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     #shelf-service-modal .ax-line > span,
     #shelf-service-modal .ax-kicker,
@@ -2753,6 +2807,9 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
   // ==========================================================================
   const initServiceScenes = () => {
     const modal = document.getElementById('shelf-service-modal');
+    // O modal fica dentro da seção Soluções (z-index 6); levamos ele para o fim do <body>
+    // para que nenhuma outra seção (ex.: o Hero, z-index 10) passe por cima dele.
+    if (modal && modal.parentElement !== document.body) document.body.appendChild(modal);
     const scroller = document.getElementById('service-scroll-container');
     const header = document.getElementById('service-modal-header');
     if (!modal || !scroller) return;
@@ -3046,6 +3103,36 @@ const ctaReachUrl = getWhatsAppUrl("Olá! Gostaria de conversar sobre gestão de
         });
       });
     }
+
+    // Acessibilidade: abas com setas do teclado e foco preso dentro do modal aberto
+    const tabs = Array.from(modal.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const syncTabs = () => tabs.forEach((t) => (t.tabIndex = t.getAttribute('aria-selected') === 'true' ? 0 : -1));
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener('keydown', (e) => {
+        let to = -1;
+        if (e.key === 'ArrowRight') to = (idx + 1) % tabs.length;
+        if (e.key === 'ArrowLeft') to = (idx - 1 + tabs.length) % tabs.length;
+        if (e.key === 'Home') to = 0;
+        if (e.key === 'End') to = tabs.length - 1;
+        if (to < 0) return;
+        e.preventDefault();
+        tabs[to].click();
+        tabs[to].focus();
+      });
+    });
+    new MutationObserver(syncTabs).observe(modal, { subtree: true, attributes: true, attributeFilter: ['aria-selected'] });
+
+    modal.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !modal.classList.contains('is-active')) return;
+      const focusables = Array.from(
+        modal.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex="0"]')
+      ).filter((el) => el.offsetParent !== null && !el.closest('[aria-hidden="true"]'));
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
 
     activate();
   };

@@ -1,0 +1,113 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { EMPRESA } from '../config/empresa';
+import { RASTREAMENTO, rastreamentoAtivo } from '../config/rastreamento';
+
+const ferramentas = [
+  RASTREAMENTO.googleAnalytics && { nome: 'Google Analytics 4 (Google)', categoria: 'Medição', finalidade: 'Medir visitas, páginas mais acessadas e origem do tráfego, de forma estatística.' },
+  RASTREAMENTO.googleAds && { nome: 'Tag do Google Ads (Google)', categoria: 'Marketing', finalidade: 'Medir conversões de anúncios do Google e criar públicos para anúncios.' },
+  RASTREAMENTO.metaPixel && { nome: 'Pixel da Meta (Facebook/Instagram)', categoria: 'Marketing', finalidade: 'Medir resultados de anúncios na Meta e criar públicos para anúncios.' }
+].filter(Boolean) as { nome: string; categoria: string; finalidade: string }[];
+---
+
+<LegalLayout
+  title="Política de Cookies"
+  description="Como o site da K. Up Biz usa cookies e tecnologias semelhantes."
+>
+  <p>
+    Esta Política explica o que são cookies, quais tecnologias este site utiliza e como você pode controlar suas
+    preferências. Ela complementa a nossa <a href="/politica-de-privacidade">Política de Privacidade</a>.
+  </p>
+
+  <h2>1. O que são cookies</h2>
+  <p>
+    Cookies são pequenos arquivos que um site guarda no seu navegador. Tecnologias parecidas, como o armazenamento
+    local do navegador e os "pixels" de anúncios, funcionam de forma semelhante. Elas podem servir para o site
+    funcionar, para medir audiência ou para anúncios.
+  </p>
+
+  <h2>2. O que este site usa hoje</h2>
+  {rastreamentoAtivo ? (
+    <>
+      <table>
+        <thead>
+          <tr><th scope="col">Ferramenta</th><th scope="col">Categoria</th><th scope="col">Para que serve</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Registro da sua escolha de cookies (armazenamento local)</td>
+            <td>Necessário</td>
+            <td>Lembrar se você aceitou ou recusou cookies, para não perguntar de novo.</td>
+          </tr>
+          <tr>
+            <td>Abertura já exibida (armazenamento de sessão)</td>
+            <td>Necessário</td>
+            <td>Não repetir a animação de abertura na mesma visita. Apagado ao fechar a aba.</td>
+          </tr>
+          {ferramentas.map((f) => (
+            <tr><td>{f.nome}</td><td>{f.categoria}</td><td>{f.finalidade}</td></tr>
+          ))}
+        </tbody>
+      </table>
+      <p>
+        As ferramentas de <strong>medição</strong> e <strong>marketing</strong> só são carregadas depois que você
+        aceita a categoria correspondente no aviso de cookies.
+      </p>
+    </>
+  ) : (
+    <div class="lg-box">
+      <p>
+        <strong>Atualmente, este site não utiliza cookies de medição, publicidade ou rastreamento.</strong>{' '}
+        O único dado guardado no seu navegador é um aviso de que você já viu a animação de abertura, para não repeti-la
+        na mesma visita. Ele fica no armazenamento da sessão e é apagado quando você fecha a aba.
+      </p>
+    </div>
+  )}
+  <p>
+    As fontes tipográficas e demais arquivos do site são hospedados no próprio site: ao abrir as páginas, seu navegador
+    não se conecta a serviços de terceiros, exceto se você clicar em um link externo (como WhatsApp ou Instagram).
+  </p>
+
+  <h2>3. Categorias de cookies</h2>
+  <ul>
+    <li><strong>Necessários:</strong> essenciais para o site funcionar ou para lembrar sua escolha sobre cookies. Não dependem de consentimento.</li>
+    <li><strong>Medição:</strong> ajudam a entender como o site é usado (por exemplo, Google Analytics). Só são ativados com seu consentimento.</li>
+    <li><strong>Marketing:</strong> usados para medir e personalizar anúncios em plataformas como Google e Meta. Só são ativados com seu consentimento.</li>
+  </ul>
+
+  <h2>4. Como controlar</h2>
+  <ul>
+    {rastreamentoAtivo && (
+      <li>
+        Use o botão <button type="button" class="lg-inline-btn" data-open-cookie-prefs>Preferências de cookies</button>{' '}
+        (também disponível no rodapé) para aceitar, recusar ou mudar sua escolha a qualquer momento.
+      </li>
+    )}
+    <li>Você também pode apagar ou bloquear cookies nas configurações do seu navegador.</li>
+  </ul>
+
+  <h2>5. Ferramentas de terceiros</h2>
+  <p>
+    Quando ativadas, ferramentas do Google e da Meta tratam dados de acordo com as políticas de privacidade dessas
+    empresas, que podem envolver o armazenamento de dados fora do Brasil.
+  </p>
+
+  <h2>6. Contato</h2>
+  <p>
+    Dúvidas sobre cookies: <a href={`mailto:${EMPRESA.email}`}>{EMPRESA.email}</a>.
+  </p>
+</LegalLayout>
+
+<style>
+  .lg-inline-btn {
+    padding: 2px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    background: rgba(212, 175, 55, 0.1);
+    color: #F3E5AB;
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .lg-inline-btn:focus-visible { outline: 2px solid #D4AF37; outline-offset: 3px; }
+</style>

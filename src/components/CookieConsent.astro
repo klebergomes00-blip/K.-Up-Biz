@@ -1,0 +1,255 @@
+---
+// src/components/CookieConsent.astro — Aviso e preferências de cookies.
+// Só é renderizado quando há ao menos uma ferramenta configurada em src/config/rastreamento.ts.
+// Nenhum script de medição/anúncios é carregado antes do consentimento.
+import { RASTREAMENTO, rastreamentoAtivo } from '../config/rastreamento';
+const temMedicao = !!RASTREAMENTO.googleAnalytics;
+const temMarketing = !!(RASTREAMENTO.googleAds || RASTREAMENTO.metaPixel);
+const cfg = {
+  ga: RASTREAMENTO.googleAnalytics,
+  ads: RASTREAMENTO.googleAds,
+  pixel: RASTREAMENTO.metaPixel
+};
+---
+
+{rastreamentoAtivo && (
+  <>
+    <div class="cc-banner" id="cc-banner" role="region" aria-label="Aviso de cookies" hidden>
+      <div class="cc-banner-text">
+        <p class="cc-title">Sua privacidade</p>
+        <p>
+          Usamos cookies {temMedicao && 'para medir o acesso ao site'}{temMedicao && temMarketing && ' e '}{temMarketing && 'para medir e personalizar anúncios'},
+          apenas se você permitir. Saiba mais na <a href="/politica-de-cookies">Política de Cookies</a>.
+        </p>
+      </div>
+      <div class="cc-actions">
+        <button type="button" class="cc-btn" data-cc="reject">Recusar</button>
+        <button type="button" class="cc-btn" data-cc="customize">Personalizar</button>
+        <button type="button" class="cc-btn" data-cc="accept">Aceitar todos</button>
+      </div>
+    </div>
+
+    <div class="cc-modal" id="cc-modal" role="dialog" aria-modal="true" aria-labelledby="cc-modal-title" hidden>
+      <div class="cc-modal-box">
+        <h2 class="cc-modal-title" id="cc-modal-title">Preferências de cookies</h2>
+        <div class="cc-option">
+          <div>
+            <p class="cc-opt-name">Necessários</p>
+            <p class="cc-opt-desc">Guardam a sua escolha sobre cookies. Sempre ativos.</p>
+          </div>
+          <span class="cc-always">Sempre ativo</span>
+        </div>
+        {temMedicao && (
+          <label class="cc-option">
+            <div>
+              <span class="cc-opt-name">Medição</span>
+              <span class="cc-opt-desc">Estatísticas de visitas (Google Analytics).</span>
+            </div>
+            <input type="checkbox" id="cc-analytics" />
+          </label>
+        )}
+        {temMarketing && (
+          <label class="cc-option">
+            <div>
+              <span class="cc-opt-name">Marketing</span>
+              <span class="cc-opt-desc">Medição e personalização de anúncios (Google Ads e/ou Meta).</span>
+            </div>
+            <input type="checkbox" id="cc-marketing" />
+          </label>
+        )}
+        <div class="cc-actions cc-modal-actions">
+          <button type="button" class="cc-btn" data-cc="reject">Recusar todos</button>
+          <button type="button" class="cc-btn" data-cc="save">Salvar escolha</button>
+          <button type="button" class="cc-btn" data-cc="accept">Aceitar todos</button>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline define:vars={{ cfg }}>
+      (function () {
+        var KEY = 'kupbiz-consentimento-v1';
+        var banner = document.getElementById('cc-banner');
+        var modal = document.getElementById('cc-modal');
+        var boxA = document.getElementById('cc-analytics');
+        var boxM = document.getElementById('cc-marketing');
+        var lastFocus = null;
+
+        function read() {
+          try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; }
+        }
+        function write(c) {
+          try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {}
+        }
+        function loadScript(src) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = src;
+          document.head.appendChild(s);
+        }
+        function applyConsent(c) {
+          if (!c) return;
+          var needGtag = (c.analytics && cfg.ga) || (c.marketing && cfg.ads);
+          if (needGtag && !window.gtag) {
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { window.dataLayer.push(arguments); };
+            window.gtag('consent', 'default', {
+              analytics_storage: c.analytics ? 'granted' : 'denied',
+              ad_storage: c.marketing ? 'granted' : 'denied',
+              ad_user_data: c.marketing ? 'granted' : 'denied',
+              ad_personalization: c.marketing ? 'granted' : 'denied'
+            });
+            window.gtag('js', new Date());
+            loadScript('https://www.googletagmanager.com/gtag/js?id=' + (c.analytics && cfg.ga ? cfg.ga : cfg.ads));
+            if (c.analytics && cfg.ga) window.gtag('config', cfg.ga);
+            if (c.marketing && cfg.ads) window.gtag('config', cfg.ads);
+          }
+          if (c.marketing && cfg.pixel && !window.fbq) {
+            var n = (window.fbq = function () {
+              n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+            });
+            if (!window._fbq) window._fbq = n;
+            n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+            loadScript('https://connect.facebook.net/en_US/fbevents.js');
+            window.fbq('init', cfg.pixel);
+            window.fbq('track', 'PageView');
+          }
+        }
+        function save(c) {
+          var prev = read();
+          c.data = new Date().toISOString();
+          write(c);
+          hideBanner();
+          closeModal();
+          // Se a pessoa retirou um consentimento dado antes, recarrega para parar os scripts já carregados
+          if (prev && ((prev.analytics && !c.analytics) || (prev.marketing && !c.marketing))) {
+            location.reload();
+            return;
+          }
+          applyConsent(c);
+        }
+        function showBanner() { banner.hidden = false; }
+        function hideBanner() { banner.hidden = true; }
+        function openModal() {
+          var c = read() || { analytics: false, marketing: false };
+          if (boxA) boxA.checked = !!c.analytics;
+          if (boxM) boxM.checked = !!c.marketing;
+          lastFocus = document.activeElement;
+          modal.hidden = false;
+          var first = modal.querySelector('input, button');
+          if (first) first.focus();
+        }
+        function closeModal() {
+          if (modal.hidden) return;
+          modal.hidden = true;
+          if (lastFocus && lastFocus.focus) lastFocus.focus();
+        }
+
+        document.addEventListener('click', function (e) {
+          var t = e.target.closest('[data-cc], [data-open-cookie-prefs]');
+          if (!t) return;
+          if (t.hasAttribute('data-open-cookie-prefs')) { openModal(); return; }
+          var a = t.getAttribute('data-cc');
+          if (a === 'accept') save({ analytics: true, marketing: true });
+          if (a === 'reject') save({ analytics: false, marketing: false });
+          if (a === 'customize') openModal();
+          if (a === 'save') save({ analytics: !!(boxA && boxA.checked), marketing: !!(boxM && boxM.checked) });
+        });
+
+        // Teclado: Esc fecha; Tab fica dentro da janela de preferências
+        modal.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') { closeModal(); if (!read()) showBanner(); }
+          if (e.key !== 'Tab') return;
+          var f = modal.querySelectorAll('input, button, a[href]');
+          var first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        });
+
+        var saved = read();
+        if (saved) applyConsent(saved);
+        else showBanner();
+      })();
+    </script>
+  </>
+)}
+
+<style>
+  .cc-banner {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    z-index: 200000;
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 20px;
+    border-radius: 18px;
+    border: 1px solid rgba(245, 241, 232, 0.16);
+    background: rgba(6, 20, 15, 0.97);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    color: #F5F1E8;
+    font-family: var(--font-sans);
+  }
+  .cc-banner[hidden], .cc-modal[hidden] { display: none; }
+  .cc-banner-text p { margin: 0; font-size: 14px; line-height: 1.55; color: rgba(245, 241, 232, 0.86); }
+  .cc-banner-text .cc-title { margin-bottom: 4px; font-size: 15px; font-weight: 600; color: #F5F1E8; }
+  .cc-banner a { color: #F3E5AB; }
+  .cc-actions { display: flex; flex-wrap: wrap; gap: 8px; flex-shrink: 0; }
+  .cc-btn {
+    padding: 11px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(245, 241, 232, 0.35);
+    background: rgba(245, 241, 232, 0.06);
+    color: #F5F1E8;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .cc-btn:hover { background: rgba(245, 241, 232, 0.16); }
+  .cc-btn:focus-visible,
+  .cc-banner a:focus-visible,
+  .cc-option input:focus-visible { outline: 2px solid #D4AF37; outline-offset: 3px; }
+
+  .cc-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200001;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  .cc-modal-box {
+    width: min(520px, 100%);
+    padding: 26px;
+    border-radius: 20px;
+    border: 1px solid rgba(245, 241, 232, 0.16);
+    background: #06140F;
+    color: #F5F1E8;
+    font-family: var(--font-sans);
+  }
+  .cc-modal-title { margin: 0 0 16px; font-size: 22px; font-weight: 600; }
+  .cc-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(245, 241, 232, 0.1);
+    cursor: pointer;
+  }
+  .cc-opt-name { display: block; margin: 0; font-size: 15px; font-weight: 600; }
+  .cc-opt-desc { display: block; margin: 2px 0 0; font-size: 13px; color: rgba(245, 241, 232, 0.72); }
+  .cc-option input { width: 22px; height: 22px; accent-color: #D4AF37; flex-shrink: 0; }
+  .cc-always { font-size: 13px; color: #2EE59D; white-space: nowrap; }
+  .cc-modal-actions { margin-top: 18px; justify-content: flex-end; }
+
+  @media (max-width: 720px) {
+    .cc-banner { flex-direction: column; align-items: stretch; }
+    .cc-actions .cc-btn { flex: 1; }
+  }
+</style>

@@ -15,22 +15,44 @@
         muted
         playsinline
         preload="auto"
-        poster="/imagens/hero-poster.png"
-      >
-        <source src="/videos/hero-desktop-intra-opt.mp4" type="video/mp4" />
-        <source src="/videos/hero-desktop.mp4" type="video/mp4" />
-      </video>
+        data-src-mobile="/videos/hero-mobile.mp4"
+        data-src-desktop="/videos/hero-1600.mp4"
+      ></video>
+      <script is:inline>
+        // Um único arquivo de vídeo: versão leve no celular, versão HD no computador.
+        (function () {
+          var v = document.getElementById('hero-video');
+          if (!v) return;
+          // Celular/tablet em pé: vídeo e foto recortados na vertical (nítidos na tela cheia)
+          var mobile = window.matchMedia('(max-width: 860px) and (orientation: portrait)').matches;
+          // O vídeo só começa a baixar depois que a página carregou (foto, fontes e estilos
+          // chegam primeiro). A abertura cobre esse tempo, então o visitante não percebe.
+          // Capa do vídeo no tamanho certo para a tela (a mesma foto já carregada acima)
+          v.poster = mobile ? '/imagens/hero-poster-mobile.webp' : '/imagens/hero-poster.webp';
+          var set = function () { v.src = mobile ? v.dataset.srcMobile : v.dataset.srcDesktop; };
+          if (document.readyState === 'complete') set();
+          else window.addEventListener('load', set, { once: true });
+        })();
+      </script>
 
       <!-- Camada de Fotografia Limpa para Abertura Inicial (0% Scroll) -->
       <div class="hero-photo-layer" id="hero-photo-layer">
+        <picture>
+        <source media="(max-width: 860px) and (orientation: portrait)" srcset="/imagens/hero-poster-mobile.webp" width="760" height="1080" />
         <img
-          src="/imagens/hero-poster.png"
-          alt="Fundador K. UP BIZ"
+          src="/imagens/hero-poster.webp"
+          srcset="/imagens/hero-poster-960.webp 960w, /imagens/hero-poster.webp 1600w, /imagens/hero-poster-1920.webp 1920w"
+          sizes="100vw"
+          width="1600"
+          height="900"
+          fetchpriority="high"
+          alt="Kleber Gomes Silva, fundador da K. Up Biz"
           class="hero-photo-img"
           id="hero-photo-img"
           loading="eager"
           decoding="async"
         />
+        </picture>
       </div>
       
       <!-- Scrims Cinematográficos para Fusão & Legibilidade Sem Obstrução -->
@@ -55,12 +77,12 @@
                A fotografia do fundador é protagonista. Surge a centelha da ideia.
                ================================================================ -->
           <div class="hero-act hero-act-1" id="hero-act-1">
-            <h2 class="act-title act1-title" id="act1-title">
+            <p class="act-title act1-title" id="act1-title">
               <span class="act-line act1-prefix">Toda grande transformação começa com</span>
               <span class="act-line act1-lead">
                 <span class="italic-serif text-gold act1-highlight">uma ideia.</span>
               </span>
-            </h2>
+            </p>
 
             <!-- Linha Decorativa Minimalista de Pensamento -->
             <div class="act1-decor" aria-hidden="true">
@@ -74,12 +96,12 @@
                À medida que as partículas se expandem, surge a estratégia.
                ================================================================ -->
           <div class="hero-act hero-act-2" id="hero-act-2">
-            <h2 class="act-title act2-title" id="act2-title">
+            <p class="act-title act2-title" id="act2-title">
               <span class="act-line act2-prefix">Uma boa ideia precisa de</span>
               <span class="act-line act2-lead">
                 <span class="italic-serif text-gold act2-highlight">estratégia.</span>
               </span>
-            </h2>
+            </p>
 
             <div class="act2-decor" aria-hidden="true">
               <div class="act2-decor-line" id="act2-decor-line"></div>
@@ -148,7 +170,7 @@
   .hero-scroll-wrapper {
     position: relative;
     width: 100%;
-    height: 320vh;
+    height: 240vh;
     background-color: var(--color-verde-profundo);
   }
 
@@ -835,7 +857,7 @@
      ========================================================================== */
   @media (max-width: 860px) {
     .hero-scroll-wrapper {
-      height: 260vh;
+      height: 200vh;
     }
 
     .hero-viewport {
@@ -847,12 +869,13 @@
       overflow: hidden;
     }
 
-    /* Mídia na Metade Superior */
+    /* Mídia ocupando a tela inteira: a foto preenche também a parte de baixo
+       (antes vazia), e um degradê escurece só onde entram os textos */
     .hero-media-container {
-      position: relative;
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: 44vh;
-      flex-shrink: 0;
+      height: 100%;
     }
 
     .hero-video,
@@ -875,11 +898,12 @@
     }
 
     .hero-scrim-bottom {
-      height: 45%;
+      height: 66%;
       background: linear-gradient(
         0deg,
         var(--color-verde-profundo) 0%,
-        rgba(4, 29, 23, 0.7) 50%,
+        rgba(4, 29, 23, 0.86) 22%,
+        rgba(4, 29, 23, 0.5) 55%,
         transparent 100%
       );
     }
@@ -887,12 +911,15 @@
     /* Conteúdo Comercial na Metade Inferior */
     .hero-content-container {
       position: relative;
+      z-index: 3;
       width: 100%;
       flex: 1;
+      margin-top: 44vh;
+      margin-top: 44svh;
       padding: 8px 0 24px 0;
       display: flex;
       align-items: center;
-      background: var(--color-verde-profundo);
+      background: transparent;
     }
 
     .hero-wrap {
@@ -1030,8 +1057,9 @@
 
   /* Telas Pequenas Verticais (< 380px) */
   @media (max-width: 380px) {
-    .hero-media-container {
-      height: 40vh;
+    .hero-content-container {
+      margin-top: 40vh;
+      margin-top: 40svh;
     }
     .act1-prefix,
     .act2-prefix {

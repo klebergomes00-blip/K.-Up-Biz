@@ -1,0 +1,103 @@
+---
+// /google-meu-negocio — Página do serviço de otimização do Perfil da Empresa no Google
+import ServicoLayout from '../layouts/ServicoLayout.astro';
+
+const jornada = [
+  { t: 'Ele pesquisa.', d: 'Quando alguém precisa de um produto ou serviço, a primeira ação é abrir o Google.' },
+  { t: 'Encontra quem está por perto.', d: 'Endereço correto e localização no Maps colocam a sua empresa no caminho certo.' },
+  { t: 'Escolhe quem transmite confiança.', d: 'Perfil verificado, categoria adequada, horários atualizados, boas fotos e avaliações de clientes.' },
+  { t: 'E entra em contato.', d: 'Rotas, ligação, WhatsApp e site a um toque de distância.' }
+];
+
+const entregas = [
+  { t: 'Revisão e otimização das informações', d: 'Ajuste de nome, endereço, telefone, horários e links essenciais, de acordo com as diretrizes oficiais do Google.' },
+  { t: 'Serviços e categorias', d: 'Definição da categoria principal e das secundárias mais adequadas para conectar o perfil às buscas certas.' },
+  { t: 'Imagens e vitrine', d: 'Organização de fotos de fachada, ambiente, produtos e equipe para acolher quem visita o perfil.' },
+  { t: 'Avaliações e respostas', d: 'Boas práticas para pedir avaliações sinceras e responder os clientes com profissionalismo.' },
+  { t: 'Acompanhamento', d: 'Revisões periódicas para encontrar oportunidades de melhoria e cuidar da reputação da sua marca.' }
+];
+
+const etapas = [
+  { k: '01 · Diagnosticar', t: 'Análise completa', d: 'Analiso como a sua empresa aparece hoje na Busca e no Maps e identifico falhas e oportunidades.' },
+  { k: '02 · Organizar', t: 'Estrutura e conteúdo', d: 'Organizo informações, categorias, catálogo de serviços e produtos e a seleção de imagens.' },
+  { k: '03 · Otimizar', t: 'Alinhamento técnico', d: 'Aplico melhorias de apresentação seguindo as boas práticas do Google para dar relevância e clareza.' },
+  { k: '04 · Acompanhar', t: 'Evolução contínua', d: 'Acompanho as informações e o retorno dos clientes para encontrar novos pontos de melhoria.' }
+];
+
+const faq = [
+  { q: 'Google Meu Negócio e Perfil da Empresa no Google são a mesma coisa?', a: 'Sim. "Google Meu Negócio" era o nome antigo da ferramenta; hoje o Google chama de "Perfil da Empresa no Google". É o cadastro que mostra a sua empresa na Busca e no Maps.' },
+  { q: 'Vocês garantem o primeiro lugar no Google Maps?', a: 'Não. Ninguém pode garantir posição no Google. O trabalho é feito com método, qualidade de apresentação e alinhamento às boas práticas recomendadas pelo próprio Google.' },
+  { q: 'Preciso ter um endereço físico para ter o perfil?', a: 'Não necessariamente. O Google permite perfis de empresas que atendem na casa ou no local do cliente, mostrando uma área de atendimento em vez do endereço. Avaliamos o seu caso na conversa.' },
+  { q: 'Minha empresa já tem perfil. Vale a pena otimizar?', a: 'Sim. Muitos perfis existem, mas estão incompletos, com categoria inadequada, horários desatualizados ou poucas fotos. A otimização começa justamente pela análise do que já existe.' },
+  { q: 'Vocês atendem empresas de outras cidades?', a: 'Sim. O trabalho é feito online, para empresas de todo o Brasil, com atendimento direto comigo pelo WhatsApp.' },
+  { q: 'Como é feito o pagamento?', a: 'As condições de pagamento são combinadas diretamente pelo WhatsApp, junto com a proposta.' }
+];
+---
+
+<ServicoLayout
+  id="local"
+  title="Otimização do Google Meu Negócio | K. Up Biz"
+  description="Otimização do Google Meu Negócio, hoje Perfil da Empresa no Google: informações, categorias, fotos e avaliações organizadas para sua empresa ser encontrada na Busca e no Maps."
+  eyebrow="Google Meu Negócio"
+  h1="Otimização do Google Meu Negócio"
+  h1Em="para sua empresa ser encontrada."
+  lead="Trabalho a apresentação e a otimização do Perfil da Empresa no Google para que os clientes encontrem com facilidade as informações importantes sobre o seu negócio na Busca e no Maps."
+  ctaLabel="Quero melhorar meu perfil"
+  serviceType="Otimização do Perfil da Empresa no Google (Google Meu Negócio)"
+  faq={faq}
+>
+  <section class="sv-section" aria-labelledby="gmn-jornada">
+    <div class="sv-head">
+      <p class="sv-tag">A busca local</p>
+      <h2 id="gmn-jornada" class="sv-h2">Seu cliente está procurando. <em>Sua empresa está preparada?</em></h2>
+      <p>Ser encontrado é importante. Transmitir confiança também. É assim que o cliente decide:</p>
+    </div>
+    <div class="sv-grid sv-grid-4">
+      {jornada.map((e, i) => (
+        <article class="sv-card glass">
+          <span class="sv-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{e.t}</h3>
+          <p>{e.d}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="sv-section" aria-labelledby="gmn-entregas">
+    <div class="sv-head">
+      <p class="sv-tag">O que é feito</p>
+      <h2 id="gmn-entregas" class="sv-h2">Não basta existir no mapa. <em>Seu perfil precisa transmitir solidez.</em></h2>
+    </div>
+    <div class="sv-grid">
+      {entregas.map((e, i) => (
+        <article class="sv-card glass">
+          <span class="sv-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{e.t}</h3>
+          <p>{e.d}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="sv-section" id="como-funciona" aria-labelledby="gmn-etapas">
+    <div class="sv-head">
+      <p class="sv-tag">Como funciona</p>
+      <h2 id="gmn-etapas" class="sv-h2">Um processo estruturado <em>em quatro etapas.</em></h2>
+    </div>
+    <ol class="sv-steps">
+      {etapas.map((e) => (
+        <li class="glass">
+          <span class="sv-step-k">{e.k}</span>
+          <h3>{e.t}</h3>
+          <p>{e.d}</p>
+        </li>
+      ))}
+    </ol>
+    <p class="sv-note"><strong>Compromisso ético:</strong> não prometo primeira posição garantida nem volumes mágicos de clientes. O trabalho é feito com método técnico, qualidade de apresentação e alinhamento contínuo às boas práticas recomendadas pelo Google.</p>
+  </section>
+</ServicoLayout>
+
+<style>
+  .sv-steps h3 { margin: 0 0 8px; font-family: var(--font-sans); font-size: 18px; font-weight: 600; color: #F5F1E8; }
+  .sv-steps p { margin: 0; font-family: var(--font-sans); font-size: 15px; line-height: 1.6; color: rgba(245, 241, 232, 0.74); }
+</style>

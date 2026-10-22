@@ -1,0 +1,157 @@
+---
+// src/components/Rodape.astro — Rodapé com navegação, contato, links legais e dados da empresa.
+import { EMPRESA, waLink } from '../config/empresa';
+import { rastreamentoAtivo } from '../config/rastreamento';
+import { SERVICOS } from '../config/servicos';
+
+const year = new Date().getFullYear();
+const mainUrl = waLink('Olá, Kleber! Vim pelo site da K. Up Biz e gostaria de conversar sobre o meu negócio.');
+---
+
+<footer class="site-footer" aria-label="Rodapé">
+  <div class="sf-inner">
+    <div class="sf-brand">
+      <a href="/" aria-label="K. Up Biz — página inicial">
+        <img src="/imagens/kupbiz-logo-fundo-escuro.svg" alt="K. Up Biz" width="132" height="36" loading="lazy" decoding="async" />
+      </a>
+      <p class="sf-by">Serviços prestados por <span class="sf-nowrap">{EMPRESA.responsavelCurto}.</span></p>
+      <p>Sites, Google e anúncios para empresas que querem ser encontradas.</p>
+    </div>
+
+    <nav class="sf-col" aria-label="Navegação do rodapé">
+      <h2 class="sf-head">Navegação</h2>
+      <a href="/#inicio">Início</a>
+      <a href="/#solucoes">Soluções</a>
+      <a href="/#metodo">Metodologia</a>
+      <a href="/#diferencial">Diferenciais</a>
+      <a href="/#portfolio">Projetos</a>
+      <a href="/#faq">Perguntas frequentes</a>
+    </nav>
+
+    <nav class="sf-col" aria-label="Serviços">
+      <h2 class="sf-head">Serviços</h2>
+      {SERVICOS.map((s) => <a href={s.slug}>{s.nome}</a>)}
+    </nav>
+
+    <div class="sf-col">
+      <h2 class="sf-head">Contato</h2>
+      <a href={mainUrl} target="_blank" rel="noopener noreferrer">WhatsApp {EMPRESA.whatsappLabel}</a>
+      <a href={`mailto:${EMPRESA.email}`}>{EMPRESA.email}</a>
+      <a href={EMPRESA.instagramUrl} target="_blank" rel="noopener noreferrer">Instagram {EMPRESA.instagramHandle}</a>
+      <address class="sf-address">
+        {EMPRESA.endereco.split(' – ')[0]}<br />
+        {EMPRESA.endereco.split(' – ').slice(1).concat(EMPRESA.cidadeUf).join(' – ')}
+      </address>
+    </div>
+
+    <nav class="sf-col" aria-label="Informações legais">
+      <h2 class="sf-head">Legal</h2>
+      <a href="/politica-de-privacidade">Política de Privacidade</a>
+      <a href="/termos-de-uso">Termos de Uso</a>
+      <a href="/politica-de-cookies">Política de Cookies</a>
+      <a href="/trocas-e-reembolso">Cancelamento e Reembolso</a>
+      {rastreamentoAtivo && (
+        <button type="button" class="sf-link-btn" data-open-cookie-prefs>Preferências de cookies</button>
+      )}
+    </nav>
+  </div>
+
+  <div class="sf-bottom">
+    <span>© {year} {EMPRESA.nomeFantasia}. Todos os direitos reservados.</span>
+    <a href="#inicio" class="sf-top">Voltar ao topo ↑</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    --ivory: #F5F1E8;
+    --ivory-2: rgba(245, 241, 232, 0.78);
+    --ivory-3: rgba(245, 241, 232, 0.66);
+    --line: rgba(245, 241, 232, 0.1);
+    position: relative;
+    z-index: 8;
+    border-top: 1px solid var(--line);
+    background: #030D0B;
+    color: var(--ivory);
+    font-family: var(--font-sans);
+  }
+  .sf-inner {
+    max-width: var(--max-width, 1240px);
+    margin: 0 auto;
+    padding: 56px clamp(20px, 5vw, 64px) 36px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1.2fr 1.1fr;
+    gap: 32px;
+    gap: 40px;
+  }
+  .sf-brand img { height: 36px; width: auto; display: block; }
+  .sf-brand p {
+    max-width: 280px;
+    margin: 16px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ivory-3);
+  }
+  .sf-col { display: grid; align-content: start; gap: 12px; }
+  .sf-head {
+    margin: 0 0 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #D4AF37;
+  }
+  .sf-brand .sf-by { margin-top: 14px; color: var(--ivory-2); font-weight: 500; }
+  .sf-brand .sf-by + p { margin-top: 6px; }
+  .sf-nowrap { white-space: nowrap; }
+  .sf-address {
+    font-style: normal;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ivory-3);
+  }
+  .sf-col a,
+  .sf-link-btn {
+    justify-self: start;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    color: var(--ivory-2);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.25s ease;
+  }
+  .sf-col a:hover,
+  .sf-link-btn:hover { color: var(--ivory); text-decoration: underline; text-underline-offset: 3px; }
+  .sf-col a:focus-visible,
+  .sf-link-btn:focus-visible,
+  .sf-top:focus-visible,
+  .sf-brand a:focus-visible { outline: 2px solid #D4AF37; outline-offset: 3px; border-radius: 3px; }
+
+
+  .sf-bottom {
+    max-width: var(--max-width, 1240px);
+    margin: 0 auto;
+    padding: 16px clamp(20px, 5vw, 64px) 32px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ivory-3);
+  }
+  .sf-top { color: #D4AF37; text-decoration: none; font-weight: 600; }
+  .sf-top:hover { color: #F3E5AB; }
+
+  @media (max-width: 1080px) {
+    .sf-inner { grid-template-columns: 1fr 1fr; }
+    .sf-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 560px) {
+    .sf-inner { grid-template-columns: 1fr; gap: 28px; }
+    .sf-bottom { flex-direction: column; align-items: flex-start; }
+  }
+</style>

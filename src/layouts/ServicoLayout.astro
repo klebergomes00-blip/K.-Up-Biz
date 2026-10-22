@@ -1,0 +1,372 @@
+---
+// src/layouts/ServicoLayout.astro — Modelo das páginas de serviço
+// (/criacao-de-sites, /google-meu-negocio, /gestao-de-trafego-pago).
+// Página leve (sem GSAP): todo o conteúdo já vem no HTML, bom para o Google.
+import Layout from './Layout.astro';
+import Rodape from '../components/Rodape.astro';
+import WhatsAppFlutuante from '../components/WhatsAppFlutuante.astro';
+import { EMPRESA, waLink } from '../config/empresa';
+import { SERVICOS, servico, type ServicoId } from '../config/servicos';
+
+interface Faq { q: string; a: string }
+interface Props {
+  id: ServicoId;
+  title: string;
+  description: string;
+  eyebrow: string;
+  h1: string;
+  h1Em: string;
+  lead: string;
+  ctaLabel: string;
+  serviceType: string;
+  faq: Faq[];
+}
+
+const { id, title, description, eyebrow, h1, h1Em, lead, ctaLabel, serviceType, faq } = Astro.props;
+const atual = servico(id);
+const outros = SERVICOS.filter((s) => s.id !== id);
+const wa = waLink(atual.whatsapp);
+const siteUrl = new URL('/', Astro.site).href;
+const pageUrl = new URL(atual.slug, Astro.site).href;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${pageUrl}#servico`,
+    name: atual.nome,
+    serviceType,
+    description,
+    url: pageUrl,
+    areaServed: { '@type': 'Country', name: 'Brasil' },
+    availableChannel: { '@type': 'ServiceChannel', serviceUrl: pageUrl, availableLanguage: 'pt-BR' },
+    provider: {
+      '@type': 'ProfessionalService',
+      '@id': `${siteUrl}#empresa`,
+      name: EMPRESA.nomeFantasia,
+      url: siteUrl
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Início', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: atual.nome, item: pageUrl }
+    ]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a }
+    }))
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <a href="#conteudo" class="sv-skip">Pular para o conteúdo</a>
+
+  <header class="sv-header" id="inicio">
+    <div class="sv-header-inner">
+      <a href="/" class="sv-logo" aria-label="K. Up Biz — página inicial">
+        <img src="/imagens/kupbiz-logo-fundo-escuro.svg" alt="K. Up Biz" width="132" height="36" />
+      </a>
+      <nav class="sv-nav" aria-label="Menu de serviços">
+        {SERVICOS.map((s) => (
+          <a href={s.slug} aria-current={s.id === id ? 'page' : undefined}>{s.nome}</a>
+        ))}
+      </nav>
+      <a href={wa} target="_blank" rel="noopener noreferrer" class="sv-header-cta">WhatsApp</a>
+    </div>
+  </header>
+
+  <main id="conteudo" class="sv-main">
+    <div class="sv-ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+
+    <section class="sv-hero" aria-labelledby="sv-h1">
+      <nav class="sv-crumbs" aria-label="Você está em">
+        <ol>
+          <li><a href="/">Início</a></li>
+          <li aria-current="page">{atual.nome}</li>
+        </ol>
+      </nav>
+      <p class="sv-eyebrow"><span class="sv-pip" aria-hidden="true"></span>{eyebrow}</p>
+      <h1 id="sv-h1" class="sv-h1">{h1} <em>{h1Em}</em></h1>
+      <p class="sv-lead">{lead}</p>
+      <div class="sv-hero-ctas">
+        <a href={wa} target="_blank" rel="noopener noreferrer" class="sv-btn">
+          <span>{ctaLabel}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
+        </a>
+        <a href="#como-funciona" class="sv-btn-ghost">Como funciona</a>
+      </div>
+      <p class="sv-trust">Atendimento online para todo o Brasil, direto com quem faz o seu projeto.</p>
+    </section>
+
+    <slot />
+
+    <section class="sv-section" aria-labelledby="sv-faq-title">
+      <div class="sv-head">
+        <p class="sv-tag">Perguntas frequentes</p>
+        <h2 id="sv-faq-title" class="sv-h2">Dúvidas sobre {atual.nome.toLowerCase().startsWith('google') ? 'o' : 'a'} <em>{atual.nome}</em></h2>
+      </div>
+      <div class="sv-faq">
+        {faq.map((f) => (
+          <details class="sv-faq-item">
+            <summary><span>{f.q}</span><i aria-hidden="true"></i></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="sv-section sv-cta-wrap" aria-labelledby="sv-cta-title">
+      <div class="sv-cta glass">
+        <p class="sv-tag">Próximo passo</p>
+        <h2 id="sv-cta-title" class="sv-h2">Vamos conversar sobre <em>o seu negócio?</em></h2>
+        <p class="sv-p">Me conte o que você precisa. Eu mesmo respondo e indico o melhor caminho para o seu momento.</p>
+        <a href={wa} target="_blank" rel="noopener noreferrer" class="sv-btn">
+          <span>{ctaLabel}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
+        </a>
+        <p class="sv-privacy">Abre uma conversa no WhatsApp. Seus dados são tratados conforme a <a href="/politica-de-privacidade">Política de Privacidade</a>.</p>
+      </div>
+    </section>
+
+    <section class="sv-section" aria-labelledby="sv-outros-title">
+      <div class="sv-head">
+        <p class="sv-tag">Tudo conectado</p>
+        <h2 id="sv-outros-title" class="sv-h2">Outros serviços que <em>trabalham junto</em></h2>
+      </div>
+      <div class="sv-grid sv-grid-2">
+        {outros.map((s) => (
+          <a href={s.slug} class="sv-card glass sv-related">
+            <h3>{s.nome}</h3>
+            <p>{s.resumo}</p>
+            <span class="sv-more">Conhecer o serviço <span aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Rodape />
+  <WhatsAppFlutuante />
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</Layout>
+
+<style is:global>
+  /* ==========================================================================
+     PÁGINAS DE SERVIÇO — mesma linguagem do site (esmeralda, dourado, vidro)
+     ========================================================================== */
+  .sv-skip {
+    position: absolute; left: 16px; top: -60px; z-index: 100;
+    padding: 10px 16px; border-radius: 8px;
+    background: #F5F1E8; color: #030D0B; font-weight: 600; text-decoration: none;
+  }
+  .sv-skip:focus { top: 16px; }
+
+  .sv-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(3, 13, 11, 0.62);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .sv-header-inner {
+    max-width: 1180px; margin: 0 auto;
+    padding: 14px clamp(20px, 5vw, 48px);
+    display: flex; align-items: center; gap: 28px;
+  }
+  .sv-logo img { height: 32px; width: auto; display: block; }
+  .sv-nav { display: flex; gap: 26px; margin-left: auto; }
+  .sv-nav a {
+    font-family: var(--font-sans); font-size: 14px; font-weight: 500;
+    color: rgba(245, 241, 232, 0.72); text-decoration: none; transition: color 0.25s ease;
+  }
+  .sv-nav a:hover, .sv-nav a[aria-current='page'] { color: #F5F1E8; }
+  .sv-nav a[aria-current='page'] { text-decoration: underline; text-decoration-color: #D4AF37; text-underline-offset: 6px; }
+  .sv-header-cta {
+    padding: 9px 18px; border-radius: 999px;
+    background: linear-gradient(135deg, #D4AF37, #F3E5AB);
+    color: #041D17; font-family: var(--font-sans); font-size: 14px; font-weight: 700; text-decoration: none;
+  }
+
+  .sv-main {
+    position: relative;
+    overflow: clip;
+    color: #F5F1E8;
+    background: linear-gradient(180deg, #041D17 0%, #030D0B 520px, #030D0B 100%);
+    padding-bottom: 40px;
+  }
+  .sv-ambient { position: absolute; inset: 0; pointer-events: none; }
+  .sv-ambient i { position: absolute; border-radius: 50%; filter: blur(90px); }
+  .sv-ambient i:nth-child(1) { width: 520px; height: 520px; left: -160px; top: -120px; background: rgba(4, 120, 87, 0.35); }
+  .sv-ambient i:nth-child(2) { width: 420px; height: 420px; right: -140px; top: 260px; background: rgba(212, 175, 55, 0.14); }
+  .sv-ambient i:nth-child(3) { width: 480px; height: 480px; left: 30%; top: 1200px; background: rgba(46, 229, 157, 0.1); }
+
+  .sv-hero, .sv-section {
+    position: relative;
+    max-width: 1180px; margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 48px);
+  }
+  .sv-hero { padding-top: clamp(40px, 8vh, 88px); padding-bottom: clamp(56px, 10vh, 110px); }
+  .sv-section { padding-top: clamp(48px, 9vh, 96px); }
+
+  .sv-crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; padding: 0; font-family: var(--font-sans); font-size: 13px; color: rgba(245, 241, 232, 0.66); }
+  .sv-crumbs li + li::before { content: '/'; margin-right: 8px; color: rgba(245, 241, 232, 0.4); }
+  .sv-crumbs a { color: rgba(245, 241, 232, 0.78); text-decoration: none; }
+  .sv-crumbs a:hover { color: #F5F1E8; text-decoration: underline; text-underline-offset: 3px; }
+
+  .sv-eyebrow, .sv-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin: 0 0 18px;
+    font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #D4AF37;
+  }
+  .sv-pip { width: 6px; height: 6px; border-radius: 50%; background: #2EE59D; box-shadow: 0 0 10px #2EE59D; }
+  .sv-h1 {
+    max-width: 900px; margin: 0;
+    font-family: var(--font-sans); font-weight: 600;
+    font-size: clamp(36px, 5.4vw, 72px); line-height: 1.02; letter-spacing: -0.04em;
+  }
+  .sv-h1 em, .sv-h2 em {
+    font-family: var(--font-instrument-serif); font-style: italic; font-weight: 400;
+    letter-spacing: -0.01em; color: #D4AF37;
+  }
+  .sv-lead {
+    max-width: 640px; margin: 26px 0 0;
+    font-family: var(--font-sans); font-size: clamp(17px, 1.5vw, 20px); line-height: 1.6;
+    color: rgba(245, 241, 232, 0.78);
+  }
+  .sv-hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+  .sv-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 26px; border-radius: 999px;
+    background: linear-gradient(135deg, #D4AF37, #F3E5AB);
+    color: #041D17; font-family: var(--font-sans); font-size: 15px; font-weight: 700; text-decoration: none;
+    box-shadow: 0 12px 34px -12px rgba(212, 175, 55, 0.7);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .sv-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -12px rgba(212, 175, 55, 0.8); }
+  .sv-btn-ghost {
+    display: inline-flex; align-items: center;
+    padding: 15px 24px; border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.04);
+    color: #F5F1E8; font-family: var(--font-sans); font-size: 15px; font-weight: 600; text-decoration: none;
+  }
+  .sv-btn-ghost:hover { background: rgba(255, 255, 255, 0.08); }
+  .sv-trust { margin: 22px 0 0; font-family: var(--font-sans); font-size: 14px; color: rgba(245, 241, 232, 0.68); }
+
+  .sv-head { max-width: 760px; margin-bottom: 36px; }
+  .sv-h2 {
+    margin: 0;
+    font-family: var(--font-sans); font-weight: 600;
+    font-size: clamp(28px, 3.4vw, 46px); line-height: 1.08; letter-spacing: -0.03em;
+  }
+  .sv-p, .sv-head > p:not(.sv-tag) {
+    margin: 16px 0 0; max-width: 680px;
+    font-family: var(--font-sans); font-size: 17px; line-height: 1.65; color: rgba(245, 241, 232, 0.76);
+  }
+
+  /* Vidro (mesmo acabamento dos cards do Diferencial) */
+  .glass {
+    position: relative;
+    border-radius: 24px;
+    background:
+      linear-gradient(155deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.03) 40%, rgba(255, 255, 255, 0.05) 100%),
+      rgba(6, 26, 21, 0.5);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 24px 60px -30px rgba(0, 0, 0, 0.8);
+  }
+  .sv-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+  .sv-grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .sv-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .sv-card { padding: 28px; }
+  .sv-card h3 {
+    margin: 0 0 10px;
+    font-family: var(--font-sans); font-size: 19px; font-weight: 600; letter-spacing: -0.01em; color: #F5F1E8;
+  }
+  .sv-card p { margin: 0; font-family: var(--font-sans); font-size: 15.5px; line-height: 1.6; color: rgba(245, 241, 232, 0.74); }
+  .sv-num {
+    display: inline-grid; place-items: center;
+    width: 34px; height: 34px; margin-bottom: 18px; border-radius: 10px;
+    background: rgba(212, 175, 55, 0.14); border: 1px solid rgba(212, 175, 55, 0.35);
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700; color: #F3E5AB;
+  }
+  .sv-related { text-decoration: none; transition: transform 0.3s ease, border-color 0.3s ease; }
+  .sv-related:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.45); }
+  .sv-more { display: inline-block; margin-top: 18px; font-family: var(--font-sans); font-size: 14px; font-weight: 600; color: #D4AF37; }
+
+  /* Etapas */
+  .sv-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); counter-reset: sv; }
+  .sv-steps li { padding: 26px; }
+  .sv-steps .sv-step-k { display: block; margin-bottom: 10px; font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #7CF0C4; }
+
+  /* Nota de transparência */
+  .sv-note {
+    margin-top: 22px; padding: 18px 22px; border-radius: 16px;
+    border: 1px solid rgba(212, 175, 55, 0.3); background: rgba(212, 175, 55, 0.06);
+    font-family: var(--font-sans); font-size: 15px; line-height: 1.6; color: rgba(245, 241, 232, 0.82);
+  }
+  .sv-note strong { color: #F3E5AB; }
+
+  /* Portfólio */
+  .sv-cases { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .sv-case { display: block; overflow: hidden; text-decoration: none; }
+  .sv-case img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+  .sv-case div { padding: 18px 20px 20px; }
+  .sv-case h3 { margin: 0 0 6px; font-family: var(--font-sans); font-size: 17px; font-weight: 600; color: #F5F1E8; }
+  .sv-case p { margin: 0; font-family: var(--font-sans); font-size: 14.5px; line-height: 1.55; color: rgba(245, 241, 232, 0.72); }
+  .sv-case .sv-more { margin-top: 12px; }
+  .sv-case:hover { border-color: rgba(212, 175, 55, 0.45); }
+
+  /* FAQ */
+  .sv-faq { display: grid; gap: 12px; max-width: 860px; }
+  .sv-faq-item {
+    border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.035);
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .sv-faq-item[open] { border-color: rgba(212, 175, 55, 0.4); background: rgba(212, 175, 55, 0.05); }
+  .sv-faq-item summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    padding: 20px 22px; cursor: pointer; list-style: none;
+    font-family: var(--font-sans); font-size: 16.5px; font-weight: 600; color: #F5F1E8;
+  }
+  .sv-faq-item summary::-webkit-details-marker { display: none; }
+  .sv-faq-item summary i { position: relative; flex: none; width: 14px; height: 14px; }
+  .sv-faq-item summary i::before, .sv-faq-item summary i::after {
+    content: ''; position: absolute; left: 0; top: 6px; width: 14px; height: 2px; border-radius: 2px; background: #D4AF37;
+    transition: transform 0.3s ease;
+  }
+  .sv-faq-item summary i::after { transform: rotate(90deg); }
+  .sv-faq-item[open] summary i::after { transform: rotate(0deg); }
+  .sv-faq-item p { margin: 0; padding: 0 22px 22px; font-family: var(--font-sans); font-size: 15.5px; line-height: 1.65; color: rgba(245, 241, 232, 0.78); }
+
+  /* CTA final */
+  .sv-cta { padding: clamp(32px, 5vw, 56px); text-align: center; }
+  .sv-cta .sv-p { margin-left: auto; margin-right: auto; }
+  .sv-cta .sv-btn { margin-top: 28px; }
+  .sv-privacy { margin: 18px auto 0; max-width: 420px; font-family: var(--font-sans); font-size: 13px; line-height: 1.55; color: rgba(245, 241, 232, 0.66); }
+  .sv-privacy a { color: #F3E5AB; }
+
+  .sv-main a:focus-visible, .sv-header a:focus-visible, .sv-faq-item summary:focus-visible {
+    outline: 2px solid #D4AF37; outline-offset: 3px; border-radius: 8px;
+  }
+
+  @media (max-width: 860px) {
+    .sv-nav { display: none; }
+    .sv-header-cta { margin-left: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sv-btn, .sv-related { transition: none; }
+  }
+</style>

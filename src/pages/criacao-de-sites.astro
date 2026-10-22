@@ -1,0 +1,138 @@
+---
+// /criacao-de-sites — Página do serviço de Criação de Sites e Landing Pages
+import ServicoLayout from '../layouts/ServicoLayout.astro';
+import { portfolioSrcset } from '../config/imagens';
+
+const entregas = [
+  { t: 'Layout com a cara da sua marca', d: 'Composição visual adaptada à sua marca, tipografia sofisticada e acabamento que reflete a autoridade real da sua empresa.' },
+  { t: 'Perfeito no celular', d: 'Navegação fluida e leitura confortável em smartphones, tablets, notebooks e monitores grandes.' },
+  { t: 'Organização estratégica', d: 'Informações organizadas para responder as dúvidas do cliente e facilitar a decisão de entrar em contato.' },
+  { t: 'WhatsApp e contatos integrados', d: 'Botões de WhatsApp, telefone e outros canais posicionados onde o cliente precisa deles.' },
+  { t: 'Carregamento rápido', d: 'Um site que abre rápido segura o visitante e passa a confiança de uma empresa organizada.' }
+];
+
+const tipos = [
+  { t: 'Site institucional', d: 'Apresenta a empresa, os serviços e os canais de contato em várias páginas ou em uma página completa.' },
+  { t: 'Landing page', d: 'Página focada em um único objetivo, como divulgar um serviço ou receber contatos de uma campanha de anúncios.' },
+  { t: 'Cardápio e catálogo digital', d: 'Mostra produtos ou pratos de forma visual e leva o cliente direto para o pedido no WhatsApp.' }
+];
+
+const etapas = [
+  { k: 'Etapa 01', t: 'Conversa inicial', d: 'Conheço o seu negócio, o seu público e o objetivo do site pelo WhatsApp.' },
+  { k: 'Etapa 02', t: 'Proposta', d: 'Você recebe a proposta com escopo, prazo e investimento definidos para o seu projeto.' },
+  { k: 'Etapa 03', t: 'Criação', d: 'Desenvolvo o site com a identidade da sua marca, do zero ou a partir de uma base pronta quando o prazo pede.' },
+  { k: 'Etapa 04', t: 'Publicação', d: 'O site vai ao ar com os canais de contato funcionando e pronto para receber visitas.' }
+];
+
+const projetos = [
+  { nome: 'Fernando Junior', seg: 'Imobiliário', d: 'Experiência imobiliária cinematográfica para valorizar propriedades.', url: 'https://fernandocorretor-six.vercel.app/', key: 'fernando-junior', img: '/imagens/portfolio/fernando-junior.webp' },
+  { nome: 'Level Up Agency', seg: 'Marketing digital', d: 'Design e posicionamento para apresentar soluções de presença digital.', url: 'https://level-up-agency-astro.vercel.app/', key: 'level-up-agency', img: '/imagens/portfolio/level-up-agency.webp' },
+  { nome: 'Level Up Aesthetics', seg: 'Estética', d: 'Experiência elegante que transmite cuidado, confiança e beleza natural.', url: 'https://clinicaestetica-xi.vercel.app/', key: 'level-up-aesthetics', img: '/imagens/portfolio/level-up-aesthetics.webp' },
+  { nome: 'Styvy Burguer', seg: 'Gastronomia', d: 'Narrativa visual que transforma ingredientes, brasa e sabor em desejo.', url: 'https://styviburguer.vercel.app/', key: 'styvy-burguer', img: '/imagens/portfolio/styvy-burguer.webp' }
+];
+
+const faq = [
+  { q: 'Quanto custa criar um site?', a: 'O investimento depende das funcionalidades, do conteúdo e da complexidade do projeto. Conversamos sobre as suas necessidades pelo WhatsApp antes de elaborar a proposta.' },
+  { q: 'Em quanto tempo o site fica pronto?', a: 'O prazo varia conforme o escopo e a disponibilidade dos materiais, como textos e fotos. O cronograma é definido na proposta de cada projeto.' },
+  { q: 'O site é criado do zero ou a partir de um modelo?', a: 'Depende do projeto. O site pode ser criado do zero ou partir de uma base pronta quando o prazo pede. Nos dois casos, design, textos e estrutura são adaptados à identidade da sua marca.' },
+  { q: 'Qual a diferença entre site e landing page?', a: 'O site apresenta a empresa como um todo, com serviços, história e contatos. A landing page é uma página única, focada em um objetivo, como divulgar um serviço ou receber contatos de uma campanha.' },
+  { q: 'O site funciona bem no celular?', a: 'Sim. Todos os sites são pensados para smartphones, tablets e computadores, com leitura confortável e botões fáceis de tocar.' },
+  { q: 'Vocês atendem empresas de outras cidades?', a: 'Sim. O atendimento é online, para todo o Brasil, direto comigo pelo WhatsApp, do primeiro contato à entrega.' },
+  { q: 'Como é feito o pagamento?', a: 'As condições de pagamento são combinadas diretamente pelo WhatsApp, junto com a proposta.' }
+];
+---
+
+<ServicoLayout
+  id="web"
+  title="Criação de Sites Profissionais e Landing Pages | K. Up Biz"
+  description="Criação de sites e landing pages para empresas: design com a cara da sua marca, rápido no celular e com WhatsApp integrado. Atendimento online para todo o Brasil."
+  eyebrow="Criação de sites"
+  h1="Criação de sites profissionais e landing pages"
+  h1Em="para a sua empresa vender mais."
+  lead="Sites e landing pages que unem identidade, tecnologia e estratégia para apresentar a sua empresa com profissionalismo e facilitar o contato de novos clientes."
+  ctaLabel="Solicitar uma proposta"
+  serviceType="Criação de sites e landing pages"
+  faq={faq}
+>
+  <section class="sv-section" aria-labelledby="web-por-que">
+    <div class="sv-head">
+      <p class="sv-tag">Por que ter um site</p>
+      <h2 id="web-por-que" class="sv-h2">Um site não é só um cartão de visitas. <em>Pode ser o seu melhor vendedor.</em></h2>
+      <p>Seu cliente pesquisa antes de escolher. Ele analisa a apresentação da sua empresa e compara alternativas. Em poucos segundos ele decide se confia no que vê: sem domínio próprio, lento no celular ou com botões que não funcionam, o site afasta quem estava pronto para comprar.</p>
+    </div>
+  </section>
+
+  <section class="sv-section" aria-labelledby="web-entregas">
+    <div class="sv-head">
+      <p class="sv-tag">O que o seu site recebe</p>
+      <h2 id="web-entregas" class="sv-h2">Design que valoriza. <em>Estrutura que orienta.</em></h2>
+    </div>
+    <div class="sv-grid">
+      {entregas.map((e, i) => (
+        <article class="sv-card glass">
+          <span class="sv-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{e.t}</h3>
+          <p>{e.d}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="sv-section" aria-labelledby="web-tipos">
+    <div class="sv-head">
+      <p class="sv-tag">Formatos</p>
+      <h2 id="web-tipos" class="sv-h2">O formato certo <em>para cada objetivo.</em></h2>
+    </div>
+    <div class="sv-grid">
+      {tipos.map((e) => (
+        <article class="sv-card glass">
+          <h3>{e.t}</h3>
+          <p>{e.d}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="sv-section" id="como-funciona" aria-labelledby="web-etapas">
+    <div class="sv-head">
+      <p class="sv-tag">Como funciona</p>
+      <h2 id="web-etapas" class="sv-h2">Do primeiro contato <em>ao site no ar.</em></h2>
+    </div>
+    <ol class="sv-steps">
+      {etapas.map((e) => (
+        <li class="glass">
+          <span class="sv-step-k">{e.k}</span>
+          <h3 class="sv-card-h">{e.t}</h3>
+          <p>{e.d}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="sv-section" aria-labelledby="web-projetos">
+    <div class="sv-head">
+      <p class="sv-tag">Projetos reais</p>
+      <h2 id="web-projetos" class="sv-h2">Sites criados <em>pela K. Up Biz.</em></h2>
+    </div>
+    <div class="sv-cases">
+      {projetos.map((p) => (
+        <a href={p.url} target="_blank" rel="noopener noreferrer" class="sv-case glass">
+          <picture>
+            <source type="image/avif" srcset={portfolioSrcset(p.key).avif} sizes="(max-width: 640px) 92vw, 280px" />
+            <img src={p.img} srcset={portfolioSrcset(p.key).webp} sizes="(max-width: 640px) 92vw, 280px" alt={`Página inicial do site ${p.nome}, desenvolvido pela K. Up Biz`} width="1584" height="849" loading="lazy" decoding="async" />
+          </picture>
+          <div>
+            <h3>{p.nome}</h3>
+            <p>{p.seg} · {p.d}</p>
+            <span class="sv-more">Ver site <span aria-hidden="true">↗</span><span class="sr-only"> (abre em nova aba)</span></span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</ServicoLayout>
+
+<style>
+  .sv-steps h3 { margin: 0 0 8px; font-family: var(--font-sans); font-size: 18px; font-weight: 600; color: #F5F1E8; }
+  .sv-steps p { margin: 0; font-family: var(--font-sans); font-size: 15px; line-height: 1.6; color: rgba(245, 241, 232, 0.74); }
+</style>

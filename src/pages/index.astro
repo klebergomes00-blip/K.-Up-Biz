@@ -11,12 +11,15 @@ import NossoDiferencial from '../components/NossoDiferencial.astro';
 import ProjetosSelecionados from '../components/ProjetosSelecionados.astro';
 import PerguntasFrequentes from '../components/PerguntasFrequentes.astro';
 import Contato from '../components/Contato.astro';
+import WhatsAppFlutuante from '../components/WhatsAppFlutuante.astro';
 ---
 
 <Layout
-  title="K. UP BIZ — Grandes ideias merecem ser encontradas"
-  description="Transformamos presença digital em oportunidades reais com estratégias no Google, sites de alto padrão e tráfego pago."
+  title="K. Up Biz | Criação de Sites, Google Meu Negócio e Tráfego Pago"
+  description="Criação de sites e landing pages, otimização do Google Meu Negócio e gestão de tráfego pago para empresas que querem ser encontradas. Atendimento online para todo o Brasil."
 >
+  <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
   <!-- Abertura Cinematográfica Premium V2 -->
   <CinematicIntro />
 
@@ -35,5 +38,21 @@ import Contato from '../components/Contato.astro';
     <PerguntasFrequentes />
     <Contato />
   </main>
+  <WhatsAppFlutuante />
 </Layout>
+
+<script>
+  // Acessibilidade: enquanto a introdução está na tela, o restante da página fica
+  // fora do alcance do teclado (inert) e o foco não vai parar em itens invisíveis.
+  const intro = document.getElementById('cinematic-intro');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (intro && !reduce) {
+    const blocked = [document.getElementById('site-header'), document.getElementById('main-content')].filter(Boolean) as HTMLElement[];
+    blocked.forEach((el) => (el.inert = true));
+    const release = () => blocked.forEach((el) => (el.inert = false));
+    window.addEventListener('cinematic-intro-complete', release, { once: true });
+    window.addEventListener('cinematic-header-reveal', release, { once: true });
+    window.setTimeout(release, 15000);
+  }
+</script>
 

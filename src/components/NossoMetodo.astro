@@ -32,6 +32,9 @@ const steps: StepItem[] = [
 ];
 ---
 
+<!-- Trilho: dá a altura de rolagem da cena; a seção fica presa com position: sticky
+     (no lugar do "pin" do GSAP, que gerava saltos de layout medidos pelo Google como CLS). -->
+<div class="metodo-track" id="metodo-track">
 <section class="metodo-section" id="metodo" aria-label="03 Nosso Método — Crescimento não acontece por acaso">
   <!-- Mídia de Fundo: Montanha Cinematográfica com Video Scrubbing Sincronizado -->
   <div class="metodo-media-container" aria-hidden="true">
@@ -40,22 +43,23 @@ const steps: StepItem[] = [
       class="metodo-video"
       muted
       playsinline
-      preload="auto"
-      poster="/imagens/metodo-poster.png"
-    >
-      <source src="/videos/metodo-montanha-allintra.mp4" type="video/mp4" />
-      <source src="/videos/metodo-montanha-opt.mp4" type="video/mp4" />
-      <source src="/videos/metodo-montanha.mp4" type="video/mp4" />
-    </video>
+      preload="none"
+      data-src-mobile="/videos/metodo-854.mp4"
+      data-src-desktop="/videos/metodo-1280.mp4"
+    ></video>
 
     <!-- Camada de Poster Fallback (0% Scroll / Sem JS / Reduced Motion) -->
     <div class="metodo-poster-layer" id="metodo-poster-layer">
       <img
-        src="/imagens/metodo-poster.png"
+        src="/imagens/metodo-poster.webp"
+        srcset="/imagens/metodo-poster-854.webp 854w, /imagens/metodo-poster.webp 1280w"
+        sizes="100vw"
+        width="1280"
+        height="720"
         alt="Montanha com caminho luminoso dourado"
         class="metodo-poster-img"
         id="metodo-poster-img"
-        loading="eager"
+        loading="lazy"
         decoding="async"
       />
     </div>
@@ -145,6 +149,7 @@ const steps: StepItem[] = [
     </div>
   </div>
 </section>
+</div>
 
 <style>
   /* ==========================================================================
@@ -170,8 +175,14 @@ const steps: StepItem[] = [
     z-index: 6;
   }
 
+  .metodo-track { position: relative; z-index: 6; }
+
   @media (min-width: 1025px) {
+    /* 100vh da cena + 180vh de rolagem para as 4 etapas */
+    .metodo-track { height: 280vh; }
     .metodo-section {
+      position: sticky;
+      top: 0;
       height: 100vh;
       height: 100dvh;
       min-height: 100vh;
@@ -899,7 +910,8 @@ const steps: StepItem[] = [
       if (!video) return;
       const duration = getVideoDuration();
       targetTime = Math.max(0, Math.min(duration, time));
-      hidePoster();
+      // Mantém a imagem de capa até o vídeo ter quadros prontos (evita tela preta)
+      if (video.readyState >= 2) hidePoster();
       if (!video.seeking && video.readyState >= 1) {
         if (Math.abs(video.currentTime - targetTime) > 0.015) {
           video.currentTime = targetTime;
@@ -910,12 +922,25 @@ const steps: StepItem[] = [
     if (video) {
       video.muted = true;
       video.playsInline = true;
-      video.preload = 'auto';
       video.pause();
-      try {
-        video.load();
-      } catch (e) {
-        // ignora
+
+      // Carrega o vídeo só quando a seção estiver se aproximando da tela
+      const loadVideo = () => {
+        if (video.getAttribute('src')) return;
+        const mobile = window.matchMedia('(max-width: 768px)').matches;
+        video.preload = 'auto';
+        // Enquanto o vídeo não tem quadros (ex.: conexão lenta), mostra a foto da montanha
+        video.poster = mobile ? '/imagens/metodo-poster-854.webp' : '/imagens/metodo-poster.webp';
+        video.src = (mobile ? video.dataset.srcMobile : video.dataset.srcDesktop) || '';
+        try { video.load(); } catch (e) { /* ignora */ }
+      };
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          if (entries.some((e) => e.isIntersecting)) { loadVideo(); io.disconnect(); }
+        }, { rootMargin: '150% 0px' });
+        io.observe(section);
+      } else {
+        loadVideo();
       }
 
       video.addEventListener('seeked', () => {
@@ -1025,7 +1050,7 @@ const steps: StepItem[] = [
       // ----------------------------------------------------------------------
       const headerTl = gsap.timeline({
         scrollTrigger: {
-          trigger: section,
+          trigger: document.getElementById('metodo-track') || section,
           start: 'top 30%',
           toggleActions: 'play none none reverse',
         }
@@ -1048,13 +1073,11 @@ const steps: StepItem[] = [
       // ----------------------------------------------------------------------
       const mainTl = gsap.timeline({
         scrollTrigger: {
-          trigger: section,
+          // A seção fica presa via CSS (sticky) dentro do trilho #metodo-track
+          trigger: document.getElementById('metodo-track') || section,
           start: 'top top',
-          end: () => '+=' + Math.round(window.innerHeight * 2.5),
-          pin: true,
-          pinSpacing: true,
+          end: () => '+=' + Math.round(window.innerHeight * 1.8),
           scrub: 0.8,
-          anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             const t = mainTl.time();

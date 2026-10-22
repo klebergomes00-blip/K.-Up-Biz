@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # perfis temporários do Chrome gerados pelos testes
 scratch/chrome-temp-profile-*/
+
+# scripts de teste e cópias de trabalho (não fazem parte do site)
+scratch/

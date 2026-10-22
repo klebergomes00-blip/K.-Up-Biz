@@ -1,0 +1,168 @@
+---
+// src/layouts/LegalLayout.astro — Modelo das páginas legais (privacidade, termos, cookies, reembolso).
+import Layout from './Layout.astro';
+import Rodape from '../components/Rodape.astro';
+import { EMPRESA } from '../config/empresa';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+
+<Layout title={`${title} — ${EMPRESA.nomeFantasia}`} description={description}>
+  <a href="#conteudo" class="lg-skip">Pular para o conteúdo</a>
+
+  <header class="lg-header" id="inicio">
+    <a href="/" class="lg-logo" aria-label="K. Up Biz — voltar à página inicial">
+      <img src="/imagens/kupbiz-logo-fundo-escuro.svg" alt="K. Up Biz" width="132" height="36" />
+    </a>
+    <a href="/" class="lg-back">← Voltar ao site</a>
+  </header>
+
+  <main id="conteudo" class="lg-main">
+    <article class="lg-article">
+      <p class="lg-eyebrow">Informações legais</p>
+      <h1>{title}</h1>
+      <p class="lg-updated">Última atualização: {EMPRESA.atualizacaoPoliticas}</p>
+      <slot />
+    </article>
+
+    <nav class="lg-related" aria-label="Outras políticas">
+      <a href="/politica-de-privacidade">Política de Privacidade</a>
+      <a href="/termos-de-uso">Termos de Uso</a>
+      <a href="/politica-de-cookies">Política de Cookies</a>
+      <a href="/trocas-e-reembolso">Cancelamento e Reembolso</a>
+    </nav>
+  </main>
+
+  <Rodape />
+</Layout>
+
+<style is:global>
+  .lg-skip {
+    position: absolute;
+    left: 16px;
+    top: -60px;
+    z-index: 100;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: #F5F1E8;
+    color: #030D0B;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .lg-skip:focus { top: 16px; }
+
+  .lg-header {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 28px clamp(20px, 5vw, 40px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .lg-logo img { height: 34px; width: auto; display: block; }
+  .lg-back {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    color: #D4AF37;
+    text-decoration: none;
+  }
+  .lg-back:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .lg-header a:focus-visible,
+  .lg-article a:focus-visible,
+  .lg-related a:focus-visible { outline: 2px solid #D4AF37; outline-offset: 3px; border-radius: 3px; }
+
+  .lg-main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px clamp(20px, 5vw, 40px) 80px;
+    font-family: var(--font-sans);
+    color: #F5F1E8;
+  }
+  .lg-eyebrow {
+    margin: 0 0 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #D4AF37;
+  }
+  .lg-article h1 {
+    margin: 0 0 10px;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+  }
+  .lg-updated { margin: 0 0 40px; font-size: 14px; color: rgba(245, 241, 232, 0.66); }
+  .lg-article h2 {
+    margin: 44px 0 14px;
+    font-size: clamp(21px, 2.4vw, 26px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+    color: #F5F1E8;
+  }
+  .lg-article h3 { margin: 26px 0 10px; font-size: 18px; font-weight: 600; }
+  .lg-article p,
+  .lg-article li {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(245, 241, 232, 0.86);
+  }
+  .lg-article p { margin: 0 0 16px; }
+  .lg-article ul,
+  .lg-article ol { margin: 0 0 18px; padding-left: 22px; }
+  .lg-article li { margin-bottom: 8px; }
+  .lg-article a { color: #F3E5AB; text-decoration: underline; text-underline-offset: 3px; }
+  .lg-article strong { color: #F5F1E8; }
+  .lg-article .lg-box {
+    margin: 24px 0;
+    padding: 18px 22px;
+    border-radius: 14px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(212, 175, 55, 0.06);
+  }
+  .lg-article .lg-box p:last-child { margin-bottom: 0; }
+  .lg-article table { width: 100%; border-collapse: collapse; margin: 8px 0 22px; font-size: 15px; }
+  .lg-article th,
+  .lg-article td {
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(245, 241, 232, 0.12);
+    text-align: left;
+    vertical-align: top;
+    color: rgba(245, 241, 232, 0.86);
+    line-height: 1.5;
+  }
+  .lg-article th { color: #F5F1E8; font-weight: 600; }
+
+  .lg-related {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(245, 241, 232, 0.1);
+  }
+  .lg-related a {
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(245, 241, 232, 0.16);
+    color: rgba(245, 241, 232, 0.86);
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .lg-related a:hover { border-color: #D4AF37; color: #F5F1E8; }
+  .lg-related a[aria-current='page'] { background: #F5F1E8; color: #030D0B; border-color: #F5F1E8; }
+</style>
+
+<script>
+  // Marca a página atual na lista de políticas
+  document.querySelectorAll<HTMLAnchorElement>('.lg-related a').forEach((a) => {
+    if (a.pathname.replace(/\/$/, '') === location.pathname.replace(/\/$/, '')) a.setAttribute('aria-current', 'page');
+  });
+</script>

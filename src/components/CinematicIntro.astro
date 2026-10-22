@@ -56,13 +56,21 @@
       type="button"
       id="intro-skip-btn"
       class="intro-skip-btn"
-      aria-label="Pular introdução cinematográfica"
     >
       <span>PULAR INTRO</span>
       <kbd>ESC</kbd>
     </button>
   </div>
 </div>
+
+<script is:inline>
+  // Quem já viu a abertura nesta sessão entra direto no site (a intro é removida antes de aparecer)
+  try {
+    if (sessionStorage.getItem('kupbiz-intro-vista') === '1') {
+      document.getElementById('cinematic-intro')?.remove();
+    }
+  } catch (e) {}
+</script>
 
 <style>
   /* ==========================================================================
@@ -482,12 +490,20 @@
     let masterTl: gsap.core.Timeline | null = null;
     let failsafeTimer: ReturnType<typeof setTimeout> | null = null;
 
+    const markSeen = () => {
+      try { sessionStorage.setItem('kupbiz-intro-vista', '1'); } catch (e) {}
+    };
+
     const cleanup = () => {
+      markSeen();
       if (failsafeTimer) {
         clearTimeout(failsafeTimer);
         failsafeTimer = null;
       }
       window.removeEventListener('keydown', handleKeydown);
+      window.removeEventListener('wheel', skipOnIntent);
+      window.removeEventListener('touchmove', skipOnIntent);
+      introEl.removeEventListener('click', skipOnIntent);
     };
 
     // Função para Concluir / Desvendar para o Hero (pular ou recuperação de emergência)
@@ -534,17 +550,26 @@
       });
     }
 
+    // Qualquer sinal de que a pessoa quer navegar pula a abertura
+    const skipKeys = ['Escape', 'Enter', ' ', 'ArrowDown', 'PageDown', 'End'];
     const handleKeydown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') finishIntro();
+      if (skipKeys.includes(e.key)) finishIntro();
     };
+    function skipOnIntent() {
+      finishIntro();
+    }
     window.addEventListener('keydown', handleKeydown);
+    window.addEventListener('wheel', skipOnIntent, { passive: true });
+    window.addEventListener('touchmove', skipOnIntent, { passive: true });
+    introEl.addEventListener('click', skipOnIntent);
+    markSeen();
 
     // Mecanismo de recuperação discreto (failsafe): se por qualquer razão a animação não concluir em 12s, libera a Hero
     failsafeTimer = setTimeout(() => {
       if (!isCompleted) {
         finishIntro();
       }
-    }, 12000);
+    }, 8000);
 
     // Linha de Tempo Master GSAP
     masterTl = gsap.timeline({
@@ -559,6 +584,9 @@
         }
       }
     });
+
+    // Abertura mais curta (~35% mais rápida que a original)
+    masterTl.timeScale(1.55);
 
     // Passo 0: Inicialização
     gsap.set(introEl, { opacity: 1, visibility: 'visible' });
