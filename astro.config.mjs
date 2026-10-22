@@ -2,10 +2,8 @@
 import { defineConfig } from 'astro/config';
 
 // Endereço público do site.
-// Na Vercel ele é detectado sozinho (domínio de produção do projeto).
-// Para forçar um domínio, crie a variável de ambiente SITE_URL na Vercel (ex.: https://kupbiz.com.br).
-const vercelDomain = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-const site = process.env.SITE_URL || (vercelDomain ? `https://${vercelDomain}` : 'http://localhost:4321');
+// Domínio oficial. A variável SITE_URL (se existir na Vercel) tem prioridade.
+const site = process.env.SITE_URL || 'https://kupbiz.com.br';
 
 // https://astro.build/config
 export default defineConfig({
