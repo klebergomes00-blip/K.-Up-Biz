@@ -9,7 +9,7 @@
 
 export const RASTREAMENTO = {
   // Google Analytics 4 — formato "G-XXXXXXXXXX" (categoria: medição)
-  googleAnalytics: '',
+  googleAnalytics: 'G-DE4MNDQ6KD',
   // Tag de conversão do Google Ads — formato "AW-XXXXXXXXX" (categoria: marketing)
   googleAds: '',
   // Pixel da Meta (Facebook/Instagram) — apenas números (categoria: marketing)
