@@ -157,7 +157,7 @@ const cfg = {
 
         // Clique no WhatsApp = contato (lead). Só é registrado se a pessoa aceitou a medição.
         document.addEventListener('click', function (e) {
-          var l = e.target.closest && e.target.closest('a[href*="wa.me/"]');
+          var l = e.target.closest && e.target.closest('a[href^="/whatsapp"]');
           if (!l) return;
           if (window.gtag) window.gtag('event', 'generate_lead', { method: 'whatsapp', page_path: location.pathname });
           if (window.fbq) window.fbq('track', 'Contact');

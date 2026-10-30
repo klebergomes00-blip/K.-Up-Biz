@@ -3,17 +3,9 @@
 // K. UP BIZ — EXPERIÊNCIA IMERSIVA EM SERVIÇOS (DIGITAL SHELF EXPANSION)
 // Experiência editorial completa em fullscreen para WEB, LOCAL e REACH.
 
-// Configuração do WhatsApp K. Up Biz
-// Número comercial oficial pode ser inserido aqui no formato internacional (ex: '5538999999999')
-// Se estiver vazio, a URL padrão do WhatsApp abre o chat com a mensagem pronta para envio.
-const WHATSAPP_PHONE = '5561996229988';
-
-function getWhatsAppUrl(message: string): string {
-  const encoded = encodeURIComponent(message);
-  return WHATSAPP_PHONE
-    ? `https://wa.me/${WHATSAPP_PHONE}?text=${encoded}`
-    : `https://api.whatsapp.com/send?text=${encoded}`;
-}
+// Links de WhatsApp: passam pela página /whatsapp (registra o contato e abre a conversa)
+import { waLink } from '../config/empresa';
+const getWhatsAppUrl = (message: string): string => waLink(message);
 
 const ctaWebUrl = getWhatsAppUrl("Olá! Conheci a K. Up Biz e gostaria de conversar sobre a criação de um site profissional.");
 const ctaLocalUrl = getWhatsAppUrl("Olá! Gostaria de saber mais sobre a otimização do Perfil da Empresa no Google pela K. Up Biz.");

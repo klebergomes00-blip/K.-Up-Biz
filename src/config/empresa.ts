@@ -18,5 +18,10 @@ export const EMPRESA = {
   atualizacaoPoliticas: '21 de outubro de 2026'
 };
 
-export const waLink = (msg: string) =>
+// Link direto para o WhatsApp (usado em assuntos que não são vendas: dados pessoais, reembolso).
+export const waDireto = (msg: string) =>
   `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent(msg)}`;
+
+// Link de contato comercial: passa pela página /whatsapp, que registra o contato
+// (Google Ads / Analytics) e abre a conversa na hora.
+export const waLink = (msg: string) => `/whatsapp?m=${encodeURIComponent(msg)}`;
