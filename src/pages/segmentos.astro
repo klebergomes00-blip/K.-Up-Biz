@@ -1,0 +1,47 @@
+---
+// /segmentos — Todos os segmentos atendidos.
+import ConteudoLayout from '../layouts/ConteudoLayout.astro';
+import { SEGMENTOS, GRUPOS, segmentoUrl } from '../config/segmentos';
+
+const grupos = (Object.keys(GRUPOS) as (keyof typeof GRUPOS)[]).map((g) => ({
+  id: g,
+  nome: GRUPOS[g],
+  itens: SEGMENTOS.filter((s) => s.grupo === g)
+}));
+const siteUrl = new URL('/', Astro.site).href;
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Sites por segmento',
+  itemListElement: SEGMENTOS.map((s, i) => ({ '@type': 'ListItem', position: i + 1, name: `Sites para ${s.curto}`, url: new URL(segmentoUrl(s), siteUrl).href }))
+}];
+---
+
+<ConteudoLayout
+  title="Sites por segmento: saúde, profissionais e negócios | K. Up Biz"
+  description="Criação de sites para dentistas, médicos, advogados, contadores, engenheiros, energia solar, marcenarias, restaurantes e outros segmentos."
+  crumbs={[{ nome: 'Segmentos' }]}
+  eyebrow="Segmentos"
+  h1="Sites para cada tipo"
+  h1Em="de negócio."
+  lead="Cada área tem um público, dúvidas e regras diferentes. Veja como é o site ideal para o seu segmento."
+  schema={schema}
+>
+  <section class="sv-section" aria-label="Lista de segmentos">
+    {grupos.map((g) => (
+      <>
+        <h2 class="sv-group-title">{g.nome}</h2>
+        <div class="sv-grid">
+          {g.itens.map((s) => (
+            <a href={segmentoUrl(s)} class="sv-card glass sv-related">
+              <h3>{s.nome}</h3>
+              <p>{s.lead}</p>
+              <span class="sv-more">Ver como é o site <span aria-hidden="true">→</span></span>
+            </a>
+          ))}
+        </div>
+      </>
+    ))}
+    <p class="sv-note"><strong>Seu segmento não está na lista?</strong> Criamos sites para qualquer tipo de negócio. Chame no WhatsApp e conte o que você faz.</p>
+  </section>
+</ConteudoLayout>

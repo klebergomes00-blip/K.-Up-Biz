@@ -1,0 +1,43 @@
+---
+// src/components/SiteHeader.astro — Cabeçalho das páginas de conteúdo
+// (serviços, segmentos, guias, cidades, sobre, cases).
+import { waLink } from '../config/empresa';
+
+interface Props { atual?: string; whatsapp?: string }
+const { atual = '', whatsapp } = Astro.props;
+const wa = waLink(whatsapp || 'Olá, Kleber! Vim pelo site da K. Up Biz e gostaria de conversar sobre o meu negócio.');
+
+const links = [
+  { href: '/criacao-de-sites', nome: 'Sites' },
+  { href: '/google-meu-negocio', nome: 'Google Meu Negócio' },
+  { href: '/gestao-de-trafego-pago', nome: 'Tráfego pago' },
+  { href: '/segmentos', nome: 'Segmentos' },
+  { href: '/guias', nome: 'Guias' },
+  { href: '/sobre', nome: 'Sobre' }
+];
+const ativo = (href: string) => atual === href || (href !== '/' && atual.startsWith(href + '/'));
+---
+
+<a href="#conteudo" class="sv-skip">Pular para o conteúdo</a>
+
+<header class="sv-header" id="inicio">
+  <div class="sv-header-inner">
+    <a href="/" class="sv-logo" aria-label="K. Up Biz — página inicial">
+      <img src="/imagens/kupbiz-logo-fundo-escuro.svg" alt="K. Up Biz" width="132" height="36" />
+    </a>
+    <nav class="sv-nav" aria-label="Menu principal">
+      {links.map((l) => (
+        <a href={l.href} aria-current={ativo(l.href) ? 'page' : undefined}>{l.nome}</a>
+      ))}
+    </nav>
+    <details class="sv-menu">
+      <summary aria-label="Abrir menu">Menu</summary>
+      <nav aria-label="Menu principal (celular)">
+        {links.map((l) => (
+          <a href={l.href} aria-current={ativo(l.href) ? 'page' : undefined}>{l.nome}</a>
+        ))}
+      </nav>
+    </details>
+    <a href={wa} class="sv-header-cta">WhatsApp</a>
+  </div>
+</header>

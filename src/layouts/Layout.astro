@@ -44,7 +44,7 @@ const jsonLd = [{
   logo: new URL('/icon-512.png', Astro.site).href,
   telephone: '+55 61 99622-9988',
   email: EMPRESA.email,
-  founder: { '@type': 'Person', name: EMPRESA.responsavel },
+  founder: { '@type': 'Person', '@id': `${siteUrl}sobre#kleber`, name: EMPRESA.responsavel, url: new URL('/sobre', Astro.site).href },
   address: {
     '@type': 'PostalAddress',
     streetAddress: EMPRESA.endereco,

@@ -1,0 +1,53 @@
+---
+// /cases — Projetos reais desenvolvidos pela K. Up Biz.
+import ConteudoLayout from '../layouts/ConteudoLayout.astro';
+import { PROJETOS } from '../config/portfolio';
+import { portfolioSrcset } from '../config/imagens';
+
+const siteUrl = new URL('/', Astro.site).href;
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Projetos desenvolvidos pela K. Up Biz',
+  itemListElement: PROJETOS.map((p, i) => ({
+    '@type': 'ListItem', position: i + 1,
+    item: { '@type': 'CreativeWork', name: `Site ${p.nome}`, url: p.url, creator: { '@id': `${siteUrl}#empresa` } }
+  }))
+}];
+---
+
+<ConteudoLayout
+  title="Projetos e cases de sites | K. Up Biz"
+  description="Veja sites reais desenvolvidos pela K. Up Biz para corretor de imóveis, clínica de estética, hamburgueria e agência de marketing."
+  crumbs={[{ nome: 'Projetos' }]}
+  eyebrow="Projetos"
+  h1="Sites reais"
+  h1Em="desenvolvidos pela K. Up Biz."
+  lead="Cada projeto foi pensado para o público e o objetivo do cliente. Clique para ver os sites no ar."
+  ctaLabel="Quero um projeto assim"
+  schema={schema}
+>
+  <section class="sv-section" aria-label="Lista de projetos">
+    <div class="sv-cases">
+      {PROJETOS.map((p) => (
+        <article class="sv-case glass">
+          <picture>
+            <source type="image/avif" srcset={portfolioSrcset(p.key).avif} sizes="(max-width: 640px) 92vw, 400px" />
+            <img src={portfolioSrcset(p.key).src} srcset={portfolioSrcset(p.key).webp} sizes="(max-width: 640px) 92vw, 400px" alt={`Página inicial do site ${p.nome}, desenvolvido pela K. Up Biz`} width="1584" height="849" loading="lazy" decoding="async" />
+          </picture>
+          <div>
+            <h2 class="sv-card-title">{p.nome}</h2>
+            <p>{p.segmento} · {p.descricao}</p>
+            <a href={p.url} target="_blank" rel="noopener noreferrer" class="sv-more">Ver site <span aria-hidden="true">↗</span><span class="sr-only"> (abre em nova aba)</span></a>
+            {p.segmentoSlug && <a href={`/sites-para-${p.segmentoSlug}`} class="sv-more cs-seg">Sites para esse segmento →</a>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</ConteudoLayout>
+
+<style>
+  .cs-seg { display: block; margin-top: 8px; color: #7CF0C4 !important; }
+  .sv-case .sv-more { text-decoration: none; }
+</style>

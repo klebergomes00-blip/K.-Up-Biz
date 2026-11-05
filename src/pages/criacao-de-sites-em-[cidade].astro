@@ -1,0 +1,85 @@
+---
+// /criacao-de-sites-em-{cidade} — Páginas da região (conteúdo local próprio).
+import ConteudoLayout from '../layouts/ConteudoLayout.astro';
+import { CIDADES, cidadeUrl, type Cidade } from '../config/cidades';
+import { SERVICOS } from '../config/servicos';
+import { EMPRESA } from '../config/empresa';
+
+export function getStaticPaths() {
+  return CIDADES.map((c) => ({ params: { cidade: c.slug }, props: { c } }));
+}
+const { c } = Astro.props as { c: Cidade };
+const outras = CIDADES.filter((x) => x.slug !== c.slug);
+const siteUrl = new URL('/', Astro.site).href;
+const pageUrl = new URL(cidadeUrl(c), Astro.site).href;
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `Criação de sites em ${c.nome} – ${c.uf}`,
+  serviceType: 'Criação de sites, Google Meu Negócio e tráfego pago',
+  url: pageUrl,
+  description: c.description,
+  areaServed: { '@type': 'City', name: `${c.nome} – ${c.uf}` },
+  availableChannel: { '@type': 'ServiceChannel', serviceUrl: pageUrl, availableLanguage: 'pt-BR' },
+  provider: { '@type': 'ProfessionalService', '@id': `${siteUrl}#empresa`, name: EMPRESA.nomeFantasia, url: siteUrl }
+}];
+---
+
+<ConteudoLayout
+  title={`Criação de Sites em ${c.nome} – ${c.uf} | K. Up Biz`}
+  description={c.description}
+  crumbs={[{ nome: 'Atendimento', href: '/atendimento-online' }, { nome: `${c.nome} – ${c.uf}` }]}
+  eyebrow={`${c.nome} – ${c.uf}`}
+  h1={`Criação de sites em ${c.nome}`}
+  h1Em="e presença no Google."
+  lead={c.lead}
+  whatsapp={`Olá, Kleber! Sou de ${c.nome} – ${c.uf} e quero conversar sobre o meu negócio.`}
+  faq={c.faq}
+  faqTitulo={`Dúvidas de empresas de ${c.nome}`}
+  schema={schema}
+>
+  <section class="sv-section" aria-labelledby="ci-contexto">
+    <div class="sv-head">
+      <p class="sv-tag">Busca local</p>
+      <h2 id="ci-contexto" class="sv-h2">Como as pessoas procuram <em>empresas em {c.nome}.</em></h2>
+      <p>{c.contexto}</p>
+    </div>
+    <div class="sv-grid">
+      {c.dicas.map((d, i) => (
+        <article class="sv-card glass">
+          <span class="sv-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{d.t}</h3>
+          <p>{d.d}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="sv-section" aria-labelledby="ci-servicos">
+    <div class="sv-head">
+      <p class="sv-tag">Serviços</p>
+      <h2 id="ci-servicos" class="sv-h2">O que a K. Up Biz faz <em>pela sua empresa.</em></h2>
+    </div>
+    <div class="sv-grid">
+      {SERVICOS.map((s) => (
+        <a href={s.slug} class="sv-card glass sv-related">
+          <h3>{s.nome}</h3>
+          <p>{s.resumo}</p>
+          <span class="sv-more">Conhecer o serviço <span aria-hidden="true">→</span></span>
+        </a>
+      ))}
+    </div>
+    <p class="sv-note"><strong>Como funciona o atendimento:</strong> conversa pelo WhatsApp ou videochamada, proposta com escopo e prazo, criação com aprovação em cada etapa e publicação. Tudo direto com {EMPRESA.responsavelCurto}, que cuida do projeto do começo ao fim.</p>
+  </section>
+
+  <section slot="depois" class="sv-section" aria-labelledby="ci-outras">
+    <div class="sv-head">
+      <p class="sv-tag">Região</p>
+      <h2 id="ci-outras" class="sv-h2">Outras cidades</h2>
+    </div>
+    <div class="sv-chips">
+      {outras.map((o) => <a href={cidadeUrl(o)}>{o.nome} – {o.uf}</a>)}
+      <a href="/atendimento-online">Atendimento em todo o Brasil →</a>
+    </div>
+  </section>
+</ConteudoLayout>

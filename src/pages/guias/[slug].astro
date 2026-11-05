@@ -1,0 +1,64 @@
+---
+// /guias/{slug} — Guias que respondem às dúvidas mais buscadas.
+import ConteudoLayout from '../../layouts/ConteudoLayout.astro';
+import { GUIAS, guiaUrl, type Guia } from '../../config/guias';
+import { EMPRESA } from '../../config/empresa';
+
+export function getStaticPaths() {
+  return GUIAS.map((g) => ({ params: { slug: g.slug }, props: { g } }));
+}
+const { g } = Astro.props as { g: Guia };
+const siteUrl = new URL('/', Astro.site).href;
+const pageUrl = new URL(guiaUrl(g), Astro.site).href;
+const data = new Date(g.publicado + 'T12:00:00').toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+const outros = GUIAS.filter((x) => x.slug !== g.slug);
+
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: g.titulo,
+  description: g.description,
+  url: pageUrl,
+  mainEntityOfPage: pageUrl,
+  datePublished: g.publicado,
+  dateModified: g.publicado,
+  inLanguage: 'pt-BR',
+  image: new URL('/imagens/og-kupbiz.jpg', Astro.site).href,
+  author: { '@type': 'Person', '@id': `${siteUrl}sobre#kleber`, name: EMPRESA.responsavel, url: new URL('/sobre', Astro.site).href },
+  publisher: { '@type': 'Organization', '@id': `${siteUrl}#empresa`, name: EMPRESA.nomeFantasia, logo: { '@type': 'ImageObject', url: new URL('/icon-512.png', Astro.site).href } }
+}];
+---
+
+<ConteudoLayout
+  title={g.title}
+  description={g.description}
+  crumbs={[{ nome: 'Guias', href: '/guias' }, { nome: g.titulo }]}
+  eyebrow="Guia"
+  h1={g.titulo}
+  lead={g.description}
+  meta={`Por ${EMPRESA.responsavelCurto} · Publicado em ${data}`}
+  faq={g.faq}
+  schema={schema}
+>
+  <section class="sv-section">
+    <article class="sv-prose">
+      <p class="sv-resumo"><strong>Resposta rápida</strong>{g.resumo}</p>
+      <Fragment set:html={g.corpo} />
+      <div class="sv-autor">
+        <img src="/imagens/kleber-avatar.webp" alt="" width="52" height="52" loading="lazy" />
+        <p><strong>{EMPRESA.responsavelCurto}</strong>, fundador da K. Up Biz. Cria sites, cuida do Perfil da Empresa no Google e gerencia anúncios para empresas de todo o Brasil. <a href="/sobre">Conheça a K. Up Biz</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <section slot="depois" class="sv-section" aria-labelledby="gu-rel">
+    <div class="sv-head">
+      <p class="sv-tag">Continue lendo</p>
+      <h2 id="gu-rel" class="sv-h2">Leia também</h2>
+    </div>
+    <div class="sv-chips">
+      {g.relacionados.map((r) => <a href={r.href}>{r.nome}</a>)}
+      {outros.filter((o) => !g.relacionados.some((r) => r.href === guiaUrl(o))).slice(0, 3).map((o) => <a href={guiaUrl(o)}>{o.titulo}</a>)}
+    </div>
+  </section>
+</ConteudoLayout>

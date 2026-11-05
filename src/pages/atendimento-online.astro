@@ -1,0 +1,78 @@
+---
+// /atendimento-online — Atendimento para todo o Brasil (capitais e demais cidades).
+import ConteudoLayout from '../layouts/ConteudoLayout.astro';
+import { CIDADES, CAPITAIS, cidadeUrl } from '../config/cidades';
+import { EMPRESA } from '../config/empresa';
+
+const etapas = [
+  { k: 'Etapa 01', t: 'Conversa', d: 'Você conta pelo WhatsApp ou por videochamada o que precisa. Eu entendo o negócio, o público e o objetivo.' },
+  { k: 'Etapa 02', t: 'Proposta', d: 'Você recebe a proposta com escopo, prazo e investimento definidos.' },
+  { k: 'Etapa 03', t: 'Criação', d: 'O projeto é desenvolvido com aprovação em cada etapa, sem você precisar sair de onde está.' },
+  { k: 'Etapa 04', t: 'Publicação', d: 'O site vai ao ar, o perfil é ajustado ou a campanha começa a rodar, com acompanhamento.' }
+];
+const faq = [
+  { q: 'Vocês atendem a minha cidade?', a: 'Sim. O atendimento é online, então empresas de qualquer cidade do Brasil podem contratar a K. Up Biz.' },
+  { q: 'Como é feita a comunicação?', a: 'Pelo WhatsApp e por videochamada, sempre direto com Kleber Gomes, que cuida do projeto do começo ao fim.' },
+  { q: 'Como envio fotos, textos e logo?', a: 'Pelo WhatsApp, e-mail ou um link de pasta compartilhada, como for mais fácil para você.' },
+  { q: 'Como é feito o pagamento?', a: 'As condições são combinadas diretamente pelo WhatsApp, junto com a proposta.' }
+];
+const siteUrl = new URL('/', Astro.site).href;
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Criação de sites, Google Meu Negócio e tráfego pago com atendimento online',
+  url: new URL('/atendimento-online', Astro.site).href,
+  areaServed: { '@type': 'Country', name: 'Brasil' },
+  provider: { '@type': 'ProfessionalService', '@id': `${siteUrl}#empresa`, name: EMPRESA.nomeFantasia, url: siteUrl }
+}];
+---
+
+<ConteudoLayout
+  title="Criação de Sites Online para Todo o Brasil | K. Up Biz"
+  description="Criação de sites, Google Meu Negócio e tráfego pago com atendimento online para empresas de todas as capitais e cidades do Brasil."
+  crumbs={[{ nome: 'Atendimento' }]}
+  eyebrow="Atendimento online"
+  h1="Sites, Google e anúncios"
+  h1Em="para empresas de todo o Brasil."
+  lead="O atendimento da K. Up Biz é online, por WhatsApp e videochamada. Sua empresa pode estar em qualquer cidade: o projeto é feito do mesmo jeito, direto com quem faz."
+  faq={faq}
+  faqTitulo="Dúvidas sobre o atendimento online"
+  schema={schema}
+>
+  <section class="sv-section" id="como-funciona" aria-labelledby="at-etapas">
+    <div class="sv-head">
+      <p class="sv-tag">Como funciona</p>
+      <h2 id="at-etapas" class="sv-h2">Do primeiro contato <em>à entrega, online.</em></h2>
+    </div>
+    <ol class="sv-steps">
+      {etapas.map((e) => (
+        <li class="glass">
+          <span class="sv-step-k">{e.k}</span>
+          <h3>{e.t}</h3>
+          <p>{e.d}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="sv-section" aria-labelledby="at-capitais">
+    <div class="sv-head">
+      <p class="sv-tag">Onde atendemos</p>
+      <h2 id="at-capitais" class="sv-h2">Todas as capitais <em>e demais cidades.</em></h2>
+      <p>Empresas de qualquer cidade podem contratar, inclusive das capitais:</p>
+    </div>
+    <ul class="sv-chips" aria-label="Capitais atendidas">
+      {CAPITAIS.map((c) => <li><span>{c}</span></li>)}
+    </ul>
+    <h3 class="sv-group-title">Região de origem da K. Up Biz</h3>
+    <div class="sv-chips">
+      {CIDADES.map((c) => <a href={cidadeUrl(c)}>{c.nome} – {c.uf}</a>)}
+    </div>
+  </section>
+</ConteudoLayout>
+
+<style>
+  ul.sv-chips { list-style: none; margin: 0; padding: 0; }
+  .sv-steps h3 { margin: 0 0 8px; font-family: var(--font-sans); font-size: 18px; font-weight: 600; color: #F5F1E8; }
+  .sv-steps p { margin: 0; font-family: var(--font-sans); font-size: 15px; line-height: 1.6; color: rgba(245, 241, 232, 0.74); }
+</style>

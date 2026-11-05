@@ -1,0 +1,27 @@
+---
+// /guias — Lista de guias.
+import ConteudoLayout from '../../layouts/ConteudoLayout.astro';
+import { GUIAS, guiaUrl } from '../../config/guias';
+---
+
+<ConteudoLayout
+  title="Guias sobre sites, Google e anúncios | K. Up Biz"
+  description="Guias práticos sobre quanto custa um site, como aparecer no Google Maps, landing page ou site, tráfego pago e mais."
+  crumbs={[{ nome: 'Guias' }]}
+  eyebrow="Guias"
+  h1="Respostas diretas para"
+  h1Em="decidir com segurança."
+  lead="Conteúdo prático para quem está pensando em ter um site, aparecer no Google ou começar a anunciar."
+>
+  <section class="sv-section" aria-label="Lista de guias">
+    <div class="sv-grid sv-grid-2">
+      {GUIAS.map((g) => (
+        <a href={guiaUrl(g)} class="sv-card glass sv-related">
+          <h2 class="sv-card-title">{g.titulo}</h2>
+          <p>{g.description}</p>
+          <span class="sv-more">Ler o guia <span aria-hidden="true">→</span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+</ConteudoLayout>

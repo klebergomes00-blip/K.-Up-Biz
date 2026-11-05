@@ -1,0 +1,133 @@
+---
+// src/layouts/ConteudoLayout.astro — Modelo das páginas de conteúdo:
+// segmentos, guias, cidades, sobre e cases. Leve (sem GSAP), tudo no HTML.
+import Layout from './Layout.astro';
+import '../styles/paginas.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import Rodape from '../components/Rodape.astro';
+import WhatsAppFlutuante from '../components/WhatsAppFlutuante.astro';
+import { EMPRESA, waLink } from '../config/empresa';
+
+interface Faq { q: string; a: string }
+interface Crumb { nome: string; href?: string }
+interface Props {
+  title: string;
+  description: string;
+  crumbs: Crumb[];
+  eyebrow: string;
+  h1: string;
+  h1Em?: string;
+  lead: string;
+  ctaLabel?: string;
+  whatsapp?: string;
+  faq?: Faq[];
+  faqTitulo?: string;
+  schema?: Record<string, unknown>[];
+  meta?: string;
+  semCta?: boolean;
+}
+
+const {
+  title, description, crumbs, eyebrow, h1, h1Em, lead,
+  ctaLabel = 'Conversar no WhatsApp',
+  whatsapp = 'Olá, Kleber! Vim pelo site da K. Up Biz e gostaria de conversar sobre o meu negócio.',
+  faq = [], faqTitulo = 'Perguntas frequentes', schema = [], meta, semCta = false
+} = Astro.props;
+
+const wa = waLink(whatsapp);
+const siteUrl = new URL('/', Astro.site).href;
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1');
+const pageUrl = new URL(path, Astro.site).href;
+
+const ld: Record<string, unknown>[] = [
+  ...schema,
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ nome: 'Início', href: '/' }, ...crumbs].map((c, i, arr) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.nome,
+      item: i === arr.length - 1 ? pageUrl : new URL(c.href || '/', Astro.site).href
+    }))
+  }
+];
+if (faq.length) {
+  ld.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+  });
+}
+---
+
+<Layout title={title} description={description}>
+  <SiteHeader atual={path} whatsapp={whatsapp} />
+
+  <main id="conteudo" class="sv-main">
+    <div class="sv-ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+
+    <section class="sv-hero" aria-labelledby="sv-h1">
+      <nav class="sv-crumbs" aria-label="Você está em">
+        <ol>
+          <li><a href="/">Início</a></li>
+          {crumbs.map((c, i) => (
+            i === crumbs.length - 1
+              ? <li aria-current="page">{c.nome}</li>
+              : <li><a href={c.href}>{c.nome}</a></li>
+          ))}
+        </ol>
+      </nav>
+      <p class="sv-eyebrow"><span class="sv-pip" aria-hidden="true"></span>{eyebrow}</p>
+      <h1 id="sv-h1" class="sv-h1">{h1}{h1Em && <> <em>{h1Em}</em></>}</h1>
+      <p class="sv-lead">{lead}</p>
+      {meta && <p class="sv-meta">{meta}</p>}
+      {!semCta && (
+        <div class="sv-hero-ctas">
+          <a href={wa} class="sv-btn">
+            <span>{ctaLabel}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
+          </a>
+        </div>
+      )}
+    </section>
+
+    <slot />
+
+    {faq.length > 0 && (
+      <section class="sv-section" aria-labelledby="sv-faq-title">
+        <div class="sv-head">
+          <p class="sv-tag">Perguntas frequentes</p>
+          <h2 id="sv-faq-title" class="sv-h2">{faqTitulo}</h2>
+        </div>
+        <div class="sv-faq">
+          {faq.map((f) => (
+            <details class="sv-faq-item">
+              <summary><span>{f.q}</span><i aria-hidden="true"></i></summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <slot name="depois" />
+
+    <section class="sv-section sv-cta-wrap" aria-labelledby="sv-cta-title">
+      <div class="sv-cta glass">
+        <p class="sv-tag">Próximo passo</p>
+        <h2 id="sv-cta-title" class="sv-h2">Vamos conversar sobre <em>o seu negócio?</em></h2>
+        <p class="sv-p">Me conte o que você precisa. Eu mesmo respondo e indico o melhor caminho para o seu momento.</p>
+        <a href={wa} class="sv-btn">
+          <span>{ctaLabel}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
+        </a>
+        <p class="sv-privacy">Abre uma conversa no WhatsApp com {EMPRESA.responsavelCurto}. Seus dados são tratados conforme a <a href="/politica-de-privacidade">Política de Privacidade</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <Rodape />
+  <WhatsAppFlutuante />
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</Layout>

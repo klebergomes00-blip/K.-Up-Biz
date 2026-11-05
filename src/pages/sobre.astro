@@ -1,0 +1,64 @@
+---
+// /sobre — Quem é a K. Up Biz e quem faz o trabalho (autoria / E-E-A-T).
+import ConteudoLayout from '../layouts/ConteudoLayout.astro';
+import { EMPRESA } from '../config/empresa';
+import { SERVICOS } from '../config/servicos';
+
+const siteUrl = new URL('/', Astro.site).href;
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${siteUrl}sobre#kleber`,
+  name: EMPRESA.responsavel,
+  alternateName: EMPRESA.responsavelCurto,
+  jobTitle: 'Fundador da K. Up Biz',
+  image: new URL('/imagens/hero-poster-mobile.webp', Astro.site).href,
+  url: new URL('/sobre', Astro.site).href,
+  worksFor: { '@type': 'ProfessionalService', '@id': `${siteUrl}#empresa`, name: EMPRESA.nomeFantasia },
+  address: { '@type': 'PostalAddress', addressLocality: 'Cabeceiras', addressRegion: 'GO', addressCountry: 'BR' },
+  sameAs: [EMPRESA.instagramUrl],
+  knowsAbout: ['Criação de sites', 'Landing pages', 'Google Meu Negócio', 'Perfil da Empresa no Google', 'Google Ads', 'Meta Ads', 'SEO']
+}];
+---
+
+<ConteudoLayout
+  title="Sobre a K. Up Biz e Kleber Gomes | K. Up Biz"
+  description="Conheça a K. Up Biz (Kleber Up Business), de Cabeceiras – GO: sites, Google Meu Negócio e tráfego pago com atendimento direto com quem faz."
+  crumbs={[{ nome: 'Sobre' }]}
+  eyebrow="Sobre"
+  h1="Quem cuida do seu projeto"
+  h1Em="do começo ao fim."
+  lead={`A K. Up Biz (Kleber Up Business) é o trabalho de ${EMPRESA.responsavelCurto}, de Cabeceiras – GO. Sites, Perfil da Empresa no Google e anúncios para empresas que querem ser encontradas.`}
+  schema={schema}
+>
+  <section class="sv-section">
+    <div class="sv-prose sobre-grid">
+      <img src="/imagens/hero-poster-mobile.webp" alt={`${EMPRESA.responsavel}, fundador da K. Up Biz`} width="760" height="1080" loading="lazy" decoding="async" class="sobre-foto" />
+      <div>
+        <h2>Atendimento direto, sem intermediários</h2>
+        <p>Na K. Up Biz, quem conversa com você é a mesma pessoa que cria o seu projeto. Não há briefing passado de mão em mão nem atendimento por equipe de vendas: do primeiro contato à entrega, o atendimento é com {EMPRESA.responsavelCurto}.</p>
+        <h2>O que eu faço</h2>
+        <ul>
+          {SERVICOS.map((s) => <li><a href={s.slug}>{s.nome}</a>: {s.resumo}</li>)}
+          <li>Design de logotipo, SEO e otimização técnica de sites.</li>
+        </ul>
+        <h2>Como eu trabalho</h2>
+        <p>Cada site é criado do zero ou a partir de uma base pronta, quando o prazo pede, mas sempre com design, textos e estrutura adaptados à marca do cliente. Antes de publicar, cada projeto é testado no computador e no celular e preparado para o Google.</p>
+        <h2>Compromisso com a transparência</h2>
+        <p>Ninguém pode garantir primeira posição no Google ou resultado certo em anúncios, e eu não prometo isso. O que eu entrego é método, acompanhamento e decisões baseadas em dados.</p>
+        <h2>Onde a K. Up Biz está</h2>
+        <p>A K. Up Biz fica em Cabeceiras – GO e atende empresas de todo o Brasil de forma online, por WhatsApp e videochamada. Veja o <a href="/atendimento-online">atendimento online</a> e os <a href="/cases">projetos realizados</a>.</p>
+      </div>
+    </div>
+  </section>
+</ConteudoLayout>
+
+<style>
+  .sobre-grid { max-width: 1080px; display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
+  .sobre-foto { width: 100%; height: auto; border-radius: 22px; border: 1px solid rgba(255, 255, 255, 0.12); position: sticky; top: 100px; }
+  .sobre-grid h2:first-child { margin-top: 0; }
+  @media (max-width: 800px) {
+    .sobre-grid { grid-template-columns: 1fr; gap: 28px; }
+    .sobre-foto { max-width: 260px; position: static; }
+  }
+</style>

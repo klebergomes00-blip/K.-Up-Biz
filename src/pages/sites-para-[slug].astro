@@ -1,0 +1,130 @@
+---
+// /sites-para-{segmento} — Uma página por segmento (dentistas, advogados, energia solar...).
+import ConteudoLayout from '../layouts/ConteudoLayout.astro';
+import { SEGMENTOS, GRUPOS, segmentoUrl, type Segmento } from '../config/segmentos';
+import { projeto } from '../config/portfolio';
+import { portfolioSrcset } from '../config/imagens';
+import { EMPRESA } from '../config/empresa';
+
+export function getStaticPaths() {
+  return SEGMENTOS.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+
+const { s } = Astro.props as { s: Segmento };
+const caso = projeto(s.caseKey);
+const vizinhos = SEGMENTOS.filter((x) => x.grupo === s.grupo && x.slug !== s.slug);
+const siteUrl = new URL('/', Astro.site).href;
+const pageUrl = new URL(segmentoUrl(s), Astro.site).href;
+
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${pageUrl}#servico`,
+  name: `Criação de sites para ${s.curto}`,
+  serviceType: 'Criação de sites',
+  description: s.description,
+  url: pageUrl,
+  audience: { '@type': 'BusinessAudience', name: s.nome },
+  areaServed: { '@type': 'Country', name: 'Brasil' },
+  provider: { '@type': 'ProfessionalService', '@id': `${siteUrl}#empresa`, name: EMPRESA.nomeFantasia, url: siteUrl }
+}];
+---
+
+<ConteudoLayout
+  title={`Criação de Site para ${s.curto.replace(/^empresas de /, '').replace(/^./, (c) => c.toUpperCase())} | K. Up Biz`}
+  description={s.description}
+  crumbs={[{ nome: 'Segmentos', href: '/segmentos' }, { nome: s.nome }]}
+  eyebrow={`Sites para ${GRUPOS[s.grupo].toLowerCase()}`}
+  h1={`Site para ${s.nome.charAt(0).toLowerCase() + s.nome.slice(1)}`}
+  h1Em="feito para o seu público."
+  lead={s.lead}
+  ctaLabel="Quero um site assim"
+  whatsapp={s.whatsapp}
+  faq={s.faq}
+  faqTitulo={`Dúvidas de ${s.curto} sobre o site`}
+  schema={schema}
+>
+  <section class="sv-section" aria-labelledby="seg-dores">
+    <div class="sv-head">
+      <p class="sv-tag">O que costuma acontecer</p>
+      <h2 id="seg-dores" class="sv-h2">Os problemas mais comuns <em>de quem não tem um bom site.</em></h2>
+    </div>
+    <ul class="sv-checks">
+      {s.dores.map((d) => <li>{d}</li>)}
+    </ul>
+  </section>
+
+  <section class="sv-section" aria-labelledby="seg-secoes">
+    <div class="sv-head">
+      <p class="sv-tag">O que o site tem</p>
+      <h2 id="seg-secoes" class="sv-h2">O que o site de {s.curto} <em>precisa ter.</em></h2>
+    </div>
+    <div class="sv-grid">
+      {s.secoes.map((x, i) => (
+        <article class="sv-card glass">
+          <span class="sv-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{x.t}</h3>
+          <p>{x.d}</p>
+        </article>
+      ))}
+    </div>
+    <p class="sv-note"><strong>Em todos os sites:</strong> design com a identidade da sua marca, carregamento rápido no celular, WhatsApp integrado e estrutura pronta para o Google (títulos, descrições e dados estruturados).</p>
+  </section>
+
+  {s.regras && (
+    <section class="sv-section" aria-labelledby="seg-regras">
+      <div class="sv-head">
+        <p class="sv-tag">Publicidade profissional</p>
+        <h2 id="seg-regras" class="sv-h2">Dentro das regras <em>do seu conselho.</em></h2>
+        <p>{s.regras}</p>
+      </div>
+    </section>
+  )}
+
+  <section class="sv-section" aria-labelledby="seg-google">
+    <div class="sv-head">
+      <p class="sv-tag">Ser encontrado</p>
+      <h2 id="seg-google" class="sv-h2">Site, Google e anúncios <em>trabalhando juntos.</em></h2>
+      <p>{s.google}</p>
+    </div>
+    <div class="sv-chips">
+      <a href="/criacao-de-sites">Criação de sites</a>
+      <a href="/google-meu-negocio">Google Meu Negócio</a>
+      <a href="/gestao-de-trafego-pago">Gestão de tráfego pago</a>
+      <a href="/guias/quanto-custa-um-site">Quanto custa um site</a>
+    </div>
+  </section>
+
+  {caso && (
+    <section class="sv-section" aria-labelledby="seg-caso">
+      <div class="sv-head">
+        <p class="sv-tag">Projeto real</p>
+        <h2 id="seg-caso" class="sv-h2">Um site que fizemos <em>para esse segmento.</em></h2>
+      </div>
+      <div class="sv-cases">
+        <a href={caso.url} target="_blank" rel="noopener noreferrer" class="sv-case glass">
+          <picture>
+            <source type="image/avif" srcset={portfolioSrcset(caso.key).avif} sizes="(max-width: 640px) 92vw, 400px" />
+            <img src={portfolioSrcset(caso.key).src} srcset={portfolioSrcset(caso.key).webp} sizes="(max-width: 640px) 92vw, 400px" alt={`Página inicial do site ${caso.nome}, desenvolvido pela K. Up Biz`} width="1584" height="849" loading="lazy" decoding="async" />
+          </picture>
+          <div>
+            <h3>{caso.nome}</h3>
+            <p>{caso.segmento} · {caso.descricao}</p>
+            <span class="sv-more">Ver site <span aria-hidden="true">↗</span><span class="sr-only"> (abre em nova aba)</span></span>
+          </div>
+        </a>
+      </div>
+    </section>
+  )}
+
+  <section slot="depois" class="sv-section" aria-labelledby="seg-outros">
+    <div class="sv-head">
+      <p class="sv-tag">Outros segmentos</p>
+      <h2 id="seg-outros" class="sv-h2">Também criamos sites <em>para {GRUPOS[s.grupo].toLowerCase()}.</em></h2>
+    </div>
+    <div class="sv-chips">
+      {vizinhos.map((v) => <a href={segmentoUrl(v)}>{v.nome}</a>)}
+      <a href="/segmentos">Ver todos os segmentos →</a>
+    </div>
+  </section>
+</ConteudoLayout>
