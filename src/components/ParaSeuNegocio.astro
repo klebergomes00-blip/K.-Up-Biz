@@ -1,12 +1,18 @@
 ---
 // src/components/ParaSeuNegocio.astro — Home: atalhos para os segmentos e os guias principais.
-import { SEGMENTOS, segmentoUrl } from '../config/segmentos';
+import { SEGMENTOS, GRUPOS, segmentoUrl } from '../config/segmentos';
 import { GUIAS, guiaUrl } from '../config/guias';
 import { iconeSegmento } from '../config/icones';
 
 const guias = ['quanto-custa-um-site', 'como-aparecer-no-google-maps', 'quanto-investir-em-trafego-pago']
   .map((slug) => GUIAS.find((g) => g.slug === slug))
   .filter((g): g is NonNullable<typeof g> => Boolean(g));
+
+const linhas = (Object.keys(GRUPOS) as (keyof typeof GRUPOS)[]).map((g, i) => ({
+  nome: GRUPOS[g],
+  itens: SEGMENTOS.filter((x) => x.grupo === g),
+  reverso: i % 2 === 1
+}));
 
 const cortarResumo = (t: string, max = 150) =>
   t.length <= max ? t : t.slice(0, t.lastIndexOf(' ', max)).replace(/[,.;:]$/, '') + '…';
@@ -23,22 +29,35 @@ const cortarResumo = (t: string, max = 150) =>
       <p class="psn-lead">Veja como é o site ideal para a sua área, com o que o seu cliente procura antes de entrar em contato.</p>
     </div>
 
-    <ul class="psn-chips" role="list">
-      {SEGMENTOS.map((s) => {
-        const ic = iconeSegmento(s.slug);
-        return (
-          <li>
-            <a href={segmentoUrl(s)} class="psn-chip">
-              <span class="psn-chip-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={ic.svg} />
-              </span>
-              <span>{s.nome}</span>
-            </a>
-          </li>
-        );
-      })}
-    </ul>
-    <p class="psn-all"><a href="/segmentos">Ver todos os segmentos <span aria-hidden="true">→</span></a></p>
+  </div>
+
+  <div class="psn-marquee" id="psn-marquee">
+    {linhas.map((l) => (
+      <div class:list={['psn-row', { 'psn-row--rev': l.reverso }]} style={`--dur:${l.itens.length * 6}s`}>
+        <ul class="psn-track" aria-label={`Sites para ${l.nome.toLowerCase()}`}>
+          {[0, 1].map((copia) => l.itens.map((s) => (
+            <li aria-hidden={copia === 1 ? 'true' : undefined}>
+              <a href={segmentoUrl(s)} class="psn-chip" tabindex={copia === 1 ? -1 : undefined}>
+                <span class="psn-chip-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={iconeSegmento(s.slug).svg} />
+                </span>
+                <span>{s.nome}</span>
+              </a>
+            </li>
+          )))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <div class="psn-container">
+    <div class="psn-controls">
+      <p class="psn-all"><a href="/segmentos">Ver todos os segmentos <span aria-hidden="true">→</span></a></p>
+      <button type="button" class="psn-pause" id="psn-pause" aria-pressed="false">
+        <span class="psn-pause-icon" aria-hidden="true"></span>
+        <span class="psn-pause-label">Pausar animação</span>
+      </button>
+    </div>
 
     <div class="psn-guides-head">
       <h3 class="psn-subtitle">Guias para decidir <em>com clareza.</em></h3>
@@ -56,6 +75,19 @@ const cortarResumo = (t: string, max = 150) =>
     </div>
   </div>
 </section>
+
+<script>
+  const marquee = document.getElementById('psn-marquee');
+  const btn = document.getElementById('psn-pause');
+  if (marquee && btn) {
+    const label = btn.querySelector('.psn-pause-label');
+    btn.addEventListener('click', () => {
+      const pausado = marquee.classList.toggle('is-paused');
+      btn.setAttribute('aria-pressed', String(pausado));
+      if (label) label.textContent = pausado ? 'Retomar animação' : 'Pausar animação';
+    });
+  }
+</script>
 
 <style>
   .psn {
@@ -84,10 +116,40 @@ const cortarResumo = (t: string, max = 150) =>
   }
   .psn-lead { margin: 18px 0 0; max-width: 620px; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.6; color: rgba(245, 241, 232, 0.76); }
 
-  .psn-chips {
-    list-style: none; margin: clamp(32px, 5vh, 48px) 0 0; padding: 0;
-    display: flex; flex-wrap: wrap; gap: 10px;
+  .psn-marquee {
+    display: grid; gap: 12px;
+    margin-top: clamp(32px, 5vh, 48px);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   }
+  .psn-row { overflow: hidden; padding: 4px 0; }
+  .psn-track {
+    list-style: none; margin: 0; padding: 0;
+    --g: 12px;
+    display: flex; gap: var(--g); width: max-content;
+    animation: psnScroll var(--dur, 40s) linear infinite;
+  }
+  .psn-track li { flex: none; }
+  .psn-row--rev .psn-track { animation-direction: reverse; }
+  .psn-row:hover .psn-track,
+  .psn-marquee.is-paused .psn-track { animation-play-state: paused; }
+  /* Teclado: ao focar um item, a faixa para e volta ao início para o item ficar visível */
+  .psn-row:focus-within .psn-track { animation: none; }
+  @keyframes psnScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-50% - var(--g) / 2)); }
+  }
+  .psn-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 20px; }
+  .psn-pause {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 999px;
+    background: transparent; border: 1px solid rgba(245, 241, 232, 0.18);
+    color: rgba(245, 241, 232, 0.8); font: 500 13px var(--font-sans, sans-serif); cursor: pointer;
+  }
+  .psn-pause:hover { border-color: rgba(212, 175, 55, 0.6); color: #F5F1E8; }
+  .psn-pause:focus-visible { outline: 2px solid #F3E5AB; outline-offset: 3px; }
+  .psn-pause-icon { width: 10px; height: 10px; border-left: 3px solid currentColor; border-right: 3px solid currentColor; box-sizing: border-box; }
+  .psn-pause[aria-pressed="true"] .psn-pause-icon { border: 0; width: 0; height: 0; border-left: 9px solid currentColor; border-top: 5.5px solid transparent; border-bottom: 5.5px solid transparent; }
   .psn-chip {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 8px 16px 8px 8px; border-radius: 999px;
@@ -105,7 +167,7 @@ const cortarResumo = (t: string, max = 150) =>
     color: #F3E5AB;
   }
   .psn-chip-icon svg { width: 16px; height: 16px; }
-  .psn-all { margin: 20px 0 0; }
+  .psn-all { margin: 0; }
   .psn-all a, .psn-link { color: #F3E5AB; font-size: 15px; font-weight: 600; text-decoration: none; }
   .psn-all a:hover, .psn-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 
@@ -137,12 +199,18 @@ const cortarResumo = (t: string, max = 150) =>
   @media (max-width: 640px) {
     .psn { padding: 56px 0 24px; }
     .psn-container { padding: 0 18px; }
-    .psn-chips { gap: 8px; }
+    .psn-marquee { gap: 8px; }
+    .psn-track { --g: 8px; }
     .psn-chip { font-size: 13.5px; padding: 6px 14px 6px 6px; gap: 8px; }
     .psn-chip-icon { width: 26px; height: 26px; }
     .psn-guide { padding: 22px 20px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .psn-chip, .psn-guide { transition: none; }
+    .psn-marquee { -webkit-mask-image: none; mask-image: none; max-width: 1240px; margin-inline: auto; padding: 0 clamp(20px, 5vw, 64px); }
+    .psn-row { overflow: visible; }
+    .psn-track { animation: none; flex-wrap: wrap; width: auto; }
+    .psn-track li[aria-hidden="true"] { display: none; }
+    .psn-pause { display: none; }
   }
 </style>
