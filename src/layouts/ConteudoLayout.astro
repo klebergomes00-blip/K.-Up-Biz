@@ -25,13 +25,14 @@ interface Props {
   schema?: Record<string, unknown>[];
   meta?: string;
   semCta?: boolean;
+  visual?: { svg: string; rotulo: string };  // orbe com ícone ao lado do título
 }
 
 const {
   title, description, crumbs, eyebrow, h1, h1Em, lead,
   ctaLabel = 'Conversar no WhatsApp',
   whatsapp = 'Olá, Kleber! Vim pelo site da K. Up Biz e gostaria de conversar sobre o meu negócio.',
-  faq = [], faqTitulo = 'Perguntas frequentes', schema = [], meta, semCta = false
+  faq = [], faqTitulo = 'Perguntas frequentes', schema = [], meta, semCta = false, visual
 } = Astro.props;
 
 const wa = waLink(whatsapp);
@@ -67,7 +68,8 @@ if (faq.length) {
   <main id="conteudo" class="sv-main">
     <div class="sv-ambient" aria-hidden="true"><i></i><i></i><i></i></div>
 
-    <section class="sv-hero" aria-labelledby="sv-h1">
+    <section class:list={['sv-hero', { 'sv-hero--visual': visual }]} aria-labelledby="sv-h1">
+      <div class="sv-hero-text">
       <nav class="sv-crumbs" aria-label="Você está em">
         <ol>
           <li><a href="/">Início</a></li>
@@ -88,6 +90,18 @@ if (faq.length) {
             <span>{ctaLabel}</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>
           </a>
+        </div>
+      )}
+      </div>
+      {visual && (
+        <div class="sv-orb-wrap" aria-hidden="true">
+          <div class="sv-orb-glow"></div>
+          <div class="sv-orb-ring"></div>
+          <div class="sv-orb"></div>
+          <div class="sv-orb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" set:html={visual.svg} />
+            <span>{visual.rotulo}</span>
+          </div>
         </div>
       )}
     </section>

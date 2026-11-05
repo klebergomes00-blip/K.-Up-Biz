@@ -5,6 +5,7 @@ import { SEGMENTOS, GRUPOS, segmentoUrl, type Segmento } from '../config/segment
 import { projeto } from '../config/portfolio';
 import { portfolioSrcset } from '../config/imagens';
 import { EMPRESA } from '../config/empresa';
+import { iconeSegmento } from '../config/icones';
 
 export function getStaticPaths() {
   return SEGMENTOS.map((s) => ({ params: { slug: s.slug }, props: { s } }));
@@ -43,6 +44,7 @@ const schema = [{
   faq={s.faq}
   faqTitulo={`Dúvidas de ${s.curto} sobre o site`}
   schema={schema}
+  visual={iconeSegmento(s.slug)}
 >
   <section class="sv-section" aria-labelledby="seg-dores">
     <div class="sv-head">

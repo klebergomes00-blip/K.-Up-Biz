@@ -1,0 +1,148 @@
+---
+// src/components/ParaSeuNegocio.astro — Home: atalhos para os segmentos e os guias principais.
+import { SEGMENTOS, segmentoUrl } from '../config/segmentos';
+import { GUIAS, guiaUrl } from '../config/guias';
+import { iconeSegmento } from '../config/icones';
+
+const guias = ['quanto-custa-um-site', 'como-aparecer-no-google-maps', 'quanto-investir-em-trafego-pago']
+  .map((slug) => GUIAS.find((g) => g.slug === slug))
+  .filter((g): g is NonNullable<typeof g> => Boolean(g));
+
+const cortarResumo = (t: string, max = 150) =>
+  t.length <= max ? t : t.slice(0, t.lastIndexOf(' ', max)).replace(/[,.;:]$/, '') + '…';
+---
+
+<section class="psn" id="segmentos" aria-labelledby="psn-title">
+  <div class="psn-container">
+    <div class="psn-head">
+      <div class="psn-eyebrow">
+        <span class="psn-pip" aria-hidden="true"></span>
+        <span>06 / PARA O SEU NEGÓCIO</span>
+      </div>
+      <h2 id="psn-title" class="psn-title">Cada segmento tem seu público. <em>O site também.</em></h2>
+      <p class="psn-lead">Veja como é o site ideal para a sua área, com o que o seu cliente procura antes de entrar em contato.</p>
+    </div>
+
+    <ul class="psn-chips" role="list">
+      {SEGMENTOS.map((s) => {
+        const ic = iconeSegmento(s.slug);
+        return (
+          <li>
+            <a href={segmentoUrl(s)} class="psn-chip">
+              <span class="psn-chip-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={ic.svg} />
+              </span>
+              <span>{s.nome}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+    <p class="psn-all"><a href="/segmentos">Ver todos os segmentos <span aria-hidden="true">→</span></a></p>
+
+    <div class="psn-guides-head">
+      <h3 class="psn-subtitle">Guias para decidir <em>com clareza.</em></h3>
+      <a href="/guias" class="psn-link">Ver todos os guias <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="psn-guides">
+      {guias.map((g) => (
+        <a href={guiaUrl(g)} class="psn-guide">
+          <span class="psn-guide-tag">Guia</span>
+          <h4>{g.titulo}</h4>
+          <p>{cortarResumo(g.resumo)}</p>
+          <span class="psn-more">Ler o guia <span aria-hidden="true">→</span></span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .psn {
+    position: relative;
+    background: radial-gradient(ellipse 70% 50% at 85% 0%, rgba(4, 120, 87, 0.16), transparent 70%), #030D0B;
+    color: #F5F1E8;
+    font-family: var(--font-sans, 'Instrument Sans', sans-serif);
+    padding: clamp(80px, 12vh, 140px) 0 clamp(40px, 6vh, 70px);
+  }
+  .psn-container { max-width: 1240px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px); }
+  .psn-head { max-width: 760px; }
+  .psn-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 4px 12px; border-radius: 999px;
+    background: rgba(4, 120, 87, 0.12); border: 1px solid rgba(4, 120, 87, 0.35);
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+    margin-bottom: clamp(14px, 2vh, 20px);
+  }
+  .psn-pip { width: 6px; height: 6px; border-radius: 50%; background: #047857; box-shadow: 0 0 10px rgba(4, 120, 87, 0.9), 0 0 4px #10b981; }
+  .psn-title {
+    margin: 0; font-size: clamp(2.1rem, 3.2vw, 3.2rem); font-weight: 500;
+    line-height: 1.12; letter-spacing: -0.025em;
+  }
+  .psn-title em, .psn-subtitle em {
+    font-family: var(--font-instrument-serif); font-style: italic; font-weight: 400; color: #D4AF37; letter-spacing: -0.01em;
+  }
+  .psn-lead { margin: 18px 0 0; max-width: 620px; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.6; color: rgba(245, 241, 232, 0.76); }
+
+  .psn-chips {
+    list-style: none; margin: clamp(32px, 5vh, 48px) 0 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .psn-chip {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 16px 8px 8px; border-radius: 999px;
+    background: rgba(245, 241, 232, 0.05);
+    border: 1px solid rgba(245, 241, 232, 0.12);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    color: #F5F1E8; font-size: 14.5px; font-weight: 500; text-decoration: none;
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  }
+  .psn-chip:hover, .psn-chip:focus-visible { border-color: rgba(212, 175, 55, 0.6); background: rgba(212, 175, 55, 0.08); transform: translateY(-2px); }
+  .psn-chip-icon {
+    display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; flex: none;
+    background: radial-gradient(circle at 35% 30%, rgba(243, 229, 171, 0.3), transparent 45%), radial-gradient(circle at 60% 70%, rgba(4, 120, 87, 0.8), rgba(4, 29, 23, 0.9) 75%);
+    color: #F3E5AB;
+  }
+  .psn-chip-icon svg { width: 16px; height: 16px; }
+  .psn-all { margin: 20px 0 0; }
+  .psn-all a, .psn-link { color: #F3E5AB; font-size: 15px; font-weight: 600; text-decoration: none; }
+  .psn-all a:hover, .psn-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  .psn-guides-head {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px;
+    margin-top: clamp(56px, 9vh, 96px);
+  }
+  .psn-subtitle { margin: 0; font-size: clamp(1.6rem, 2.4vw, 2.3rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; }
+  .psn-guides { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 28px; }
+  .psn-guide {
+    display: flex; flex-direction: column; gap: 12px;
+    padding: 28px 26px; border-radius: 24px;
+    background: linear-gradient(160deg, rgba(245, 241, 232, 0.07), rgba(245, 241, 232, 0.02));
+    border: 1px solid rgba(245, 241, 232, 0.12);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    color: #F5F1E8; text-decoration: none;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .psn-guide:hover, .psn-guide:focus-visible { border-color: rgba(212, 175, 55, 0.55); transform: translateY(-3px); }
+  .psn-guide-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #10b981; }
+  .psn-guide h4 { margin: 0; font-size: 20px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
+  .psn-guide p { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(245, 241, 232, 0.72); flex: 1; }
+  .psn-more { color: #F3E5AB; font-size: 14px; font-weight: 600; }
+
+  @media (max-width: 900px) {
+    .psn-guides { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .psn { padding: 56px 0 24px; }
+    .psn-container { padding: 0 18px; }
+    .psn-chips { gap: 8px; }
+    .psn-chip { font-size: 13.5px; padding: 6px 14px 6px 6px; gap: 8px; }
+    .psn-chip-icon { width: 26px; height: 26px; }
+    .psn-guide { padding: 22px 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .psn-chip, .psn-guide { transition: none; }
+  }
+</style>
