@@ -25,7 +25,8 @@ const cortarResumo = (t: string, max = 150) =>
         <span class="psn-pip" aria-hidden="true"></span>
         <span>06 / PARA O SEU NEGÓCIO</span>
       </div>
-      <h2 id="psn-title" class="psn-title">Cada segmento tem seu público. <em>O site também.</em></h2>
+      <h2 id="psn-title" class="psn-title">Cada segmento tem seu público. <span class="psn-highlight">O site também.</span></h2>
+      <div class="psn-divider" aria-hidden="true"></div>
       <p class="psn-lead">Veja como é o site ideal para a sua área, com o que o seu cliente procura antes de entrar em contato.</p>
     </div>
 
@@ -98,7 +99,7 @@ const cortarResumo = (t: string, max = 150) =>
     padding: clamp(80px, 12vh, 140px) 0 clamp(40px, 6vh, 70px);
   }
   .psn-container { max-width: 1240px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px); }
-  .psn-head { max-width: 760px; }
+  .psn-head { max-width: 820px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; }
   .psn-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 4px 12px; border-radius: 999px;
@@ -111,10 +112,16 @@ const cortarResumo = (t: string, max = 150) =>
     margin: 0; font-size: clamp(2.1rem, 3.2vw, 3.2rem); font-weight: 500;
     line-height: 1.12; letter-spacing: -0.025em;
   }
-  .psn-title em, .psn-subtitle em {
+  .psn-highlight {
+    display: block; margin-top: 2px;
+    font-family: var(--font-serif, 'Bodoni Moda', Georgia, serif); font-style: italic; font-weight: 400;
+    color: #D4AF37; text-shadow: 0 0 35px rgba(212, 175, 55, 0.38);
+  }
+  .psn-divider { width: 56px; height: 2px; margin: clamp(16px, 2vh, 22px) auto 0; background: linear-gradient(90deg, transparent, #D4AF37, transparent); }
+  .psn-subtitle em {
     font-family: var(--font-instrument-serif); font-style: italic; font-weight: 400; color: #D4AF37; letter-spacing: -0.01em;
   }
-  .psn-lead { margin: 18px 0 0; max-width: 620px; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.6; color: rgba(245, 241, 232, 0.76); }
+  .psn-lead { margin: 18px auto 0; max-width: 620px; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.6; color: rgba(245, 241, 232, 0.76); }
 
   .psn-marquee {
     display: grid; gap: 12px;

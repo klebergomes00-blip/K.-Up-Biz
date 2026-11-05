@@ -35,7 +35,7 @@ export const GUIAS: Guia[] = [
 </ul>
 
 <h2>Tipos de site e para quem cada um serve</h2>
-<div class="sv-table-wrap"><table class="sv-table">
+<div class="sv-table-wrap" tabindex="0" role="region" aria-label="Tabela comparativa"><table class="sv-table">
   <thead><tr><th>Tipo</th><th>Para quem</th><th>Complexidade</th></tr></thead>
   <tbody>
     <tr><td>Landing page</td><td>Quem quer divulgar um serviço ou receber contatos de anúncios</td><td>Menor</td></tr>
@@ -105,7 +105,7 @@ export const GUIAS: Guia[] = [
 </ul>
 
 <h2>Comparação rápida</h2>
-<div class="sv-table-wrap"><table class="sv-table">
+<div class="sv-table-wrap" tabindex="0" role="region" aria-label="Tabela comparativa"><table class="sv-table">
   <thead><tr><th></th><th>Instagram</th><th>Site</th></tr></thead>
   <tbody>
     <tr><td>Aparece no Google para quem pesquisa o serviço</td><td>Raramente</td><td>Sim</td></tr>
@@ -151,7 +151,7 @@ export const GUIAS: Guia[] = [
 <p>Um site institucional apresenta a empresa como um todo: quem é, quais serviços oferece, para quem, onde atende e como entrar em contato. Ele tem várias páginas, o que permite aparecer no Google para buscas diferentes.</p>
 
 <h2>Quando escolher cada um</h2>
-<div class="sv-table-wrap"><table class="sv-table">
+<div class="sv-table-wrap" tabindex="0" role="region" aria-label="Tabela comparativa"><table class="sv-table">
   <thead><tr><th>Situação</th><th>Melhor opção</th></tr></thead>
   <tbody>
     <tr><td>Vou anunciar um serviço específico no Google ou no Instagram</td><td>Landing page</td></tr>

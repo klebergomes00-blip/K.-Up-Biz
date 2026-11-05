@@ -3,6 +3,7 @@
 import ConteudoLayout from '../../layouts/ConteudoLayout.astro';
 import { GUIAS, guiaUrl, type Guia } from '../../config/guias';
 import { EMPRESA } from '../../config/empresa';
+import { iconeGuia } from '../../config/icones';
 
 export function getStaticPaths() {
   return GUIAS.map((g) => ({ params: { slug: g.slug }, props: { g } }));
@@ -11,6 +12,15 @@ const { g } = Astro.props as { g: Guia };
 const siteUrl = new URL('/', Astro.site).href;
 const pageUrl = new URL(guiaUrl(g), Astro.site).href;
 const data = new Date(g.publicado + 'T12:00:00').toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+// Divide o título em parte branca + parte dourada em itálico, como nas outras páginas.
+const QUEBRAS: Record<string, string> = {
+  'quanto-custa-um-site': 'profissional em 2026?',
+  'quanto-investir-em-trafego-pago': 'para começar?',
+  'por-que-minha-empresa-nao-aparece-no-google': 'não aparece no Google?'
+};
+const fim = QUEBRAS[g.slug] ?? (g.titulo.includes(':') ? g.titulo.slice(g.titulo.indexOf(':') + 1).trim() : '');
+const h1 = fim && g.titulo.endsWith(fim) ? g.titulo.slice(0, g.titulo.length - fim.length).trim() : g.titulo;
+const h1Em = h1 !== g.titulo ? fim : undefined;
 const outros = GUIAS.filter((x) => x.slug !== g.slug);
 
 const schema = [{
@@ -34,7 +44,9 @@ const schema = [{
   description={g.description}
   crumbs={[{ nome: 'Guias', href: '/guias' }, { nome: g.titulo }]}
   eyebrow="Guia"
-  h1={g.titulo}
+  h1={h1}
+  h1Em={h1Em}
+  visual={iconeGuia(g.slug)}
   lead={g.description}
   meta={`Por ${EMPRESA.responsavelCurto} · Publicado em ${data}`}
   faq={g.faq}

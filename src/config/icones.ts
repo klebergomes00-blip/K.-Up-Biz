@@ -90,3 +90,33 @@ export const ICONES_SEGMENTO: Record<string, IconeSegmento> = {
 };
 
 export const iconeSegmento = (slug: string) => ICONES_SEGMENTO[slug];
+
+// Ícone do orbe na hero de cada guia
+export const ICONES_GUIA: Record<string, IconeSegmento> = {
+  'quanto-custa-um-site': {
+    rotulo: 'Investimento',
+    svg: '<path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/>'
+  },
+  'site-ou-instagram': {
+    rotulo: 'Presença digital',
+    svg: '<rect x="2" y="4" width="14" height="10" rx="1.5"/><path d="M6 18h6M9 14v4"/><rect x="16" y="8" width="6" height="12" rx="1.5"/><path d="M18.5 17.5h1"/>'
+  },
+  'landing-page-ou-site': {
+    rotulo: 'Estrutura',
+    svg: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>'
+  },
+  'como-aparecer-no-google-maps': {
+    rotulo: 'Google Maps',
+    svg: '<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>'
+  },
+  'quanto-investir-em-trafego-pago': {
+    rotulo: 'Tráfego pago',
+    svg: '<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-6"/><path d="M16 8h4v4"/>'
+  },
+  'por-que-minha-empresa-nao-aparece-no-google': {
+    rotulo: 'Visibilidade',
+    svg: '<circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16 16"/><path d="M11 8v3.5M11 14.2v.1"/>'
+  }
+};
+
+export const iconeGuia = (slug: string) => ICONES_GUIA[slug];

@@ -362,3 +362,4 @@
   color: #F3E5AB;
 }
 .sv-seg-icon svg { width: 22px; height: 22px; }
+.sv-table-wrap:focus-visible { outline: 2px solid #F3E5AB; outline-offset: 4px; border-radius: 8px; }
