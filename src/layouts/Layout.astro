@@ -42,7 +42,12 @@ const jsonLd = [{
   url: siteUrl,
   image: ogImage,
   logo: new URL('/icon-512.png', Astro.site).href,
-  telephone: '+55 61 99622-9988',
+  alternateName: ['K. Up Biz Marketing Digital', 'Kleber Up Business'],
+  telephone: ['+55 66 99904-2946', '+55 61 99622-9988'],
+  contactPoint: [
+    { '@type': 'ContactPoint', contactType: 'customer service', telephone: '+55 61 99622-9988', url: `https://wa.me/${EMPRESA.whatsapp}`, availableLanguage: 'pt-BR', areaServed: 'BR' },
+    { '@type': 'ContactPoint', contactType: 'customer service', telephone: '+55 66 99904-2946', availableLanguage: 'pt-BR', areaServed: 'BR' }
+  ],
   email: EMPRESA.email,
   founder: { '@type': 'Person', '@id': `${siteUrl}sobre#kleber`, name: EMPRESA.responsavel, url: new URL('/sobre', Astro.site).href },
   address: {

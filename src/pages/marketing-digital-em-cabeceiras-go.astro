@@ -1,0 +1,128 @@
+---
+// /marketing-digital-em-cabeceiras-go — Página local: a K. Up Biz é de Cabeceiras – GO.
+import ConteudoLayout from '../layouts/ConteudoLayout.astro';
+import { SERVICOS } from '../config/servicos';
+import { EMPRESA } from '../config/empresa';
+import { CIDADES, cidadeUrl } from '../config/cidades';
+
+const siteUrl = new URL('/', Astro.site).href;
+const pageUrl = new URL('/marketing-digital-em-cabeceiras-go', Astro.site).href;
+const description = 'Marketing digital em Cabeceiras – GO: criação de sites, Google Meu Negócio e tráfego pago com a K. Up Biz, agência da cidade. Atendimento direto com quem faz.';
+
+const passos = [
+  { t: 'Perfil da Empresa no Google', d: 'É o que aparece no Google Maps e na busca quando alguém procura um serviço na cidade. Deixar o perfil completo, com categoria certa, fotos reais, horário e avaliações de clientes, costuma ser o primeiro passo.' },
+  { t: 'Site ou landing page', d: 'O perfil mostra que a empresa existe; o site explica o que ela faz, tira as dúvidas e leva o cliente para o WhatsApp. Para muitos negócios de Cabeceiras, uma página única bem feita já resolve.' },
+  { t: 'Anúncios para a região', d: 'Com o perfil e o site prontos, anúncios no Google e no Instagram levam a empresa a quem ainda não a conhece, em Cabeceiras e nas cidades vizinhas que você atende, com a verba definida por você.' }
+];
+
+const publico = [
+  'Comércio local: lojas, mercados, materiais de construção, farmácias e autopeças.',
+  'Prestadores de serviço: oficinas, salões, barbearias, clínicas, academias e escritórios.',
+  'Alimentação: restaurantes, lanchonetes, hamburguerias e delivery.',
+  'Agronegócio e serviços rurais: energia solar, máquinas, veterinária e consultorias.',
+  'Profissionais liberais: advogados, contadores, dentistas, engenheiros e arquitetos.'
+];
+
+const faq = [
+  { q: 'Existe agência de marketing digital em Cabeceiras – GO?', a: `Sim. A ${EMPRESA.nomeFantasia} fica em Cabeceiras – GO e cria sites, cuida do Perfil da Empresa no Google (Google Meu Negócio) e gerencia anúncios no Google, Instagram e Facebook.` },
+  { q: 'O atendimento é presencial ou online?', a: 'Os dois. Empresas de Cabeceiras podem ser atendidas pessoalmente; para as demais cidades, o atendimento é online, por WhatsApp e videochamada.' },
+  { q: 'Marketing digital funciona em cidade pequena?', a: 'Funciona, e a concorrência costuma ser menor. Poucas empresas cuidam bem do Perfil da Empresa no Google, então quem tem perfil completo, avaliações e um site simples se destaca com facilidade nas buscas locais.' },
+  { q: 'Por onde uma empresa de Cabeceiras deve começar?', a: 'Pelo Perfil da Empresa no Google, que é gratuito e é o que aparece no Maps. Depois vem o site ou a landing page e, por último, os anúncios.' },
+  { q: 'Quem faz o atendimento?', a: `${EMPRESA.responsavelCurto}, fundador da ${EMPRESA.nomeFantasia}. Você fala com a mesma pessoa do primeiro contato até a entrega.` }
+];
+
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': `${pageUrl}#servico`,
+  name: 'Marketing digital em Cabeceiras – GO',
+  serviceType: 'Marketing digital: criação de sites, Google Meu Negócio e tráfego pago',
+  url: pageUrl,
+  description,
+  areaServed: { '@type': 'City', name: 'Cabeceiras', containedInPlace: { '@type': 'State', name: 'Goiás' } },
+  provider: { '@type': 'ProfessionalService', '@id': `${siteUrl}#empresa`, name: EMPRESA.nomeFantasia, url: siteUrl }
+}];
+---
+
+<ConteudoLayout
+  title="Marketing Digital em Cabeceiras – GO | K. Up Biz"
+  description={description}
+  crumbs={[{ nome: 'Atendimento', href: '/atendimento-online' }, { nome: 'Marketing digital em Cabeceiras – GO' }]}
+  eyebrow="Cabeceiras – Goiás"
+  h1="Marketing digital em Cabeceiras – GO"
+  h1Em="com quem é da cidade."
+  lead={`A ${EMPRESA.nomeFantasia} é uma agência de marketing digital de Cabeceiras, Goiás. Criamos sites, cuidamos do Perfil da Empresa no Google e gerenciamos anúncios para que os negócios da cidade sejam encontrados por quem procura.`}
+  whatsapp="Olá, Kleber! Sou de Cabeceiras – GO e quero conversar sobre marketing digital para o meu negócio."
+  faq={faq}
+  faqTitulo="Dúvidas sobre marketing digital em Cabeceiras"
+  schema={schema}
+>
+  <section class="sv-section" aria-labelledby="mc-oque">
+    <div class="sv-head">
+      <p class="sv-tag">Para negócios locais</p>
+      <h2 id="mc-oque" class="sv-h2">O que é marketing digital <em>para uma empresa de Cabeceiras.</em></h2>
+      <p>Em uma cidade do tamanho de Cabeceiras, marketing digital não é sobre viralizar: é sobre aparecer quando alguém da cidade ou da região pega o celular e pesquisa pelo que você vende. Isso acontece em três lugares — no Google Maps, na busca do Google e nas redes sociais — e cada um pede um cuidado diferente.</p>
+    </div>
+    <div class="sv-grid">
+      {passos.map((p, i) => (
+        <article class="sv-card glass">
+          <span class="sv-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{p.t}</h3>
+          <p>{p.d}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="sv-section" aria-labelledby="mc-servicos">
+    <div class="sv-head">
+      <p class="sv-tag">Serviços</p>
+      <h2 id="mc-servicos" class="sv-h2">O que a K. Up Biz faz <em>em Cabeceiras e região.</em></h2>
+    </div>
+    <div class="sv-grid">
+      {SERVICOS.map((s) => (
+        <a href={s.slug} class="sv-card glass sv-related">
+          <h3>{s.nome}</h3>
+          <p>{s.resumo}</p>
+          <span class="sv-more">Conhecer o serviço <span aria-hidden="true">→</span></span>
+        </a>
+      ))}
+    </div>
+    <p class="sv-note"><strong>Também fazemos:</strong> criação de logotipo, otimização de sites para o Google (SEO) e melhoria de velocidade de sites que já existem.</p>
+  </section>
+
+  <section class="sv-section" aria-labelledby="mc-quem">
+    <div class="sv-head">
+      <p class="sv-tag">Para quem é</p>
+      <h2 id="mc-quem" class="sv-h2">Negócios de Cabeceiras <em>que atendemos.</em></h2>
+    </div>
+    <ul class="sv-checks ok">
+      {publico.map((p) => <li>{p}</li>)}
+    </ul>
+    <div class="sv-chips" style="margin-top: 24px;">
+      <a href="/segmentos">Ver sites por segmento</a>
+      <a href="/guias/como-aparecer-no-google-maps">Como aparecer no Google Maps</a>
+      <a href="/guias/por-que-minha-empresa-nao-aparece-no-google">Por que minha empresa não aparece no Google?</a>
+    </div>
+  </section>
+
+  <section class="sv-section" aria-labelledby="mc-onde">
+    <div class="sv-head">
+      <p class="sv-tag">Onde estamos</p>
+      <h2 id="mc-onde" class="sv-h2">Uma agência <em>daqui.</em></h2>
+      <p>A {EMPRESA.nomeFantasia} fica na {EMPRESA.endereco}, em {EMPRESA.cidadeUf}. O trabalho é feito por {EMPRESA.responsavelCurto}, que conhece a cidade e atende cada cliente pessoalmente, do primeiro contato à entrega. Além de Cabeceiras, atendemos empresas de Formosa, Unaí, Brasília e, de forma online, de todo o Brasil.</p>
+    </div>
+    <p class="sv-note"><strong>Contato:</strong> WhatsApp {EMPRESA.whatsappLabel} · Telefone {EMPRESA.telefone2Label} · {EMPRESA.email}</p>
+  </section>
+
+  <section slot="depois" class="sv-section" aria-labelledby="mc-regiao">
+    <div class="sv-head">
+      <p class="sv-tag">Região</p>
+      <h2 id="mc-regiao" class="sv-h2">Cidades vizinhas</h2>
+    </div>
+    <div class="sv-chips">
+      {CIDADES.map((o) => <a href={cidadeUrl(o)}>Criação de sites em {o.nome} – {o.uf}</a>)}
+      <a href="/atendimento-online">Atendimento em todo o Brasil →</a>
+    </div>
+  </section>
+</ConteudoLayout>

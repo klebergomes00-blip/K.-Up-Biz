@@ -6,6 +6,7 @@ import { projeto } from '../config/portfolio';
 import { portfolioSrcset } from '../config/imagens';
 import { EMPRESA } from '../config/empresa';
 import { iconeSegmento } from '../config/icones';
+import { extraSegmento } from '../config/segmentos-extra';
 
 export function getStaticPaths() {
   return SEGMENTOS.map((s) => ({ params: { slug: s.slug }, props: { s } }));
@@ -13,6 +14,9 @@ export function getStaticPaths() {
 
 const { s } = Astro.props as { s: Segmento };
 const caso = projeto(s.caseKey);
+const x = extraSegmento(s.slug);
+const regras = x?.regras ?? s.regras;
+const faq = [...s.faq, ...(x?.faq ?? [])];
 const vizinhos = SEGMENTOS.filter((x) => x.grupo === s.grupo && x.slug !== s.slug);
 const siteUrl = new URL('/', Astro.site).href;
 const pageUrl = new URL(segmentoUrl(s), Astro.site).href;
@@ -41,7 +45,7 @@ const schema = [{
   lead={s.lead}
   ctaLabel="Quero um site assim"
   whatsapp={s.whatsapp}
-  faq={s.faq}
+  faq={faq}
   faqTitulo={`Dúvidas de ${s.curto} sobre o site`}
   schema={schema}
   visual={iconeSegmento(s.slug)}
@@ -55,6 +59,25 @@ const schema = [{
       {s.dores.map((d) => <li>{d}</li>)}
     </ul>
   </section>
+
+  {x && (
+    <section class="sv-section" aria-labelledby="seg-decide">
+      <div class="sv-head">
+        <p class="sv-tag">Antes do primeiro contato</p>
+        <h2 id="seg-decide" class="sv-h2">{x.decideTitulo}.</h2>
+        <p>{x.decide}</p>
+      </div>
+      <h3 class="sv-sub">Dúvidas que o site precisa responder</h3>
+      <dl class="sv-qa">
+        {x.duvidas.map((d) => (
+          <div>
+            <dt>{d.q}</dt>
+            <dd>{d.onde}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  )}
 
   <section class="sv-section" aria-labelledby="seg-secoes">
     <div class="sv-head">
@@ -70,15 +93,32 @@ const schema = [{
         </article>
       ))}
     </div>
-    <p class="sv-note"><strong>Em todos os sites:</strong> design com a identidade da sua marca, carregamento rápido no celular, WhatsApp integrado e estrutura pronta para o Google (títulos, descrições e dados estruturados).</p>
+    <p class="sv-note"><strong>Na prática:</strong> {x?.nota ?? 'design com a identidade da sua marca, carregamento rápido no celular, WhatsApp integrado e estrutura pronta para o Google.'}</p>
   </section>
 
-  {s.regras && (
+  {x && (
+    <section class="sv-section" aria-labelledby="seg-erros">
+      <div class="sv-head">
+        <p class="sv-tag">O que evitar</p>
+        <h2 id="seg-erros" class="sv-h2">Erros comuns em sites de {s.curto}.</h2>
+      </div>
+      <div class="sv-grid">
+        {x.erros.map((e) => (
+          <article class="sv-card glass sv-erro">
+            <h3>{e.t}</h3>
+            <p>{e.d}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {regras && (
     <section class="sv-section" aria-labelledby="seg-regras">
       <div class="sv-head">
         <p class="sv-tag">Publicidade profissional</p>
         <h2 id="seg-regras" class="sv-h2">Dentro das regras <em>do seu conselho.</em></h2>
-        <p>{s.regras}</p>
+        <p>{regras}</p>
       </div>
     </section>
   )}

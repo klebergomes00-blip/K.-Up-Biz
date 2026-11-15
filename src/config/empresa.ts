@@ -12,6 +12,9 @@ export const EMPRESA = {
   email: 'kleberupbusiness@gmail.com',
   whatsapp: '5561996229988',
   whatsappLabel: '(61) 99622-9988',
+  // Segundo número (o mesmo do Perfil da Empresa no Google)
+  telefone2: '5566999042946',
+  telefone2Label: '(66) 99904-2946',
   instagramUrl: 'https://www.instagram.com/k.upbiz/',
   instagramHandle: '@k.upbiz',
   // Data da última revisão das políticas (atualize sempre que mudar o texto)

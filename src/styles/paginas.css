@@ -363,3 +363,13 @@
 }
 .sv-seg-icon svg { width: 22px; height: 22px; }
 .sv-table-wrap:focus-visible { outline: 2px solid #F3E5AB; outline-offset: 4px; border-radius: 8px; }
+
+/* Dúvidas do cliente → onde o site responde (páginas de segmento) */
+.sv-qa { margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 980px; }
+@media (max-width: 720px) { .sv-qa { grid-template-columns: 1fr; } }
+.sv-qa > div { padding: 18px 20px; border-radius: 16px; background: rgba(255, 255, 255, 0.035); border: 1px solid rgba(255, 255, 255, 0.08); }
+.sv-qa dt { font-family: var(--font-instrument-serif); font-style: italic; font-size: 20px; line-height: 1.3; color: #F3E5AB; }
+.sv-qa dd { margin: 8px 0 0; font-family: var(--font-sans); font-size: 15.5px; line-height: 1.55; color: rgba(245, 241, 232, 0.78); }
+.sv-erro h3 { display: flex; gap: 10px; align-items: baseline; }
+.sv-erro h3::before { content: '×'; color: #E8796B; font-weight: 700; flex: none; }
+.sv-sub { margin: 28px 0 16px; font-family: var(--font-sans); font-size: 19px; font-weight: 600; letter-spacing: -0.01em; color: #F5F1E8; }

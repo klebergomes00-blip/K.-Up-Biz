@@ -14,6 +14,7 @@ const paginas = [
   { path: '/guias', prioridade: '0.7' },
   ...GUIAS.map((g) => ({ path: guiaUrl(g), prioridade: '0.7' })),
   { path: '/atendimento-online', prioridade: '0.7' },
+  { path: '/marketing-digital-em-cabeceiras-go', prioridade: '0.8' },
   ...CIDADES.map((c) => ({ path: cidadeUrl(c), prioridade: '0.6' })),
   { path: '/cases', prioridade: '0.6' },
   { path: '/sobre', prioridade: '0.6' },
