@@ -2142,6 +2142,17 @@ const services: ServiceData[] = [
       lastFocusedElement = document.activeElement as HTMLElement;
 
       const serviceId = anchor.getAttribute('data-service-id') || 'web';
+      const posthog = (window as Window & {
+        posthog?: {
+          capture: (event: string, properties?: Record<string, string>) => void;
+          logger?: { info: (message: string, attributes?: Record<string, string>) => void };
+        };
+      }).posthog;
+      posthog?.capture('service_details_opened', { service: serviceId });
+      posthog?.logger?.info('service details opened', {
+        event: 'service_details_opened',
+        service: serviceId,
+      });
       switchService(serviceId);
 
       // Bloquear scroll do body de forma limpa sem layout shift

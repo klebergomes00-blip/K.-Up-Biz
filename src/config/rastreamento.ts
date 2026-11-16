@@ -10,6 +10,8 @@
 export const RASTREAMENTO = {
   // Google Analytics 4 — formato "G-XXXXXXXXXX" (categoria: medição)
   googleAnalytics: 'G-DE4MNDQ6KD',
+  // PostHog — a chave vem da variável PUBLIC_POSTHOG_PROJECT_TOKEN (.env / Vercel) (categoria: medição)
+  posthog: (import.meta.env.PUBLIC_POSTHOG_PROJECT_TOKEN ?? '') as string,
   // Tag de conversão do Google Ads — formato "AW-XXXXXXXXX" (categoria: marketing)
   googleAds: '',
   // Pixel da Meta (Facebook/Instagram) — apenas números (categoria: marketing)

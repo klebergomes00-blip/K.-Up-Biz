@@ -5,6 +5,7 @@ import { RASTREAMENTO, rastreamentoAtivo } from '../config/rastreamento';
 
 const ferramentas = [
   RASTREAMENTO.googleAnalytics && { nome: 'Google Analytics 4 (Google)', categoria: 'Medição', finalidade: 'Medir visitas, páginas mais acessadas e origem do tráfego, de forma estatística.' },
+  RASTREAMENTO.posthog && { nome: 'PostHog (PostHog Inc., EUA)', categoria: 'Medição', finalidade: 'Medir o uso do site (páginas visitadas, cliques em contato e serviços consultados) e registrar erros técnicos, de forma estatística.' },
   RASTREAMENTO.googleAds && { nome: 'Tag do Google Ads (Google)', categoria: 'Marketing', finalidade: 'Medir conversões de anúncios do Google e criar públicos para anúncios.' },
   RASTREAMENTO.metaPixel && { nome: 'Pixel da Meta (Facebook/Instagram)', categoria: 'Marketing', finalidade: 'Medir resultados de anúncios na Meta e criar públicos para anúncios.' }
 ].filter(Boolean) as { nome: string; categoria: string; finalidade: string }[];

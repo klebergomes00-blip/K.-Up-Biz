@@ -3,7 +3,7 @@
 // Só é renderizado quando há ao menos uma ferramenta configurada em src/config/rastreamento.ts.
 // Nenhum script de medição/anúncios é carregado antes do consentimento.
 import { RASTREAMENTO, rastreamentoAtivo } from '../config/rastreamento';
-const temMedicao = !!RASTREAMENTO.googleAnalytics;
+const temMedicao = !!(RASTREAMENTO.googleAnalytics || RASTREAMENTO.posthog);
 const temMarketing = !!(RASTREAMENTO.googleAds || RASTREAMENTO.metaPixel);
 const cfg = {
   ga: RASTREAMENTO.googleAnalytics,
@@ -88,6 +88,7 @@ const cfg = {
         }
         function applyConsent(c) {
           if (!c) return;
+          if (c.analytics && window.kupbizLoadPostHog) window.kupbizLoadPostHog();
           var needGtag = (c.analytics && cfg.ga) || (c.marketing && cfg.ads);
           if (needGtag && !window.gtag) {
             window.dataLayer = window.dataLayer || [];
@@ -114,6 +115,21 @@ const cfg = {
             window.fbq('track', 'PageView');
           }
         }
+        // Apaga o identificador do PostHog (cookie e localStorage "ph_*") quando a medição é retirada
+        function clearPostHog() {
+          // Impede o PostHog de regravar o identificador ao sair da página
+          try { if (window.posthog && window.posthog.__loaded) window.posthog.set_config({ disable_persistence: true }); } catch (e) {}
+          try {
+            Object.keys(localStorage).forEach(function (k) { if (k.indexOf('ph_') === 0) localStorage.removeItem(k); });
+          } catch (e) {}
+          document.cookie.split(';').forEach(function (p) {
+            var name = p.split('=')[0].trim();
+            if (name.indexOf('ph_') === 0) {
+              document.cookie = name + '=; Max-Age=0; path=/';
+              document.cookie = name + '=; Max-Age=0; path=/; domain=' + location.hostname.replace(/^www\./, '.');
+            }
+          });
+        }
         function save(c) {
           var prev = read();
           c.data = new Date().toISOString();
@@ -122,6 +138,7 @@ const cfg = {
           closeModal();
           // Se a pessoa retirou um consentimento dado antes, recarrega para parar os scripts já carregados
           if (prev && ((prev.analytics && !c.analytics) || (prev.marketing && !c.marketing))) {
+            if (prev.analytics && !c.analytics) clearPostHog();
             location.reload();
             return;
           }
