@@ -276,5 +276,11 @@ const cfg = {
   @media (max-width: 720px) {
     .cc-banner { flex-direction: column; align-items: stretch; }
     .cc-actions .cc-btn { flex: 1; }
+    /* Mais compacto no celular para não cobrir o título e o botão principal da primeira tela */
+    .cc-banner { left: 8px; right: 8px; bottom: 8px; gap: 10px; padding: 12px 14px; border-radius: 14px; }
+    .cc-banner-text .cc-title { display: none; }
+    .cc-banner-text p { font-size: 13px; line-height: 1.45; }
+    .cc-banner .cc-actions { flex-wrap: nowrap; gap: 6px; }
+    .cc-banner .cc-btn { padding: 9px 8px; font-size: 13px; white-space: nowrap; }
   }
 </style>

@@ -29,7 +29,9 @@
           // chegam primeiro). A abertura cobre esse tempo, então o visitante não percebe.
           // Capa do vídeo no tamanho certo para a tela (a mesma foto já carregada acima)
           v.poster = mobile ? '/imagens/hero-poster-mobile.webp' : '/imagens/hero-poster.webp';
-          var set = function () { v.src = mobile ? v.dataset.srcMobile : v.dataset.srcDesktop; };
+          // No celular em pé a abertura é estática (só a foto): o vídeo de 3,2 MB não é baixado.
+          if (mobile) return;
+          var set = function () { v.src = v.dataset.srcDesktop; };
           if (document.readyState === 'complete') set();
           else window.addEventListener('load', set, { once: true });
         })();
@@ -1102,6 +1104,23 @@
       opacity: 0.8 !important;
     }
   }
+
+  /* Celular em pé: abertura estática, com a proposta e o botão de contato na primeira tela */
+  @media (max-width: 860px) and (orientation: portrait) {
+    .hero-scroll-wrapper {
+      height: 100vh;
+      height: 100svh;
+    }
+    .hero-act-1,
+    .hero-act-2 {
+      display: none !important;
+    }
+    .hero-act-3 {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+    }
+  }
 </style>
 
 <script>
@@ -1207,8 +1226,12 @@
     // 3. APPLE-STYLE SCROLL VIDEO SCRUBBING & MASTER NARRATIVE TIMELINE
     if (!video || !scrollWrapper || !heroViewport) return;
 
-    // Respeitar prefers-reduced-motion
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Abertura estática (sem rolagem narrativa) com movimento reduzido e no celular em pé:
+    // título, serviços e botão de contato aparecem já na primeira tela.
+    if (
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      window.matchMedia('(max-width: 860px) and (orientation: portrait)').matches
+    ) {
       video.pause();
       return;
     }

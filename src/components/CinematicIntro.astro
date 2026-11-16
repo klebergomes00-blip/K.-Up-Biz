@@ -64,9 +64,11 @@
 </div>
 
 <script is:inline>
-  // Quem já viu a abertura nesta sessão entra direto no site (a intro é removida antes de aparecer)
+  // Quem já viu a abertura nesta sessão entra direto no site (a intro é removida antes de aparecer).
+  // No celular em pé a intro não aparece: a primeira tela já mostra a proposta e o botão de contato.
   try {
-    if (sessionStorage.getItem('kupbiz-intro-vista') === '1') {
+    var celular = window.matchMedia('(max-width: 860px) and (orientation: portrait)').matches;
+    if (celular || sessionStorage.getItem('kupbiz-intro-vista') === '1') {
       document.getElementById('cinematic-intro')?.remove();
     }
   } catch (e) {}
