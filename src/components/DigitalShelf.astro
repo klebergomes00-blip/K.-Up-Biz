@@ -1348,6 +1348,15 @@ const services: ServiceData[] = [
     transform: scale(1.04);
   }
 
+  /* Celular/tablet (toque): sem "passar o mouse", o botão ABRIR fica sempre visível
+     para mostrar que o card abre com um toque */
+  @media (pointer: coarse) {
+    .card-open-pill-btn {
+      opacity: 1; /* a entrada animada dos cards faz o botão surgir junto com eles */
+      pointer-events: auto;
+    }
+  }
+
   /* Quando o modal está aberto, o botão ABRIR fica oculto */
   body.shelf-modal-open .card-open-pill-btn {
     opacity: 0 !important;
@@ -1879,6 +1888,18 @@ const services: ServiceData[] = [
         stagger: 0.15,
         ease: 'power3.out',
       }, 0.15);
+
+      // Celular/tablet (toque): o botão ABRIR aparece junto com cada card e fica visível
+      if (window.matchMedia('(pointer: coarse)').matches && pillBtns.length > 0) {
+        // Na frente do card inclinado em 3D (senão a borda do card cobre o botão)
+        gsap.set(pillBtns, { opacity: 0, y: -14, z: 40 });
+        enterTl.to(pillBtns, {
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.15,
+          ease: 'power2.out',
+        }, 0.6);
+      }
     }
 
     // ------------------------------------------------------------------------
@@ -2437,79 +2458,14 @@ const services: ServiceData[] = [
         openExpansion(anchor);
       });
 
-      if (!isTouch) {
-        // Desktop: clique em qualquer ponto do card abre a expansão.
-        // (O ouvinte fica no contêiner: com o card inclinado em 3D, parte dos cliques
-        // cai no contêiner e não no botão da capa.)
-        anchor.addEventListener('click', (e) => {
-          e.preventDefault();
-          openExpansion(anchor);
-        });
-      } else {
-        // Mobile / Touch:
-        // 1º toque na capa destaca o card e exibe "ABRIR"
-        // 2º toque na capa expande
-        // (ouvinte no contêiner para o toque funcionar em qualquer ponto do card)
-        anchor.addEventListener('click', (e) => {
-          if (!anchor.classList.contains('is-touch-active')) {
-            e.preventDefault();
-            cardAnchors.forEach((a) => {
-              a.classList.remove('is-touch-active');
-              a.style.zIndex = '2';
-              const otherCard = a.querySelector<HTMLElement>('.shelf-card');
-              const otherPill = a.querySelector<HTMLElement>('.card-open-pill-btn');
-              if (otherCard) gsap.to(otherCard, { scale: 1, y: 0, z: 0, rotationX: 4.5, duration: 0.4, overwrite: 'auto' });
-              if (otherPill) gsap.to(otherPill, { opacity: 0, xPercent: -50, y: 0, pointerEvents: 'none', duration: 0.3, overwrite: 'auto' });
-              gsap.to(a, { opacity: 0.6, duration: 0.4, overwrite: 'auto' });
-            });
-
-            anchor.classList.add('is-touch-active');
-            anchor.style.zIndex = '25';
-            gsap.to(anchor, { opacity: 1, duration: 0.3, overwrite: 'auto' });
-            gsap.to(card, {
-              scale: 1.06,
-              y: -14,
-              z: 20,
-              rotationX: 0,
-              duration: 0.4,
-              ease: 'power3.out',
-              overwrite: 'auto'
-            });
-
-            if (openBtn) {
-              gsap.to(openBtn, {
-                opacity: 1,
-                xPercent: -50,
-                y: -18,
-                scale: 1.04,
-                pointerEvents: 'auto',
-                duration: 0.4,
-                ease: 'power3.out',
-                overwrite: 'auto'
-              });
-            }
-          } else {
-            e.preventDefault();
-            openExpansion(anchor);
-          }
-        });
-      }
+      // Celular e computador: um toque/clique em qualquer ponto do card abre a expansão.
+      // No celular o botão "ABRIR" fica sempre visível (ver CSS), mostrando que o card abre.
+      // (O ouvinte fica no contêiner: com o card inclinado em 3D, parte dos cliques
+      // cai no contêiner e não no botão da capa.)
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        openExpansion(anchor);
+      });
     });
-
-    // Toque fora desativa o destaque mobile
-    document.addEventListener('touchstart', (e) => {
-      const target = e.target as HTMLElement;
-      if (!target.closest('.shelf-card-anchor')) {
-        cardAnchors.forEach((a) => {
-          a.classList.remove('is-touch-active');
-          a.style.zIndex = '2';
-          const c = a.querySelector<HTMLElement>('.shelf-card');
-          const p = a.querySelector<HTMLElement>('.card-open-pill-btn');
-          if (c) gsap.to(c, { scale: 1, y: 0, z: 0, rotationX: 4.5, duration: 0.4, overwrite: 'auto' });
-          if (p) gsap.to(p, { opacity: 0, y: 0, pointerEvents: 'none', duration: 0.3, overwrite: 'auto' });
-          gsap.to(a, { opacity: 1, duration: 0.4, overwrite: 'auto' });
-        });
-      }
-    }, { passive: true });
   });
 </script>
